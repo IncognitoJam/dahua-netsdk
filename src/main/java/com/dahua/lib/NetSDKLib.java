@@ -19,34 +19,34 @@ import com.sun.jna.win32.StdCallLibrary.StdCallCallback;
 public interface NetSDKLib extends Library {
 	NetSDKLib NETSDK_INSTANCE = (NetSDKLib)Native.loadLibrary(Utils.getLoadLibrary("dhnetsdk"), NetSDKLib.class);
 	NetSDKLib CONFIG_INSTANCE = (NetSDKLib)Native.loadLibrary(Utils.getLoadLibrary("dhconfigsdk"), NetSDKLib.class);
-	
+
 	public static class LLong extends IntegerType {
 		private static final long serialVersionUID = 1L;
-		
+
 		/** Size of a native long, in bytes. */
 	    public static int size;
 	    static {
 	        size = Native.LONG_SIZE;
-	        if (Utils.getOsPrefix().toLowerCase().equals("linux-amd64") 
+	        if (Utils.getOsPrefix().toLowerCase().equals("linux-amd64")
 	        		|| Utils.getOsPrefix().toLowerCase().equals("win32-amd64")) {
 	        	size = 8;
-	        } else if (Utils.getOsPrefix().toLowerCase().equals("linux-i386") 
+	        } else if (Utils.getOsPrefix().toLowerCase().equals("linux-i386")
 	        		|| Utils.getOsPrefix().toLowerCase().equals("win32-x86")) {
 	        	size = 4;
 	        }
-	    } 
-	    
+	    }
+
 	    /** Create a zero-valued LLong. */
 	    public LLong() {
 	        this(0);
 	    }
-	    
+
 	    /** Create a LLong with the given value. */
 	    public LLong(long value) {
 	        super(size, value);
 	    }
 	}
-	
+
     /************************************************************************
      ** 常量定义
      ***********************************************************************/
@@ -160,7 +160,7 @@ public interface NetSDKLib extends Library {
     public static final int NET_LOGIN_ERROR_PROTOCOL3_ONLY      = (0x80000000|111); // 只支持3代协议
     public static final int NET_LOGIN_ERROR_UKEY_LOST           = (0x80000000|112); // 未插入U盾或U盾信息错误
     public static final int NET_LOGIN_ERROR_NO_AUTHORIZED       = (0x80000000|113); // 客户端IP地址没有登录权限
-    public static final int NET_LOGIN_ERROR_USER_OR_PASSOWRD    = (0x80000000|117); // 账号或密码错误 
+    public static final int NET_LOGIN_ERROR_USER_OR_PASSOWRD    = (0x80000000|117); // 账号或密码错误
     public static final int NET_LOGIN_ERROR_DEVICE_NOT_INIT		= (0x80000000|118);	// 设备尚未初始化，不能登录，请先初始化设备
     public static final int NET_RENDER_SOUND_ON_ERROR           = (0x80000000|120); // Render库打开音频出错
     public static final int NET_RENDER_SOUND_OFF_ERROR          = (0x80000000|121); // Render库关闭音频出错
@@ -354,7 +354,7 @@ public interface NetSDKLib extends Library {
     public static final int NET_ERROR_DIGITAL_CERTIFICATE_COUNTS_UPPER_LIMIT = (0x80000000|1046); // 超出证书导入上限
     public static final int NET_ERROR_DIGITAL_CERTIFICATE_CERT_NO_EXIST	 = (0x80000000|1047);	  // 证书文件不存在(导出证书或者获取对应证书的公钥)
     public static final int NET_ERROR_FACE_RECOGNITION_SERVER_GROUP_ID_EXCEED = (0x80000000|1051);// 组ID超过最大值
-    
+
     // CLIENT_StartListenEx报警事件
     public static final int NET_ALARM_ALARM_EX 					= 0x2101;     		// 外部报警，数据字节数与设备报警通道个数相同，每个字节表示一个报警通道的报警状态，1为有报警，0为无报警。
     public static final int NET_MOTION_ALARM_EX                	= 0x2102;          	// 动态检测报警，数据字节数与设备视频通道个数相同，每个字节表示一个视频通道的动态检测报警状态，1为有报警，0为无报警。
@@ -362,7 +362,7 @@ public interface NetSDKLib extends Library {
     public static final int NET_SHELTER_ALARM_EX 				= 0x2104;   		// 视频遮挡报警，数据字节数与设备视频通道个数相同，每个字节表示一个视频通道的遮挡(黑屏)报警状态，1为有报警，0为无报警。
     public static final int NET_DISKFULL_ALARM_EX 				= 0x2106;  			// 硬盘满报警，数据为1个字节，1为有硬盘满报警，0为无报警。
     public static final int NET_DISKERROR_ALARM_EX 				= 0x2107; 			// 坏硬盘报警，数据为32个字节，每个字节表示一个硬盘的故障报警状态，1为有报警，0为无报警。
-    public static final int NET_ALARM_ACC_POWEROFF              = 0x211E;           // ACC断电报警，数据为 DWORD 0：ACC通电 1：ACC断电 
+    public static final int NET_ALARM_ACC_POWEROFF              = 0x211E;           // ACC断电报警，数据为 DWORD 0：ACC通电 1：ACC断电
     public static final int NET_ALARM_FRONTDISCONNECT           = 0x2132;           // 前端IPC断网报警(对应结构体 ALARM_FRONTDISCONNET_INFO)
     public static final int NET_ALARM_BATTERYLOWPOWER 			= 0x2134;      		// 电池电量低报警(对应结构体 ALARM_BATTERYLOWPOWER_INFO)
     public static final int NET_ALARM_TEMPERATURE 				= 0x2135;  			// 温度过高报警(对应结构体 ALARM_TEMPERATURE_INFO)
@@ -402,22 +402,22 @@ public interface NetSDKLib extends Library {
     public static final int NET_ALARM_FACEINFO_COLLECT          = 0x3240;           // 人脸信息录入事件(对应 ALARM_FACEINFO_COLLECT_INFO)
     public static final int NET_ALARM_HIGH_SPEED	            = 0x3241;			// 车辆超速报警事件(对应 ALARM_HIGH_SPEED_INFO )
     public static final int NET_ALARM_VIDEO_LOSS                = 0x3242;			// 视频丢失事件(对应 ALARM_VIDEO_LOSS_INFO )
-    public static final int NET_ALARM_DOWNLOAD_REMOTE_FILE		= 0x3301;			// 下载远程文件事件(对应 ALARM_DOWNLOAD_REMOTE_FILE_INFO) 
+    public static final int NET_ALARM_DOWNLOAD_REMOTE_FILE		= 0x3301;			// 下载远程文件事件(对应 ALARM_DOWNLOAD_REMOTE_FILE_INFO)
     public static final int NET_ALARM_TRAFFIC_LINKAGEALARM		= 0x3353;			// 各种违章事件联动报警输出事件(对应结构体 ALARM_TRAFFIC_LINKAGEALARM_INFO)
 
-    
+
     // 订阅Bus状态对应事件上报(CLIENT_AttachBusState)
     public static final int NET_ALARM_BUS_PASSENGER_CARD_CHECK  = 0x0009;           // 乘客刷卡事件(对应结构体 ALARM_PASSENGER_CARD_CHECK )
-    
+
     // 帧类型掩码定义
     public static final int FRAME_TYPE_MOTION                   = 0x00000001;       // 动检帧
-    
+
     // CLIENT_RealLoadPictureEx 智能抓图事件
     public static final int EVENT_IVS_ALL                       = 0x00000001;       // 订阅所有事件
     public static final int EVENT_IVS_CROSSLINEDETECTION        = 0x00000002;       // 警戒线事件(对应 DEV_EVENT_CROSSLINE_INFO)
     public static final int EVENT_IVS_CROSSREGIONDETECTION      = 0x00000003;       // 警戒区事件(对应 DEV_EVENT_CROSSREGION_INFO)
     public static final int EVENT_IVS_WANDERDETECTION           = 0x00000007;       // 徘徊事件(对应  DEV_EVENT_WANDER_INFO)
-    public static final int EVENT_IVS_FIGHTDETECTION            = 0x0000000E;       // 斗殴事件(对应 DEV_EVENT_FIGHT_INFO)  
+    public static final int EVENT_IVS_FIGHTDETECTION            = 0x0000000E;       // 斗殴事件(对应 DEV_EVENT_FIGHT_INFO)
     public static final int EVENT_IVS_TRAFFICJUNCTION           = 0x00000017;       // 交通路口事件----老规则(对应 DEV_EVENT_TRAFFICJUNCTION_INFO)
     public static final int EVENT_IVS_TRAFFICGATE               = 0x00000018;       // 交通卡口事件----老规则(对应 DEV_EVENT_TRAFFICGATE_INFO)
     public static final int EVENT_IVS_FACEDETECT                = 0x0000001A;       // 人脸检测事件 (对应 DEV_EVENT_FACEDETECT_INFO)(智能规则对应  EVENT_IVS_FACEDETECT)
@@ -466,7 +466,7 @@ public interface NetSDKLib extends Library {
     public static final int EVENT_IVS_VEHICLE_RECOGNITION       = 0x00000231;       // 车牌对比事件(中石化智慧加油站项目)(对应 DEV_EVENT_VEHICLE_RECOGNITION_INFO)
     public static final int EVENT_IVSS_FACEATTRIBUTE            = 0x00000243;       // IVSS人脸检测事件 (暂未有具体事件)
     public static final int EVENT_IVSS_FACECOMPARE              = 0x00000244;       // IVSS人脸识别事件 (暂未有具体事件)
-    
+
     // CLIENT_GetNewDevConfig / CLIENT_SetNewDevConfig 配置项
     public static final String CFG_CMD_VIDEOWIDGET              = "VideoWidget";         // 视频编码物件配置(对应 NET_CFG_VideoWidget )
     public static final String CFG_CMD_ANALYSEGLOBAL            = "VideoAnalyseGlobal";  // 视频分析全局配置(对应 CFG_ANALYSEGLOBAL_INFO)
@@ -492,7 +492,7 @@ public interface NetSDKLib extends Library {
     public static final String CFG_CMD_MONITORWALL              = "MonitorWall";         // 电视墙配置(对应  AV_CFG_MonitorWall 数组, 通道无关)
     public static final String CFG_CMD_RTMP                  	= "RTMP";             	 // RTMP配置(对应  CFG_RTMP_INFO)
     public static final String CFG_CMD_ACCESS_EVENT             = "AccessControl";       // 门禁事件配置(对应 CFG_ACCESS_EVENT_INFO 数组)
-    public static final String CFG_CMD_ACCESSTIMESCHEDULE       = "AccessTimeSchedule";  // 门禁刷卡时间段(对应 CFG_ACCESS_TIMESCHEDULE_INFO) 
+    public static final String CFG_CMD_ACCESSTIMESCHEDULE       = "AccessTimeSchedule";  // 门禁刷卡时间段(对应 CFG_ACCESS_TIMESCHEDULE_INFO)
     public static final String CFG_CMD_DEV_GENERRAL             = "General";             // 普通配置 (对应 CFG_DEV_DISPOSITION_INFO)
     public static final String CFG_CMD_VIDEODIAGNOSIS_PROFILE   = "VideoDiagnosisProfile";// 视频诊断参数表(CFG_VIDEODIAGNOSIS_PROFILE)
     public static final String CFG_CMD_VIDEODIAGNOSIS_TASK      = "VideoDiagnosisTask";   // 视频诊断任务表(CFG_VIDEODIAGNOSIS_TASK)
@@ -502,12 +502,12 @@ public interface NetSDKLib extends Library {
     public static final String CFG_CMD_THERMOMETRY_RULE         = "ThermometryRule";      // 热成像测温规则配置(对应 CFG_RADIOMETRY_RULE_INFO)
     public static final String CFG_CMD_TEMP_STATISTICS          = "TemperatureStatistics"; // 温度统计配置(CFG_TEMP_STATISTICS_INFO)
     public static final String CFG_CMD_THERMOMETRY              = "HeatImagingThermometry";// 热成像测温全局配置(CFG_THERMOMETRY_INFO)
-    
+
     // CLIENT_FileTransmit接口传输文件类型
     public static final int NET_DEV_BLACKWHITETRANS_START      = 0x0003;           // 开始发送黑白名单(对应结构体 NETDEV_BLACKWHITE_LIST_INFO)
     public static final int NET_DEV_BLACKWHITETRANS_SEND       = 0x0004;           // 发送黑白名单
     public static final int NET_DEV_BLACKWHITETRANS_STOP       = 0x0005;           // 停止发送黑白名单
-    
+
     // 配置类型,对应CLIENT_GetDevConfig和CLIENT_SetDevConfig接口
     public static final int NET_DEV_DEVICECFG                   = 0x0001;           // 设备属性配置
     public static final int NET_DEV_NETCFG_EX                   = 0x005b;           // 网络扩展配置(对应结构体 NETDEV_NET_CFG_EX )
@@ -517,39 +517,39 @@ public interface NetSDKLib extends Library {
     public static final String CFG_CAP_CMD_DEVICE_STATE         = "trafficSnap.getDeviceStatus";   // 获取设备状态信息 (对应 CFG_CAP_TRAFFIC_DEVICE_STATUS)
     public static final String CFG_CAP_CMD_RECORDFINDER         = "RecordFinder.getCaps";          // 获取查询记录能力集, (对应结构体 CFG_CAP_RECORDFINDER_INFO)
     public static final String CFG_CMD_VIDEODIAGNOSIS_GETSTATE  = "videoDiagnosisServer.getState"; // 获取视频诊断进行状态(CFG_VIDEODIAGNOSIS_STATE_INFO)
-    
-    // 远程配置结构体相关常量                 
+
+    // 远程配置结构体相关常量
     public static final int NET_MAX_MAIL_ADDR_LEN              = 128;              // 邮件发(收)地址最大长度
     public static final int NET_MAX_MAIL_SUBJECT_LEN           = 64;               // 邮件主题最大长度
     public static final int NET_MAX_IPADDR_LEN                 = 16;               // IP地址字符串长度
     public static final int NET_MAX_IPADDR_LEN_EX              = 40;               // 扩展IP地址字符串长度, 支持IPV6
     public static final int NET_USER_NAME_LEN_EX               = 32;               // 用户名长度,用于新平台扩展
     public static final int NET_USER_PSW_LEN_EX                = 32;               // 用户密码长度,用于新平台扩展
-    
+
     public static final int NET_MAX_DEV_ID_LEN                 = 48;               // 机器编号最大长度
     public static final int NET_MAX_HOST_NAMELEN               = 64;               // 主机名长度,
     public static final int NET_MAX_HOST_PSWLEN                = 32;               // 密码长度
     public static final int NET_MAX_ETHERNET_NUM               = 2;                // 以太网口最大个数
     public static final int NET_MAX_ETHERNET_NUM_EX            = 10;               // 扩展以太网口最大个数
     public static final int NET_DEV_CLASS_LEN                  = 16;               // 设备类型字符串（如"IPC"）长度
-    public static final int NET_N_WEEKS                        = 7;                // 一周的天数    
+    public static final int NET_N_WEEKS                        = 7;                // 一周的天数
     public static final int NET_N_TSECT                        = 6;                // 通用时间段个数
     public static final int NET_N_REC_TSECT                    = 6;                // 录像时间段个数
-    public static final int NET_N_COL_TSECT                    = 2;                // 颜色时间段个数            
-    public static final int NET_N_ENCODE_AUX                   = 3;                // 扩展码流个数    
+    public static final int NET_N_COL_TSECT                    = 2;                // 颜色时间段个数
+    public static final int NET_N_ENCODE_AUX                   = 3;                // 扩展码流个数
     public static final int NET_N_TALK                         = 1;                // 最多对讲通道个数
-    public static final int NET_N_COVERS                       = 1;                // 遮挡区域个数    
-    public static final int NET_N_CHANNEL                      = 16;               // 最大通道个数    
+    public static final int NET_N_COVERS                       = 1;                // 遮挡区域个数
+    public static final int NET_N_CHANNEL                      = 16;               // 最大通道个数
     public static final int NET_N_ALARM_TSECT                  = 2;                // 报警提示时间段个数
     public static final int NET_MAX_ALARMOUT_NUM               = 16;               // 报警输出口个数上限
     public static final int NET_MAX_AUDIO_IN_NUM               = 16;               // 音频输入口个数上限
     public static final int NET_MAX_VIDEO_IN_NUM               = 16;               // 视频输入口个数上限
     public static final int NET_MAX_ALARM_IN_NUM               = 16;               // 报警输入口个数上限
     public static final int NET_MAX_DISK_NUM                   = 16;               // 硬盘个数上限,暂定为16
-    public static final int NET_MAX_DECODER_NUM                = 16;               // 解码器(485)个数上限    
+    public static final int NET_MAX_DECODER_NUM                = 16;               // 解码器(485)个数上限
     public static final int NET_MAX_232FUNCS                   = 10;               // 232串口功能个数上限
     public static final int NET_MAX_232_NUM                    = 2;                // 232串口个数上限
-    public static final int NET_MAX_232_NUM_EX                 = 16;               // 扩展串口配置个数上限          
+    public static final int NET_MAX_232_NUM_EX                 = 16;               // 扩展串口配置个数上限
     public static final int NET_MAX_DECPRO_LIST_SIZE           = 100;              // 解码器协议列表个数上限
     public static final int NET_FTP_MAXDIRLEN                  = 240;              // FTP文件目录最大长度
     public static final int NET_MATRIX_MAXOUT                  = 16;               // 矩阵输出口最大个数
@@ -558,7 +558,7 @@ public interface NetSDKLib extends Library {
     public static final int NET_MAX_SERVER_TYPE_LEN            = 32;               // ddns服务器类型,最大字符串长度
     public static final int NET_MAX_DOMAIN_NAME_LEN            = 256;              // ddns域名,最大字符串长度
     public static final int NET_MAX_DDNS_ALIAS_LEN             = 32;               // ddns服务器别名,最大字符串长度
-    public static final int NET_MAX_DEFAULT_DOMAIN_LEN         = 60;               // ddns默认域名,最大字符串长度     
+    public static final int NET_MAX_DEFAULT_DOMAIN_LEN         = 60;               // ddns默认域名,最大字符串长度
     public static final int NET_MOTION_ROW                     = 32;               // 动态检测区域的行数
     public static final int NET_MOTION_COL                     = 32;               // 动态检测区域的列数
     public static final int NET_STATIC_ROW                     = 32;               // 静态检测区域的行数
@@ -588,7 +588,7 @@ public interface NetSDKLib extends Library {
     public static final int NET_SNIFFER_CONTENT_NUM            = 4;                // 每个FRAME对应的4个抓包内容
     public static final int NET_SNIFFER_CONTENT_NUM_EX         = 8;                // 每个FRAME对应的8个抓包内容
     public static final int NET_SNIFFER_PROTOCOL_SIZE          = 20;               // 协议名字长度
-    public static final int NET_MAX_PROTOCOL_NAME_LENGTH       = 20;               
+    public static final int NET_MAX_PROTOCOL_NAME_LENGTH       = 20;
     public static final int NET_SNIFFER_GROUP_NUM              = 4;                // 4组抓包设置
     public static final int NET_ALARM_OCCUR_TIME_LEN           = 40;               // 新的报警上传时间的长度
     public static final int NET_VIDEO_OSD_NAME_NUM             = 64;               // 叠加的名称长度,目前支持32个英文,16个中文
@@ -649,7 +649,7 @@ public interface NetSDKLib extends Library {
     public static final int NET_MAX_IPADDR_EX_LEN              = 128;              // 扩展IP地址最大长度
     public static final int MAX_EVENT_NAME                     = 128;              // 最长事件名
     public static final int NET_MAX_ETH_NAME                   = 64;               // 最大网卡名
-    public static final int NET_N_SCHEDULE_TSECT               = 8;                // 时间表元素个数    
+    public static final int NET_N_SCHEDULE_TSECT               = 8;                // 时间表元素个数
     public static final int NET_MAX_URL_NUM                    = 8;                // URL最大个数
     public static final int NET_MAX_LOWER_MITRIX_NUM           = 16;               // 最大下位矩阵数
     public static final int NET_MAX_BURN_CHANNEL_NUM           = 32;               // 最大刻录通道数
@@ -659,14 +659,14 @@ public interface NetSDKLib extends Library {
     public static final int NET_MAX_MULTIPLAYBACK_SPLIT_NUM    = 32;               // 最大多通道预览回放分割模式数
     public static final int NET_MAX_AUDIO_ENCODE_TYPE          = 64;               // 最大语音编码类型个数
     public static final int MAX_CARD_RECORD_FIELD_NUM          = 16;               // 卡号录像最大域数量
-    public static final int NET_BATTERY_NUM_MAX                = 16;               // 最大电池数量    
-    public static final int NET_POWER_NUM_MAX                  = 16;               // 最大电源数量        
+    public static final int NET_BATTERY_NUM_MAX                = 16;               // 最大电池数量
+    public static final int NET_POWER_NUM_MAX                  = 16;               // 最大电源数量
     public static final int NET_MAX_AUDIO_PATH                 = 260;              // 最大音频文件路长度
-    public static final int NET_MAX_DOORNAME_LEN               = 128;              // 最大门禁名称长度    
-    public static final int NET_MAX_CARDPWD_LEN                = 64;               // 最大门禁名称长度    
+    public static final int NET_MAX_DOORNAME_LEN               = 128;              // 最大门禁名称长度
+    public static final int NET_MAX_CARDPWD_LEN                = 64;               // 最大门禁名称长度
     public static final int NET_MAX_FISHEYE_MOUNTMODE_NUM      = 4;                // 最大鱼眼安装模式个数
     public static final int NET_MAX_FISHEYE_CALIBRATEMODE_NUM  = 16;               // 最大鱼眼矫正模式个数
-    public static final int NET_MAX_FISHEYE_EPTZCMD_NUM        = 64;               // 最大鱼眼电子云台操作个数   
+    public static final int NET_MAX_FISHEYE_EPTZCMD_NUM        = 64;               // 最大鱼眼电子云台操作个数
     public static final int POINT_NUM_IN_PAIR                  = 2;                // 标定点对中的点数量
     public static final int MAX_POINT_PAIR_NUM                 = 128;              // 标定点最大数量
     public static final int CHANNEL_NUM_IN_POINT_GROUP         = 2;                // 标定点中的视频通道数
@@ -685,15 +685,15 @@ public interface NetSDKLib extends Library {
     public static final int MAX_MOSAIC_CHANNEL_NUM			   = 256;			   // 支持马赛克叠加的最多通道数量
     public static final int MAX_FIREWARNING_INFO_NUM           = 4;                // 最大热成像着火点报警信息个数
     public static final int MAX_AXLE_NUM                       = 8;                // 最大车轴数量
-    public static final int MAX_ACCESSDOOR_NUM                 = 128;              // 最大门数量 
+    public static final int MAX_ACCESSDOOR_NUM                 = 128;              // 最大门数量
     public static final int MAX_SIMILARITY_COUNT			   = 1024;			   // 最大人脸对比库阈值个数
     public static final int MAX_FEATURESTATE_NUM		       = 4;				   // 最大人脸组建模状态个数
 
-    public static final int NET_MAX_BULLET_HOLES               = 10;               // 最大的弹孔数       
+    public static final int NET_MAX_BULLET_HOLES               = 10;               // 最大的弹孔数
 
     public static final int MAX_NTP_SERVER                     = 4;                // 最大备用NTP服务器地址
     public static final int MAX_PLATE_NUM                      = 64;               // 每张图片中包含的最大车牌个数
-    public static final int MAX_PREVIEW_CHANNEL_NUM            = 64;               // 最大导播预览的通道数量 
+    public static final int MAX_PREVIEW_CHANNEL_NUM            = 64;               // 最大导播预览的通道数量
     public static final int MAX_ADDRESS_LEN                    = 256;              // 最大的地址长度
     public static final int MAX_DNS_SERVER_NUM                 = 2;                // DNS最大数量
     public static final int MAX_NETWORK_INTERFACE_NUM          = 32;               // 最大网卡数量
@@ -730,18 +730,18 @@ public interface NetSDKLib extends Library {
     public static final int MAX_GD_COUNT					   = 170;
     public static final int MAX_SUNTIME_COUNT				   = 12;    		   // 日出日落时间个数
     public static final int MAX_DOOR_TIME_SECTION			   = 4;				   // 门禁每天分时时间段最大个数
-    
+
     public static final int MAX_REMOTEDEVICEINFO_IPADDR_LEN    = 128;      		   // 远程设备IP地址最大长度
     public static final int MAX_REMOTEDEVICEINFO_USERNAME_LEN  = 128;              // 远程设备用户名最大长度
     public static final int MAX_REMOTEDEVICEINFO_USERPSW_LENGTH = 128;             // 远程设备密码最大长度
-    
+
     public static final int MAX_MANUFACTURER_LEN               = 32;               // 最大的 MAC地址所属制造商长度
     public static final int MAX_MACHISTORY_SSID_LEN            = 24;               // 最大的历史SSID长度
     public static final int MAX_MACHISTORY_SSID_NUM	           = 5;	               // 历史SSID的最大个数
-    
+
     public static final int CFG_MAX_SN_LEN					   = 32;			   // 最大设备序列号长度
     public static final int CFG_MAX_ACCESS_CONTROL_ADDRESS_LEN = 64;			   // 最大的地址长度
-    
+
     public static final int MAX_MACADDR_NUM					   = 8;				   // 最大物理地址个数
     public static final int MAX_ADD_DEVICE_NUM                 = 16;               // 最大添加设备个数
     public static final int MAX_LINK_DEVICE_NUM                = 1024;             // 最大连接设备个数
@@ -752,7 +752,7 @@ public interface NetSDKLib extends Library {
     public static final int NET_BURNING_DEV_NAMELEN			   = 32;			   // 刻录设备名字最大长度
     public static final int PTZ_PRESET_NAME_LEN				   = 64;			   // 云台预置点名称长度
     public static final int NET_RADIOMETRY_DOFIND_MAX		   = 32;			   // 热成像温度统计最大个数
-    
+
     // 查询类型,对应CLIENT_QueryDevState接口
     public static final int NET_DEVSTATE_COMM_ALARM            = 0x0001;           // 查询普通报警状态(包括外部报警,视频丢失,动态检测)
     public static final int NET_DEVSTATE_SHELTER_ALARM         = 0x0002;           // 查询遮挡报警状态
@@ -789,7 +789,7 @@ public interface NetSDKLib extends Library {
     public static final int NET_DEVSTATE_TEST_SNAPPICTURE      = 0x0021;           // 查询抓图设置是否成功
     public static final int NET_DEVSTATE_STATIC_ALARM          = 0x0022;           // 查询静态报警状态
     public static final int NET_DEVSTATE_SUBMODULE_INFO        = 0x0023;           // 查询设备子模块信息
-    public static final int NET_DEVSTATE_DISKDAMAGE            = 0x0024;           // 查询硬盘坏道能力 
+    public static final int NET_DEVSTATE_DISKDAMAGE            = 0x0024;           // 查询硬盘坏道能力
     public static final int NET_DEVSTATE_IPC                   = 0x0025;           // 查询设备支持的IPC能力, 见结构体NET_DEV_IPC_INFO
     public static final int NET_DEVSTATE_ALARM_ARM_DISARM      = 0x0026;           // 查询报警布撤防状态
     public static final int NET_DEVSTATE_ACC_POWEROFF_ALARM    = 0x0027;           // 查询ACC断电报警状态(返回一个DWORD, 1表示断电,0表示通电)
@@ -810,13 +810,13 @@ public interface NetSDKLib extends Library {
     public static final int NET_DEVSTATE_PTZ_LOCATION          = 0x0036;           // 查询云台状态信息(对应结构体 NET_PTZ_LOCATION_INFO)
     public static final int NET_DEVSTATE_MONITOR_INFO          = 0x0037;           // 画面监控辅助信息(对应结构体NETDEV_MONITOR_INFO)
     public static final int NET_DEVSTATE_SUBDEVICE             = 0x0300;           // 查询子设备(电源, 风扇等)状态(对应结构体CFG_DEVICESTATUS_INFO)
-    public static final int NET_DEVSTATE_RAID_INFO             = 0x0038;           // 查询RAID状态(对应结构体ALARM_RAID_INFO)  
+    public static final int NET_DEVSTATE_RAID_INFO             = 0x0038;           // 查询RAID状态(对应结构体ALARM_RAID_INFO)
     public static final int NET_DEVSTATE_TEST_DDNSDOMAIN       = 0x0039;           // 测试DDNS域名是否可用
     public static final int NET_DEVSTATE_VIRTUALCAMERA         = 0x003a;           // 查询虚拟摄像头状态(对应 NETDEV_VIRTUALCAMERA_STATE_INFO)
     public static final int NET_DEVSTATE_TRAFFICWORKSTATE      = 0x003b;           // 获取设备工作视频/线圈模式状态等(对应NETDEV_TRAFFICWORKSTATE_INFO)
     public static final int NET_DEVSTATE_ALARM_CAMERA_MOVE     = 0x003c;           // 获取摄像机移位报警事件状态(对应ALARM_CAMERA_MOVE_INFO)
-    public static final int NET_DEVSTATE_ALARM                 = 0x003e;           // 获取外部报警状态(对应 NET_CLIENT_ALARM_STATE) 
-    public static final int NET_DEVSTATE_VIDEOLOST             = 0x003f;           // 获取视频丢失报警状态(对应 NET_CLIENT_VIDEOLOST_STATE) 
+    public static final int NET_DEVSTATE_ALARM                 = 0x003e;           // 获取外部报警状态(对应 NET_CLIENT_ALARM_STATE)
+    public static final int NET_DEVSTATE_VIDEOLOST             = 0x003f;           // 获取视频丢失报警状态(对应 NET_CLIENT_VIDEOLOST_STATE)
     public static final int NET_DEVSTATE_MOTIONDETECT          = 0x0040;           // 获取动态监测报警状态(对应 NET_CLIENT_MOTIONDETECT_STATE)
     public static final int NET_DEVSTATE_DETAILEDMOTION        = 0x0041;           // 获取详细的动态监测报警状态(对应 NET_CLIENT_DETAILEDMOTION_STATE)
     public static final int NET_DEVSTATE_VEHICLE_INFO          = 0x0042;           // 获取车载自身各种硬件信息(对应 NETDEV_VEHICLE_INFO)
@@ -885,7 +885,7 @@ public interface NetSDKLib extends Library {
     public static final int NET_DEVSTATE_GET_WIRESSLESS_STATE  = 0x1579;           // 获取无线设备状态信息(对应 NET_GET_WIRELESS_DEVICE_STATE)
     public static final int NET_DEVSTATE_GET_REDUNDANCE_POWER_INFO = 0x157a;       // 获取冗余电源信息(对应 NET_GET_REDUNDANCE_POWER_INFO)
 
- 
+
     // 查询设备信息类型, 对应接口 CLIENT_QueryDevInfo
     // 设备信息类型,对应CLIENT_QueryDevInfo接口
     public static final int NET_QUERY_DEV_STORAGE_NAMES                 = 0x01;                // 查询设备的存储模块名列表 , pInBuf=NET_IN_STORAGE_DEV_NAMES *, pOutBuf=NET_OUT_STORAGE_DEV_NAMES *
@@ -903,7 +903,7 @@ public interface NetSDKLib extends Library {
     public static final int NET_QUERY_DEV_RADIOMETRY_TEMPER             = 0x0d;                // 查询测温项的参数值, pInBuf= NET_IN_RADIOMETRY_GETTEMPER*, pOutBuf= NET_OUT_RADIOMETRY_GETTEMPER *
     public static final int NET_QUERY_GET_CAMERA_STATE                  = 0x0e;                // 获取摄像机状态, pInBuf= NET_IN_GET_CAMERA_STATEINFO*, pOutBuf= NET_OUT_GET_CAMERA_STATEINFO *
     public static final int NET_QUERY_GET_REMOTE_CHANNEL_AUDIO_ENCODE   = 0x0f;                // 获取远程通道音频编码方式, pInBuf= NET_IN_GET_REMOTE_CHANNEL_AUDIO_ENCODEINFO*, pOutBuf= NET_OUT_GET_REMOTE_CHANNEL_AUDIO_ENCODEINFO *
-    public static final int NET_QUERY_GET_COMM_PORT_INFO                = 0x10;                // 获取设备串口信息, pInBuf=NET_IN_GET_COMM_PORT_INFO* , pOutBuf=NET_OUT_GET_COMM_PORT_INFO* 
+    public static final int NET_QUERY_GET_COMM_PORT_INFO                = 0x10;                // 获取设备串口信息, pInBuf=NET_IN_GET_COMM_PORT_INFO* , pOutBuf=NET_OUT_GET_COMM_PORT_INFO*
     public static final int NET_QUERY_GET_LINKCHANNELS                  = 0x11;                // 查询某视频通道的关联通道列表,pInBuf=NET_IN_GET_LINKCHANNELS* , pOutBuf=NET_OUT_GET_LINKCHANNELS*
     public static final int NET_QUERY_GET_VIDEOOUTPUTCHANNELS           = 0x12;                // 获取解码通道数量统计信息, pInBuf=NET_IN_GET_VIDEOOUTPUTCHANNELS*, pOutBuf=NET_OUT_GET_VIDEOOUTPUTCHANNELS*
     public static final int NET_QUERY_GET_VIDEOINFO                     = 0x13;                // 获取解码通道信息, pInBuf=NET_IN_GET_VIDEOINFO*, pOutBuf=NET_OUT_GET_VIDEOINFO*
@@ -915,11 +915,11 @@ public interface NetSDKLib extends Library {
     public static final int NET_QUERY_WLAN_ACCESSPOINT                  = 0x19;                // 查询无线网络接入点信息,pInBuf=NET_IN_WLAN_ACCESSPOINT* , pOutBuf=NET_OUT_WLAN_ACCESSPOINT*
     public static final int NET_QUERY_GPS_INFO							= 0x1a;				   // 查询设备GPS信息,pInBuf=NET_IN_DEV_GPS_INFO* , pOutBuf=NET_OUT_DEV_GPS_INFO*
     public static final int NET_QUERY_IVS_REMOTE_DEVICE_INFO            = 0x1b;                // 查询IVS的前端设备所关联的远程设备信息, pInBuf = NET_IN_IVS_REMOTE_DEV_INFO*, pOutBuf = NET_OUT_IVS_REMOTE_DEV_INFO*
-   
+
     // 设备能力类型, 对应CLIENT_GetDevCaps接口
     public static final int NET_THERMO_GRAPHY_CAPS                 		= 0x06;                // 热成像摄像头属性能力,pInBuf=NET_IN_THERMO_GETCAPS*, pOutBuf=NET_OUT_THERMO_GETCAPS*
-    public static final int NET_RADIOMETRY_CAPS                 		= 0x07;                // 热成像测温全局配置能力,pInBuf=NET_IN_RADIOMETRY_GETCAPS*, pOutBuf=NET_OUT_RADIOMETRY_GETCAPS*                          
-    
+    public static final int NET_RADIOMETRY_CAPS                 		= 0x07;                // 热成像测温全局配置能力,pInBuf=NET_IN_RADIOMETRY_GETCAPS*, pOutBuf=NET_OUT_RADIOMETRY_GETCAPS*
+
     /////////////////////////////////// 矩阵 ///////////////////////////////////////
 
     public static final int NET_MATRIX_INTERFACE_LEN          			= 16;          // 信号接口名称长度
@@ -953,7 +953,7 @@ public interface NetSDKLib extends Library {
     public static final String NET_DEVICE_ID_LOCAL               		= "Local";     // 本地设备ID
     public static final String NET_DEVICE_ID_REMOTE              		= "Remote";    // 远程设备ID
     public static final String NET_DEVICE_ID_UNIQUE             		= "Unique";    // 设备内统一编号
-    
+
     //其他定义
     public static final int NET_MAX_NAME_LEN                    = 16;   // 通用名字字符串长度
     public static final int NET_MAX_PERSON_ID_LEN               = 32;   // 人员id最大长度
@@ -994,7 +994,7 @@ public interface NetSDKLib extends Library {
     public static final int MAX_SUMMARY_LEN                     = 1024; // 叠加到JPEG图片的摘要信息最大长度
     public static final int WEEK_DAY_NUM                        = 7;    // 一周的天数
     public static final int NET_MAX_FACEDETECT_FEATURE_NUM      = 32;   // 人脸特征最大个数
-    public static final int NET_MAX_OBJECT_LIST                 = 16;   // 智能分析设备检测到的物体ID个数上限    
+    public static final int NET_MAX_OBJECT_LIST                 = 16;   // 智能分析设备检测到的物体ID个数上限
     public static final int NET_MAX_RULE_LIST                   = 16;   // 智能分析设备规则个数上限
     public static final int MAX_HUMANFACE_LIST_SIZE             = 8;    // 视频分析设备支持的人脸检测类型列表个数上限
     public static final int MAX_FEATURE_LIST_SIZE				= 32;	// 视频分析设备支持的人脸属性列表个数上限
@@ -1036,7 +1036,7 @@ public interface NetSDKLib extends Library {
     public static final int NET_EVENT_MAX_CARD_NUM              = 16;   // 事件上报信息包含最大卡片个数
     public static final int MAX_STATUS_NUM                      = 16;   // 交通设备状态最大个数
     public static final int NET_MAX_CHANMASK 					= 64;   // 通道掩码最大值
-    public static final int NET_CHAN_NAME_LEN                   = 32;   // 通道名长度,DVR DSP能力限制,最多32字节 
+    public static final int NET_CHAN_NAME_LEN                   = 32;   // 通道名长度,DVR DSP能力限制,最多32字节
     public static final int MAX_LANE_NUM                        = 8;    // 视频分析设备每个通道对应车道数上限
     public static final int MAX_STAFF_NUM                       = 20;   // 视频分析设备每个通道对应的标尺数上限
     public static final int MAX_ANALYSE_RULE_NUM                = 32;   // 视频分析设备最大规则个数
@@ -1063,29 +1063,29 @@ public interface NetSDKLib extends Library {
     public static final int NET_WIRELESS_DEVICE_SERIAL_NUMBER_MAX_LEN = 32;// 无线设备序列号最大长度
     public static final int NET_MAX_CUSTOM_PERSON_INFO_NUM		= 4;    // 注册人员信息扩展最大个数
     public static final int NET_MAX_PERSON_INFO_LEN         	= 64;   // 人员扩展信息最大长度
-    
+
     public static final int NET_NEW_MAX_RIGHT_NUM               = 1024; // 用户权限个数上限
     public static final int NET_MAX_GROUP_NUM                   = 20;   // 用户组个数上限
     public static final int NET_MAX_USER_NUM                    = 200;  // 用户个数上限
     public static final int NET_RIGHT_NAME_LENGTH               = 32;   // 权限名长度
     public static final int NET_MEMO_LENGTH                     = 32;   // 备注长度
     public static final int NET_NEW_USER_NAME_LENGTH            = 128;  // 用户名长度
-    public static final int NET_NEW_USER_PSW_LENGTH             = 128;  // 密码   
+    public static final int NET_NEW_USER_PSW_LENGTH             = 128;  // 密码
 	public static final int NET_MAX_RIGHT_NUM                   = 100;  // 用户权限个数上限
 	public static final int NET_COMMENT_LENGTH					= 100;	// 备注信息长度
 	public static final int NET_GROUPID_LENGTH					= 64;	// group id 信息长度
 	public static final int NET_GROUPNAME_LENGTH				= 128;	// group name 信息长度
 	public static final int NET_FEATUREVALUE_LENGTH				= 128;	// 人脸特征 信息长度
-	
+
 	public static final int	MAX_GROUP_ID_LEN					= 64;	// 最大布控组ID长度
 	public static final int	MAX_COLOR_NAME_LEN					= 32;	// 最大颜色名长度
 	public static final int	MAX_COLOR_HEX_LEN					= 8;	// 最大HEX颜色长度
 	public static final int	MAX_LINK_GROUP_NUM					= 20;	// 联动的布控组最大数量
-	public static final int MAX_PATH_LEN					    = 260;	// 最大路径长度	
+	public static final int MAX_PATH_LEN					    = 260;	// 最大路径长度
 	public static final int MAX_RIDER_NUM 						= 16;	// 骑车人数组上限
 	public static final int MAX_ALARM_CHANNEL_NAME_LEN		    = 64;   // 最大报警名称长度
 	public static final int MAX_SMALLPIC_NUM				    = 32;	// 最大小图张数
-	
+
 	// 支持用户名最大长度为8位或16位的设备,对应扩展接口CLIENT_QueryUserInfoEx和CLIENT_OperateUserInfoEx
 	public static final int NET_USER_PSW_LENGTH_EX       		= 16;   // 密码
 
@@ -1112,15 +1112,15 @@ public interface NetSDKLib extends Library {
     public static final int MAX_DEV_ID_LEN_EX					= 128;  // 设备ID最大长度
     public static final int MAX_PATH_STOR                       = 240;  // 远程目录的长度
     public static final int	MAX_REMOTE_DEV_NUM       			= 256;  // 最大远程设备数量
-    public static final int NET_MAX_PLATE_NUMBER_LEN            = 32;   // 车牌字符长度    
-    public static final int NET_MAX_AUTHORITY_LIST_NUM          = 16;   // 权限列表最大个数    
+    public static final int NET_MAX_PLATE_NUMBER_LEN            = 32;   // 车牌字符长度
+    public static final int NET_MAX_AUTHORITY_LIST_NUM          = 16;   // 权限列表最大个数
     public static final int NET_MAX_ALARMOUT_NUM_EX 			= 32;   //报警输出口个数上限扩展
     public static final int NET_MAX_VIDEO_IN_NUM_EX 			= 32;   //视频输入口个数上限扩展
     public static final int NET_MAX_SAERCH_IP_NUM               = 256;  // 最大搜索IP个数
     public static final int NET_MAX_POS_MAC_NUM                 = 8;    // 刷卡机Mac码最大长度
     public static final int NET_MAX_BUSCARD_NUM                 = 64;   // 公交卡号最大长度
     public static final int NET_STORAGE_NAME_LEN                = 128;  // 存储设备名称长度
-    
+
     public static final int NET_MAX_DOOR_NUM               		= 32;   // 最大有权限门禁数目
     public static final int NET_MAX_TIMESECTION_NUM        		= 32;   // 最大有效时间段数目
     public static final int NET_MAX_CARDNAME_LEN           		= 64;   // 门禁卡命名最大长度
@@ -1153,7 +1153,7 @@ public interface NetSDKLib extends Library {
     public static final int MAX_ACCESS_FLOOR_NUM                = 64;   // 最大楼层数量
     public static final int MAX_ORDER_NUMBER 					= 6;	// 排序规则的最大数量
     public static final int MAX_NUMBER_REGISTER_INFO			= 32;
-    
+
 	public static final int CFG_COMMON_STRING_8                 = 8;    // 通用字符串长度8
 	public static final int CFG_COMMON_STRING_16                = 16;   // 通用字符串长度16
 	public static final int CFG_COMMON_STRING_32                = 32;   // 通用字符串长度32
@@ -1161,7 +1161,7 @@ public interface NetSDKLib extends Library {
 	public static final int CFG_COMMON_STRING_128               = 128;  // 通用字符串长度128
 	public static final int CFG_COMMON_STRING_256               = 256;  // 通用字符串长度256
 	public static final int CFG_COMMON_STRING_512               = 512;  // 通用字符串长度512
-    
+
     public static final int MAX_COILCONFIG          			= 3;    // 智能交通车检器线圈配置上限
     public static final int MAX_DETECTOR            			= 6;    // 智能交通车检器配置上限
     public static final int MAX_VIOLATIONCODE					= 16;   // 智能交通违章代码长度上限
@@ -1170,7 +1170,7 @@ public interface NetSDKLib extends Library {
     public static final int MAX_ROADWAYNO           			= 128;  // 道路编号	由32个数字和字母构成
     public static final int MAX_PRIORITY_NUMBER                 = 256;  // 违章优先级包含违章最大个数
     public static final int MAX_DRIVINGDIRECTION          		= 256;  // 行驶方向字符串长度
-    
+
     public static final int MAX_OSD_CUSTOM_SORT_NUM       		= 8;
     public static final int MAX_OSD_CUSTOM_SORT_ELEM_NUM  		= 8;
     public static final int MAX_OSD_CUSTOM_GENERAL_NUM    		= 8;
@@ -1187,17 +1187,17 @@ public interface NetSDKLib extends Library {
     public static final int MAX_SCADA_POINT_LIST_INFO_NUM       = 256;  // 最大点位表路径个数
     public static final int MAX_SCADA_POINT_LIST_ALARM_INFO_NUM = 256;  // 最大点位表报警个数
     public static final int	MAX_LABEL_ARRAY						= 1024;
-    
+
     public static final int	MAX_DELIVERY_FILE_NUM  				= 128;  // 最大投放文件数量
     public static final int	DELIVERY_FILE_URL_LEN  				= 128;  // 投放文件的URL长度
-    
+
     public static final int MAX_COMMON_STRING_512               = 512;  // 通用字符串长度512
     public static final int	MAX_RFIDELETAG_CARDID_LEN		    = 16;	// RFID 电子车牌标签信息中卡号最大长度
     public static final int	MAX_RFIDELETAG_DATE_LEN		 	    = 16;	// RFID 电子车牌标签信息中时间最大长度
-    public static final int MAX_REPEATENTERROUTE_NUM   			= 12;   //反潜路径个数  
+    public static final int MAX_REPEATENTERROUTE_NUM   			= 12;   //反潜路径个数
     public static final int ECK_SCREEN_NUM_MAX                  = 8;    // 智能停车系统出入口机最大屏数量
     public static final int MAX_CAR_CANDIDATE_NUM				= 50;
-    public static final int MAX_REGISTER_NUM                    = 10;   // 主动注册配置最大个数 
+    public static final int MAX_REGISTER_NUM                    = 10;   // 主动注册配置最大个数
     public static final int MAX_SERVER_NUM                      = 10;   // 服务器最大个数
     public static final int	NET_COUNTRY_LENGTH				    = 3;	// 国家缩写长度
     public static final int	MAX_ATTENDANCE_USERNAME_LEN			= 36;	// 考勤用户名长度
@@ -1205,7 +1205,7 @@ public interface NetSDKLib extends Library {
     public static final int	MAX_EVENT_ID_LEN					= 52;   // 国标事件ID最大长度
     public static final int	MAX_HUMANTRAIT_EVENT_LEN			= 36; 	// 补充人体特征上报事件最大长度
     public static final int MAX_EXIT_MAN_NUM					= 32;	// 最大支持的离开人员数量
-    
+
     // 矩阵子卡类型, 多种类型可以组合
     public static final int NET_MATRIX_CARD_MAIN                = 0x10000000;   // 主卡
     public static final int NET_MATRIX_CARD_INPUT               = 0x00000001;   // 输入卡
@@ -1217,10 +1217,10 @@ public interface NetSDKLib extends Library {
     public static final int NET_MATRIX_CARD_ALARM               = 0x00000040;   // 报警卡
     public static final int NET_MATRIX_CARD_RAID                = 0x00000080;   // 硬Raid卡
     public static final int NET_MATRIX_CARD_NET_DECODE          = 0x00000100;   // 网络解码卡
-    
+
     public static final int RESERVED_TYPE_FOR_INTEL_BOX 		= 0x00000001;
     public static final int RESERVED_TYPE_FOR_COMMON   			= 0x00000010;
-    
+
     /************************************************************************
      ** 结构体
      ***********************************************************************/
@@ -1243,7 +1243,7 @@ public interface NetSDKLib extends Library {
         public int                    nPicBufSize;              // 实时图片接收缓冲大小（字节为单位），为0默认为2*1024*1024
         public byte[]                 bReserved = new byte[4];  // 保留字段字段
     }
-    
+
     // 设备信息
     public static class NET_DEVICEINFO extends MyStructure {
         public byte[]              sSerialNumber = new byte[NET_SERIALNO_LEN];    // 序列号
@@ -1257,7 +1257,7 @@ public interface NetSDKLib extends Library {
             public byte                byLeftLogTimes;           // 当登陆失败原因为密码错误时,通过此参数通知用户,剩余登陆次数,为0时表示此参数无效
         }
     }
-    
+
     // 设备信息扩展///////////////////////////////////////////////////
     public static class NET_DEVICEINFO_Ex extends MyStructure {
     	 public byte[]     sSerialNumber = new byte[NET_SERIALNO_LEN];    // 序列号
@@ -1272,7 +1272,7 @@ public interface NetSDKLib extends Library {
     	 public int        byLockLeftTime;                                // 当登陆失败,用户解锁剩余时间（秒数）, -1表示设备未设置该参数
     	 public byte[]     Reserved = new byte[24];                       // 保留
     }
-    
+
     // 对应接口 CLIENT_LoginEx2/////////////////////////////////////////////////////////
     public static class EM_LOGIN_SPAC_CAP_TYPE extends MyStructure {
     	public static final int EM_LOGIN_SPEC_CAP_TCP               = 0;    // TCP登陆, 默认方式
@@ -1288,7 +1288,7 @@ public interface NetSDKLib extends Library {
     	public static final int EM_LOGIN_SPEC_CAP_U_LOGIN           = 11;   // 用U盾设备的登入
     	public static final int	EM_LOGIN_SPEC_CAP_LDAP              = 12;   // LDAP方式登录
     	public static final int EM_LOGIN_SPEC_CAP_AD                = 13;   // AD（ActiveDirectory）登录方式
-    	public static final int EM_LOGIN_SPEC_CAP_RADIUS            = 14;   // Radius 登录方式 
+    	public static final int EM_LOGIN_SPEC_CAP_RADIUS            = 14;   // Radius 登录方式
     	public static final int EM_LOGIN_SPEC_CAP_SOCKET_5          = 15;   // Socks5登陆方式
     	public static final int EM_LOGIN_SPEC_CAP_CLOUD             = 16;   // 云登陆方式
     	public static final int EM_LOGIN_SPEC_CAP_AUTH_TWICE        = 17;   // 二次鉴权登陆方式
@@ -1296,7 +1296,7 @@ public interface NetSDKLib extends Library {
     	public static final int	EM_LOGIN_SPEC_CAP_P2P               = 19;   // 为P2P登陆方式
     	public static final int	EM_LOGIN_SPEC_CAP_MOBILE            = 20;   // 手机客户端登陆
     }
-    
+
     // 时间
     public static class NET_TIME extends MyStructure {
         public int                dwYear;                   // 年
@@ -1305,7 +1305,7 @@ public interface NetSDKLib extends Library {
         public int                dwHour;                   // 时
         public int                dwMinute;                 // 分
         public int                dwSecond;                 // 秒
-        
+
         public NET_TIME() {
             this.dwYear = 0;
             this.dwMonth = 0;
@@ -1314,7 +1314,7 @@ public interface NetSDKLib extends Library {
             this.dwMinute = 0;
             this.dwSecond = 0;
         }
-        
+
         public void setTime(int year, int month, int day, int hour, int minute, int second) {
         	this.dwYear = year;
         	this.dwMonth= month;
@@ -1323,7 +1323,7 @@ public interface NetSDKLib extends Library {
         	this.dwMinute=minute;
         	this.dwSecond=second;
         }
-        
+
         public NET_TIME(NET_TIME other) {
             this.dwYear = other.dwYear;
             this.dwMonth = other.dwMonth;
@@ -1332,22 +1332,22 @@ public interface NetSDKLib extends Library {
             this.dwMinute = other.dwMinute;
             this.dwSecond = other.dwSecond;
         }
-        
+
         //用于列表中显示
         public String toStringTime() {
             return  String.format("%02d/%02d/%02d %02d:%02d:%02d", dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond);
         }
-        
+
         public String toStringTimeEx() {
             return  String.format("%02d-%02d-%02d %02d:%02d:%02d", dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond);
         }
-        
+
         public String toString() {
         	return String.format("%02d%02d%02d%02d%02d%02d", dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond);
         }
     }
 
-    public static class NET_TIME_EX extends MyStructure 
+    public static class NET_TIME_EX extends MyStructure
     {
         public int                dwYear;                    // 年
         public int                dwMonth;                   // 月
@@ -1357,7 +1357,7 @@ public interface NetSDKLib extends Library {
         public int                dwSecond;                  // 秒
         public int                dwMillisecond;             // 毫秒
         public int[]              dwReserved = new int[2];   // 保留字段
-        
+
         public String toString() {
             return dwYear + "/" + dwMonth + "/" + dwDay + " " + dwHour + ":" + dwMinute + ":" + dwSecond;
         }
@@ -1374,7 +1374,7 @@ public interface NetSDKLib extends Library {
             return  String.format("Time_%02d%02d%02d_%02d%02d%02d", dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond);
         }
     }
-    
+
     // 区域
     public static class  NET_CFG_Rect extends MyStructure
     {
@@ -1382,14 +1382,14 @@ public interface NetSDKLib extends Library {
         public int            nLeft;
         public int            nTop;
         public int            nRight;
-        public int            nBottom;    
-        
+        public int            nBottom;
+
         public NET_CFG_Rect()
         {
             this.nStructSize = this.size();
         }
     }
-    
+
     // 颜色
     public static class  NET_CFG_Color extends MyStructure
     {
@@ -1398,7 +1398,7 @@ public interface NetSDKLib extends Library {
         public int            nGreen;                            	// 绿
         public int            nBlue;                            	// 蓝
         public int            nAlpha;                            	// 透明
-        
+
         public NET_CFG_Color()
         {
             this.nStructSize = this.size();
@@ -1418,7 +1418,7 @@ public interface NetSDKLib extends Library {
         public NET_CFG_Color      stuBackColor = new NET_CFG_Color();    // 背景色
         public NET_CFG_Rect       stuRect = new NET_CFG_Rect();        // 区域, 坐标取值0~8191, 仅使用left和top值, 点(left,top)应和(right,bottom)设置成同样的点
         public int            bPreviewBlend;                    // 叠加到预览视频, 类型为BOOL， 取值0或者1
-        
+
         public NET_CFG_VideoWidgetChannelTitle()
         {
             this.nStructSize = this.size();
@@ -1439,17 +1439,17 @@ public interface NetSDKLib extends Library {
         public NET_CFG_Rect        stuRect = new NET_CFG_Rect();        // 区域, 坐标取值0~8191, 仅使用left和top值, 点(left,top)应和(right,bottom)设置成同样的点
         public int            bShowWeek;                            // 是否显示星期, 类型为BOOL, 取值0或者1
         public int            bPreviewBlend;                        // 叠加到预览视频, 类型为BOOL, 取值0或者1
-        
+
         public NET_CFG_VideoWidgetTimeTitle()
         {
             this.nStructSize = this.size();
         }
     }
-    
+
     // 编码物件-区域覆盖配置
     public static class  NET_CFG_VideoWidgetCover extends MyStructure
     {
-        public int                nStructSize;    
+        public int                nStructSize;
         public int            bEncodeBlend;                    // 叠加到主码流, 类型为BOOL, 取值0或者1
         public int            bEncodeBlendExtra1;                // 叠加到辅码流1, 类型为BOOL, 取值0或者1
         public int            bEncodeBlendExtra2;                // 叠加到辅码流2, 类型为BOOL, 取值0或者1
@@ -1459,13 +1459,13 @@ public interface NetSDKLib extends Library {
         public NET_CFG_Color        stuBackColor = new NET_CFG_Color();        // 背景色
         public NET_CFG_Rect        stuRect = new NET_CFG_Rect();            // 区域, 坐标取值0~8191
         public int            bPreviewBlend;                    // 叠加到预览视频, 类型为BOOL, 取值0或者1
-        
+
         public NET_CFG_VideoWidgetCover()
         {
             this.nStructSize = this.size();
         }
     }
-    
+
     public class EM_TITLE_TEXT_ALIGN
     {
         public static final int EM_TEXT_ALIGN_INVALID         = 0;     // 无效的对齐方式
@@ -1484,7 +1484,7 @@ public interface NetSDKLib extends Library {
     public static class  NET_CFG_VideoWidgetCustomTitle extends MyStructure
     {
         public int                nStructSize;
-        public int            bEncodeBlend;                        // 叠加到主码流, 类型为BOOL, 取值0或者1 
+        public int            bEncodeBlend;                        // 叠加到主码流, 类型为BOOL, 取值0或者1
         public int            bEncodeBlendExtra1;                    // 叠加到辅码流1, 类型为BOOL, 取值0或者1
         public int            bEncodeBlendExtra2;                    // 叠加到辅码流2, 类型为BOOL, 取值0或者1
         public int            bEncodeBlendExtra3;                    // 叠加到辅码流3, 类型为BOOL, 取值0或者1
@@ -1495,15 +1495,15 @@ public interface NetSDKLib extends Library {
         public byte[]            szText = new byte[NET_CFG_Custom_Title_Len];// 标题内容
         public int            bPreviewBlend;                    // 叠加到预览视频, 类型为BOOL, 取值0或者1
         public byte[]           szType = new byte[NET_CFG_Custom_TitleType_Len];// 标题类型 "Rtinfo" 实时刻录信息 "Custom" 自定义叠加、温湿度叠加 "Title" :片头信息 "Check"  校验码
-                                                                // 地理信息 "Geography"  ATM卡号信息 "ATMCardInfo" 摄像机编号 "CameraID" 
+                                                                // 地理信息 "Geography"  ATM卡号信息 "ATMCardInfo" 摄像机编号 "CameraID"
         public int                  emTextAlign;                    // 标题对齐方式 (参见EM_TITLE_TEXT_ALIGN)
-        
+
         public NET_CFG_VideoWidgetCustomTitle()
         {
             this.nStructSize = this.size();
         }
     }
-    
+
     //  编码物件-叠加传感器信息-叠加内容描述
     public static class  NET_CFG_VideoWidgetSensorInfo_Description extends MyStructure
     {
@@ -1527,7 +1527,7 @@ public interface NetSDKLib extends Library {
         public NET_CFG_Rect    stuRect = new NET_CFG_Rect();                        // 区域, 坐标取值0~8191
         public int            nDescriptionNum;                // 叠加区域描述数目
         public NET_CFG_VideoWidgetSensorInfo_Description[]  stuDescription = (NET_CFG_VideoWidgetSensorInfo_Description[])new NET_CFG_VideoWidgetSensorInfo_Description().toArray(NET_CFG_Max_Description_Num);// 叠加区域描述信息
-        
+
         public NET_CFG_VideoWidgetSensorInfo()
         {
             this.nStructSize = this.size();
@@ -1559,28 +1559,28 @@ public interface NetSDKLib extends Library {
         public int                               nFontSizeExtra3;        //叠加到辅码流3上的全局字体大小,单位 px
         public int                               nFontSizeSnapshot;      //叠加到抓图流上的全局字体大小, 单位 px
         public int                               nFontSizeMergeSnapshot; //叠加到抓图流上合成图片的字体大小,单位 px
-        
+
         public NET_CFG_VideoWidget()
         {
             this.nStructSize = this.size();
             for (int i = 0; i < stuCustomTitle.length; i++) {
             	stuCustomTitle[i] = new NET_CFG_VideoWidgetCustomTitle();
 			}
-            
+
             for (int i = 0; i < stuCovers.length; i++) {
             	stuCovers[i] = new NET_CFG_VideoWidgetCover();
 			}
-            
+
             for (int i = 0; i < stuSensorInfo.length; i++) {
             	stuSensorInfo[i] = new NET_CFG_VideoWidgetSensorInfo();
 			}
         }
     }
-    
+
     // 报警事件类型 NET_EVENT_VIDEOABNORMALDETECTION 对应的数据描述信息
     public static class ALARM_VIDEOABNORMAL_DETECTION_INFO extends MyStructure
     {
-        public int          dwSize;    
+        public int          dwSize;
         public int          nChannelID;                     // 通道号
         public double       PTS;                            // 时间戳(单位是毫秒)
         public NET_TIME_EX  UTC;                            // 事件发生的时间
@@ -1591,13 +1591,13 @@ public interface NetSDKLib extends Library {
                                                             // 11-视频运动, 12-视频闪烁, 13-视频颜色, 14-虚焦检测, 15-过曝检测
         public int          nValue;                         // 检测值,值越高表示视频质量越差, GB30147定义
         public int          nOccurrenceCount;               // 规则被触发生次数
-        
+
         public ALARM_VIDEOABNORMAL_DETECTION_INFO()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // 停车发卡刷卡类型
     public static class NET_PARKING_CARD_TYPE extends MyStructure
     {
@@ -1605,14 +1605,14 @@ public interface NetSDKLib extends Library {
         public static final int NET_PARKING_CARD_TYPE_SEND = 1;   // 发卡
         public static final int NET_PARKING_CARD_TYPE_DETECT = 2; // 刷卡
     }
-    
+
     // 报警事件类型 NET_ALARM_PARKING_CARD (停车刷卡事件)对应的数据描述信息
     public static class ALARM_PARKING_CARD extends MyStructure {
     	public int                   dwSize;
     	public int   				 emType;                       // 类型, 参考 NET_PARKING_CARD_TYPE
         public int                   dwCardNo;                     // 卡号
         public byte[]                szPlate = new byte[NET_COMMON_STRING_16]; // 车牌
-        
+
         public ALARM_PARKING_CARD() {
         	this.dwSize = this.size();
         }
@@ -1629,7 +1629,7 @@ public interface NetSDKLib extends Library {
         public int      nIndex;                             // 事件源通道
         public int      dwStorPoint;                        // 存储点
         public byte[]   szFileName = new byte[128];         // 文件名
-        
+
         public ALARM_NEW_FILE_INFO()
         {
             this.dwSize = this.size();
@@ -1639,12 +1639,12 @@ public interface NetSDKLib extends Library {
     // 人数越上限类型
     public static class EM_UPPER_LIMIT_TYPE extends MyStructure
     {
-        public static final int EM_UPPER_LIMIT_TYPE_UNKNOWN     = 0;  
+        public static final int EM_UPPER_LIMIT_TYPE_UNKNOWN     = 0;
         public static final int EM_UPPER_LIMIT_TYPE_ENTER_OVER  = 1; // 进入越上限
         public static final int EM_UPPER_LIMIT_TYPE_EXIT_OVER   = 2; // 出来越上限
-        public static final int EM_UPPER_LIMIT_TYPE_INSIDE_OVER = 3; // 内部越上限    
+        public static final int EM_UPPER_LIMIT_TYPE_INSIDE_OVER = 3; // 内部越上限
     }
-    
+
 
     // 事件类型 NET_ALARM_HUMAM_NUMBER_STATISTIC (人数量/客流量统计事件NumberStat对应的数据描述信息)
     public static class  ALARM_HUMAN_NUMBER_STATISTIC_INFO extends MyStructure
@@ -1656,9 +1656,9 @@ public interface NetSDKLib extends Library {
         public int                 nEnteredNumber;                 // 进入区域或者出入口内的物体个数
         public int                 nExitedNumber;                  // 出来区域或者出入口内的物体个数
         public int                 emUpperLimitType;               // 人数越上限类型,参见EM_UPPER_LIMIT_TYPE定义
-        public byte[]              reserved = new byte[512];       // 预留       
+        public byte[]              reserved = new byte[512];       // 预留
     }
-    
+
     /////////////////////////////////智能支持/////////////////////////////////
     //物体对应图片文件信息
     public static class NET_PIC_INFO extends MyStructure
@@ -1674,13 +1674,13 @@ public interface NetSDKLib extends Library {
                                             		 // 则不需要再时检测定位抠图,1:检测过的,0:没有检测过
         public byte[] 		bReserved = new byte[3]; // 12<--16
     	public int			nFilePathLen;			 // 文件路径长度 既pszFilePath 用户申请的大小
-        public NET_POINT 	stuPoint;			 	 // 小图左上角在大图的位置，使用绝对坐标系				
+        public NET_POINT 	stuPoint;			 	 // 小图左上角在大图的位置，使用绝对坐标系
     }
 
     // 人员类型
     public static class EM_PERSON_TYPE extends MyStructure
     {
-        public static final int PERSON_TYPE_UNKNOWN = 0;  
+        public static final int PERSON_TYPE_UNKNOWN = 0;
         public static final int PERSON_TYPE_NORMAL = 1; 	//普通人员
         public static final int PERSON_TYPE_SUSPICION = 2;  //嫌疑人员
     }
@@ -1688,11 +1688,11 @@ public interface NetSDKLib extends Library {
     // 证件类型
     public static class EM_CERTIFICATE_TYPE extends MyStructure
     {
-        public static final int CERTIFICATE_TYPE_UNKNOWN = 0;  
+        public static final int CERTIFICATE_TYPE_UNKNOWN = 0;
         public static final int CERTIFICATE_TYPE_IC = 1; 		//身份证
         public static final int CERTIFICATE_TYPE_PASSPORT = 2;  //护照
     }
-    
+
     //人员信息
     public static class FACERECOGNITION_PERSON_INFO extends MyStructure
     {
@@ -1707,8 +1707,8 @@ public interface NetSDKLib extends Library {
         public NET_PIC_INFO[] szFacePicInfo =  (NET_PIC_INFO[])new NET_PIC_INFO().toArray(NET_MAX_PERSON_IMAGE_NUM);//当前人员对应的图片信息
         public byte		 byType;										// 人员类型,详见EM_PERSON_TYPE
         public byte 	 byIDType;										// 证件类型,详见EM_CERTIFICATE_TYPE
-        public byte		 byGlasses;										// 是否戴眼镜，0-未知 1-不戴 2-戴						
-        public byte      byAge;											// 年龄,0表示未知  
+        public byte		 byGlasses;										// 是否戴眼镜，0-未知 1-不戴 2-戴
+        public byte      byAge;											// 年龄,0表示未知
         public byte[]	 szProvince = new byte[NET_MAX_PROVINCE_NAME_LEN];// 省份
         public byte[]	 szCity = new byte[NET_MAX_CITY_NAME_LEN];		// 城市
         public byte[]	 szPersonNameEx = new byte[NET_MAX_PERSON_NAME_LEN];// 姓名,因存在姓名过长,16字节无法存放问题,故增加此参数,
@@ -1716,18 +1716,18 @@ public interface NetSDKLib extends Library {
                                                               			// 修改,删除操作时必填
     	public byte[] 	 szCountry = new byte[NET_COUNTRY_LENGTH];		// 国籍,符合ISO3166规范
     	public byte		 byIsCustomType;								// 人员类型是否为自定义: 0 使用Type规定的类型 1 自定义,使用szPersonName字段
-    	public Pointer	 pszComment;									// 备注信息, 用户自己申请内存的情况时, 
+    	public Pointer	 pszComment;									// 备注信息, 用户自己申请内存的情况时,
 																	    // 下方bCommentLen需填写对应的具体长度值，推荐长度 NET_COMMENT_LENGTH
-				
-    	public Pointer	 pszGroupID;									// 人员所属组ID, 用户自己申请内存的情况时, 
+
+    	public Pointer	 pszGroupID;									// 人员所属组ID, 用户自己申请内存的情况时,
 																	    // 下方bGroupIdLen需填写对应的具体长度值，推荐长度 NET_GROUPID_LENGTH
-					
-    	public Pointer	 pszGroupName;									// 人员所属组名, 用户自己申请内存的情况时, 
+
+    	public Pointer	 pszGroupName;									// 人员所属组名, 用户自己申请内存的情况时,
 													  				    // 下方bGroupNameLen需填写对应的具体长度值，推荐长度 NET_GROUPNAME_LENGTH
-				
-    	public Pointer	 pszFeatureValue;								// 人脸特征, 用户自己申请内存的情况时, 
+
+    	public Pointer	 pszFeatureValue;								// 人脸特征, 用户自己申请内存的情况时,
 																		// 下方bFeatureValueLen需填写对应的具体长度值，推荐长度 NET_FEATUREVALUE_LENGTH
-				
+
 		public byte		 bGroupIdLen;									// pszGroupID的长度
 		public byte		 bGroupNameLen;									// pszGroupName的长度
 		public byte		 bFeatureValueLen;								// pszFeatureValue的长度
@@ -1740,17 +1740,17 @@ public interface NetSDKLib extends Library {
     {
         public byte[] szUID = new byte[NET_MAX_PERSON_ID_LEN];//UID内容
     }
-    
+
     //人脸识别数据库操作
     public static class EM_OPERATE_FACERECONGNITIONDB_TYPE
     {
-        public static final int NET_FACERECONGNITIONDB_UNKOWN = 0; 
+        public static final int NET_FACERECONGNITIONDB_UNKOWN = 0;
         public static final int NET_FACERECONGNITIONDB_ADD = 1;             //添加人员信息和人脸样本，如果人员已经存在，图片数据和原来的数据合并
         public static final int NET_FACERECONGNITIONDB_DELETE = 2;          //删除人员信息和人脸样本
         public static final int NET_FACERECONGNITIONDB_MODIFY = 3;          //修改人员信息和人脸样本,人员的UID标识必填
         public static final int NET_FACERECONGNITIONDB_DELETE_BY_UID = 4;   //通过UID删除人员信息和人脸样本
     }
-    
+
     //CLIENT_OperateFaceRecognitionDB接口输入参数
     public static class NET_IN_OPERATE_FACERECONGNITIONDB extends MyStructure
     {
@@ -1760,33 +1760,33 @@ public interface NetSDKLib extends Library {
                                                         			//emOperateType操作类型为ET_FACERECONGNITIONDB_DELETE_BY_UID时使用,stPeronInfo字段无效
         public int 								nUIDNum;			//UID个数
         public Pointer 							stuUIDs;			//人员唯一标识符,首次由服务端生成,区别于ID字段, NET_UID_CHAR[]
-        
+
         // 图片二进制数据
         public Pointer 							pBuffer;			//缓冲地址, char *
         public int 								nBufferLen;			//缓冲数据长度
-        
+
     	public int			  					bUsePersonInfoEx;	// 使用人员扩展信息, 1:true   0:false
     	public FACERECOGNITION_PERSON_INFOEX	stPersonInfoEx;	    // 人员信息扩展
-    	
+
         public NET_IN_OPERATE_FACERECONGNITIONDB()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     //CLIENT_OperateFaceRecognitionDB接口输出参数
     public static class NET_OUT_OPERATE_FACERECONGNITIONDB extends MyStructure
     {
         public int 		dwSize;
     	public byte[]	szUID = new byte[NET_MAX_PERSON_ID_LEN];	// 人员唯一标识符, 只有在操作类型为NET_FACERECONGNITIONDB_ADD时有效
 
-        
+
         public NET_OUT_OPERATE_FACERECONGNITIONDB()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     //人脸对比模式
     public static class EM_FACE_COMPARE_MODE extends MyStructure
     {
@@ -1795,18 +1795,18 @@ public interface NetSDKLib extends Library {
         public static final int NET_FACE_COMPARE_MODE_AREA = 2; //指定人脸区域组合区域
         public static final int  NET_FACE_COMPARE_MODE_AUTO = 3; //智能模式,算法根据人脸各个区域情况自动选取组合
     }
-    
+
     //人脸区域
     public static class EM_FACE_AREA_TYPE extends MyStructure
     {
-        public static final int NET_FACE_AREA_TYPE_UNKOWN = 0; 
+        public static final int NET_FACE_AREA_TYPE_UNKOWN = 0;
         public static final int NET_FACE_AREA_TYPE_EYEBROW = 1; //眉毛
         public static final int NET_FACE_AREA_TYPE_EYE = 2; //眼睛
         public static final int NET_FACE_AREA_TYPE_NOSE= 3; //鼻子
         public static final int NET_FACE_AREA_TYPE_MOUTH = 4; //嘴巴
         public static final int NET_FACE_AREA_TYPE_CHEEK =5; //脸颊
     }
-    
+
     public static class NET_FACE_MATCH_OPTIONS extends MyStructure
     {
         public int 			dwSize;
@@ -1817,13 +1817,13 @@ public interface NetSDKLib extends Library {
         public int 			nAccuracy;								// 识别精度(取值1~10,随着值增大,检测精度提高,检测速度下降。最小值为1表示检测速度优先,最大值为10表示检测精度优先。暂时只对人脸检测有效)
         public int 			nSimilarity;							// 相似度(必须大于该相识度才报告;百分比表示,1~100)
         public int 			nMaxCandidate;							// 报告的最大候选个数(根据相似度进行排序,取相似度最大的候选人数报告)
-        	
+
         public NET_FACE_MATCH_OPTIONS()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     //人脸识别人脸类型
     public static class EM_FACERECOGNITION_FACE_TYPE extends MyStructure
     {
@@ -1832,7 +1832,7 @@ public interface NetSDKLib extends Library {
         public static final int  EM_FACERECOGNITION_FACE_TYPE_REC_SUCCESS=  2;	// 识别成功
         public static final int  EM_FACERECOGNITION_FACE_TYPE_REC_FAIL = 3;		// 识别失败
     }
-    
+
     public static class NET_FACE_FILTER_CONDTION extends MyStructure
     {
         public int 			dwSize;
@@ -1850,19 +1850,19 @@ public interface NetSDKLib extends Library {
     	public byte[]		byReserved = new byte[2];				// 保留字节对齐
     	public int[]	    emEmotion = new int[MAX_EMOTION_NUM];	// 表情条件
     	public int			nEmotionNum;				   			// 表情条件的个数
-        
+
         public NET_FACE_FILTER_CONDTION()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // 人员组ID
-    public static class GROUP_ID extends MyStructure 
+    public static class GROUP_ID extends MyStructure
     {
     	public byte[]   szGroupId= new byte[NET_COMMON_STRING_64];  //人员组ID
     }
-    
+
     //CLIENT_StartFindFaceRecognition接口输入参数
     public static class NET_IN_STARTFIND_FACERECONGNITION extends MyStructure
     {
@@ -1871,23 +1871,23 @@ public interface NetSDKLib extends Library {
         public FACERECOGNITION_PERSON_INFO  	stPerson;			// 人员信息查询条件
         public NET_FACE_MATCH_OPTIONS 			stMatchOptions; 	// 人脸匹配选项
         public NET_FACE_FILTER_CONDTION 		stFilterInfo;		// 查询过滤条件
-        
+
         // 图片二进制数据
         public Pointer 							pBuffer;			// 缓冲地址, char *
         public int 								nBufferLen;			// 缓冲数据长度
         public int 								nChannelID;			// 通道号
-        
+
     	public int								bPersonExEnable;	// 人员信息查询条件是否有效, 并使用扩展结构体
     	public FACERECOGNITION_PERSON_INFOEX	stPersonInfoEx;		// 人员信息扩展
     	public int								nSmallPicIDNum;								// 小图ID数量
     	public int[]					        nSmallPicID = new int[MAX_SMALLPIC_NUM];	// 小图ID
-    	
+
         public NET_IN_STARTFIND_FACERECONGNITION()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     //CLIENT_StartFindFaceRecognition接口输出参数
     public static class NET_OUT_STARTFIND_FACERECONGNITION extends MyStructure {
         public int 		dwSize;
@@ -1896,12 +1896,12 @@ public interface NetSDKLib extends Library {
                                			// 使用CLIENT_AttachFaceFindState接口状态
         public LLong 	lFindHandle;	// 查询句柄
         public int 		nToken;			// 获取到的查询令牌
-        
+
         public NET_OUT_STARTFIND_FACERECONGNITION() {
             this.dwSize = this.size();
         }
     }
-    
+
     //CLIENT_DoFindFaceRecognition 接口输入参数
     public static class NET_IN_DOFIND_FACERECONGNITION extends MyStructure {
         public int 			dwSize;
@@ -1909,13 +1909,13 @@ public interface NetSDKLib extends Library {
         public int 			nBeginNum;		// 查询起始序号
         public int 			nCount;			// 当前想查询的记录条数
     	public int			emDataType;		// 指定查询结果返回图片的格式. 参考  EM_NEEDED_PIC_RETURN_TYPE
-        
+
         public NET_IN_DOFIND_FACERECONGNITION()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // 查询结果返回图片的格式
     public static class EM_NEEDED_PIC_RETURN_TYPE extends MyStructure {
         public static final int EM_NEEDED_PIC_TYPE_UNKOWN = 0;            // 未知类型
@@ -1923,7 +1923,7 @@ public interface NetSDKLib extends Library {
         public static final int EM_NEEDED_PIC_TYPE_BINARY_DATA = 2;       // 返回图片二进制数据
         public static final int EM_NEEDED_PIC_TYPE_HTTP_AND_BINARY = 3;   // 返回二进制和HTTP链接
     }
-    
+
     //候选人员信息
     public static class CANDIDATE_INFO extends MyStructure {
         public FACERECOGNITION_PERSON_INFO stPersonInfo;					// 人员信息
@@ -1940,7 +1940,7 @@ public interface NetSDKLib extends Library {
     	public int 							nChannelID;				 		// 通道号
         public byte[] 						byReserved = new byte[32];		// 保留字节
     }
-    
+
     // 物体对应图片文件信息(包含图片路径)
     public static class NET_PIC_INFO_EX3 extends MyStructure
     {
@@ -1953,29 +1953,29 @@ public interface NetSDKLib extends Library {
     	                                                    // 则不需要再时检测定位抠图,1:检测过的,0:没有检测过
         public byte[]       bReserved = new byte[11];       // 保留
     }
-    
+
     //CLIENT_DoFindFaceRecognition接口输出参数
     public static class NET_OUT_DOFIND_FACERECONGNITION extends MyStructure
     {
         public int 					dwSize;
         public int 					nCadidateNum;					// 实际返回的候选信息结构体个数
         public CANDIDATE_INFO[] 	stCadidateInfo = (CANDIDATE_INFO[])new CANDIDATE_INFO().toArray(MAX_FIND_COUNT);//候选信息数组
-        
+
         // 图片二进制数据
         public Pointer 				pBuffer;						// 缓冲地址, char *
         public int 					nBufferLen;					 	// 缓冲数据长度
-        
-        public int					bUseCandidatesEx;				// 是否使用候选对象扩展结构体, 
+
+        public int					bUseCandidatesEx;				// 是否使用候选对象扩展结构体,
 																    // 若为1-true, 则表示使用stuCandidatesEx, 且stuCandidates无效, 否则相反
         public int 					nCadidateExNum;					// 实际返回的候选信息结构体个数
         public CANDIDATE_INFOEX[]	stuCandidatesEx = (CANDIDATE_INFOEX[])new CANDIDATE_INFOEX().toArray(MAX_FIND_COUNT); // 当前人脸匹配到的候选对象信息, 实际返回个数同nCandidateNum
-        
+
         public NET_OUT_DOFIND_FACERECONGNITION()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     /////////////////////////////////智能支持/////////////////////////////////
     //CLIENT_DetectFace接口输入参数
     public static class NET_IN_DETECT_FACE extends MyStructure
@@ -1985,13 +1985,13 @@ public interface NetSDKLib extends Library {
         // 图片二进制数据
         public Pointer pBuffer;//缓冲地址, char *
         public int nBufferLen;//缓冲数据长度
-        
+
         public NET_IN_DETECT_FACE()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     //CLIENT_DetectFace接口输出参数
     public static class NET_OUT_DETECT_FACE extends MyStructure
     {
@@ -2002,13 +2002,13 @@ public interface NetSDKLib extends Library {
         // 图片二进制数据
         public Pointer pBuffer;//缓冲地址,由用户申请空间,存放检测出的人脸图片数据, char *
         public int nBufferLen;//缓冲数据长度
-        
+
         public NET_OUT_DETECT_FACE()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // 人脸识别事件类型
     public static class EM_FACERECOGNITION_ALARM_TYPE extends MyStructure
     {
@@ -2017,12 +2017,12 @@ public interface NetSDKLib extends Library {
         public static final int NET_FACERECOGNITION_ALARM_TYPE_BLACKLIST = 2; //黑名单
         public static final int NET_FACERECOGNITION_ALARM_TYPE_WHITELIST = 3; //白名单
     }
-    
+
     // NET_FILE_QUERY_FACE 对应的人脸识别服务查询参数
     public static class MEDIAFILE_FACERECOGNITION_PARAM extends MyStructure
     {
         public int 								dwSize;			// 结构体大小
-        
+
         //////// 查询过滤条件
         public NET_TIME 						stStartTime;	// 开始时间
         public NET_TIME 						stEndTime;		// 结束时间
@@ -2035,31 +2035,31 @@ public interface NetSDKLib extends Library {
         public GROUP_ID[]						szGroupIdArr = (GROUP_ID[])new GROUP_ID().toArray(MAX_GOURP_NUM); // 人员组ID
     	public int                				abPersonInfoEx; // 人员信息扩展是否有效
     	public FACERECOGNITION_PERSON_INFOEX	stPersonInfoEx; // 人员信息扩展
-        
+
         public MEDIAFILE_FACERECOGNITION_PARAM()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // NET_MEDIA_QUERY_TRAFFICCAR对应的查询条件
-    public static class MEDIA_QUERY_TRAFFICCAR_PARAM extends MyStructure 
+    public static class MEDIA_QUERY_TRAFFICCAR_PARAM extends MyStructure
     {
         public int                 nChannelID;                     // 通道号从0开始,-1表示查询所有通道
-        public NET_TIME            StartTime;                      // 开始时间    
+        public NET_TIME            StartTime;                      // 开始时间
         public NET_TIME            EndTime;                        // 结束时间
         public int                 nMediaType;                     // 文件类型,0:任意类型, 1:jpg图片, 2:dav文件
         public int                 nEventType;                     // 事件类型,详见"智能分析事件类型", 0:表示查询任意事件,此参数废弃,请使用pEventTypes
         public byte[]              szPlateNumber = new byte[32];   // 车牌号, "\0"则表示查询任意车牌号
         public int                 nSpeedUpperLimit;               // 查询的车速范围; 速度上限 单位: km/h
-        public int                 nSpeedLowerLimit;               // 查询的车速范围; 速度下限 单位: km/h 
+        public int                 nSpeedLowerLimit;               // 查询的车速范围; 速度下限 单位: km/h
         public int                 bSpeedLimit;                    // 是否按速度查询; TRUE:按速度查询,nSpeedUpperLimit和nSpeedLowerLimit有效。
         public int                 dwBreakingRule;                 // 违章类型：
                                                             	   // 当事件类型为 EVENT_IVS_TRAFFICGATE时
-                                                            	   //        第一位:逆行;  第二位:压线行驶; 第三位:超速行驶; 
+                                                            	   //        第一位:逆行;  第二位:压线行驶; 第三位:超速行驶;
                                                                    //        第四位：欠速行驶; 第五位:闯红灯;
                                                                    // 当事件类型为 EVENT_IVS_TRAFFICJUNCTION
-                                                                   //        第一位:闯红灯;  第二位:不按规定车道行驶;  
+                                                                   //        第一位:闯红灯;  第二位:不按规定车道行驶;
                                                                    //        第三位:逆行; 第四位：违章掉头;
                                                                    //        第五位:压线行驶;
 
@@ -2085,18 +2085,18 @@ public interface NetSDKLib extends Library {
         public short               wVehicleYearModel;              // 车辆品牌年款 需要通过映射表得到真正的年款 映射表详见开发手册
         public int[]               bReserved = new int[28];        // 保留字段
     }
-    
+
     // NET_MEDIA_QUERY_TRAFFICCAR_EX对应的查询条件
     public static class MEDIA_QUERY_TRAFFICCAR_PARAM_EX extends MyStructure
     {
         public int               dwSize;
         public MEDIA_QUERY_TRAFFICCAR_PARAM stuParam;                  // 基本查询参数
-        
+
         public MEDIA_QUERY_TRAFFICCAR_PARAM_EX() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // NET_MEDIA_QUERY_TRAFFICCAR查询出来的media文件信息
     public static class MEDIAFILE_TRAFFICCAR_INFO extends MyStructure
     {
@@ -2105,7 +2105,7 @@ public interface NetSDKLib extends Library {
         public int        		   size;                               // 文件长度
         public NET_TIME            starttime;                          // 开始时间
         public NET_TIME            endtime;                            // 结束时间
-        public int                 nWorkDirSN;                         // 工作目录编号                                    
+        public int                 nWorkDirSN;                         // 工作目录编号
         public byte                nFileType;                          // 文件类型  1：jpg图片
         public byte                bHint;                              // 文件定位索引
         public byte                bDriveNo;                           // 磁盘号
@@ -2124,7 +2124,7 @@ public interface NetSDKLib extends Library {
         public byte[]              szVehicleColor = new byte[16];      // 车身颜色:"White", "Black", "Red", "Yellow", "Gray", "Blue","Green"
         public int                 nSpeed;                             // 车速,单位 Km/H
         public int                 nEventsNum;                         // 关联的事件个数
-        public int[]               nEvents = new int[32];              // 关联的事件列表,数组值表示相应的事件,详见"智能分析事件类型"        
+        public int[]               nEvents = new int[32];              // 关联的事件列表,数组值表示相应的事件,详见"智能分析事件类型"
         public int                 dwBreakingRule;                     // 具体违章类型掩码,第一位:闯红灯; 第二位:不按规定车道行驶;
                                                                        // 第三位:逆行; 第四位：违章掉头;否则默认为:交通路口事件
         public byte[]              szVehicleSize = new byte[16];       // 车辆大小类型:"Light-duty":小型车;"Medium":中型车; "Oversize":大型车
@@ -2132,7 +2132,7 @@ public interface NetSDKLib extends Library {
         public byte[]              szMachineName = new byte[NET_MAX_NAME_LEN];     // 本地或远程设备名称
 
         public int                 nSpeedUpperLimit;                   // 速度上限 单位: km/h
-        public int                 nSpeedLowerLimit;                   // 速度下限 单位: km/h    
+        public int                 nSpeedLowerLimit;                   // 速度下限 单位: km/h
         public int                 nGroupID;                           // 事件里的组编号
         public byte                byCountInGroup;                     // 一个事件组内的抓拍张数
         public byte                byIndexInGroup;                     // 一个事件组内的抓拍序号
@@ -2143,7 +2143,7 @@ public interface NetSDKLib extends Library {
         public byte[]              szMachineAddress = new byte[MAX_PATH]; // 机器部署地点
     	public long                sizeEx;                             // 文件长度扩展，支持文件长度大于4G，单位字节
     }
-    
+
     // NET_MEDIA_QUERY_TRAFFICCAR_EX查询出来的文件信息
     public static class MEDIAFILE_TRAFFICCAR_INFO_EX extends MyStructure
     {
@@ -2156,9 +2156,9 @@ public interface NetSDKLib extends Library {
         public short             			wVehicleYearModel;                      			// 车辆年款，需要通过映射表得到真正的年款
     	public NET_TIME			 			stuEleTagInfoUTC;									// 对应电子车牌标签信息中的过车时间(ThroughTime)
     	public int[] 			 			emFalgLists = new int[EM_RECORD_SNAP_FLAG_TYPE.FLAG_TYPE_MAX];	// 录像或抓图文件标志, 参考 EM_RECORD_SNAP_FLAG_TYPE
-    	public int               			nFalgCount;										 	// 标志总数 
-        
-        public MEDIAFILE_TRAFFICCAR_INFO_EX() { 
+    	public int               			nFalgCount;										 	// 标志总数
+
+        public MEDIAFILE_TRAFFICCAR_INFO_EX() {
         	this.dwSize = this.size();
         }
     }
@@ -2168,13 +2168,13 @@ public interface NetSDKLib extends Library {
         public int dwSize;//结构体大小
         public int dwFileLenth;//文件大小,单位:字节
         public byte[] szFilePath = new byte[MAX_PATH];// 文件路径
-        
+
         public NET_PIC_INFO_EX()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     //区域；各边距按整长8192的比例
     public static class NET_RECT extends MyStructure
     {
@@ -2182,14 +2182,14 @@ public interface NetSDKLib extends Library {
         public int top;
         public int right;
         public int bottom;
-        
+
         public String toString() {
         	return "[" + left + " " + top + " " + right + " " + bottom + "]";
         }
     }
-    
 
-	 // 时间段结构                                                                
+
+	 // 时间段结构
 	 public static class NET_TSECT extends MyStructure
 	 {
 	    public int             bEnable;        // 当表示录像时间段时,按位表示四个使能,从低位到高位分别表示动检录象、报警录象、普通录象、动检和报警同时发生才录像
@@ -2199,16 +2199,16 @@ public interface NetSDKLib extends Library {
 	    public int             iEndHour;
 	    public int             iEndMin;
 	    public int             iEndSec;
-	    
+
 	    public String startTime() {
 	    	return iBeginHour + ":" + iBeginMin + ":" + iBeginSec;
 	    }
-	    
+
 	    public String endTime() {
 	    	return iEndHour + ":" + iEndMin + ":" + iEndSec;
 	    }
-	 } 
-    
+	 }
+
 
     public static class DH_RECT extends MyStructure
     {
@@ -2217,29 +2217,29 @@ public interface NetSDKLib extends Library {
     	public NativeLong  	right;
     	public NativeLong  	bottom;
     }
-    
+
     //二维空间点
     public static class NET_POINT extends MyStructure
     {
         public short nx;
         public short ny;
     }
-    
+
     public static class NET_CANDIDAT_PIC_PATHS extends MyStructure
     {
         public int dwSize;//结构体大小
         public int nFileCount;//实际文件个数
         public NET_PIC_INFO_EX[] stFiles = (NET_PIC_INFO_EX[])new NET_PIC_INFO_EX().toArray(NET_MAX_PERSON_IMAGE_NUM);//文件信息
-        
+
         public NET_CANDIDAT_PIC_PATHS()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     //颜色类型
     public static class EM_COLOR_TYPE extends MyStructure
-    {   
+    {
         public static final int NET_COLOR_TYPE_RED = 0;//红色
         public static final int NET_COLOR_TYPE_YELLOW = 1;//黄色
         public static final int NET_COLOR_TYPE_GREEN = 2; //绿色
@@ -2248,9 +2248,9 @@ public interface NetSDKLib extends Library {
         public static final int NET_COLOR_TYPE_PURPLE = 5; //紫色
         public static final int NET_COLOR_TYPE_BLACK = 6; //黑色
         public static final int NET_COLOR_TYPE_WHITE = 7; //白色
-        public static final int NET_COLOR_TYPE_MAX = 8; 
+        public static final int NET_COLOR_TYPE_MAX = 8;
     }
-    
+
     //视频分析物体信息结构体
     public static class NET_MSG_OBJECT extends MyStructure
     {
@@ -2263,10 +2263,10 @@ public interface NetSDKLib extends Library {
         public int 			nPolygonNum;						//多边形顶点个数
         public NET_POINT[]  Contour = (NET_POINT[])new NET_POINT().toArray(NET_MAX_POLYGON_NUM);//较精确的轮廓多边形
         public int 			rgbaMainColor;						//表示车牌、车身等物体主要颜色；按字节表示,分别为红、绿、蓝和透明度,例如:RGB值为(0,255,0),透明度为0时,其值为0x00ff0000.
-        
+
         public byte[] 		szText = new byte[128];			    // 物体上相关的带0结束符文本,比如车牌,集装箱号等等
                                                                 // "ObjectType"为"Vehicle"或者"Logo"时（尽量使用Logo。Vehicle是为了兼容老产品）表示车标,支持：
-                                                                // "Unknown"未知 
+                                                                // "Unknown"未知
                                                                 // "Audi" 奥迪
                                                                 // "Honda" 本田
                                                                 // "Buick" 别克
@@ -2378,15 +2378,15 @@ public interface NetSDKLib extends Library {
                                                                 // "Beifang" 北方客车
                                                                 // "Beijing" 北京汽车
                                                                 // "Hafu" 哈弗
-        
+
         public byte[] 		szObjectSubType = new byte[62];		//物体子类别,根据不同的物体类型,可以取以下子类型：
                                                                 // Vehicle Category:"Unknown"  未知,"Motor" 机动车,"Non-Motor":非机动车,"Bus": 公交车,"Bicycle" 自行车,"Motorcycle":摩托车,"PassengerCar":客车,
-                                                                // "LargeTruck":大货车,    "MidTruck":中货车,"SaloonCar":轿车,"Microbus":面包车,"MicroTruck":小货车,"Tricycle":三轮车,    "Passerby":行人                                                    
+                                                                // "LargeTruck":大货车,    "MidTruck":中货车,"SaloonCar":轿车,"Microbus":面包车,"MicroTruck":小货车,"Tricycle":三轮车,    "Passerby":行人
                                                                 // Plate Category："Unknown" 未知,"Normal" 蓝牌黑牌,"Yellow" 黄牌,"DoubleYellow" 双层黄尾牌,"Police" 警牌"Armed" 武警牌,
                                                                 // "Military" 部队号牌,"DoubleMilitary" 部队双层,"SAR" 港澳特区号牌,"Trainning" 教练车号牌
                                                                 // "Personal" 个性号牌,"Agri" 农用牌,"Embassy" 使馆号牌,"Moto" 摩托车号牌,"Tractor" 拖拉机号牌,"Other" 其他号牌
                                                                 // HumanFace Category:"Normal" 普通人脸,"HideEye" 眼部遮挡,"HideNose" 鼻子遮挡,"HideMouth" 嘴部遮挡
-        
+
         public short        wColorLogoIndex;                    // 车标索引
         public short 		wSubBrand;   						// 车辆子品牌 需要通过映射表得到真正的子品牌 映射表详见开发手册
         public byte 		byReserved1;
@@ -2412,7 +2412,7 @@ public interface NetSDKLib extends Library {
         public int 			nRelativeID;						//相关物体ID
         public byte[] 		szSubText = new byte[20];			//"ObjectType"为"Vehicle"或者"Logo"时,表示车标下的某一车系,比如奥迪A6L,由于车系较多,SDK实现时透传此字段,设备如实填写。
         public short 		wBrandYear;   						// 车辆品牌年款 需要通过映射表得到真正的年款 映射表详见开发手册
-        
+
         public NET_MSG_OBJECT()
         {
         	if(Utils.getOsName().equals("win")) {
@@ -2421,7 +2421,7 @@ public interface NetSDKLib extends Library {
         	}
         }
     }
-    
+
     // NET_FILE_QUERY_FACE 对应的人脸识别服务FINDNEXT查询返回参数
     public static class MEDIAFILE_FACERECOGNITION_INFO extends MyStructure
     {
@@ -2436,9 +2436,9 @@ public interface NetSDKLib extends Library {
         public NET_TIME 				stTime;							// 报警发生时间
         public byte[] 					szAddress = new byte[MAX_PATH]; // 报警发生地点
         public int 						nChannelId;						// 通道号
-        public int						bUseCandidatesEx;				// 是否使用候选对象扩展结构体, 1-true, 0-false 
+        public int						bUseCandidatesEx;				// 是否使用候选对象扩展结构体, 1-true, 0-false
 																		// 若为TRUE, 则表示使用stuCandidatesEx, 且stuCandidates无效, 否则相反
-		public int						nCandidateExNum;				// 当前人脸匹配到的候选对象(扩展结构体) 数量																
+		public int						nCandidateExNum;				// 当前人脸匹配到的候选对象(扩展结构体) 数量
 		public CANDIDATE_INFOEX[]		stuCandidatesEx = (CANDIDATE_INFOEX[])new CANDIDATE_INFOEX().toArray(NET_MAX_CANDIDATE_NUM);	// 当前人脸匹配到的候选对象信息, 实际返回个数同nCandidateNum
 
         public MEDIAFILE_FACERECOGNITION_INFO()
@@ -2446,7 +2446,7 @@ public interface NetSDKLib extends Library {
             this.dwSize = this.size();
         }
     }
-    
+
     //每个视频输入通道对应的所有事件规则：缓冲区pRuleBuf填充多个事件规则信息，每个事件规则信息内容为 CFG_RULE_INFO + "事件类型对应的规则配置结构体"。
     public static class CFG_ANALYSERULES_INFO extends MyStructure
     {
@@ -2454,7 +2454,7 @@ public interface NetSDKLib extends Library {
         public Pointer  	pRuleBuf;    // 每个视频输入通道对应的视频分析事件规则配置缓冲, 对应  CFG_RULE_INFO[]
         public int 			nRuleLen;    // 缓冲大小
     }
-    
+
     // 规则通用信息
     public static class CFG_RULE_COMM_INFO extends MyStructure
     {
@@ -2462,14 +2462,14 @@ public interface NetSDKLib extends Library {
     	public int   		emClassType;						// 规则所属的场景, EM_SCENE_TYPE
     	public byte[] 		bReserved = new byte[512];			// 保留字节
     }
-    
+
     public static class CFG_RULE_INFO extends MyStructure
     {
         public int 					dwRuleType;			// 事件类型，详见dhnetsdk.h中"智能分析事件类型"
         public int 					nRuleSize;			// 该事件类型规则配置结构体大小
     	public CFG_RULE_COMM_INFO   stuRuleCommInfo;	// 规则通用信息
     }
-    
+
     // 应用场景, 内容与 EM_SCENE_CLASS_TYPE 一致
     public static class EM_SCENE_TYPE extends MyStructure
     {
@@ -2508,47 +2508,47 @@ public interface NetSDKLib extends Library {
     	public static final int EM_SCENE_FACEATTRIBUTE = 32;		// "FaceAttribute" IVSS人脸检测
     	public static final int EM_SCENE_FACECOMPARE = 33;			// "FaceCompare" IVSS人脸识别
     }
-    
+
     //区域顶点信息
     public static class CFG_POLYGON extends MyStructure
     {
         public int nX;//0~8191
         public int nY;
     }
-    
+
     //区域信息
     public static class CFG_REGION extends MyStructure
     {
         public int nPointNum;
         public CFG_POLYGON[] stuPolygon = (CFG_POLYGON[])new CFG_POLYGON().toArray(MAX_POLYGON_NUM);
     }
-    
+
     public static class CFG_SIZE_Attribute extends Union
     {
         public float nWidth;//宽
         public float nArea;//面积
     }
-    
+
     //Size
     public static class CFG_SIZE extends MyStructure
     {
         public CFG_SIZE_Attribute attr;
         public float nHeight;//高
     }
-    
+
     public static class NET_SIZE extends MyStructure
     {
     	public int                 nWidth;                     // 宽度
     	public int                 nHeight;                    // 高度
     }
-    
+
     //校准框信息
     public static class CFG_CALIBRATEBOX_INFO extends MyStructure
     {
         public CFG_POLYGON stuCenterPoint;//校准框中心点坐标(点的坐标归一化到[0,8191]区间)
         public float fRatio;//相对基准校准框的比率(比如1表示基准框大小，0.5表示基准框大小的一半)
     }
-    
+
     //尺寸过滤器
     public static class CFG_SIZEFILTER_INFO extends MyStructure
     {
@@ -2593,23 +2593,23 @@ public interface NetSDKLib extends Library {
         public byte abBySize;//长宽过滤使能参数是否有效， 类型bool, 取值0或1
         public byte bBySize;//长宽过滤使能， 类型bool, 取值0或1
     }
-    
+
     //各种物体特定的过滤器
     public static class CFG_OBJECT_SIZEFILTER_INFO extends MyStructure
     {
         public byte[] szObjectType = new byte[MAX_NAME_LEN];//物体类型
         public CFG_SIZEFILTER_INFO stSizeFilter;//对应的尺寸过滤器
     }
-    
+
     //特殊区域的属性类型
     public static class EM_SEPCIALREGION_PROPERTY_TYPE extends MyStructure
     {
          public static final int EM_SEPCIALREGION_PROPERTY_TYPE_HIGHLIGHT = 1;//高亮，键盘检测区域具有此特性
          public static final int EM_SEPCIALREGION_PROPERTY_TYPE_REGULARBLINK = 2; //规律的闪烁，插卡区域具有此特性
          public static final int EM_SEPCIALREGION_PROPERTY_TYPE_IREGULARBLINK = 3; //不规律的闪烁，屏幕区域具有此特性
-         public static final int EM_SEPCIALREGION_PROPERTY_TYPE_NUM = 4; 
+         public static final int EM_SEPCIALREGION_PROPERTY_TYPE_NUM = 4;
     }
-    
+
     //特殊检测区，是指从检测区中区分出来，有特殊检测属性的区域
     public static class CFG_SPECIALDETECT_INFO extends MyStructure
     {
@@ -2618,7 +2618,7 @@ public interface NetSDKLib extends Library {
         public int nPropertyNum;//特殊检测区属性个数
         public int[] nPropertys = new int[EM_SEPCIALREGION_PROPERTY_TYPE.EM_SEPCIALREGION_PROPERTY_TYPE_NUM];//特殊检测区属性
     }
-    
+
     //各类物体的子类型
     public static class CFG_CATEGORY_TYPE extends MyStructure
     {
@@ -2682,7 +2682,7 @@ public interface NetSDKLib extends Library {
          public static final int CFG_CATEGORY_PLATE_TYPE_CIVILAVIATION = 55; //"Civilaviation"民航号牌
          public static final int CFG_CATEGORY_PLATE_TYPE_BLACK = 56; //"Black"黑牌
     }
-    
+
     //不同区域各种类型物体的检测模块配置
     public static class CFG_MODULE_INFO extends MyStructure
     {
@@ -2766,35 +2766,35 @@ public interface NetSDKLib extends Library {
         public int[] emCategoryType= new int[MAX_CATEGORY_TYPE_NUMBER];//子类型信息, 元素取CFG_CATEGORY_TYPE中的值
         public byte[] szSceneType = new byte[CFG_COMMON_STRING_16];		// 检测区参数用于的场景类型
     }
-    
+
     public static class CFG_ANALYSEMODULES_INFO extends MyStructure
     {
         public int nMoudlesNum;//检测模块数
         public CFG_MODULE_INFO[] stuModuleInfo= (CFG_MODULE_INFO[])new CFG_MODULE_INFO().toArray(MAX_ANALYSE_MODULE_NUM);//每个视频输入通道对应的各种类型物体的检测模块配置
     }
-    
+
     // CLIENT_FindGroupInfo接口输入参数
     public static class NET_IN_FIND_GROUP_INFO extends MyStructure
     {
         public int dwSize;
         public byte[] szGroupId = new byte[NET_COMMON_STRING_64];//人员组ID,唯一标识一组人员,为空表示查询全部人员组信息
-        
+
         public NET_IN_FIND_GROUP_INFO()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // 人脸数据类型
     public static class EM_FACE_DB_TYPE extends MyStructure
     {
-        public static final int NET_FACE_DB_TYPE_UNKOWN = 0; 
+        public static final int NET_FACE_DB_TYPE_UNKOWN = 0;
         public static final int NET_FACE_DB_TYPE_HISTORY = 1;    // 历史数据库,存放的是检测出的人脸信息,一般没有包含人脸对应人员信息
         public static final int NET_FACE_DB_TYPE_BLACKLIST = 2;  // 黑名单数据库
         public static final int NET_FACE_DB_TYPE_WHITELIST = 3;  // 白名单数据库,废弃
         public static final int NET_FACE_DB_TYPE_ALARM = 4;      // 报警库
     }
-    
+
     // 人员组信息
     public static class NET_FACERECONGNITION_GROUP_INFO extends MyStructure
     {
@@ -2813,13 +2813,13 @@ public interface NetSDKLib extends Library {
 																			  // [1]-建模失败的人员数量，图片不符合算法要求，需要更换图片
 																			  // [2]-已建模成功人员数量，数据可用于算法进行人脸识别
 																			  // [3]-曾经建模成功，但因算法升级变得不可用的数量，重新建模就可用
-        
+
         public NET_FACERECONGNITION_GROUP_INFO()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // CLIENT_FindGroupInfo接口输出参数
     public static class NET_OUT_FIND_GROUP_INFO extends MyStructure
     {
@@ -2827,7 +2827,7 @@ public interface NetSDKLib extends Library {
         public Pointer  pGroupInfos;	// 人员组信息,由用户申请空间， 指向 NET_FACERECONGNITION_GROUP_INFO 的指针
         public int 		nMaxGroupNum;	// 当前申请的数组大小
         public int 		nRetGroupNum;	// 设备返回的人员组个数
-        
+
         public NET_OUT_FIND_GROUP_INFO()
         {
             this.dwSize = this.size();
@@ -2842,65 +2842,65 @@ public interface NetSDKLib extends Library {
         public static final int NET_FACERECONGNITION_GROUP_MODIFY = 2;  // 修改人员组信息, 对应结构体为 NET_MODIFY_FACERECONGNITION_GROUP_INFO
         public static final int NET_FACERECONGNITION_GROUP_DELETE = 3;  // 删除人员组信息, 对应结构体为 NET_DELETE_FACERECONGNITION_GROUP_INFO
     }
-    
+
     // CLIENT_OperateFaceRecognitionGroup 接口输入参数
     public static class NET_IN_OPERATE_FACERECONGNITION_GROUP extends MyStructure
     {
         public int 		dwSize;
         public int 		emOperateType;	// 操作类型, 取值为 EM_OPERATE_FACERECONGNITION_GROUP_TYPE 中的值
         public Pointer 	pOPerateInfo;	// 相关操作信息，指向void *
-        
+
         public NET_IN_OPERATE_FACERECONGNITION_GROUP()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // CLIENT_OperateFaceRecognitionGroup接口输出参数
     public static class NET_OUT_OPERATE_FACERECONGNITION_GROUP extends MyStructure
     {
         public int 		dwSize;
         public byte[] 	szGroupId = new byte[NET_COMMON_STRING_64]; // 新增记录的人员组ID,唯一标识一组人员
-        
+
         public NET_OUT_OPERATE_FACERECONGNITION_GROUP()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // 添加人员组信息
     public static class NET_ADD_FACERECONGNITION_GROUP_INFO extends MyStructure
     {
         public int               				dwSize;
-        public NET_FACERECONGNITION_GROUP_INFO  stuGroupInfo;      // 人员组信息 
-        
+        public NET_FACERECONGNITION_GROUP_INFO  stuGroupInfo;      // 人员组信息
+
         public NET_ADD_FACERECONGNITION_GROUP_INFO() {
         	this.dwSize = this.size();
-        }  
+        }
     }
 
     // 修改人员组信息
     public static class NET_MODIFY_FACERECONGNITION_GROUP_INFO extends MyStructure
     {
         public int               				dwSize;
-        public NET_FACERECONGNITION_GROUP_INFO  stuGroupInfo;      // 人员组信息 
-        
+        public NET_FACERECONGNITION_GROUP_INFO  stuGroupInfo;      // 人员组信息
+
         public NET_MODIFY_FACERECONGNITION_GROUP_INFO() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 删除人员组信息
     public static class NET_DELETE_FACERECONGNITION_GROUP_INFO extends MyStructure
     {
         public int               dwSize;
         public byte[]            szGroupId = new byte[NET_COMMON_STRING_64];  // 人员组ID,唯一标识一组人员
-        
+
         public NET_DELETE_FACERECONGNITION_GROUP_INFO() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // CLIENT_SetGroupInfoForChannel接口输入参数
     public static class NET_IN_SET_GROUPINFO_FOR_CHANNEL extends MyStructure
     {
@@ -2910,24 +2910,24 @@ public interface NetSDKLib extends Library {
         public GROUP_ID[]   szGroupIdArr = (GROUP_ID[])new GROUP_ID().toArray(MAX_GOURP_NUM);	// 人员组ID
         public int			nSimilaryNum;														// 相似度阈值个数, 与人员组数相同
         public int[]		nSimilary = new int[MAX_GOURP_NUM];									// 每个人脸组的相似度阈值, 0-100
-        
+
         public NET_IN_SET_GROUPINFO_FOR_CHANNEL()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // CLIENT_SetGroupInfoForChannel接口输出参数
     public static class NET_OUT_SET_GROUPINFO_FOR_CHANNEL extends MyStructure
     {
         public int dwSize;
-        
+
         public NET_OUT_SET_GROUPINFO_FOR_CHANNEL()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // 人脸查询状态信息回调函数, lAttachHandle是CLIENT_AttachFaceFindState的返回值
     public static class NET_CB_FACE_FIND_STATE extends MyStructure
     {
@@ -2935,13 +2935,13 @@ public interface NetSDKLib extends Library {
         public int 		nToken;					// 视频浓缩任务数据库主键ID
         public int 		nProgress;				// 正常取值范围：0-100,-1,表示查询token不存在(当订阅一个不存在或结束的查询时)
         public int 		nCurrentCount;			// 目前符合查询条件的人脸数量
-        
+
         public NET_CB_FACE_FIND_STATE()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     //CLIENT_AttachFaceFindState接口输入参数
     public static class NET_IN_FACE_FIND_STATE extends MyStructure
     {
@@ -2950,24 +2950,24 @@ public interface NetSDKLib extends Library {
         public IntByReference 	nTokens;		 //查询令牌, 指向int的指针
         public StdCallCallback  cbFaceFindState; //回调函数 fFaceFindState 回调
         public Pointer 			dwUser;			 //用户数据
-        
+
         public NET_IN_FACE_FIND_STATE()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     //CLIENT_AttachFaceFindState接口输入参数
     public static class NET_OUT_FACE_FIND_STATE extends MyStructure
     {
         public int dwSize;
-        
+
         public NET_OUT_FACE_FIND_STATE()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // SDK全局日志打印信息
     public static class LOG_SET_PRINT_INFO extends MyStructure
     {
@@ -2980,13 +2980,13 @@ public interface NetSDKLib extends Library {
         public int nFileNum;//绕接日志文件个数(默认大小10), 类型为unsigned int
         public int bSetPrintStrategy;//是否重设日志打印输出策略, BOOL类型，取值0或1
         public int nPrintStrategy;//日志输出策略,0:输出到文件(默认); 1:输出到窗口, 类型为unsigned int
-        
+
         public LOG_SET_PRINT_INFO()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // media文件查询条件
     public static class EM_FILE_QUERY_TYPE extends MyStructure
     {
@@ -2998,19 +2998,19 @@ public interface NetSDKLib extends Library {
         public static final int NET_FILE_QUERY_TRAFFICCAR_EX = 5; 	//交通车辆信息,扩展NET_FILE_QUERY_TRAFFICCAR,支持更多的字段
         public static final int NET_FILE_QUERY_FACE_DETECTION = 6; 	//人脸检测事件信息MEDIAFILE_FACE_DETECTION_PARAM和 MEDIAFILE_FACE_DETECTION_INFO
     }
-    
+
     // 查询跳转条件
     public static class NET_FINDING_JUMP_OPTION_INFO extends MyStructure
     {
         public int dwSize;
         public int nOffset;//查询结果偏移量,是相对于当前查询的第一条查询结果的位置偏移
-        
+
         public NET_FINDING_JUMP_OPTION_INFO()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // 云台联动类型
     public static class CFG_LINK_TYPE extends MyStructure
     {
@@ -3058,7 +3058,7 @@ public interface NetSDKLib extends Library {
         public CFG_RGBA stuFrontColor;//前景颜色
         public CFG_RGBA stuBackColor;//背景颜色
     }
-    
+
     public static class NET_CFG_EVENT_TITLE extends MyStructure
     {
         public byte[] szText = new byte[MAX_CHANNELNAME_LEN];
@@ -3067,8 +3067,8 @@ public interface NetSDKLib extends Library {
         public CFG_RGBA stuFrontColor;//前景颜色
         public CFG_RGBA stuBackColor;//背景颜色
     }
-    
-    
+
+
     // 邮件附件类型
     public static class CFG_ATTACHMENT_TYPE extends MyStructure
     {
@@ -3087,7 +3087,7 @@ public interface NetSDKLib extends Library {
         public static final int SPLITMODE_8 =8;//8画面
         public static final int SPLITMODE_9 =9;//9画面
         public static final int SPLITMODE_3  = 10; // 3画面
-        public static final int SPLITMODE_3B = 11; // 3画面倒品 
+        public static final int SPLITMODE_3B = 11; // 3画面倒品
         public static final int SPLITMODE_12 =12;//12画面
         public static final int SPLITMODE_16 =16;//16画面
         public static final int SPLITMODE_20 =20;//20画面
@@ -3164,7 +3164,7 @@ public interface NetSDKLib extends Library {
     public static class CFG_TIME_SCHEDULE extends MyStructure
     {
         public int 						 bEnableHoliday;         //是否支持节假日配置，默认为不支持，除非获取配置后返回为TRUE，不要使能假日配置, BOOL类型，取值0或1
-        public TIME_SECTION_WEEK_DAY_6[] stuTimeSectionWeekDay = 
+        public TIME_SECTION_WEEK_DAY_6[] stuTimeSectionWeekDay =
         								 (TIME_SECTION_WEEK_DAY_6[])new TIME_SECTION_WEEK_DAY_6().toArray(MAX_TIME_SCHEDULE_NUM);//第一维前7个元素对应每周7天，第8个元素对应节假日，每天最多6个时间段
     }
 
@@ -3280,10 +3280,10 @@ public interface NetSDKLib extends Library {
         public byte abAlarmBellLatch;//bool类型，取值0或1
         public int nAlarmBellLatch;//警号输出延时时间(10-300秒)
     }
-    
+
     // 报警联动信息
     public static class NET_ALARM_MSG_HANDLE extends MyStructure
-    {  
+    {
     	//能力
         public byte                				abChannelCount;                                 // 是否支持通道数量 bool类型，取值0或1
     	public byte                				abAlarmOutCount;                                // 是否支持报警输出数量 bool类型，取值0或1
@@ -3383,7 +3383,7 @@ public interface NetSDKLib extends Library {
     	public int								bMailEnable;									// 发送邮件，如果有图片，作为附件
     	public int								bMessageEnable;									// 上传到报警服务器
     	public int								bBeepEnable;							 		// 蜂鸣
-    	
+
     	public int								bVoiceEnable;									// 语音提示
     	public int                              nPlayTimes;                                  	// 联动语音播放次数bVoiceEnable=TRUE时生效
 
@@ -3407,7 +3407,7 @@ public interface NetSDKLib extends Library {
     	public int                				bVideoTitleEn;									// 是否叠加视频标题，主要指主码流
     	public int                 				nVideoTitleNum;									// 视频标题内容数目
     	public NET_CFG_EVENT_TITLE[] 			stuVideoTitle = (NET_CFG_EVENT_TITLE [])new NET_CFG_EVENT_TITLE().toArray(MAX_VIDEO_CHANNEL_NUM);		// 视频标题内容
- 
+
     	public int                 				nTourNum;										// 轮询联动数目
     	public CFG_TOURLINK[]    				stuTour = (CFG_TOURLINK [])new CFG_TOURLINK().toArray(MAX_VIDEO_CHANNEL_NUM);// 轮询联动配置
     	public int                 				nDBKeysNum;										// 指定数据库关键字的有效数
@@ -3441,11 +3441,11 @@ public interface NetSDKLib extends Library {
         public int 		nEndHour;
         public int 		nEndMin;
         public int 		nEndSec;
-        
+
         public String startTime() {
         	return nBeginHour + ":" + nBeginMin + ":" + nBeginSec;
         }
-        
+
         public String endTime() {
         	return nEndHour + ":" + nEndMin + ":" + nEndSec;
         }
@@ -3469,10 +3469,10 @@ public interface NetSDKLib extends Library {
         public byte[]						byAreas = new byte[8];					// 人脸区域组合,0-眉毛，1-眼睛，2-鼻子，3-嘴巴，4-脸颊(此参数在对比模式为1时有效)
         public int 							nMaxCandidate;							// 报告的最大匹配图片个数
         public CFG_ALARM_MSG_HANDLE 		stuEventHandler;						// 报警联动
-        public TIME_SECTION_WEEK_DAY_10[]   stuTimeSectionWeekDay = 
+        public TIME_SECTION_WEEK_DAY_10[]   stuTimeSectionWeekDay =
         									(TIME_SECTION_WEEK_DAY_10[])new TIME_SECTION_WEEK_DAY_10().toArray(WEEK_DAY_NUM); // 事件响应时间段
     }
-    
+
     // 事件类型EVENT_IVSS_FACEATTRIBUTE(IVSS人脸检测事件) 对应的规则配置
     public static class CFG_FACEATTRIBUTE_INFO extends MyStructure
     {
@@ -3485,10 +3485,10 @@ public interface NetSDKLib extends Library {
         public int							nDetectRegionPoint;												// 检测区顶点数
         public CFG_POLYGON[]                stuDetectRegion = (CFG_POLYGON[])new CFG_POLYGON().toArray(MAX_POLYGON_NUM); // 检测区
         public CFG_ALARM_MSG_HANDLE 		stuEventHandler;												// 报警联动
-        public TIME_SECTION_WEEK_DAY_10[]   stuTimeSectionWeekDay = 
+        public TIME_SECTION_WEEK_DAY_10[]   stuTimeSectionWeekDay =
         								    (TIME_SECTION_WEEK_DAY_10[])new TIME_SECTION_WEEK_DAY_10().toArray(WEEK_DAY_NUM);// 事件响应时间段
     	public int                 			nPtzPresetId;													// 云台预置点编号	0~65535
-    	public int                 			nMinDuration;                                           		// 最短触发时间,单位：秒 
+    	public int                 			nMinDuration;                                           		// 最短触发时间,单位：秒
     	public int                 			nTriggerTargetsNumber;                                  		// 触发报警的人脸个数
     	public int                 			nSensitivity;                                           		// 灵敏度,范围[1,10],灵敏度越高越容易检测
     	public int                 			nReportInterval;                                        		// 重复报警间隔,单位:秒,[0,600](等于0表示不重复报警)
@@ -3532,7 +3532,7 @@ public interface NetSDKLib extends Library {
         public int							nDetectRegionPoint;												// 检测区顶点数
         public CFG_POLYGON[]                stuDetectRegion = (CFG_POLYGON[])new CFG_POLYGON().toArray(MAX_POLYGON_NUM); // 检测区
         public CFG_ALARM_MSG_HANDLE 		stuEventHandler;												// 报警联动
-        public TIME_SECTION_WEEK_DAY_10[]   stuTimeSectionWeekDay = 
+        public TIME_SECTION_WEEK_DAY_10[]   stuTimeSectionWeekDay =
         									(TIME_SECTION_WEEK_DAY_10[])new TIME_SECTION_WEEK_DAY_10().toArray(WEEK_DAY_NUM);// 事件响应时间段
     	public int                 			nPtzPresetId;													// 云台预置点编号	0~65535
     	public int                 			nSensitivity;                                           		// 灵敏度,范围[1,10],灵敏度越高越容易检测
@@ -3558,15 +3558,15 @@ public interface NetSDKLib extends Library {
         public int							nObjectTypeNum;													// 相应物体类型个数
         public byte[] 						szObjectTypes = new byte[MAX_OBJECT_LIST_SIZE*MAX_NAME_LEN]; 	// 相应物体类型列表
         public CFG_ALARM_MSG_HANDLE 		stuEventHandler;												// 报警联动
-        public TIME_SECTION_WEEK_DAY_10[]   stuTimeSectionWeekDay = 
+        public TIME_SECTION_WEEK_DAY_10[]   stuTimeSectionWeekDay =
         							        (TIME_SECTION_WEEK_DAY_10[])new TIME_SECTION_WEEK_DAY_10().toArray(WEEK_DAY_NUM);// 事件响应时间段
     	public int                 			nPtzPresetId;													// 云台预置点编号	0~65535
     	public int                 			nLinkGroupNum;                                        			// 联动布控个数
     	public CFG_LINKGROUP_INFO[]		    stuLinkGroupArr = (CFG_LINKGROUP_INFO[])new CFG_LINKGROUP_INFO().toArray(MAX_LINK_GROUP_NUM); // 联动的布控组
     	public CFG_STRANGERMODE_INFO		stuStrangerMode;												// 陌生人布防模式
     }
-    
-    // 大类业务方案    
+
+    // 大类业务方案
     public static class EM_CLASS_TYPE extends MyStructure
     {
         public static final int EM_CLASS_UNKNOWN =0;//未知业务
@@ -3590,7 +3590,7 @@ public interface NetSDKLib extends Library {
         public static final int EM_CLASS_VEHICLE_ANALYSE =18;//车辆特征识别"VehicleAnalyse"
         public static final int EM_CLASS_PERSON_FEATURE =19;//人员特征识别
     }
-    
+
     // 智能报警事件公共信息
     public static class EVENT_INTELLI_COMM_INFO extends MyStructure
     {
@@ -3598,7 +3598,7 @@ public interface NetSDKLib extends Library {
         public int			nPresetID;					// 该事件触发的预置点，对应该设置规则的预置点
     	public byte[]       bReserved = new byte[124];  // 保留字节,留待扩展.
     }
-    
+
     // 事件类型EVENT_IVS_FACERECOGNITION(人脸识别)对应的数据块描述信息
     public static class DEV_EVENT_FACERECOGNITION_INFO extends MyStructure
     {
@@ -3609,7 +3609,7 @@ public interface NetSDKLib extends Library {
         public NET_MSG_OBJECT   		stuObject;									// 检测到的物体
         public int 						nCandidateNum;								// 当前人脸匹配到的候选对象数量
         public CANDIDATE_INFO[] 		stuCandidates = (CANDIDATE_INFO[])new CANDIDATE_INFO().toArray(NET_MAX_CANDIDATE_NUM);//当前人脸匹配到的候选对象信息
-        public byte 					bEventAction;								// 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束; 
+        public byte 					bEventAction;								// 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte 					byImageIndex;								// 图片的序号,同一时间内(精确到秒)可能有多张图片,从0开始
         public byte[] 					byReserved1 = new byte[2];  				// 对齐
         public int 						bGlobalScenePic;							// 全景图是否存在, 类型为BOOL, 取值为0或者1
@@ -3623,9 +3623,9 @@ public interface NetSDKLib extends Library {
     	public byte[]				    szFeatureVersion = new byte[32];			// 特征值算法版本
     	public byte[]                	bReserved = new byte[864];                 // 保留字节,留待扩展.
     	public int					    nRetCandidatesExNum;						// 当前人脸匹配到的候选对象数量实际返回值
-    	public CANDIDATE_INFOEX[]       stuCandidatesEx = (CANDIDATE_INFOEX[])new CANDIDATE_INFOEX().toArray(NET_MAX_CANDIDATE_NUM);     // 当前人脸匹配到的候选对象信息扩展 
+    	public CANDIDATE_INFOEX[]       stuCandidatesEx = (CANDIDATE_INFOEX[])new CANDIDATE_INFOEX().toArray(NET_MAX_CANDIDATE_NUM);     // 当前人脸匹配到的候选对象信息扩展
     }
-    
+
     // 候选人员信息扩展结构体
     public static class CANDIDATE_INFOEX extends MyStructure
     {
@@ -3637,14 +3637,14 @@ public interface NetSDKLib extends Library {
     	public byte                           byRange;                 			  // 人员所属数据库范围,详见EM_FACE_DB_TYPE
     	public byte[]                         byReserved1 = new byte[2];
     	public NET_TIME                       stTime;                  			  // 当byRange为历史数据库时有效,表示查询人员出现的时间
-    	public byte[]                         szAddress = new byte[MAX_PATH];     // 当byRange为历史数据库时有效,表示查询人员出现的地点  
+    	public byte[]                         szAddress = new byte[MAX_PATH];     // 当byRange为历史数据库时有效,表示查询人员出现的地点
     	public int                         	  bIsHit;                  			  // 是否有识别结果,指这个检测出的人脸在库中有没有比对结果
     	public NET_PIC_INFO_EX3               stuSceneImage;           			  // 人脸全景图
     	public int							  nChannelID;			    		  // 通道号
-    	public byte[]            			  szFilePathEx = new byte[256];  	  // 文件路径	
+    	public byte[]            			  szFilePathEx = new byte[256];  	  // 文件路径
     	public byte[]                         byReserved = new byte[1024];   	  // 保留字节
-    } 
-    
+    }
+
     // 存储IVSS项目招行VIP需求,特征值信息
     public static class NET_FEATURE_VECTOR extends MyStructure
     {
@@ -3652,11 +3652,11 @@ public interface NetSDKLib extends Library {
     	public int							 dwLength;							// 人脸小图特征值长度，单位:字节
     	public byte[]						 byReserved = new byte[120];					// 保留
     }
-    
+
     // 人员信息扩展结构体
-    public static class FACERECOGNITION_PERSON_INFOEX extends MyStructure 
+    public static class FACERECOGNITION_PERSON_INFOEX extends MyStructure
     {
-    	public byte[]                		szPersonName = new byte[NET_MAX_PERSON_NAME_LEN];   // 姓名             
+    	public byte[]                		szPersonName = new byte[NET_MAX_PERSON_NAME_LEN];   // 姓名
         public short                		wYear;                                          	// 出生年,作为查询条件时,此参数填0,则表示此参数无效
         public byte                			byMonth;                                        	// 出生月,作为查询条件时,此参数填0,则表示此参数无效
         public byte                			byDay;                                          	// 出生日,作为查询条件时,此参数填0,则表示此参数无效
@@ -3667,8 +3667,8 @@ public interface NetSDKLib extends Library {
         public NET_PIC_INFO[]         		szFacePicInfo = (NET_PIC_INFO[])new NET_PIC_INFO().toArray(NET_MAX_PERSON_IMAGE_NUM);  // 当前人员对应的图片信息
         public byte                			byType;                                         	// 人员类型,详见 EM_PERSON_TYPE
         public byte                			byIDType;                                       	// 证件类型,详见 EM_CERTIFICATE_TYPE
-        public byte							byGlasses;											// 是否戴眼镜，0-未知 1-不戴 2-戴						
-        public byte                			byAge;												// 年龄,0表示未知  
+        public byte							byGlasses;											// 是否戴眼镜，0-未知 1-不戴 2-戴
+        public byte                			byAge;												// 年龄,0表示未知
         public byte[]                		szProvince = new byte[NET_MAX_PROVINCE_NAME_LEN];   // 省份
         public byte[]                		szCity = new byte[NET_MAX_CITY_NAME_LEN];           // 城市
         public byte[]                		szUID = new byte[NET_MAX_PERSON_ID_LEN];            // 人员唯一标识符,首次由服务端生成,区别于ID字段
@@ -3678,7 +3678,7 @@ public interface NetSDKLib extends Library {
         public byte[]						szCustomType = new byte[NET_COMMON_STRING_16];	    // 人员自定义类型
         public byte[]						szComment = new byte[NET_COMMENT_LENGTH];			// 备注信息
         public byte[]						szGroupID = new byte[NET_GROUPID_LENGTH];			// 人员所属组ID
-    	public byte[]						szGroupName = new byte[NET_GROUPNAME_LENGTH];		// 人员所属组名, 用户自己申请内存的情况时, 
+    	public byte[]						szGroupName = new byte[NET_GROUPNAME_LENGTH];		// 人员所属组名, 用户自己申请内存的情况时,
     	public int							emEmotion;											// 表情, 参考  EM_DEV_EVENT_FACEDETECT_FEATURE_TYPE
     	public byte[]						szHomeAddress = new byte[NET_COMMON_STRING_128];	// 注册人员家庭地址
     	public int							emGlassesType;										// 眼镜类型, 参考 EM_GLASSES_TYPE
@@ -3688,24 +3688,24 @@ public interface NetSDKLib extends Library {
     	public int 							emMask;												// 口罩状态, 参考 EM_MASK_STATE_TYPE
     	public int							emBeard;											// 胡子状态, 参考  EM_BEARD_STATE_TYPE
     	public int							nAttractive;										// 魅力值, -1表示无效, 0未识别，识别时范围1-100,得分高魅力高
-    	public int							emFeatureState;										// 人员建模状态, 参考 EM_PERSON_FEATURE_STATE	
+    	public int							emFeatureState;										// 人员建模状态, 参考 EM_PERSON_FEATURE_STATE
       	public int                			bAgeEnable;                     					// 是否指定年龄段, 1-true; 0-false
     	public int[]                 		nAgeRange = new int[2];                  	 		// 年龄范围
     	public int							nEmotionValidNum;               					// 人脸特征数组有效个数,与 emFeature 结合使用, 如果为0则表示查询所有表情
     	public int[]    					emEmotions = new int[NET_MAX_FACEDETECT_FEATURE_NUM];// 人脸特征数组,与 byFeatureValidNum 结合使用  设置查询条件的时候使用, 参考 EM_DEV_EVENT_FACEDETECT_FEATURE_TYPE
     	public int                			nCustomPersonInfoNum;                               // 注册人员信息扩展个数
-    	public CUSTOM_PERSON_INFO[]         szCustomPersonInfo 
+    	public CUSTOM_PERSON_INFO[]         szCustomPersonInfo
     										= (CUSTOM_PERSON_INFO[])new CUSTOM_PERSON_INFO().toArray(NET_MAX_CUSTOM_PERSON_INFO_NUM);  //注册人员信息扩展
     	public byte[]                       byReserved = new byte[1144];   						// 保留字节
-    } 
-    
+    }
+
     //注册人员信息扩展结构体
     public static class CUSTOM_PERSON_INFO extends MyStructure
     {
     	public byte[] 						szPersonInfo = new byte[NET_MAX_PERSON_INFO_LEN];   //人员扩展信息
     	public byte[]                       byReserved = new byte[124];   						// 保留字节
-    } 
-    
+    }
+
     // 人脸数据
     public static class NET_FACE_DATA extends MyStructure
     {
@@ -3721,17 +3721,17 @@ public interface NetSDKLib extends Library {
     	public int				nAttractive;					// 魅力值, -1表示无效, 0未识别，识别时范围1-100,得分高魅力高
     	public int              emNation;                       // 民族, 参考 EM_NATION_TYPE
     	public byte[]           bReserved = new byte[124];      // 保留字节,留待扩展.
-    } 
-    
+    }
+
     //民族
     public static class EM_NATION_TYPE extends MyStructure
     {
     	public static final int EM_NATION_TYPE_UNKNOWN = 0;                   // 未知
-    	public static final int EM_NATION_TYPE_UYGUR = 1;                     // 维族(新疆)	
+    	public static final int EM_NATION_TYPE_UYGUR = 1;                     // 维族(新疆)
     	public static final int EM_NATION_TYPE_OTHER = 2;                     // 其他
-    	public static final int EM_NATION_TYPE_UNIDENTIFIED = 3;              // 设备未识别	
+    	public static final int EM_NATION_TYPE_UNIDENTIFIED = 3;              // 设备未识别
     }
-    
+
     //人脸检测对应性别类型
     public static class EM_DEV_EVENT_FACEDETECT_SEX_TYPE extends MyStructure
     {
@@ -3759,7 +3759,7 @@ public interface NetSDKLib extends Library {
         public static final int EM_DEV_EVENT_FACEDETECT_FEATURE_TYPE_SCREAM = 13;	 // 尖叫
         public static final int EM_DEV_EVENT_FACEDETECT_FEATURE_TYPE_WEAR_SUNGLASSES = 14; // 戴太阳眼镜
     }
-    
+
     // 种族类型
     public static class EM_RACE_TYPE extends MyStructure
     {
@@ -3768,8 +3768,8 @@ public interface NetSDKLib extends Library {
     	public static final int EM_RACE_YELLOW = 2;				// 黄种人
     	public static final int EM_RACE_BLACK = 3;				// 黑人
     	public static final int EM_RACE_WHITE = 4;				// 白人
-    } 
-    
+    }
+
     // 眼睛状态
     public static class EM_EYE_STATE_TYPE extends MyStructure
     {
@@ -3777,7 +3777,7 @@ public interface NetSDKLib extends Library {
     	public static final int EM_EYE_STATE_NODISTI = 1;		// 未识别
     	public static final int EM_EYE_STATE_CLOSE = 2;		    // 闭眼
     	public static final int EM_EYE_STATE_OPEN = 3;			// 睁眼
-    } 
+    }
 
     // 嘴巴状态
     public static class EM_MOUTH_STATE_TYPE extends MyStructure
@@ -3786,7 +3786,7 @@ public interface NetSDKLib extends Library {
     	public static final int EM_MOUTH_STATE_NODISTI = 1;		// 未识别
     	public static final int EM_MOUTH_STATE_CLOSE = 2;		// 闭嘴
     	public static final int EM_MOUTH_STATE_OPEN = 3;		// 张嘴
-    } 
+    }
 
     // 口罩状态
     public static class EM_MASK_STATE_TYPE extends MyStructure
@@ -3795,7 +3795,7 @@ public interface NetSDKLib extends Library {
     	public static final int EM_MASK_STATE_NODISTI = 1;		// 未识别
     	public static final int EM_MASK_STATE_NOMASK = 2;		// 没戴口罩
     	public static final int EM_MASK_STATE_WEAR = 3;			// 戴口罩
-    } 
+    }
 
     // 胡子状态
     public static class EM_BEARD_STATE_TYPE extends MyStructure
@@ -3805,7 +3805,7 @@ public interface NetSDKLib extends Library {
     	public static final int EM_BEARD_STATE_NOBEARD = 2;		// 没胡子
     	public static final int EM_BEARD_STATE_HAVEBEARD = 3;	// 有胡子
     }
-    
+
     // 人员建模状态
     public static class EM_PERSON_FEATURE_STATE extends MyStructure
     {
@@ -3815,7 +3815,7 @@ public interface NetSDKLib extends Library {
     	public static final int EM_PERSON_FEATURE_CALCULATING = 3;	// 正在计算特征值
     	public static final int EM_PERSON_FEATURE_UNUSEFUL = 4;		// 已建模，但算法升级导致数据不可用，需要重新建模
     }
-    
+
     // 事件文件的文件标签类型
     public static class EM_EVENT_FILETAG extends MyStructure
     {
@@ -3879,7 +3879,7 @@ public interface NetSDKLib extends Library {
         public byte[] 					szUID = new byte[NET_COMMON_STRING_32];			// 抓拍人员写入数据库的唯一标识符
         public byte[] 					bReserved = new byte[836];	// 保留字节,留待扩展
     }
-    
+
     // 事件类型EVENT_IVS_TRAFFICJAM(交通拥堵事件)对应的数据块描述信息
     public static class DEV_EVENT_TRAFFICJAM_INFO extends MyStructure {
         public int                 nChannelID;                                 // 通道号
@@ -3889,7 +3889,7 @@ public interface NetSDKLib extends Library {
         public NET_TIME_EX         UTC;                                        // 事件发生的时间
         public int                 nEventID;                                   // 事件ID
         public int                 nLane;                                      // 对应车道号
-        public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息               
+        public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte                bJamLenght;                                 // 表示拥堵长度(总车道长度百分比）0-100
         public byte                reserved;                                   // 保留字节
@@ -3897,14 +3897,14 @@ public interface NetSDKLib extends Library {
         public NET_TIME_EX         stuStartJamTime;                            // 开始停车时间
         public int                 nSequence;                                  // 表示抓拍序号,如3,2,1,1表示抓拍结束,0表示异常结束(bEventAction=2时此参数有效)
         public int                 nAlarmIntervalTime;                         // 报警时间间隔,单位:秒。(此事件为连续性事件,在收到第一个此事件之后,若在超过间隔时间后未收到此事件的后续事件,则认为此事件异常结束了)
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON    
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON
         public NET_RESOLUTION_INFO stuResolution;                              // 对应图片的分辨率
         public int                 nJamRealLength;                             // 表实际的拥堵长度,单位米
         public byte[]              bReserved = new byte[1008];                 // 保留字节,留待扩展.
-        public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息  
+        public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
     }
-    
+
     // 车辆行驶方向
     public static class NET_FLOWSTAT_DIRECTION extends MyStructure
     {
@@ -3912,17 +3912,17 @@ public interface NetSDKLib extends Library {
         public static final int DRIVING_DIR_APPROACH = 1 ;     //上行,即车辆离设备部署点越来越近
         public static final int DRIVING_DIR_LEAVE    = 2 ;     //下行,即车辆离设备部署点越来越远
     }
-    
-    //车辆流量统计车辆行驶方向信息 
+
+    //车辆流量统计车辆行驶方向信息
     public static class NET_TRAFFIC_FLOWSTAT_INFO_DIR extends MyStructure
     {
         public int                         emDrivingDir;      //行驶方向 (参见NET_FLOWSTAT_DIRECTION)
-        public byte[]                      szUpGoing = new byte[FLOWSTAT_ADDR_NAME];      //上行地点 
-        public byte[]                      szDownGoing = new byte[FLOWSTAT_ADDR_NAME];    //下行地点 
+        public byte[]                      szUpGoing = new byte[FLOWSTAT_ADDR_NAME];      //上行地点
+        public byte[]                      szDownGoing = new byte[FLOWSTAT_ADDR_NAME];    //下行地点
         public byte[]                      reserved= new byte[32];                       //保留字节
-        
+
     }
-    
+
     public static class NET_TRAFFIC_JAM_STATUS extends MyStructure
     {
          public static final int JAM_STATUS_UNKNOW = 0; //未知
@@ -3958,7 +3958,7 @@ public interface NetSDKLib extends Library {
         public int                             nSmallVehicles;                 // 小车交通量(4米<车长<6米),辆/单位时间,
         public int                             nMotoVehicles;                  // 摩托交通量(微型车,车长<4米),辆/单位时间,
         public int                             nLongVehicles;                  // 超长交通量(车长>=12米),辆/单位时间,
-        public int                             nVolume;                        // 交通量, 辆/单位时间, 某时间间隔通过车道、道路或其他通道上一点的车辆数,常以1小时计, 
+        public int                             nVolume;                        // 交通量, 辆/单位时间, 某时间间隔通过车道、道路或其他通道上一点的车辆数,常以1小时计,
         public int                             nFlowRate;                      // 流率小车当量,辆/小时, 车辆通过车道、道路某一断面或某一路段的当量小时流量
         public int                             nBackOfQueue;                   // 排队长度,单位：米, 从信号交叉口停车线到上游排队车辆末端之间的距离
         public int                             nTravelTime;                    // 旅行时间,单位：秒, 车辆通过某一条道路所用时间。包括所有停车延误
@@ -3971,7 +3971,7 @@ public interface NetSDKLib extends Library {
         public int                             nPassengerCarVehicles;          // 客车交通量(辆/单位时间)
         public int                             nLargeTruckVehicles;            // 大货车交通量(辆/单位时间)
         public int                             nMidTruckVehicles;              // 中货车交通量(辆/单位时间)
-        public int                             nSaloonCarVehicles;             // 轿车交通量(辆/单位时间)    
+        public int                             nSaloonCarVehicles;             // 轿车交通量(辆/单位时间)
         public int                             nMicrobusVehicles;              // 面包车交通量(辆/单位时间)
         public int                             nMicroTruckVehicles;            // 小货车交通量(辆/单位时间)
         public int                             nTricycleVehicles;              // 三轮车交通量(辆/单位时间)
@@ -4023,7 +4023,7 @@ public interface NetSDKLib extends Library {
     	public EVENT_INTELLI_COMM_INFO   stuIntelliCommInfo;                 	 // 智能事件公共信息
         public byte[]                    bReserved = new byte[892];              // 保留字节
     }
-    
+
     // 图片分辨率
     public static class NET_RESOLUTION_INFO extends MyStructure
     {
@@ -4073,22 +4073,22 @@ public interface NetSDKLib extends Library {
     }
 
     public static class EM_COMM_ATTACHMENT_TYPE extends MyStructure
-    {       
+    {
         public static final int COMM_ATTACHMENT_TYPE_UNKNOWN = 0;// 未知类型
-        public static final int COMM_ATTACHMENT_TYPE_FURNITURE = 1;// 摆件   
-        public static final int COMM_ATTACHMENT_TYPE_PENDANT = 2;// 挂件    
+        public static final int COMM_ATTACHMENT_TYPE_FURNITURE = 1;// 摆件
+        public static final int COMM_ATTACHMENT_TYPE_PENDANT = 2;// 挂件
         public static final int COMM_ATTACHMENT_TYPE_TISSUEBOX = 3;// 纸巾盒
         public static final int COMM_ATTACHMENT_TYPE_DANGER = 4;// 危险品
     }
 
     // 车辆物件
     public static class EVENT_COMM_ATTACHMENT extends MyStructure
-    {       
+    {
         public int emAttachmentType;//物件类型, 取值为EM_COMM_ATTACHMENT_TYPE中的值
         public NET_RECT stuRect;//坐标
         public byte[] bReserved = new byte[20];//预留字节
     }
-    
+
     //NTP校时状态
     public static class EM_NTP_STATUS extends MyStructure
     {
@@ -4097,7 +4097,7 @@ public interface NetSDKLib extends Library {
         public static final int NET_NTP_STATUS_SUCCESSFUL = 2;
         public static final int NET_NTP_STATUS_FAILED = 3;
     }
-    
+
     // 交通抓图图片信息
     public static class EVENT_PIC_INFO extends MyStructure
     {
@@ -4118,25 +4118,25 @@ public interface NetSDKLib extends Library {
         public EVENT_COMM_ATTACHMENT[]  stuAttachment = (EVENT_COMM_ATTACHMENT[])new EVENT_COMM_ATTACHMENT().toArray(NET_MAX_ATTACHMENT_NUM);//车辆物件信息
         public int 						nAnnualInspectionNum;			// 年检标志个数
         public NET_RECT[] 				stuAnnualInspection = (NET_RECT[])new NET_RECT().toArray(NET_MAX_ANNUUALINSPECTION_NUM);//年检标志
-        public float 					fHCRatio; 						// HC所占比例，单位：% 
-        public float 					fNORatio; 						// NO所占比例，单位：% 
+        public float 					fHCRatio; 						// HC所占比例，单位：%
+        public float 					fNORatio; 						// NO所占比例，单位：%
         public float 					fCOPercent; 					// CO所占百分比，单位：% 取值0~100
-        public float 					fCO2Percent; 					// CO2所占百分比，单位：% 取值0~100     
+        public float 					fCO2Percent; 					// CO2所占百分比，单位：% 取值0~100
         public float 					fLightObscuration; 				// 不透光度，单位：% 取值0~100
         public int 						nPictureNum;					// 原始图片张数
         public EVENT_PIC_INFO[] 		stuPicInfos = (EVENT_PIC_INFO[])new EVENT_PIC_INFO().toArray(NET_MAX_EVENT_PIC_NUM);// 原始图片信息
         public float 					fTemperature;                   // 温度值,单位摄氏度
-        public int 						nHumidity;                      // 相对湿度百分比值   
+        public int 						nHumidity;                      // 相对湿度百分比值
         public float 					fPressure;                      // 气压值,单位Kpa
         public float 					fWindForce;                     // 风力值,单位m/s
         public int 						nWindDirection;                 // 风向,单位度,范围:[0,360]
         public float 					fRoadGradient;                  // 道路坡度值,单位度
-        public float 					fAcceleration;                  // 加速度值,单位:m/s2   
+        public float 					fAcceleration;                  // 加速度值,单位:m/s2
         public NET_RFIDELETAG_INFO		stuRFIDEleTagInfo;				// RFID 电子车牌标签信息
         public byte[] 					bReserved = new byte[704];      // 预留字节
         public byte[] 					szCountry = new byte[20];		// 国家
     }
-    
+
  // RFID 电子车牌标签信息
     public static class NET_RFIDELETAG_INFO extends MyStructure
     {
@@ -4161,15 +4161,15 @@ public interface NetSDKLib extends Library {
     	public byte[]					szPlateCode = new byte[MAX_COMMON_STRING_8];	// 发牌代号，UTF-8编码
     	public byte[]					szPlateSN = new byte[MAX_COMMON_STRING_16];		// 号牌号码序号，UTF-8编码
     	public byte[]               	bReserved = new byte[104];		                // 保留字节,留待扩展.
-    } 
-    
+    }
+
     // 车检器冗余信息
     public static class NET_SIG_CARWAY_INFO_EX extends MyStructure
     {
         public byte[] byRedundance = new byte[8];//由车检器产生抓拍信号冗余信息
         public byte[] bReserved = new byte[120];//保留字段
     }
-    
+
     // 颜色RGBA
     public static class NET_COLOR_RGBA extends MyStructure
     {
@@ -4177,7 +4177,7 @@ public interface NetSDKLib extends Library {
         public int nGreen;//绿
         public int nBlue;//蓝
         public int nAlpha;//透明
-        
+
         public String toString() {
         	return "[" + nRed + " " + nGreen + " " + nBlue + " " + nAlpha + "]";
         }
@@ -4238,7 +4238,7 @@ public interface NetSDKLib extends Library {
         public int 				nTotalDeckCount;				// 总共车板数量
         public byte[] 			szViolationName = new byte[64]; // 违章名称
         public int 				nWeight;						// 车重(单位Kg), 类型为unsigned int
-       
+
         public byte[]      		szCustomRoadwayDirection = new byte[32];// 自定义车道方向,byDirection为9时有效
         public byte        		byPhysicalLane; 				// 物理车道号,取值0到5
         public byte[]      		byReserved2 = new byte[3];
@@ -4276,14 +4276,14 @@ public interface NetSDKLib extends Library {
         public byte[] szAlarmRecordPath = new byte[NET_COMMON_STRING_256];//录像路径
         public byte[] szFTPPath = new byte[NET_COMMON_STRING_256];//FTP路径
         public EVENT_INTELLI_COMM_INFO stuIntelliCommInfo;//智能事件公共信息
-        public byte byPreAlarm;	// 是否为违章预警图片,0 违章停车事件1 预警事件(预警触发后一定时间，车辆还没有离开，才判定为违章)由于此字段会导致事件含义改变，必须和在平台识别预警事件后，才能有此字段, 
+        public byte byPreAlarm;	// 是否为违章预警图片,0 违章停车事件1 预警事件(预警触发后一定时间，车辆还没有离开，才判定为违章)由于此字段会导致事件含义改变，必须和在平台识别预警事件后，才能有此字段,
         public byte[]  bReserved2 = new byte[3]; // 保留字节,留待扩展.
         public NET_GPS_INFO stuGPSInfo;   // GPS信息 车载定制
         public byte[] bReserved = new byte[228];//保留字节,留待扩展.
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;//交通车辆信息
         public EVENT_COMM_INFO stCommInfo;//公共信息
     }
-    
+
     //停车场信息
     public static class DEV_TRAFFIC_PARKING_INFO extends MyStructure
     {
@@ -4291,7 +4291,7 @@ public interface NetSDKLib extends Library {
         public NET_POINT[]   stFeaturePicArea = (NET_POINT[])new NET_POINT().toArray(NET_MAX_POLYGON_NUM);   // 特征图片区信息
         public byte[]        bReserved = new byte[572];                                                      // 保留字节
     }
-    
+
     //事件类型 EVENT_IVS_TRAFFIC_PARKINGSPACEPARKING(车位有车事件)对应的数据块描述信息
     public static class DEV_EVENT_TRAFFIC_PARKINGSPACEPARKING_INFO extends MyStructure
     {
@@ -4305,12 +4305,12 @@ public interface NetSDKLib extends Library {
         public NET_MSG_OBJECT      stuObject;                                  // 检测到的物体
         public NET_MSG_OBJECT      stuVehicle;                                 // 车身信息
         public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息
-        
-        public int                 nSequence;                                  // 表示抓拍序号,如3,2,1,1表示抓拍结束,0表示异常结束    
+
+        public int                 nSequence;                                  // 表示抓拍序号,如3,2,1,1表示抓拍结束,0表示异常结束
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              byReserved = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON    
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON
         public NET_RESOLUTION_INFO  stuResolution;                             // 对应图片的分辨率
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息
         public int                 nParkingSpaceStatus;                        // 车位状态,0-占用,1-空闲,2-压线
@@ -4320,7 +4320,7 @@ public interface NetSDKLib extends Library {
         public byte[]              szParkingNum = new byte[32];                // 车位(地磁)编号，球机定制项目
         public int                 dwPresetNum;                                // 球机预置位编号，球机定制项目
         public int                 bParkingFault;                              // 车位是否有故障，球机定制项目
-        public byte[]              bReserved = new byte[364];                  // 保留字节 
+        public byte[]              bReserved = new byte[364];                  // 保留字节
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
     }
 
@@ -4339,12 +4339,12 @@ public interface NetSDKLib extends Library {
         public NET_MSG_OBJECT       stuObject;                                 // 检测到的物体
         public NET_MSG_OBJECT       stuVehicle;                                // 车身信息
         public NET_EVENT_FILE_INFO  stuFileInfo;                               // 事件对应文件信息
-        
+
         public int                 nSequence;                                  // 表示抓拍序号,如3,2,1,1表示抓拍结束,0表示异常结束
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              byReserved = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见 NET_RESERVED_COMMON    
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见 NET_RESERVED_COMMON
         public NET_RESOLUTION_INFO  stuResolution;                             // 对应图片的分辨率
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息
         public DEV_TRAFFIC_PARKING_INFO stTrafficParingInfo;                   // 停车场信息
@@ -4353,10 +4353,10 @@ public interface NetSDKLib extends Library {
         public byte[]              szParkingNum = new byte[32];                // 车位(地磁)编号，球机定制项目
         public int                 dwPresetNum;                                // 球机预置位编号，球机定制项目
         public int                 bParkingFault;                              // 车位是否有故障，球机定制项目
-        public byte[]              bReserved = new byte[368];                  // 保留字节 
+        public byte[]              bReserved = new byte[368];                  // 保留字节
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
     }
-    
+
     //事件类型 EVENT_IVS_TRAFFIC_PEDESTRAIN(交通行人事件)对应数据块描述信息
     public static class DEV_EVENT_TRAFFIC_PEDESTRAIN_INFO extends MyStructure {
         public int                 nChannelID;                                 // 通道号
@@ -4367,7 +4367,7 @@ public interface NetSDKLib extends Library {
         public int                 nEventID;                                   // 事件ID
         public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息
         public NET_RESOLUTION_INFO stuResolution;                              // 对应图片的分辨率
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout" 
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              bReserved2 = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
@@ -4388,7 +4388,7 @@ public interface NetSDKLib extends Library {
         public int                 nEventID;                                   // 事件ID
         public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息
         public NET_RESOLUTION_INFO stuResolution;                              // 对应图片的分辨率
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout" 
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              bReserved2 = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
@@ -4400,59 +4400,59 @@ public interface NetSDKLib extends Library {
         public byte[]              bReserved = new byte[340];                  // 保留字节
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
     }
-    
+
     // 交通车辆部分信息
     public class EVENT_TRAFFIC_CAR_PART_INFO extends MyStructure
     {
-        public byte[]              szMachineName = new byte[128];               // 本地或远程设备名称    来源于普通配置General.MachineName    
+        public byte[]              szMachineName = new byte[128];               // 本地或远程设备名称    来源于普通配置General.MachineName
         public byte[]              szRoadwayNo = new byte[32];                  // 道路编号
         public byte[]              bReserved = new byte[352];                   // 保留字节
     }
-    
+
     // 事件上报携带卡片信息
     public static class EVENT_CARD_INFO extends MyStructure
     {
         public byte[]              szCardNumber = new byte[NET_EVENT_CARD_LEN];// 卡片序号字符串
         public byte[]              bReserved = new byte[32];                   // 保留字节,留待扩展.
     }
-    
+
     // 车辆方向信息
     public static class EM_VEHICLE_DIRECTION extends MyStructure
     {
         public static final int    NET_VEHICLE_DIRECTION_UNKOWN = 0;           // 未知
-        public static final int    NET_VEHICLE_DIRECTION_HEAD   = 1;           // 车头    
-        public static final int    NET_VEHICLE_DIRECTION_TAIL   = 2;           // 车尾  
+        public static final int    NET_VEHICLE_DIRECTION_HEAD   = 1;           // 车头
+        public static final int    NET_VEHICLE_DIRECTION_TAIL   = 2;           // 车尾
     }
-    
+
     // 开闸状态
     public static class EM_OPEN_STROBE_STATE extends MyStructure
     {
         public static final int    NET_OPEN_STROBE_STATE_UNKOWN = 0;           // 未知状态
         public static final int    NET_OPEN_STROBE_STATE_CLOSE  = 1;           // 关闸
-        public static final int    NET_OPEN_STROBE_STATE_AUTO   = 2;           // 自动开闸    
+        public static final int    NET_OPEN_STROBE_STATE_AUTO   = 2;           // 自动开闸
         public static final int    NET_OPEN_STROBE_STATE_MANUAL = 3;           // 手动开闸
     }
-    
+
     public static class RESERVED_PARA extends MyStructure
     {
         public int   				dwType;         						   //pData的数据类型
-                                											   //当[dwType]为 RESERVED_TYPE_FOR_INTEL_BOX 时,pData 对应为结构体 RESERVED_DATA_INTEL_BOX 的地址                    
+                                											   //当[dwType]为 RESERVED_TYPE_FOR_INTEL_BOX 时,pData 对应为结构体 RESERVED_DATA_INTEL_BOX 的地址
                                 											   //当[dwType]为 RESERVED_TYPE_FOR_COMMON 时,[pData]对应为结构体 NET_RESERVED_COMMON 的结构体地址
                                 											   //当[dwType]为 RESERVED_TYPE_FOR_PATH 时,[pData]对应结构体NET_RESERVED_PATH的结构体地址
         public Pointer   			pData;          						   //数据,由用户申请内存，大小参考对应的结构体
     }
-    
+
     public static class NET_RESERVED_COMMON extends MyStructure
     {
         public int                  dwStructSize;
         public Pointer   			pIntelBox;             					   // 对应 结构体 RESERVED_DATA_INTEL_BOX*, 兼容  RESERVED_TYPE_FOR_INTEL_BOX
         public int                  dwSnapFlagMask;     					   // 抓图标志(按位),0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
-    
+
         public NET_RESERVED_COMMON() {
         	this.dwStructSize = this.size();
         }
     }
-    
+
     // 事件类型 EVENT_IVS_TRAFFICJUNCTION 交通路口老规则事件/视频电警上的交通卡口老规则事件对应的数据块描述信息
     // 由于历史原因,如果要处理卡口事件,DEV_EVENT_TRAFFICJUNCTION_INFO 和 EVENT_IVS_TRAFFICGATE要一起处理
     // 以防止有视频电警和线圈电警同时接入平台的情况发生, 另外EVENT_IVS_TRAFFIC_TOLLGATE只支持新卡口事件的配置
@@ -4463,13 +4463,13 @@ public interface NetSDKLib extends Library {
         public byte                byMainSeatBelt;                             // 主驾驶座,系安全带状态,1-系安全带,2-未系安全带
         public byte                bySlaveSeatBelt;                            // 副驾驶座,系安全带状态,1-系安全带,2-未系安全带
         public byte                byVehicleDirection;                         // 当前被抓拍到的车辆是车头还是车尾,具体请见 EM_VEHICLE_DIRECTION
-        public byte                byOpenStrobeState;                          // 开闸状态,具体请见 EM_OPEN_STROBE_STATE 
+        public byte                byOpenStrobeState;                          // 开闸状态,具体请见 EM_OPEN_STROBE_STATE
         public double              PTS;                                        // 时间戳(单位是毫秒)
         public NET_TIME_EX         UTC;                                        // 事件发生的时间
         public int                 nEventID;                                   // 事件ID
         public NET_MSG_OBJECT      stuObject;                                  // 检测到的物体
         public int                 nLane;                                      // 对应车道号
-        public int                 dwBreakingRule;                             // 违反规则掩码,第一位:闯红灯; 
+        public int                 dwBreakingRule;                             // 违反规则掩码,第一位:闯红灯;
                                                                                // 第二位:不按规定车道行驶;
                                                                                // 第三位:逆行; 第四位：违章掉头;
                                                                                // 第五位:交通堵塞; 第六位:交通异常空闲
@@ -4477,14 +4477,14 @@ public interface NetSDKLib extends Library {
         public NET_TIME_EX         RedLightUTC;                                // 红灯开始UTC时间
         public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息
         public int                 nSequence;                                  // 表示抓拍序号,如3,2,1,1表示抓拍结束,0表示异常结束
-        public int                 nSpeed;                                     // 车辆实际速度Km/h                 
+        public int                 nSpeed;                                     // 车辆实际速度Km/h
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte                byDirection;                                // 路口方向,1-表示正向,2-表示反向
         public byte                byLightState;                               // LightState表示红绿灯状态:0 未知,1 绿灯,2 红灯,3 黄灯
         public byte                byReserved;                                 // 保留字节
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
         public NET_MSG_OBJECT      stuVehicle;                                 // 车身信息
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见 NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"   
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见 NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public NET_RESOLUTION_INFO stuResolution;                              // 对应图片的分辨率
         public byte[]              szRecordFile = new byte[NET_COMMON_STRING_128];// 报警对应的原始录像文件信息
     	public EVENT_JUNCTION_CUSTOM_INFO   stuCustomInfo;                     // 自定义信息
@@ -4495,14 +4495,14 @@ public interface NetSDKLib extends Library {
         public int                 nTriggerType;                               // TriggerType:触发类型,0车检器,1雷达,2视频
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息
         public int                 dwRetCardNumber;                            // 卡片个数
-        public EVENT_CARD_INFO[]   stuCardInfo = (EVENT_CARD_INFO[])new EVENT_CARD_INFO().toArray(NET_EVENT_MAX_CARD_NUM);// 卡片信息   
+        public EVENT_CARD_INFO[]   stuCardInfo = (EVENT_CARD_INFO[])new EVENT_CARD_INFO().toArray(NET_EVENT_MAX_CARD_NUM);// 卡片信息
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
-        
+
     	public int				   bNonMotorInfoEx;							   // 是否有非机动车信息, 1-true; 0-false
     	public VA_OBJECT_NONMOTOR  stuNonMotor;								   // 非机动车信息
     	public byte[]			   byReserved2 = new byte[2048];			   // 保留字节,留待扩展
-    }    
-    
+    }
+
     // 非机动车对象
     public static class VA_OBJECT_NONMOTOR extends MyStructure
     {
@@ -4515,11 +4515,11 @@ public interface NetSDKLib extends Library {
     	public int					  bHasImage;							  // 是否有抠图, 1-true; 0-false
     	public NET_NONMOTOR_PIC_INFO  stuImage;							      // 物体截图
     	public int					  nNumOfCycling;						  // 骑车人数量
-    	public NET_RIDER_INFO[]		  stuRiderList = 
+    	public NET_RIDER_INFO[]		  stuRiderList =
     								  (NET_RIDER_INFO[])new NET_RIDER_INFO().toArray(MAX_RIDER_NUM); // 骑车人特征,个数和nNumOfCycling关联
     	public byte[]				  byReserved = new byte[4096];			  // 保留
     }
-    
+
     // 非机动车抠图信息
     public static class NET_NONMOTOR_PIC_INFO extends MyStructure
     {
@@ -4530,7 +4530,7 @@ public interface NetSDKLib extends Library {
     	public byte[]				 szFilePath = new byte[MAX_PATH_LEN];	 // 文件路径
     	public byte[]				 byReserved = new byte[512];			 // 保留
     }
-    
+
     // 骑车人信息
     public static class NET_RIDER_INFO extends MyStructure
     {
@@ -4553,7 +4553,7 @@ public interface NetSDKLib extends Library {
     	public int       		     emLowerBodyColor;                      // 下衣颜色, 对应枚举 EM_OBJECT_COLOR_TYPE
     	public byte[]				 byReserved = new byte[516];			// 保留
     }
-    
+
     // 性别
     public static class EM_SEX_TYPE extends MyStructure
     {
@@ -4600,15 +4600,15 @@ public interface NetSDKLib extends Library {
     	public static final int EM_CLOTHES_TYPE_MINIPANTS = 7;              //超短裤
     	public static final int EM_CLOTHES_TYPE_MINISKIRT = 8;              //超短裙
     }
-    
+
     // 非机动车子类型
     public static class EM_CATEGORY_NONMOTOR_TYPE extends MyStructure
     {
     	public static final int EM_CATEGORY_NONMOTOR_TYPE_UNKNOWN = 0;					// 未知
     	public static final int EM_CATEGORY_NONMOTOR_TYPE_TRICYCLE = 1;					// "Tricycle" 三轮车
     	public static final int EM_CATEGORY_NONMOTOR_TYPE_MOTORCYCLE = 2;				// "Motorcycle" 摩托车
-    	public static final int EM_CATEGORY_NONMOTOR_TYPE_NON_MOTOR = 3;				// "Non-Motor"非机动车 
-    	public static final int EM_CATEGORY_NONMOTOR_TYPE_BICYCLE = 4;					// "Bicycle" 自行车     
+    	public static final int EM_CATEGORY_NONMOTOR_TYPE_NON_MOTOR = 3;				// "Non-Motor"非机动车
+    	public static final int EM_CATEGORY_NONMOTOR_TYPE_BICYCLE = 4;					// "Bicycle" 自行车
     	public static final int EM_CATEGORY_NONMOTOR_TYPE_DUALTRIWHEELMOTORCYCLE = 5;	// "DualTriWheelMotorcycle"两、三轮摩托车
     	public static final int EM_CATEGORY_NONMOTOR_TYPE_LIGHTMOTORCYCLE = 6;			// "LightMotorcycle" 轻便摩托车
     	public static final int EM_CATEGORY_NONMOTOR_TYPE_EMBASSYMOTORCYCLE = 7;		// "EmbassyMotorcycle "使馆摩托车
@@ -4618,7 +4618,7 @@ public interface NetSDKLib extends Library {
     	public static final int EM_CATEGORY_NONMOTOR_TYPE_TRIALMOTORCYCLE = 11;			// "TrialMotorcycle "试验摩托车
     	public static final int EM_CATEGORY_NONMOTOR_TYPE_COACHMOTORCYCLE = 12;			// "CoachMotorcycle "教练摩托车
     }
-    
+
     // 颜色类型
     public static class EM_OBJECT_COLOR_TYPE extends MyStructure
     {
@@ -4653,40 +4653,40 @@ public interface NetSDKLib extends Library {
     	public static final int EM_OBJECT_COLOR_TYPE_CYAN = 28;				  // 青色
     	public static final int EM_OBJECT_COLOR_TYPE_OTHER = 29;			  // 无法识别
     }
-    
+
     public static class NET_SEAT_INFO extends MyStructure
     {
         public NET_RECT 		  stuFaceRect; 								   // 人脸矩形框信息(8192坐标系)
-        public byte   			  bySunShade;								   // 遮阳板状态 0: 未知 1：无遮阳板 2：有遮阳板    
+        public byte   			  bySunShade;								   // 遮阳板状态 0: 未知 1：无遮阳板 2：有遮阳板
         public byte   			  byDriverCalling; 							   // 打电话状态 0: 未知 1：未打电话 2：打电话
         public byte   			  byDriverSmoking;						       // 抽烟状态	0: 未知 1：未吸烟 2：吸烟
         public byte   			  bySafeBelt; 								   // 安全带状态	0: 未知 1：未系安全带 2：系安全带
         public byte[]   		  byReserved = new byte[32];				   // 保留字节
     }
-    
+
     public static class NET_VEHICLE_ATTACH extends MyStructure
     {
         public int         		  nType; 									   // 附件类型	0-未知  1-年检标志  2-挂件  3-纸巾盒  4-香水盒
         public NET_RECT    		  stuBoundingBox;							   // 包围盒信息(8192坐标系)
         public byte[]        	  byReserved = new byte[32];				   // 保留字节
     }
-    
+
     //卡口事件专用定制上报内容，定制需求增加到Custom下
     public static class EVENT_JUNCTION_CUSTOM_INFO extends MyStructure
     {
         public EVENT_CUSTOM_WEIGHT_INFO    stuWeightInfo;      				   // 原始图片信息
-        public byte[]					   bReserved = new byte[60];		   // 预留字节 
+        public byte[]					   bReserved = new byte[60];		   // 预留字节
     }
-    
+
     //建委地磅定制称重信息
     public static class EVENT_CUSTOM_WEIGHT_INFO extends MyStructure
     {
     	public int        dwRoughWeight;                    				   // 毛重,车辆满载货物重量。单位KG
     	public int        dwTareWeight;                     				   // 皮重,空车重量。单位KG
     	public int        dwNetWeight;                      				   // 净重,载货重量。单位KG
-    	public byte[]	  bReserved = new byte[28];					   	 	   // 预留字节 
+    	public byte[]	  bReserved = new byte[28];					   	 	   // 预留字节
     }
-    
+
     // 事件类型 EVENT_IVS_TRAFFICGATE(交通卡口老规则事件/线圈电警上的交通卡口老规则事件)对应的数据块描述信息
     // 由于历史原因,如果要处理卡口事件,DEV_EVENT_TRAFFICJUNCTION_INFO和EVENT_IVS_TRAFFICGATE要一起处理,以防止有视频电警和线圈电警同时接入平台的情况发生
     // 另外 EVENT_IVS_TRAFFIC_TOLLGATE 只支持新卡口事件的配置
@@ -4703,16 +4703,16 @@ public interface NetSDKLib extends Library {
         public int                 nLane;                                      // 对应车道号
         public int                 nSpeed;                                     // 车辆实际速度Km/h
         public int                 nSpeedUpperLimit;                           // 速度上限 单位：km/h
-        public int                 nSpeedLowerLimit;                           // 速度下限 单位：km/h 
-        public int                 dwBreakingRule;                             // 违反规则掩码,第一位:逆行; 
-                                                                               // 第二位:压线行驶; 第三位:超速行驶; 
+        public int                 nSpeedLowerLimit;                           // 速度下限 单位：km/h
+        public int                 dwBreakingRule;                             // 违反规则掩码,第一位:逆行;
+                                                                               // 第二位:压线行驶; 第三位:超速行驶;
                                                                                // 第四位：欠速行驶; 第五位:闯红灯;第六位:穿过路口(卡口事件)
                                                                                // 第七位: 压黄线; 第八位: 有车占道; 第九位: 黄牌占道;否则默认为:交通卡口事件
         public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息
         public NET_MSG_OBJECT      stuVehicle;                                 // 车身信息
         public byte                szManualSnapNo[] = new byte[64];            // 手动抓拍序号
         public int                 nSequence;                                  // 表示抓拍序号,如3,2,1,1表示抓拍结束,0表示异常结束
-        public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束; 
+        public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              byReserved = new byte[3];                   // 保留字节
         public byte[]              szSnapFlag = new byte[16];                  // 设备产生的抓拍标识
         public byte                bySnapMode;                                 // 抓拍方式,0-未分类 1-全景 2-近景 4-同向抓拍 8-反向抓拍 16-号牌图像
@@ -4730,8 +4730,8 @@ public interface NetSDKLib extends Library {
         public byte                byLightState;                               // LightState表示红绿灯状态:0 未知,1 绿灯,2 红灯,3 黄灯
         public byte                byReserved1;                                // 保留字节,留待扩展
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-        public int                 nOverSpeedMargin;                           // 限高速宽限值    单位：km/h 
-        public int                 nUnderSpeedMargin;                          // 限低速宽限值    单位：km/h 
+        public int                 nOverSpeedMargin;                           // 限高速宽限值    单位：km/h
+        public int                 nUnderSpeedMargin;                          // 限低速宽限值    单位：km/h
         public byte[]              szDrivingDirection = new byte[3*NET_MAX_DRIVINGDIRECTION]; //
                                                                                // "DrivingDirection" : ["Approach", "上海", "杭州"],行驶方向
                                                                                // "Approach"-上行,即车辆离设备部署点越来越近；"Leave"-下行,
@@ -4740,7 +4740,7 @@ public interface NetSDKLib extends Library {
         public byte[]              szMachineName = new byte[256];              // 本地或远程设备名称
         public byte[]              szMachineAddress = new byte[256];           // 机器部署地点、道路编码
         public byte[]              szMachineGroup = new byte[256];             // 机器分组、设备所属单位
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"   
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public NET_SIG_CARWAY_INFO_EX stuSigInfo;                              // 由车检器产生抓拍信号冗余信息
         public byte[]              szFilePath = new byte[MAX_PATH];            // 文件路径
         public NET_TIME_EX         RedLightUTC;                                // 红灯开始UTC时间
@@ -4756,7 +4756,7 @@ public interface NetSDKLib extends Library {
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
         public byte[]              bReserved = new byte[452];                  // 保留字节,留待扩展.
     }
-    
+
     //事件类型EVENT_IVS_TRAFFIC_RUNREDLIGHT(交通-闯红灯事件)对应的数据块描述信息
     public static class DEV_EVENT_TRAFFIC_RUNREDLIGHT_INFO extends MyStructure
     {
@@ -4769,14 +4769,14 @@ public interface NetSDKLib extends Library {
         public int                 nLane;                                      // 对应车道号
         public NET_MSG_OBJECT      stuObject;                                  // 车牌信息
         public NET_MSG_OBJECT      stuVehicle;                                 // 车身信息
-        public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息 
+        public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息
         public int                 nLightState;                                // 红绿灯状态 0:未知 1：绿灯 2:红灯 3:黄灯
         public int                 nSpeed;                                     // 车速,km/h
         public int                 nSequence;                                  // 表示抓拍序号,如3,2,1,1表示抓拍结束,0表示异常结束
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              byReserved = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"    
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public NET_TIME_EX         stRedLightUTC;                              // 红灯开始时间
         public NET_RESOLUTION_INFO stuResolution;                              // 对应图片的分辨率
         public byte                byRedLightMargin;                           // 红灯容许间隔时间,单位：秒
@@ -4787,7 +4787,7 @@ public interface NetSDKLib extends Library {
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
     }
-    
+
     //事件类型EVENT_IVS_TRAFFIC_OVERLINE(交通-压线事件)对应的数据块描述信息
     public static class DEV_EVENT_TRAFFIC_OVERLINE_INFO extends MyStructure
     {
@@ -4806,14 +4806,14 @@ public interface NetSDKLib extends Library {
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              byReserved = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"    
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public NET_RESOLUTION_INFO stuResolution;                              // 对应图片的分辨率
         public NET_GPS_INFO        stuGPSInfo;                                 // GPS信息 车载定制
         public byte[]              bReserved = new byte[968];                  // 保留字节
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
-    } 
-    
+    }
+
     // 事件类型EVENT_IVS_TRAFFIC_RETROGRADE(交通-逆行事件)对应的数据块描述信息
     public static class DEV_EVENT_TRAFFIC_RETROGRADE_INFO extends MyStructure
     {
@@ -4832,7 +4832,7 @@ public interface NetSDKLib extends Library {
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              byReserved = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"    
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public NET_RESOLUTION_INFO  stuResolution;                             // 对应图片的分辨率
         public int                bIsExistAlarmRecord;                         // rue:有对应的报警录像; false:无对应的报警录像
         public int                dwAlarmRecordSize;                           // 录像大小
@@ -4842,10 +4842,10 @@ public interface NetSDKLib extends Library {
         public byte[]              bReserved = new byte[484];                  // 保留字节
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息
         public int                 nDetectNum;                                 // 规则检测区域顶点数
-        public NET_POINT[]         DetectRegion = (NET_POINT[])new NET_POINT().toArray(NET_MAX_DETECT_REGION_NUM); // 规则检测区域     
+        public NET_POINT[]         DetectRegion = (NET_POINT[])new NET_POINT().toArray(NET_MAX_DETECT_REGION_NUM); // 规则检测区域
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
     }
-    
+
     //事件类型EVENT_IVS_TRAFFIC_OVERSPEED(交通超速事件)对应的数据块描述信息
     public static class DEV_EVENT_TRAFFIC_OVERSPEED_INFO extends MyStructure
     {
@@ -4861,12 +4861,12 @@ public interface NetSDKLib extends Library {
         public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息
         public int                 nSpeed;                                     // 车辆实际速度Km/h
         public int                 nSpeedUpperLimit;                           // 速度上限 单位：km/h
-        public int                 nSpeedLowerLimit;                           // 速度下限 单位：km/h 
+        public int                 nSpeedLowerLimit;                           // 速度下限 单位：km/h
         public int                 nSequence;                                  // 表示抓拍序号,如3,2,1,1表示抓拍结束,0表示异常结束
-        public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;    
+        public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              byReserved = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public NET_RESOLUTION_INFO stuResolution;                              // 对应图片的分辨率
         public byte[]              szFilePath = new byte[MAX_PATH];            // 文件路径
         public EVENT_INTELLI_COMM_INFO     stuIntelliCommInfo;                 // 智能事件公共信息
@@ -4875,7 +4875,7 @@ public interface NetSDKLib extends Library {
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
     }
-    
+
     //事件类型EVENT_IVS_TRAFFIC_UNDERSPEED(交通欠速事件)对应的数据块描述信息
     public static class DEV_EVENT_TRAFFIC_UNDERSPEED_INFO extends MyStructure
     {
@@ -4891,13 +4891,13 @@ public interface NetSDKLib extends Library {
         public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息
         public int                 nSpeed;                                     // 车辆实际速度Km/h
         public int                 nSpeedUpperLimit;                           // 速度上限 单位：km/h
-        public int                 nSpeedLowerLimit;                           // 速度下限 单位：km/h 
+        public int                 nSpeedLowerLimit;                           // 速度下限 单位：km/h
         public int                 nSequence;                                  // 表示抓拍序号,如3,2,1,1表示抓拍结束,0表示异常结束
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              bReserved1 = new byte[2];                   // 对齐
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
         public int                 nUnderSpeedingPercentage;                   // 欠速百分比
-        public int               dwSnapFlagMask;                               // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+        public int               dwSnapFlagMask;                               // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public NET_RESOLUTION_INFO  stuResolution;                             // 对应图片的分辨率
         public EVENT_INTELLI_COMM_INFO     stuIntelliCommInfo;                 // 智能事件公共信息
         public NET_GPS_INFO        stuGPSInfo;                                 // GPS信息 车载定制
@@ -4905,7 +4905,7 @@ public interface NetSDKLib extends Library {
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
     }
-    
+
     //事件类型EVENT_IVS_TRAFFIC_WRONGROUTE(交通违章-不按车道行驶)对应的数据块描述信息
     public static class DEV_EVENT_TRAFFIC_WRONGROUTE_INFO extends MyStructure
     {
@@ -4918,19 +4918,19 @@ public interface NetSDKLib extends Library {
         public NET_MSG_OBJECT      stuObject;                                  // 检测到的物体
         public NET_MSG_OBJECT      stuVehicle;                                 // 车身信息
         public int                 nLane;                                      // 对应车道号
-        public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息               
+        public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              byReserved = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
         public int                 nSpeed;                                     // 车辆实际速度,km/h
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public NET_RESOLUTION_INFO stuResolution;                              // 对应图片的分辨率
         public NET_GPS_INFO        stuGPSInfo;                                 // GPS信息 车载定制
         public byte[]              bReserved = new byte[972];                  // 保留字节,留待扩展.
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
     }
-    
+
 	// 事件类型 EVENT_IVS_TRAFFIC_TURNLEFT(交通-违章左转)对应的数据块描述信息
 	public static class DEV_EVENT_TRAFFIC_TURNLEFT_INFO extends MyStructure
 	{
@@ -4949,14 +4949,14 @@ public interface NetSDKLib extends Library {
 	    public byte                		bEventAction;                               	// 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
 	    public byte[]                	byReserved = new byte[2];
 	    public byte                		byImageIndex;                               	// 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-	    public int               		dwSnapFlagMask;                             	// 抓图标志(按位),具体见  NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+	    public int               		dwSnapFlagMask;                             	// 抓图标志(按位),具体见  NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
 	    public NET_RESOLUTION_INFO  	stuResolution;     							 	// 对应图片的分辨率
 	    public NET_GPS_INFO        		stuGPSInfo;                                		// GPS信息 车载定制
 	    public byte[]                	bReserved = new byte[968];                      // 保留字节
 	    public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;   						// 交通车辆信息
 	    public EVENT_COMM_INFO     		stCommInfo;             						// 公共信息
-	} 
-	
+	}
+
 	// 事件类型 EVENT_IVS_TRAFFIC_TURNRIGHT (交通-违章右转)对应的数据块描述信息
 	public static class DEV_EVENT_TRAFFIC_TURNRIGHT_INFO extends MyStructure
 	{
@@ -4975,14 +4975,14 @@ public interface NetSDKLib extends Library {
 	    public byte                		bEventAction;                               	// 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
 	    public byte[]                	byReserved = new byte[2];
 	    public byte                		byImageIndex;                               	// 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-	    public int               		dwSnapFlagMask;                             	// 抓图标志(按位),具体见  NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+	    public int               		dwSnapFlagMask;                             	// 抓图标志(按位),具体见  NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
 	    public NET_RESOLUTION_INFO  	stuResolution;                              	// 对应图片的分辨率
 	    public NET_GPS_INFO        		stuGPSInfo;                                 	// GPS信息 车载定制
 	    public byte[]                	bReserved = new byte[968];                      // 保留字节
 	    public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 			// 交通车辆信息
 	    public EVENT_COMM_INFO     		stCommInfo;                                 	// 公共信息
-	} 
-	
+	}
+
 	// 事件类型EVENT_IVS_TRAFFIC_UTURN(违章调头事件)对应的数据块描述信息
 	public static class DEV_EVENT_TRAFFIC_UTURN_INFO extends MyStructure
 	{
@@ -5001,14 +5001,14 @@ public interface NetSDKLib extends Library {
 	    public byte                		bEventAction;                               	// 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
 	    public byte[]                	byReserved = new byte[2];
 	    public byte                		byImageIndex;                               	// 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-	    public int               		dwSnapFlagMask;                             	// 抓图标志(按位),具体见  NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+	    public int               		dwSnapFlagMask;                             	// 抓图标志(按位),具体见  NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
 	    public NET_RESOLUTION_INFO  	stuResolution;                              	// 对应图片的分辨率
 	    public NET_GPS_INFO        		stuGPSInfo;                                     // GPS信息 车载定制
 	    public byte[]                	bReserved = new byte[968];                      // 保留字节
 	    public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 			// 交通车辆信息
 	    public EVENT_COMM_INFO     		stCommInfo;                                 	// 公共信息
 	}
-	
+
 	//事件类型 EVENT_IVS_TRAFFIC_RUNYELLOWLIGHT(交通违章-闯黄灯事件)对应数据块描述信息
 	public static class DEV_EVENT_TRAFFIC_RUNYELLOWLIGHT_INFO extends MyStructure
 	{
@@ -5028,7 +5028,7 @@ public interface NetSDKLib extends Library {
 	    public byte                		bEventAction;                               	// 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
 	    public byte[]                	byReserved = new byte[2];
 	    public byte                		byImageIndex;                               	// 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-	    public int               		dwSnapFlagMask;                             	// 抓图标志(按位),具体见  NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"    
+	    public int               		dwSnapFlagMask;                             	// 抓图标志(按位),具体见  NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
 	    public NET_TIME_EX         		stYellowLightUTC;                           	// 黄灯开始时间
 	    public int        				nYellowLightPeriod;                         	// 黄灯周期间隔时间,单位秒
 	    public NET_RESOLUTION_INFO  	stuResolution;                              	// 对应图片的分辨率
@@ -5038,8 +5038,8 @@ public interface NetSDKLib extends Library {
 	    public byte[]                	bReserved = new byte[1024];                     // 保留字节
 	    public EVENT_COMM_INFO     		stCommInfo;                                 	// 公共信息
 
-	} 
-    
+	}
+
     //事件类型EVENT_IVS_TRAFFIC_OVERYELLOWLINE(交通违章-压黄线)对应的数据块描述信息
     public static class DEV_EVENT_TRAFFIC_OVERYELLOWLINE_INFO extends MyStructure
     {
@@ -5052,12 +5052,12 @@ public interface NetSDKLib extends Library {
         public NET_MSG_OBJECT      stuObject;                                  // 检测到的物体
         public NET_MSG_OBJECT      stuVehicle;                                 // 车身信息
         public int                 nLane;                                      // 对应车道号
-        public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息 
+        public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              byReserved = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
         public int                 nSpeed;                                     // 车辆实际速度,km/h
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public NET_RESOLUTION_INFO stuResolution;                              // 对应图片的分辨率
         public int                 bIsExistAlarmRecord;                        // bool 类型： 1:有对应的报警录像; 0:无对应的报警录像
         public int                 dwAlarmRecordSize;                          // 录像大小
@@ -5067,10 +5067,10 @@ public interface NetSDKLib extends Library {
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息
 
         public int                 nDetectNum;                                 // 规则检测区域顶点数
-        public NET_POINT[]         DetectRegion = (NET_POINT[])new NET_POINT().toArray(NET_MAX_DETECT_REGION_NUM); // 规则检测区域    
+        public NET_POINT[]         DetectRegion = (NET_POINT[])new NET_POINT().toArray(NET_MAX_DETECT_REGION_NUM); // 规则检测区域
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
     }
-    
+
     //事件类型EVENT_IVS_TRAFFIC_YELLOWPLATEINLANE(交通违章-黄牌车占道事件)对应的数据块描述信息
     public static class DEV_EVENT_TRAFFIC_YELLOWPLATEINLANE_INFO extends MyStructure
     {
@@ -5083,12 +5083,12 @@ public interface NetSDKLib extends Library {
         public NET_MSG_OBJECT      stuObject;                                  // 检测到的物体
         public NET_MSG_OBJECT      stuVehicle;                                 // 车身信息
         public int                 nLane;                                      // 对应车道号
-        public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息               
+        public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
-        public byte[]              byReserved = new byte[2];     
+        public byte[]              byReserved = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
         public int                 nSpeed;                                     // 车辆实际速度,km/h
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public NET_RESOLUTION_INFO stuResolution;                              // 对应图片的分辨率
         public byte[]              bReserved = new byte[1016];                 // 保留字节,留待扩展.
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息
@@ -5110,17 +5110,17 @@ public interface NetSDKLib extends Library {
         public int                 nSequence;                                  // 抓拍序号,如3-2-1/0,1表示抓拍正常结束,0表示抓拍异常结束
         public int                 nSpeed;                                     // 车速
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 表示交通车辆的数据库记录
-        public NET_EVENT_FILE_INFO  stuFileInfo;                               // 事件对应文件信息               
+        public NET_EVENT_FILE_INFO  stuFileInfo;                               // 事件对应文件信息
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              byReserved0 = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public NET_RESOLUTION_INFO  stuResolution;                             // 对应图片的分辨率
         public EVENT_INTELLI_COMM_INFO     stuIntelliCommInfo;                 // 智能事件公共信息
-        public byte[]              byReserved = new byte[884];           
+        public byte[]              byReserved = new byte[884];
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
     }
-    
+
     //事件类型EVENT_IVS_TRAFFIC_CROSSLANE(交通违章-违章变道)对应的数据块描述信息
     public static class DEV_EVENT_TRAFFIC_CROSSLANE_INFO extends MyStructure
     {
@@ -5133,12 +5133,12 @@ public interface NetSDKLib extends Library {
         public NET_MSG_OBJECT      stuObject;                                  // 检测到的物体
         public NET_MSG_OBJECT      stuVehicle;                                 // 车身信息
         public int                 nLane;                                      // 对应车道号
-        public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息               
+        public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
-        public byte[]              byReserved = new byte[2];       
+        public byte[]              byReserved = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
          public int                nSpeed;                                     // 车辆实际速度,km/h
-        public int                 dwSnapFlagMask;                               // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+        public int                 dwSnapFlagMask;                               // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public NET_RESOLUTION_INFO  stuResolution;                             // 对应图片的分辨率
     	public EVENT_INTELLI_COMM_INFO     stuIntelliCommInfo;                 // 智能事件公共信息
         public NET_GPS_INFO        stuGPSInfo;                                 // GPS信息 车载定制
@@ -5146,7 +5146,7 @@ public interface NetSDKLib extends Library {
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stuTrafficCar;                // 交通车辆信息
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
     }
-     
+
     // 事件类型EVENT_IVS_TRAFFIC_NOPASSING(交通违章-禁止通行事件)对应的数据块描述信息
     public static class DEV_EVENT_TRAFFIC_NOPASSING_INFO extends MyStructure
     {
@@ -5156,13 +5156,13 @@ public interface NetSDKLib extends Library {
         public int                 PTS;                                        // 时间戳(单位是毫秒)
         public NET_TIME_EX         UTC;                                        // 事件发生的时间
         public int                 nEventID;                                   // 事件ID
-        public int                 UTCMS;                                      // 
+        public int                 UTCMS;                                      //
         public int                 nMark;                                      // 底层产生的触发抓拍帧标记
         public int                 nSequence;                                  // 表示抓拍序号,如3,2,1,1表示抓拍结束,0表示异常结束
         public NET_EVENT_FILE_INFO  stuFileInfo;                               // 事件对应文件信息
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息
-        public int               dwSnapFlagMask;                               // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+        public int               dwSnapFlagMask;                               // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public NET_RESOLUTION_INFO  stuResolution;                             // 对应图片的分辨率
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
         public byte[]              byReserved1 = new byte[3];
@@ -5170,12 +5170,12 @@ public interface NetSDKLib extends Library {
         public NET_MSG_OBJECT      stuObject;                                  // 检测到的物体
         public NET_MSG_OBJECT      stuVehicle;                                 // 车身信息
         public int                 nFrameSequence;                             // 视频分析帧序号
-        public int                 nSource;                                    // 视频分析的数据源地址   
+        public int                 nSource;                                    // 视频分析的数据源地址
         public NET_GPS_INFO        stuGPSInfo;                                 // GPS信息 车载定制
         public byte[]              byReserved = new byte[984];                // 保留字节
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
     }
-    
+
     //事件类型 EVENT_IVS_TRAFFIC_PEDESTRAINPRIORITY(斑马线行人优先事件)对应的数据块描述信息
     public static class DEV_EVENT_TRAFFIC_PEDESTRAINPRIORITY_INFO extends MyStructure
     {
@@ -5193,7 +5193,7 @@ public interface NetSDKLib extends Library {
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              byReserved = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 表示交通车辆的数据库记录
         public NET_RESOLUTION_INFO  stuResolution;                             // 对应图片的分辨率
         public NET_GPS_INFO        stuGPSInfo;                                 // GPS信息 车载定制
@@ -5201,7 +5201,7 @@ public interface NetSDKLib extends Library {
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
 
     }
-    
+
     //事件类型 EVENT_IVS_TRAFFIC_VEHICLEINBUSROUTE(占用公交车道事件)对应的数据块描述信息
     public static class DEV_EVENT_TRAFFIC_VEHICLEINBUSROUTE_INFO extends MyStructure
     {
@@ -5220,7 +5220,7 @@ public interface NetSDKLib extends Library {
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              byReserved = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-        public int               dwSnapFlagMask;                               // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+        public int               dwSnapFlagMask;                               // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 表示交通车辆的数据库记录
         public NET_RESOLUTION_INFO stuResolution;                              // 对应图片的分辨率
         public NET_GPS_INFO        stuGPSInfo;                                 // GPS信息 车载定制
@@ -5228,7 +5228,7 @@ public interface NetSDKLib extends Library {
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
 
     }
-    
+
    //事件类型 EVENT_IVS_TRAFFIC_BACKING(违章倒车事件)对应的数据块描述信息
     public static class DEV_EVENT_IVS_TRAFFIC_BACKING_INFO extends MyStructure
     {
@@ -5247,7 +5247,7 @@ public interface NetSDKLib extends Library {
         public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              byReserved = new byte[2];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 表示交通车辆的数据库记录
         public NET_RESOLUTION_INFO  stuResolution;                             // 对应图片的分辨率
         public EVENT_INTELLI_COMM_INFO     stuIntelliCommInfo;                 // 智能事件公共信息
@@ -5256,7 +5256,7 @@ public interface NetSDKLib extends Library {
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
 
     }
-    
+
     // GPS信息
     public static class NET_GPS_INFO extends MyStructure
     {
@@ -5272,7 +5272,7 @@ public interface NetSDKLib extends Library {
         public double              dbSpeed;                     // 速度,单位km/H
         public double              dbBearing;                   // 方向角,单位°
         public byte[]              bReserved = new byte[8];     // 保留字段
-		
+
 		public NET_GPS_INFO()
         {
         	if(Utils.getOsName().equals("win")) {
@@ -5302,7 +5302,7 @@ public interface NetSDKLib extends Library {
      public int                     nMark;                          // 底层产生的触发抓拍帧标记
      public int                     nFrameSequence;                 // 视频分析帧序号
      public int                     nSource;                        // 视频分析的数据源地址
-     public int                     dwSnapFlagMask;                 // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+     public int                     dwSnapFlagMask;                 // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
      public NET_RESOLUTION_INFO     stuResolution;                  // 对应图片的分辨率
      public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stuTrafficCar;        // 交通车辆信息
      public int                     nSpeed;                         // 车辆实际速度,Km/h
@@ -5333,7 +5333,7 @@ public interface NetSDKLib extends Library {
      public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
      public byte[]              byReserved = new byte[2];
      public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-     public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+     public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
      public NET_RESOLUTION_INFO stuResolution;                              // 对应图片的分辨率
      public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息
      public NET_GPS_INFO        stuGPSInfo;                                 // GPS信息 车载定制
@@ -5366,7 +5366,7 @@ public interface NetSDKLib extends Library {
      public int                     nSpeed;                         // 车辆实际速度,Km/h
      public int      				emMainSeat;                     // 主驾驶座位安全带状态   参考 NET_SAFEBELT_STATE
      public int      				emSlaveSeat;                    // 副驾驶座位安全带状态 参考 NET_SAFEBELT_STATE
-     public int                     dwSnapFlagMask;                 // 抓图标志(按位),具体见NET_RESERVED_COMMON , 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"    
+     public int                     dwSnapFlagMask;                 // 抓图标志(按位),具体见NET_RESERVED_COMMON , 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
      public NET_RESOLUTION_INFO     stuResolution;                  // 对应图片的分辨率
      public NET_GPS_INFO            stuGPSInfo;                     // GPS信息 车载定制
      public byte[]                  byReserved = new byte[984];    // 保留字节
@@ -5384,7 +5384,7 @@ public interface NetSDKLib extends Library {
      public NET_TIME_EX         UTC;                                        // 事件发生的时间
      public int                 nEveID;                                     // 事件ID
      ///////////////////////////////以上为公共字段//////////////////////////////
- 	 public NET_EVENT_FILE_INFO stuFileInfo;                               	// 事件对应文件信息 
+ 	 public NET_EVENT_FILE_INFO stuFileInfo;                               	// 事件对应文件信息
  	 public int					nMark;										// 底层产生的触发抓拍帧标记
  	 public int					nSource;									// 视频分析的数据源地址
  	 public int					nSequence;									// 表示抓拍序号,如3-2-1/0,1表示抓拍正常结束,0表示抓拍异常结束
@@ -5412,19 +5412,19 @@ public interface NetSDKLib extends Library {
      public int                 nLane;                                      // 对应车道号
      public NET_MSG_OBJECT      stuObject;                                  // 车牌信息
      public NET_MSG_OBJECT      stuVehicle;                                 // 车身信息
-     public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息 
+     public NET_EVENT_FILE_INFO stuFileInfo;                                // 事件对应文件信息
      public int                 nSequence;                                  // 表示抓拍序号,如3,2,1,1表示抓拍结束,0表示异常结束
      public byte                bEventAction;                               // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
      public byte[]              byReserved = new byte[2];
      public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-     public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON , 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"    
+     public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON , 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
      public NET_RESOLUTION_INFO  stuResolution;                             // 对应图片的分辨率
      public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 交通车辆信息
      public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
      public NET_GPS_INFO        stuGPSInfo;                                 // GPS信息 车载定制
      public byte[]              bReserved = new byte[984];                  // 保留字节
  }
-    
+
     //事件类型EVENT_IVS_TRAFFIC_MANUALSNAP(交通手动抓拍事件)对应的数据块描述信息
     public static class DEV_EVENT_TRAFFIC_MANUALSNAP_INFO extends MyStructure
     {
@@ -5435,7 +5435,7 @@ public interface NetSDKLib extends Library {
         public NET_TIME_EX         UTC;                                        // 事件发生的时间
         public int                 nEventID;                                   // 事件ID
         public int                 nLane;                                      // 对应车道号
-        public byte[]              szManualSnapNo = new byte[64];              // 手动抓拍序号 
+        public byte[]              szManualSnapNo = new byte[64];              // 手动抓拍序号
         public NET_MSG_OBJECT      stuObject;                                  // 检测到的物体
         public NET_MSG_OBJECT      stuVehicle;                                 // 检测到的车身信息
         public DEV_EVENT_TRAFFIC_TRAFFICCAR_INFO stTrafficCar;                 // 表示交通车辆的数据库记录
@@ -5444,12 +5444,12 @@ public interface NetSDKLib extends Library {
         public byte                byOpenStrobeState;                          // 开闸状态, 具体请见 EM_OPEN_STROBE_STATE
         public byte[]              byReserved = new byte[1];
         public byte                byImageIndex;                               // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON , 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"    
+        public int                 dwSnapFlagMask;                             // 抓图标志(按位),具体见NET_RESERVED_COMMON , 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public NET_RESOLUTION_INFO stuResolution;                              // 对应图片的分辨率
         public byte[]              bReserved = new byte[1016];                 // 保留字节,留待扩展.
         public EVENT_COMM_INFO     stCommInfo;                                 // 公共信息
     }
-    
+
     // 事件类型 EVENT_IVS_CROSSLINEDETECTION(警戒线事件)对应的数据块描述信息
     public static class DEV_EVENT_CROSSLINE_INFO extends MyStructure {
         public int                 nChannelID;                         // 通道号
@@ -5468,14 +5468,14 @@ public interface NetSDKLib extends Library {
         public byte                bDirection;                         // 表示入侵方向, 0-由左至右, 1-由右至左
         public byte                byReserved;
         public byte                byImageIndex;                       // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-        public int                 dwSnapFlagMask;                     // 抓图标志(按位),具体见  NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout" 
+        public int                 dwSnapFlagMask;                     // 抓图标志(按位),具体见  NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public int                 nSourceIndex;                       // 事件源设备上的index,-1表示数据无效,-1表示数据无效
         public byte[]              szSourceDevice = new byte[MAX_PATH];           // 事件源设备唯一标识,字段不存在或者为空表示本地设备
         public int        nOccurrenceCount;                   		   // 事件触发累计次数, 类型为unsigned int
         public EVENT_INTELLI_COMM_INFO     stuIntelliCommInfo;         // 智能事件公共信息
         public byte[]              bReserved = new byte[476];          // 保留字节,留待扩展.
     }
-    
+
     // 事件类型 EVENT_IVS_CROSSREGIONDETECTION(警戒区事件)对应的数据块描述信息
     public static class DEV_EVENT_CROSSREGION_INFO extends MyStructure {
         public int                 nChannelID;                         // 通道号
@@ -5494,7 +5494,7 @@ public interface NetSDKLib extends Library {
         public byte                bDirection;                         // 表示入侵方向, 0-进入, 1-离开,2-出现,3-消失
         public byte                bActionType;                        // 表示检测动作类型,0-出现 1-消失 2-在区域内 3-穿越区域
         public byte                byImageIndex;                       // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-        public int                 dwSnapFlagMask;                     // 抓图标志(按位),具体见NET_RESERVED_COMMON , 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"    
+        public int                 dwSnapFlagMask;                     // 抓图标志(按位),具体见NET_RESERVED_COMMON , 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public int                 nSourceIndex;                       // 事件源设备上的index,-1表示数据无效
         public byte[]              szSourceDevice = new byte[MAX_PATH];// 事件源设备唯一标识,字段不存在或者为空表示本地设备
         public int        		   nOccurrenceCount;                   // 事件触发累计次数, unsigned int 类型
@@ -5505,7 +5505,7 @@ public interface NetSDKLib extends Library {
         public NET_POLY_POINTS[]   stuTrackInfo = (NET_POLY_POINTS[]) new NET_POLY_POINTS().toArray(NET_MAX_OBJECT_LIST);   // 轨迹信息(与检测到的物体对应)
     	public EVENT_INTELLI_COMM_INFO     stuIntelliCommInfo;         // 智能事件公共信息
     }
-    
+
     // 事件类型 EVENT_IVS_WANDERDETECTION(徘徊事件)对应的数据块描述信息
     public static class DEV_EVENT_WANDER_INFO extends MyStructure {
         public int                 nChannelID;                         // 通道号
@@ -5524,14 +5524,14 @@ public interface NetSDKLib extends Library {
         public NET_POLY_POINTS[]   stuTrackInfo = (NET_POLY_POINTS[]) new NET_POLY_POINTS().toArray(NET_MAX_OBJECT_LIST);   // 轨迹信息(与检测到的物体对应)
         public int                 nDetectRegionNum;                   // 规则检测区域顶点数
         public NET_POINT[]         DetectRegion = (NET_POINT[])new NET_POINT().toArray(NET_MAX_DETECT_REGION_NUM);    // 规则检测区域
-        public int                 dwSnapFlagMask;                     // 抓图标志(按位),具体见NET_RESERVED_COMMON , 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"    
+        public int                 dwSnapFlagMask;                     // 抓图标志(按位),具体见NET_RESERVED_COMMON , 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public int                 nSourceIndex;                       // 事件源设备上的index,-1表示数据无效
         public byte[]              szSourceDevice = new byte[MAX_PATH]; // 事件源设备唯一标识,字段不存在或者为空表示本地设备
         public int        		   nOccurrenceCount;                   // 事件触发累计次数, unsigned int 类型
         public EVENT_INTELLI_COMM_INFO     stuIntelliCommInfo;         // 智能事件公共信息
         public byte[]              bReserved =  new byte[624];         // 保留字节,留待扩展.
     }
-    
+
     //事件类型 EVENT_IVS_LEAVEDETECTION(离岗检测事件)对应数据块描述信息
     public static class DEV_EVENT_IVS_LEAVE_INFO extends MyStructure {
         public int                 nChannelID;                         // 通道号
@@ -5545,7 +5545,7 @@ public interface NetSDKLib extends Library {
         public NET_RESOLUTION_INFO stuResolution;                      // 对应图片的分辨率
         public int                 nDetectRegionNum;                   // 规则检测区域顶点数
         public NET_POINT[]         DetectRegion = (NET_POINT[])new NET_POINT().toArray(NET_MAX_DETECT_REGION_NUM);// 规则检测区域
-        public byte                bEventAction;                       // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;    
+        public byte                bEventAction;                       // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte                byImageIndex;                       // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
     	public EVENT_INTELLI_COMM_INFO     stuIntelliCommInfo;         // 智能事件公共信息
     	public byte[]              bReserved = new byte[894];          // 保留字节
@@ -5565,11 +5565,11 @@ public interface NetSDKLib extends Library {
         public byte                bEventAction;                       // 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
         public byte[]              byReserved = new byte[2];
         public byte                byImageIndex;                       // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-        public int                 dwSnapFlagMask;                     // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout" 
+        public int                 dwSnapFlagMask;                     // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public NET_RESOLUTION_INFO stuResolution;                      // 对应图片的分辨率
         public byte[]              bReserved = new byte[1024];         // 保留字节,留待扩展.
     }
-    
+
     //事件类型 EVENT_IVS_CLIMBDETECTION(攀高检测事件)对应数据块描述信息
     public static class DEV_EVENT_IVS_CLIMB_INFO extends MyStructure {
         public int                 nChannelID;                         // 通道号
@@ -5589,7 +5589,7 @@ public interface NetSDKLib extends Library {
         public EVENT_INTELLI_COMM_INFO     stuIntelliCommInfo;         // 智能事件公共信息
         public byte[]              bReserved = new byte[890];          // 保留字节
     }
-    
+
     // 事件类型 EVENT_IVS_FIGHTDETECTION(斗殴事件)对应的数据块描述信息
     public static class DEV_EVENT_FIGHT_INFO extends MyStructure {
         public int                 nChannelID;                         // 通道号
@@ -5606,15 +5606,15 @@ public interface NetSDKLib extends Library {
         public byte                byImageIndex;                       // 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
         public int                 nDetectRegionNum;                   // 规则检测区域顶点数
         public NET_POINT[]         DetectRegion = (NET_POINT[]) new NET_POINT().toArray(NET_MAX_DETECT_REGION_NUM);    // 规则检测区域
-        
-        public int                 dwSnapFlagMask;                     // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"     
+
+        public int                 dwSnapFlagMask;                     // 抓图标志(按位),具体见NET_RESERVED_COMMON, 0位:"*",1位:"Timing",2位:"Manual",3位:"Marked",4位:"Event",5位:"Mosaic",6位:"Cutout"
         public int                 nSourceIndex;                       // 事件源设备上的index,-1表示数据无效
         public byte[]              szSourceDevice = new byte[MAX_PATH]; // 事件源设备唯一标识,字段不存在或者为空表示本地设备
         public int                 nOccurrenceCount;                   // 事件触发累计次数, unsigned int 类型
         public EVENT_INTELLI_COMM_INFO     stuIntelliCommInfo;         // 智能事件公共信息
         public byte[]              bReserved = new byte[492];          // 保留字节,留待扩展.
     }
-    
+
     // 加油类型
     public static class EM_REFUEL_TYPE extends MyStructure {
         public static final int 	EM_REFUEL_TYPE_UNKNOWN = 0;								// unknown
@@ -5629,7 +5629,7 @@ public interface NetSDKLib extends Library {
         public static final int		EM_REFUEL_TYPE_NEGATIVE_TEN = 9;						// "-10#"
         public static final int		EM_REFUEL_TYPE_NEGATIVE_TWENTY = 10;					// "-20#"
         public static final int		EM_REFUEL_TYPE_NEGATIVE_THIRTY_FIVE = 11;				// "-35#"
-        public static final int		EM_REFUEL_TYPE_NEGATIVE_FIFTY = 12;						// "-50#"   	
+        public static final int		EM_REFUEL_TYPE_NEGATIVE_FIFTY = 12;						// "-50#"
     }
 
     // 车辆抓拍图片信息
@@ -5664,24 +5664,24 @@ public interface NetSDKLib extends Library {
     	public DEV_EVENT_TRAFFIC_FCC_OBJECT	stuObject;						// 车辆抓图信息
     	public byte[]			bReserved = new byte[1024];					// 保留字节,留待扩展
     }
-    
+
     // 区域或曲线顶点信息
     public static class NET_POLY_POINTS extends MyStructure
     {
         public int         nPointNum;                               	// 顶点数
         public NET_POINT[] stuPoints = (NET_POINT[])new NET_POINT().toArray(NET_MAX_DETECT_REGION_NUM);     // 顶点信息
     }
-    
+
     // 抓图类型
     public static class NET_CAPTURE_FORMATS extends MyStructure
     {
-        public static final int    NET_CAPTURE_BMP = 0;           
+        public static final int    NET_CAPTURE_BMP = 0;
         public static final int    NET_CAPTURE_JPEG  = 1;           // 100%质量的JPEG
-        public static final int    NET_CAPTURE_JPEG_70 = 2;         // 70%质量的JPEG   
+        public static final int    NET_CAPTURE_JPEG_70 = 2;         // 70%质量的JPEG
         public static final int    NET_CAPTURE_JPEG_50 = 3;
         public static final int    NET_CAPTURE_JPEG_30 = 4;
     }
-    
+
     // 抓图参数结构体
     public static class SNAP_PARAMS extends MyStructure
     {
@@ -5695,7 +5695,7 @@ public interface NetSDKLib extends Library {
         public int     CmdSerial;                     // 请求序列号，有效值范围 0~65535，超过范围会被截断为 unsigned short
         public int[]   Reserved = new int[4];
     }
-    
+
     // 对应CLIENT_StartSearchDevices接口
     public static class DEVICE_NET_INFO_EX extends MyStructure
     {
@@ -5726,40 +5726,40 @@ public interface NetSDKLib extends Library {
         public short 	wAlarmOutputCh;									  // 报警输出通道数
         public int   	bNewWordLen;                                      // TRUE使用新密码字段szNewPassWord, BOOL类型
         public byte[]   szNewPassWord = new byte[NET_COMMON_STRING_64];   // 登陆设备密码（在修改设备IP时需要填写）
-        
+
         public byte		byInitStatus;							          // 设备初始化状态，按位确定初始化状态
     																      // bit0~1：0-老设备，没有初始化功能 1-未初始化账号 2-已初始化账户
     																      // bit2~3：0-老设备，保留 1-公网接入未使能 2-公网接入已使能
     																      // bit4~5：0-老设备，保留 1-手机直连未使能 2-手机直连使能
- 
-    	public byte		byPwdResetWay;							 		  // 支持密码重置方式：按位确定密码重置方式，只在设备有初始化账号时有意义															
+
+    	public byte		byPwdResetWay;							 		  // 支持密码重置方式：按位确定密码重置方式，只在设备有初始化账号时有意义
     																	  // bit0-支持预置手机号 bit1-支持预置邮箱 bit2-支持文件导出
     	public byte		bySpecialAbility;								  // 设备初始化能力，按位确定初始化能力
-        public byte[]   szNewDetailType = new byte[NET_COMMON_STRING_64]; // 设备型号 
+        public byte[]   szNewDetailType = new byte[NET_COMMON_STRING_64]; // 设备型号
     	public int		bNewUserName;									  // TRUE表示使用新用户名(szNewUserName)字段. BOOL类型
     	public byte[]	szNewUserName = new byte[NET_COMMON_STRING_64];	  // 登陆设备用户名（在修改设备IP时需要填写）
     	public byte[]   cReserved = new byte[41];
     }
-    
+
     // 视频输入通道信息
     public static class NET_VIDEO_INPUTS extends MyStructure {
         public int                      dwSize;
         public byte[]                   szChnName = new byte[64];                   // 通道名称
         public int                      bEnable;                                    // 使能
         public byte[]                   szControlID = new byte[128];                // 控制ID
-        public byte[]                   szMainStreamUrl = new byte[MAX_PATH];       // 主码流url地址 
+        public byte[]                   szMainStreamUrl = new byte[MAX_PATH];       // 主码流url地址
         public byte[]                   szExtraStreamUrl = new byte[MAX_PATH];      // 辅码流url地址
         public int                      nOptionalMainUrlCount;                      // 备用主码流地址数量
         public byte[]                   szOptionalMainUrls = new byte[8*MAX_PATH];  // 备用主码流地址列表
         public int                      nOptionalExtraUrlCount;                     // 备用辅码流地址数量
         public byte[]                   szOptionalExtraUrls = new byte[8*MAX_PATH]; // 备用辅码流地址列表
-        
+
         public NET_VIDEO_INPUTS()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // 远程设备信息
     public static class NET_REMOTE_DEVICE extends MyStructure {
         public int                       dwSize;
@@ -5786,15 +5786,15 @@ public interface NetSDKLib extends Library {
         /*以下用于新平台扩展*/
         public byte[]                    szUserEx = new byte[32];          // 用户名
         public byte[]                    szPwdEx = new byte[32];           // 密码
-        
-        public NET_REMOTE_DEVICE() 
+
+        public NET_REMOTE_DEVICE()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // 可用的显示源信息
-    public static class NET_MATRIX_CAMERA_INFO extends MyStructure 
+    public static class NET_MATRIX_CAMERA_INFO extends MyStructure
     {
         public int                      dwSize;
         public byte[]                   szName = new byte[128];          // 名称
@@ -5806,58 +5806,58 @@ public interface NetSDKLib extends Library {
         public NET_REMOTE_DEVICE        stuRemoteDevice;                   // 远程设备信息
         public int                      emStreamType;                      // 视频码流类型  NET_STREAM_TYPE
         public int                      emChannelType;                     // 通道类型应 NET_LOGIC_CHN_TYPE
-               
+
         public NET_MATRIX_CAMERA_INFO() {
             this.dwSize = this.size();
             stuRemoteDevice = new NET_REMOTE_DEVICE();
         }
     }
-    
+
     // CLIENT_MatrixGetCameras接口的输入参数
     public static class NET_IN_MATRIX_GET_CAMERAS extends MyStructure {
-        public int dwSize; 
-        
+        public int dwSize;
+
         public NET_IN_MATRIX_GET_CAMERAS() {
             this.dwSize = this.size();
         }
     }
-        
+
     // CLIENT_MatrixGetCameras接口的输出参数
     public static class NET_OUT_MATRIX_GET_CAMERAS extends MyStructure {
-        public int                        dwSize;                    
+        public int                        dwSize;
         public Pointer                    pstuCameras;            // 显示源信息数组, 用户分配内存  NET_MATRIX_CAMERA_INFO
         public int                        nMaxCameraCount;        // 显示源数组大小
         public int                        nRetCameraCount;        // 返回的显示源数量
-        
+
         public NET_OUT_MATRIX_GET_CAMERAS() {
             this.dwSize = this.size();
         }
     }
-    
+
     // CLIENT_SnapPictureToFile 接口输入参数
     public static class NET_IN_SNAP_PIC_TO_FILE_PARAM extends MyStructure {
         public int                         dwSize;                    // 结构体大小
         public SNAP_PARAMS                 stuParam;                  // 抓图参数, 其中mode字段仅一次性抓图, 不支持定时或持续抓图; 除了车载DVR, 其他设备仅支持每秒一张的抓图频率
 
         public byte[]                      szFilePath = new byte[MAX_PATH];// 写入文件的地址
-        
+
         public NET_IN_SNAP_PIC_TO_FILE_PARAM() {
             this.dwSize = this.size();
             this.stuParam = new SNAP_PARAMS();
         }
     }
-    
+
     //  CLIENT_SnapPictureToFile 接口输出参数
     public static class NET_OUT_SNAP_PIC_TO_FILE_PARAM extends MyStructure {
-        public int                        dwSize;                    
+        public int                        dwSize;
         public Pointer                    szPicBuf;               // 图片内容,用户分配内存
         public int                        dwPicBufLen;            // 图片内容内存大小, 单位:字节
         public int                        dwPicBufRetLen;         // 返回的图片大小, 单位:字节
-        
+
         public NET_OUT_SNAP_PIC_TO_FILE_PARAM() {
             this.dwSize = this.size();
         }
-        
+
         public NET_OUT_SNAP_PIC_TO_FILE_PARAM(int nMaxBuf) {
             this.dwSize = this.size();
             this.dwPicBufLen = nMaxBuf;
@@ -5866,7 +5866,7 @@ public interface NetSDKLib extends Library {
             this.szPicBuf = mem;
         }
     }
-    
+
     // 录像文件信息
     public static class NET_RECORDFILE_INFO extends MyStructure {
         public int                        ch;                         // 通道号
@@ -5881,10 +5881,10 @@ public interface NetSDKLib extends Library {
         public byte                       bImportantRecID;            // 0:普通录像 1:重要录像
         public byte                       bHint;                      // 文件定位索引(nRecordFileType==4<图片>时,bImportantRecID<<8 +bHint ,组成图片定位索引 )
         public byte                       bRecType;                   // 0-主码流录像 1-辅码1流录像 2-辅码流2 3-辅码流3录像
-        
+
         public static class ByValue extends NET_RECORDFILE_INFO implements Structure.ByValue { }
     }
-    
+
     // 录像查询类型
     public static class EM_QUERY_RECORD_TYPE extends MyStructure {
         public static final int            EM_RECORD_TYPE_ALL              = 0;            // 所有录像
@@ -5902,10 +5902,10 @@ public interface NetSDKLib extends Library {
         public static final int            EM_RECORD_TYPE_TRANS_DATA       = 16;           // 查询透明串口数据录像
         public static final int            EM_RECORD_TYPE_IMPORTANT        = 17;           // 查询重要录像
         public static final int            EM_RECORD_TYPE_TALK_DATA        = 18;           // 查询录音文件
-        
+
         public static final int            EM_RECORD_TYPE_INVALID          = 256;          // 无效的查询类型
     }
-    
+
     // 语言种类
     public static class NET_LANGUAGE_TYPE extends MyStructure
     {
@@ -5948,7 +5948,7 @@ public interface NetSDKLib extends Library {
         public static final int NET_LANGUAGE_HEBREW = NET_LANGUAGE_THAI+1; //希伯来语
         public static final int NET_LANGUAGE_Bosnian = NET_LANGUAGE_HEBREW+1; //波斯尼亚文
     }
-    
+
     // 区域信息
     public static class CFG_RECT extends MyStructure
     {
@@ -6027,7 +6027,7 @@ public interface NetSDKLib extends Library {
         public byte byGainGreen;//蓝色增益调节，白平衡为"Custom"模式下有效0~100
         public byte byExposure;//曝光模式；取值范围取决于设备能力集：0-自动曝光，1-曝光等级1，2-曝光等级2…n-1最大曝光等级数n带时间上下限的自动曝光n+1自定义时间手动曝光 (n==byExposureEn）
         public float fExposureValue1;//自动曝光时间下限或者手动曝光自定义时间,毫秒为单位，取值0.1ms~80ms
-        public float fExposureValue2;//自动曝光时间上限,毫秒为单位，取值0.1ms~80ms  
+        public float fExposureValue2;//自动曝光时间上限,毫秒为单位，取值0.1ms~80ms
         public byte byWhiteBalance;//白平衡,0-"Disable", 1-"Auto", 2-"Custom", 3-"Sunny", 4-"Cloudy", 5-"Home", 6-"Office", 7-"Night", 8-"HighColorTemperature", 9-"LowColorTemperature", 10-"AutoColorTemperature", 11-"CustomColorTemperature"
         public byte byColorTemperature;//色温等级,白平衡为"CustomColorTemperature"模式下有效
         public byte bGainAuto;//自动增益, 类型为bool, 取值0或1
@@ -6096,7 +6096,7 @@ public interface NetSDKLib extends Library {
         public byte byGain;//增益调节,GainAuto为true时表示自动增益的上限，否则表示固定的增益值
         public byte bySignalFormat;//信号格式,0-Inside(内部输入)1-BT656 2-720p 3-1080p  4-1080i  5-1080sF
         public byte byRotate90;//0-不旋转，1-顺时针90°，2-逆时针90°
-        public float fExternalSyncPhase;//外同步的相位设置 0~360   
+        public float fExternalSyncPhase;//外同步的相位设置 0~360
         public byte byExternalSync;//外部同步信号输入,0-内部同步 1-外部同步
         public byte bySwitchMode;//0-不切换，总是使用白天配置；1-根据亮度切换；2-根据时间切换；3-不切换，总是使用夜晚配置；4-使用普通配置
         public byte byDoubleExposure;//双快门,0-不启用，1-双快门全帧率，即图像和视频只有快门参数不同，2-双快门半帧率，即图像和视频快门及白平衡参数均不同
@@ -6115,7 +6115,7 @@ public interface NetSDKLib extends Library {
         public CFG_RECT stuBacklightRegion;//背光补偿区域
         public CFG_VIDEO_IN_NORMAL_OPTIONS stuNormalOptions;//普通参数
     }
-    
+
     // 通用云台控制命令
     public static class NET_PTZ_ControlType extends MyStructure
     {
@@ -6232,7 +6232,7 @@ public interface NetSDKLib extends Library {
         public byte 					 bEnable;					// 雨刷使能, 类型为bool, 取值0或1
         public byte 					 bSpeedRate;				// 雨刷速度,1:快速;2:中速;3:慢速
         public byte[] 					 bReserved = new byte[2];	// 保留对齐
-        public TIME_SECTION_WEEK_DAY_6[] stuTimeSectionWeekDay = 
+        public TIME_SECTION_WEEK_DAY_6[] stuTimeSectionWeekDay =
         								 (TIME_SECTION_WEEK_DAY_6[])new TIME_SECTION_WEEK_DAY_6().toArray(WEEK_DAY_NUM);// 事件响应时间段
         public int 						 nInterval; 				// 雨刷运动间隔事件, 单位: 秒
         public int 						 bProtectEnable; 			// 雨刷保护使能: true 保护开启, false 保护关闭
@@ -6246,48 +6246,48 @@ public interface NetSDKLib extends Library {
         public static final int CTRLTYPE_CTRL_SHUTDOWN = CTRLTYPE_CTRL_REBOOT+1; //关闭设备
         public static final int CTRLTYPE_CTRL_DISK = CTRLTYPE_CTRL_SHUTDOWN+1; //硬盘管理
         public static final int CTRLTYPE_KEYBOARD_POWER =3;//网络键盘
-        public static final int CTRLTYPE_KEYBOARD_ENTER = CTRLTYPE_KEYBOARD_POWER+1; 
-        public static final int CTRLTYPE_KEYBOARD_ESC = CTRLTYPE_KEYBOARD_ENTER+1; 
-        public static final int CTRLTYPE_KEYBOARD_UP = CTRLTYPE_KEYBOARD_ESC+1; 
-        public static final int CTRLTYPE_KEYBOARD_DOWN = CTRLTYPE_KEYBOARD_UP+1; 
-        public static final int CTRLTYPE_KEYBOARD_LEFT = CTRLTYPE_KEYBOARD_DOWN+1; 
-        public static final int CTRLTYPE_KEYBOARD_RIGHT = CTRLTYPE_KEYBOARD_LEFT+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN0 = CTRLTYPE_KEYBOARD_RIGHT+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN1 = CTRLTYPE_KEYBOARD_BTN0+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN2 = CTRLTYPE_KEYBOARD_BTN1+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN3 = CTRLTYPE_KEYBOARD_BTN2+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN4 = CTRLTYPE_KEYBOARD_BTN3+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN5 = CTRLTYPE_KEYBOARD_BTN4+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN6 = CTRLTYPE_KEYBOARD_BTN5+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN7 = CTRLTYPE_KEYBOARD_BTN6+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN8 = CTRLTYPE_KEYBOARD_BTN7+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN9 = CTRLTYPE_KEYBOARD_BTN8+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN10 = CTRLTYPE_KEYBOARD_BTN9+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN11 = CTRLTYPE_KEYBOARD_BTN10+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN12 = CTRLTYPE_KEYBOARD_BTN11+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN13 = CTRLTYPE_KEYBOARD_BTN12+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN14 = CTRLTYPE_KEYBOARD_BTN13+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN15 = CTRLTYPE_KEYBOARD_BTN14+1; 
-        public static final int CTRLTYPE_KEYBOARD_BTN16 = CTRLTYPE_KEYBOARD_BTN15+1; 
-        public static final int CTRLTYPE_KEYBOARD_SPLIT = CTRLTYPE_KEYBOARD_BTN16+1; 
-        public static final int CTRLTYPE_KEYBOARD_ONE = CTRLTYPE_KEYBOARD_SPLIT+1; 
-        public static final int CTRLTYPE_KEYBOARD_NINE = CTRLTYPE_KEYBOARD_ONE+1; 
-        public static final int CTRLTYPE_KEYBOARD_ADDR = CTRLTYPE_KEYBOARD_NINE+1; 
-        public static final int CTRLTYPE_KEYBOARD_INFO = CTRLTYPE_KEYBOARD_ADDR+1; 
-        public static final int CTRLTYPE_KEYBOARD_REC = CTRLTYPE_KEYBOARD_INFO+1; 
-        public static final int CTRLTYPE_KEYBOARD_FN1 = CTRLTYPE_KEYBOARD_REC+1; 
-        public static final int CTRLTYPE_KEYBOARD_FN2 = CTRLTYPE_KEYBOARD_FN1+1; 
-        public static final int CTRLTYPE_KEYBOARD_PLAY = CTRLTYPE_KEYBOARD_FN2+1; 
-        public static final int CTRLTYPE_KEYBOARD_STOP = CTRLTYPE_KEYBOARD_PLAY+1; 
-        public static final int CTRLTYPE_KEYBOARD_SLOW = CTRLTYPE_KEYBOARD_STOP+1; 
-        public static final int CTRLTYPE_KEYBOARD_FAST = CTRLTYPE_KEYBOARD_SLOW+1; 
-        public static final int CTRLTYPE_KEYBOARD_PREW = CTRLTYPE_KEYBOARD_FAST+1; 
-        public static final int CTRLTYPE_KEYBOARD_NEXT = CTRLTYPE_KEYBOARD_PREW+1; 
-        public static final int CTRLTYPE_KEYBOARD_JMPDOWN = CTRLTYPE_KEYBOARD_NEXT+1; 
-        public static final int CTRLTYPE_KEYBOARD_JMPUP = CTRLTYPE_KEYBOARD_JMPDOWN+1; 
-        public static final int CTRLTYPE_KEYBOARD_10PLUS = CTRLTYPE_KEYBOARD_JMPUP+1; 
-        public static final int CTRLTYPE_KEYBOARD_SHIFT = CTRLTYPE_KEYBOARD_10PLUS+1; 
-        public static final int CTRLTYPE_KEYBOARD_BACK = CTRLTYPE_KEYBOARD_SHIFT+1; 
+        public static final int CTRLTYPE_KEYBOARD_ENTER = CTRLTYPE_KEYBOARD_POWER+1;
+        public static final int CTRLTYPE_KEYBOARD_ESC = CTRLTYPE_KEYBOARD_ENTER+1;
+        public static final int CTRLTYPE_KEYBOARD_UP = CTRLTYPE_KEYBOARD_ESC+1;
+        public static final int CTRLTYPE_KEYBOARD_DOWN = CTRLTYPE_KEYBOARD_UP+1;
+        public static final int CTRLTYPE_KEYBOARD_LEFT = CTRLTYPE_KEYBOARD_DOWN+1;
+        public static final int CTRLTYPE_KEYBOARD_RIGHT = CTRLTYPE_KEYBOARD_LEFT+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN0 = CTRLTYPE_KEYBOARD_RIGHT+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN1 = CTRLTYPE_KEYBOARD_BTN0+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN2 = CTRLTYPE_KEYBOARD_BTN1+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN3 = CTRLTYPE_KEYBOARD_BTN2+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN4 = CTRLTYPE_KEYBOARD_BTN3+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN5 = CTRLTYPE_KEYBOARD_BTN4+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN6 = CTRLTYPE_KEYBOARD_BTN5+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN7 = CTRLTYPE_KEYBOARD_BTN6+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN8 = CTRLTYPE_KEYBOARD_BTN7+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN9 = CTRLTYPE_KEYBOARD_BTN8+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN10 = CTRLTYPE_KEYBOARD_BTN9+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN11 = CTRLTYPE_KEYBOARD_BTN10+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN12 = CTRLTYPE_KEYBOARD_BTN11+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN13 = CTRLTYPE_KEYBOARD_BTN12+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN14 = CTRLTYPE_KEYBOARD_BTN13+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN15 = CTRLTYPE_KEYBOARD_BTN14+1;
+        public static final int CTRLTYPE_KEYBOARD_BTN16 = CTRLTYPE_KEYBOARD_BTN15+1;
+        public static final int CTRLTYPE_KEYBOARD_SPLIT = CTRLTYPE_KEYBOARD_BTN16+1;
+        public static final int CTRLTYPE_KEYBOARD_ONE = CTRLTYPE_KEYBOARD_SPLIT+1;
+        public static final int CTRLTYPE_KEYBOARD_NINE = CTRLTYPE_KEYBOARD_ONE+1;
+        public static final int CTRLTYPE_KEYBOARD_ADDR = CTRLTYPE_KEYBOARD_NINE+1;
+        public static final int CTRLTYPE_KEYBOARD_INFO = CTRLTYPE_KEYBOARD_ADDR+1;
+        public static final int CTRLTYPE_KEYBOARD_REC = CTRLTYPE_KEYBOARD_INFO+1;
+        public static final int CTRLTYPE_KEYBOARD_FN1 = CTRLTYPE_KEYBOARD_REC+1;
+        public static final int CTRLTYPE_KEYBOARD_FN2 = CTRLTYPE_KEYBOARD_FN1+1;
+        public static final int CTRLTYPE_KEYBOARD_PLAY = CTRLTYPE_KEYBOARD_FN2+1;
+        public static final int CTRLTYPE_KEYBOARD_STOP = CTRLTYPE_KEYBOARD_PLAY+1;
+        public static final int CTRLTYPE_KEYBOARD_SLOW = CTRLTYPE_KEYBOARD_STOP+1;
+        public static final int CTRLTYPE_KEYBOARD_FAST = CTRLTYPE_KEYBOARD_SLOW+1;
+        public static final int CTRLTYPE_KEYBOARD_PREW = CTRLTYPE_KEYBOARD_FAST+1;
+        public static final int CTRLTYPE_KEYBOARD_NEXT = CTRLTYPE_KEYBOARD_PREW+1;
+        public static final int CTRLTYPE_KEYBOARD_JMPDOWN = CTRLTYPE_KEYBOARD_NEXT+1;
+        public static final int CTRLTYPE_KEYBOARD_JMPUP = CTRLTYPE_KEYBOARD_JMPDOWN+1;
+        public static final int CTRLTYPE_KEYBOARD_10PLUS = CTRLTYPE_KEYBOARD_JMPUP+1;
+        public static final int CTRLTYPE_KEYBOARD_SHIFT = CTRLTYPE_KEYBOARD_10PLUS+1;
+        public static final int CTRLTYPE_KEYBOARD_BACK = CTRLTYPE_KEYBOARD_SHIFT+1;
         public static final int CTRLTYPE_KEYBOARD_LOGIN = CTRLTYPE_KEYBOARD_BACK+1;//新网络键盘功能
         public static final int CTRLTYPE_KEYBOARD_CHNNEL = CTRLTYPE_KEYBOARD_LOGIN+1;//切换视频通道
         public static final int CTRLTYPE_TRIGGER_ALARM_IN =100;//触发报警输入
@@ -6407,8 +6407,8 @@ public interface NetSDKLib extends Library {
         public static final int CTRLTYPE_CTRL_RECORDSET_IMPORT = CTRLTYPE_CTRL_ALARM_ACK + 1; // 批量导入记录集信息(对应 NET_CTRL_RECORDSET_PARAM )
         public static final int CTRLTYPE_CTRL_DELIVERY_FILE = CTRLTYPE_CTRL_RECORDSET_IMPORT + 1; // 向视频输出口投放视频和图片文件, 楼宇对讲使用，同一时间投放(对应 NET_CTRL_DELIVERY_FILE )
                                                                                     // 以下命令只在 CLIENT_ControlDeviceEx 上有效
-        public static final int CTRLTYPE_CTRL_THERMO_GRAPHY_ENSHUTTER = 0x10000;//设置热成像快门启用/禁用,pInBuf= NET_IN_THERMO_EN_SHUTTER*, pOutBuf= NET_OUT_THERMO_EN_SHUTTER * 
-        public static final int CTRLTYPE_CTRL_RADIOMETRY_SETOSDMARK = CTRLTYPE_CTRL_THERMO_GRAPHY_ENSHUTTER+1; // 设置测温项的osd为高亮,pInBuf=NET_IN_RADIOMETRY_SETOSDMARK*,pOutBuf= NET_OUT_RADIOMETRY_SETOSDMARK * 
+        public static final int CTRLTYPE_CTRL_THERMO_GRAPHY_ENSHUTTER = 0x10000;//设置热成像快门启用/禁用,pInBuf= NET_IN_THERMO_EN_SHUTTER*, pOutBuf= NET_OUT_THERMO_EN_SHUTTER *
+        public static final int CTRLTYPE_CTRL_RADIOMETRY_SETOSDMARK = CTRLTYPE_CTRL_THERMO_GRAPHY_ENSHUTTER+1; // 设置测温项的osd为高亮,pInBuf=NET_IN_RADIOMETRY_SETOSDMARK*,pOutBuf= NET_OUT_RADIOMETRY_SETOSDMARK *
         public static final int CTRLTYPE_CTRL_AUDIO_REC_START_NAME = CTRLTYPE_CTRL_RADIOMETRY_SETOSDMARK+1; // 开启音频录音并得到录音名,pInBuf = NET_IN_AUDIO_REC_MNG_NAME *, pOutBuf = NET_OUT_AUDIO_REC_MNG_NAME *
         public static final int CTRLTYPE_CTRL_AUDIO_REC_STOP_NAME = CTRLTYPE_CTRL_AUDIO_REC_START_NAME+1; // 关闭音频录音并返回文件名称,pInBuf = NET_IN_AUDIO_REC_MNG_NAME *, pOutBuf = NET_OUT_AUDIO_REC_MNG_NAME *
         public static final int CTRLTYPE_CTRL_SNAP_MNG_SNAP_SHOT = CTRLTYPE_CTRL_AUDIO_REC_STOP_NAME+1; // 即时抓图(又名手动抓图),pInBuf  =NET_IN_SNAP_MNG_SHOT *, pOutBuf = NET_OUT_SNAP_MNG_SHOT *
@@ -6443,7 +6443,7 @@ public interface NetSDKLib extends Library {
         public static final int PROFILE_BASELINE = 1;//提供I/P帧，仅支持progressive(逐行扫描)和CAVLC
         public static final int PROFILE_MAIN = PROFILE_BASELINE+1; //提供I/P/B帧，支持progressiv和interlaced，提供CAVLC或CABAC
         public static final int PROFILE_EXTENDED = PROFILE_MAIN+1; //提供I/P/B/SP/SI帧，仅支持progressive(逐行扫描)和CAVLC
-        public static final int PROFILE_HIGH = PROFILE_EXTENDED+1; //即FRExt，Main_Profile基础上新增：8x8intraprediction(8x8帧内预测), custom 
+        public static final int PROFILE_HIGH = PROFILE_EXTENDED+1; //即FRExt，Main_Profile基础上新增：8x8intraprediction(8x8帧内预测), custom
                                                                    // quant(自定义量化), lossless video coding(无损视频编码), 更多的yuv格式
     }
 
@@ -6552,7 +6552,7 @@ public interface NetSDKLib extends Library {
     {
         public int nTotalBlocks;//支持的遮挡块数
         public int nCurBlocks;//已设置的块数
-        public CFG_COVER_INFO[] stuCoverBlock = (CFG_COVER_INFO[])new CFG_COVER_INFO().toArray(MAX_VIDEO_COVER_NUM);// 覆盖的区域    
+        public CFG_COVER_INFO[] stuCoverBlock = (CFG_COVER_INFO[])new CFG_COVER_INFO().toArray(MAX_VIDEO_COVER_NUM);// 覆盖的区域
     }
 
     // OSD信息
@@ -6613,7 +6613,7 @@ public interface NetSDKLib extends Library {
         public int dwWebVersion;
         public int dwWebBuildDate;
     }
-    
+
     // 设备软件版本信息,对应CLIENT_QueryDevState接口
     public static class NETDEV_VERSION_INFO extends MyStructure
     {
@@ -6633,7 +6633,7 @@ public interface NetSDKLib extends Library {
         public int          dwWebBuildDate;
         public byte[]       reserved = new byte[256];
     }
-    
+
     // 设备类型
     public static class NET_DEVICE_TYPE extends MyStructure
     {
@@ -6816,14 +6816,14 @@ public interface NetSDKLib extends Library {
         public NET_MSG_OBJECT_EX()
         {
             this.dwSize = this.size();
-            
+
         	if(Utils.getOsName().equals("win")) {
                 // 强制采用最大四字节对其
                 setAlignType(ALIGN_GNUC);
         	}
         }
     }
-    
+
     // 视频分析物体信息扩展结构体,扩展版本2
     public static class NET_MSG_OBJECT_EX2 extends MyStructure
     {
@@ -6875,18 +6875,18 @@ public interface NetSDKLib extends Library {
         public NET_POINT stuSynopsisStartLocation;//浓缩运动方向,起始坐标点,点的坐标归一化到[0,8192)区间,bEnableDirection为True时有效
         public NET_POINT stuSynopsisEndLocation;//浓缩运动方向,终止坐标点,点的坐标归一化到[0,8192)区间,bEnableDirection为True时有效
         public byte[] byReserved = new byte[2048];//扩展字节
-        
+
         public NET_MSG_OBJECT_EX2()
         {
             this.dwSize = this.size();
-            
+
         	if(Utils.getOsName().equals("win")) {
                 // 强制采用最大四字节对其
                 setAlignType(ALIGN_GNUC);
         	}
         }
     }
-    
+
     // 设备协议类型
     public static class NET_DEVICE_PROTOCOL extends MyStructure
     {
@@ -6945,14 +6945,14 @@ public interface NetSDKLib extends Library {
         public static final int NET_PROTOCOL_GDYX = NET_PROTOCOL_GB2818+1; //GDYX
         public static final int NET_PROTOCOL_OTHER = NET_PROTOCOL_GDYX+1; //由用户自定义
     }
-    
+
     // 雨刷来回循环刷,雨刷模式配置为手动模式时有效(对应命令 CTRLTYPE_CTRL_RAINBRUSH_MOVECONTINUOUSLY)
     public static class NET_CTRL_RAINBRUSH_MOVECONTINUOUSLY extends MyStructure
     {
         public int dwSize;
         public int nChannel;//表示雨刷的索引
         public int nInterval;//雨刷间隔
-        
+
         public NET_CTRL_RAINBRUSH_MOVECONTINUOUSLY()
         {
             this.dwSize = this.size();
@@ -6964,7 +6964,7 @@ public interface NetSDKLib extends Library {
     {
         public int dwSize;
         public int nChannel;//表示雨刷的索引
-        
+
         public NET_CTRL_RAINBRUSH_STOPMOVE()
         {
             this.dwSize = this.size();
@@ -6976,13 +6976,13 @@ public interface NetSDKLib extends Library {
     {
         public int dwSize;
         public int nChannel;//表示雨刷的索引
-        
+
         public NET_CTRL_RAINBRUSH_MOVEONCE()
         {
             this.dwSize = this.size();
         }
     }
-    
+
     // DSP能力描述，扩展类型，对应CLIENT_QueryDevState接口
     public static class NET_DEV_DSP_ENCODECAP extends MyStructure
     {
@@ -7010,7 +7010,7 @@ public interface NetSDKLib extends Library {
                                			// 查询支持的分辨率和相应最大帧率
         public byte[] reserved = new byte[95];
     }
-    
+
     //云台控制坐标单元
     public static class PTZ_SPACE_UNIT extends MyStructure
     {
@@ -7058,7 +7058,7 @@ public interface NetSDKLib extends Library {
     {
         public int 				nStructSize;
         public int 				nAzimuthH;							//水平方位角度,0~3600,单位:度
-        
+
         public PTZ_VIEW_RANGE_INFO()
         {
             this.nStructSize = this.size();
@@ -7093,7 +7093,7 @@ public interface NetSDKLib extends Library {
         public int 			 dwParam3;					//命令对应参数3
         public int 			 dwParam4;					//命令对应参数4
     }
-    
+
     // 变倍设置基本信息单元
     public static class CFG_VIDEO_IN_ZOOM_UNIT extends MyStructure
     {
@@ -7111,7 +7111,7 @@ public interface NetSDKLib extends Library {
     }
 
     // 设备状态
-    public static class CFG_TRAFFIC_DEVICE_STATUS extends MyStructure 
+    public static class CFG_TRAFFIC_DEVICE_STATUS extends MyStructure
     {
         public byte[]                 szType = new byte[MAX_PATH];          // 设备类型 支持："Radar","Detector","SigDetector","StroboscopicLamp"," FlashLamp"
         public byte[]                 szSerialNo = new byte[MAX_PATH];      // 设备编号
@@ -7121,14 +7121,14 @@ public interface NetSDKLib extends Library {
 																		    // 0-未知, 1-灯亮, 2-灯灭
     	public byte[]			      byReserved = new byte[3];             // 预留字节
     }
-    
+
     // 获取设备工作状态是否正常 (对应命令 CFG_CAP_CMD_DEVICE_STATE )
     public static class CFG_CAP_TRAFFIC_DEVICE_STATUS extends MyStructure
     {
         public int                          nStatus;                        // stuStatus 实际个数
         public CFG_TRAFFIC_DEVICE_STATUS[]  stuStatus = (CFG_TRAFFIC_DEVICE_STATUS[]) new CFG_TRAFFIC_DEVICE_STATUS().toArray(MAX_STATUS_NUM);
     }
-    
+
     // 视频输入通道
     public static class CFG_RemoteDeviceVideoInput extends MyStructure
     {
@@ -7139,7 +7139,7 @@ public interface NetSDKLib extends Library {
     	public byte[]			szExtraUrl = new byte[MAX_PATH]; 			// 辅码流url地址
     	public int				nServiceType; 								// 服务类型, 0-TCP, 1-UDP, 2-MCAST, -1-AUTO
     }
-    
+
     // 远程设备
     public static class AV_CFG_RemoteDevice extends MyStructure
     {
@@ -7166,17 +7166,17 @@ public interface NetSDKLib extends Library {
     	public int              nMaxVideoInputs;
     	public int              nRetVideoInputs;
     	public int				nHttpPort; 										// http端口号
-    	
+
     	/* 以下3项为国际接入方式相关  */
     	public int 				bGB28181; 										// 是否有国际接入方式
     	public int				nDevLocalPort; 									// 设备本地端口
     	public byte[]			szDeviceNo = new byte[AV_CFG_DeviceNo_Len]; 	// 设备编号
-    	
+
     	public AV_CFG_RemoteDevice() {
         	this.nStructSize = this.size();
     	}
     }
-    
+
     // 录像模式
     public static class AV_CFG_RecordMode extends MyStructure
     {
@@ -7184,31 +7184,31 @@ public interface NetSDKLib extends Library {
     	public int			nMode;							// 录像模式, 0-自动录像，1-手动录像，2-关闭录像
         public int			nModeExtra1;					// 辅码流录像模式, 0-自动录像，1-手动录像，2-关闭录像
         public int			nModeExtra2;					// 辅码流2录像模式, 0-自动录像，1-手动录像，2-关闭录像
-        
+
         public AV_CFG_RecordMode() {
         	this.nStructSize = this.size();
         }
     }
-    
+
     // 视频分析资源类型
     public static class CFG_VIDEO_SOURCE_TYPE extends MyStructure {
     	public static final int CFG_VIDEO_SOURCE_REALSTREAM = 0; // 实时流
     	public static final int CFG_VIDEO_SOURCE_FILESTREAM = 1; // 文件流
     }
-    
+
     // 分析源文件类型
     public static class CFG_SOURCE_FILE_TYPE extends MyStructure {
     	public static final int CFG_SOURCE_FILE_UNKNOWN = 0; // 未知类型
     	public static final int CFG_SOURCE_FILE_RECORD = 1; // 录像文件
     	public static final int CFG_SOURCE_FILE_PICTURE = 2; // 图片文件
     }
-    
+
     // 视频分析源文件信息
     public static class CFG_SOURCE_FILE_INFO extends MyStructure {
     	public byte[]				szFilePath = new byte[MAX_PATH];// 文件路径
     	public int 					emFileType; // 文件类型，详见 CFG_SOURCE_FILE_TYPE
     }
-    
+
     // 每个视频输入通道对应的视频分析资源配置信息
     public static class CFG_ANALYSESOURCE_INFO extends MyStructure {
     	public byte					bEnable; 		 // 视频分析使能   1-使能， 0-禁用
@@ -7219,15 +7219,15 @@ public interface NetSDKLib extends Library {
     	public AV_CFG_RemoteDevice  stuDeviceInfo;   // 设备信息
     	public int                  emSourceType; 	 // 视频分析源类型，详见  CFG_VIDEO_SOURCE_TYPE
     	public CFG_SOURCE_FILE_INFO stuSourceFile;   // 当视频分析源类型为 CFG_VIDEO_SOURCE_FILESTREAM 时，有效
-    } 
-    
+    }
+
     public static class CFG_OVERSPEED_INFO extends MyStructure {
     	public int[]	nSpeedingPercentage = new int[2];                        // 超速百分比区间要求区间不能重叠。有效值为0,正数,-1，-1表示无穷大值
         // 如果是欠速：要求区间不能重叠。有效值为0,正数,-1，-1表示无穷大值，欠速百分比的计算方式：限低速-实际车速/限低速
     	public byte[]   szCode = new byte[MAX_VIOLATIONCODE];                     // 违章代码
     	public byte[]   szDescription = new byte[MAX_VIOLATIONCODE_DESCRIPT];     // 违章描述
     }
-    
+
     // 违章代码配置表
     public static class VIOLATIONCODE_INFO extends MyStructure {
         public byte[]	szRetrograde = new byte[MAX_VIOLATIONCODE];			                   // 逆行
@@ -7300,7 +7300,7 @@ public interface NetSDKLib extends Library {
 
     	public byte[]    szFakePlate = new byte[MAX_VIOLATIONCODE];                             // 套牌
     	public byte[]    szFakePlateDesc = new byte[MAX_VIOLATIONCODE_DESCRIPT]; 				// 套牌违章描述信息
-    	
+
     	public byte[]    szParkingSpaceParking = new byte[MAX_VIOLATIONCODE];                   // 车位有车
     	public byte[]    szParkingSpaceParkingDesc = new byte[MAX_VIOLATIONCODE_DESCRIPT]; 		// 车位有车违章描述信息、
 
@@ -7330,15 +7330,15 @@ public interface NetSDKLib extends Library {
         public byte[]    szPedestrianRunRedLight = new byte[MAX_VIOLATIONCODE];                 // 行人闯红灯
         public byte[]    szPedestrianRunRedLightShowName = new byte[MAX_VIOLATIONCODE_DESCRIPT];// 行人闯红灯显示名称
         public byte[]    szPedestrianRunRedLightDesc = new byte[MAX_VIOLATIONCODE_DESCRIPT];    // 行人闯红灯描述信息
-        
+
         public byte[]    szPassNotInOrder = new byte[MAX_VIOLATIONCODE];                        // 未按规定依次通行
         public byte[]    szPassNotInOrderShowName = new byte[MAX_VIOLATIONCODE_DESCRIPT];       // 未按规定依次通行显示名称
         public byte[]    szPassNotInOrderDesc = new byte[MAX_VIOLATIONCODE_DESCRIPT];           // 未按规定依次通行描述信息
-        
+
         public byte[]	 szTrafficBan = new byte[MAX_VIOLATIONCODE];							// 机动车违法禁令标识
         public byte[]	 szTrafficBanShowName = new byte[MAX_VIOLATIONCODE_DESCRIPT];			// 机动车违法禁令标识显示名称
         public byte[]	 szTrafficBanDesc = new byte[MAX_VIOLATIONCODE_DESCRIPT];				// 描述信息
-        
+
         public byte[]    szParkingB = new byte[MAX_VIOLATIONCODE];								// B类违章停车
         public byte[]    szParkingBDesc = new byte[MAX_VIOLATIONCODE_DESCRIPT];		 			// B类违章描述信息
         public byte[]    szParkingBShowName = new byte[MAX_VIOLATIONCODE_DESCRIPT];   			// B类违章停车显示名称
@@ -7351,16 +7351,16 @@ public interface NetSDKLib extends Library {
         public byte[]    szParkingDDesc = new byte[MAX_VIOLATIONCODE_DESCRIPT];		 			// D类违章描述信息
         public byte[]    szParkingDShowName = new byte[MAX_VIOLATIONCODE_DESCRIPT];   			// D类违章停车显示名称
     }
-    
+
     // 违章抓拍时间配置表
     public static class TIME_SCHEDULE_INFO extends MyStructure {
     	public int                	 		bEnable;                                              // 是否启用时间表
-        public TIME_SECTION_WEEK_DAY_6[]    stuTimeScheduleWeekDay = 
+        public TIME_SECTION_WEEK_DAY_6[]    stuTimeScheduleWeekDay =
         							        (TIME_SECTION_WEEK_DAY_6[])new TIME_SECTION_WEEK_DAY_6().toArray(WEEK_DAY_NUM);         // 时间表
     }
-    
+
     // 违章抓拍自定义时间配置
-    public static class VIOLATION_TIME_SCHEDULE extends MyStructure 
+    public static class VIOLATION_TIME_SCHEDULE extends MyStructure
     {
         public int                abTrafficGate;                  // 是否携带交通卡口信息
         public TIME_SCHEDULE_INFO  stTrafficGate;                  // 交通卡口时间配置
@@ -7373,7 +7373,7 @@ public interface NetSDKLib extends Library {
 
         public int                abTrafficRunRedLight;           // 是否携带交通闯红灯信息
         public TIME_SCHEDULE_INFO  stTrafficRunRedLight;           // 交通闯红灯时间配置
-        
+
         public int                abTrafficRunYellowLight;        // 是否携带交通闯黄灯信息
         public TIME_SCHEDULE_INFO  stTrafficRunYellowLight;        // 交通闯黄灯时间配置
 
@@ -7567,14 +7567,14 @@ public interface NetSDKLib extends Library {
         public TIME_SCHEDULE_INFO  stVehicleOnBus;                 // 车载公交时间配置
 
         public int                abVehicleOnSchoolBus;           // 是否携带车载校车信息
-        public TIME_SCHEDULE_INFO  stVehicleOnSchoolBus;           // 车载校车时间配置  
+        public TIME_SCHEDULE_INFO  stVehicleOnSchoolBus;           // 车载校车时间配置
     }
-    
+
     // 交通全局配置对应图片命名格式参数配置
     public static class TRAFFIC_NAMING_FORMAT extends MyStructure {
     	public byte[]               szFormat = new byte[CFG_COMMON_STRING_256];            // 图片格式
     }
-    
+
     // CFG_NET_TIME 时间
     public static class CFG_NET_TIME extends MyStructure {
     	public int                 	nStructSize;
@@ -7584,25 +7584,25 @@ public interface NetSDKLib extends Library {
         public int					dwHour;					// 时
         public int					dwMinute;				// 分
         public int					dwSecond;				// 秒
-        
+
         public CFG_NET_TIME() {
         	this.nStructSize = this.size();
         }
     }
-    
+
     // PERIOD_OF_VALIDITY
     public static class PERIOD_OF_VALIDITY extends MyStructure {
-        public CFG_NET_TIME            stBeginTime;                    // 标定开始时间 
+        public CFG_NET_TIME            stBeginTime;                    // 标定开始时间
         public CFG_NET_TIME            stEndTime;                      // 标定到期时间
     }
-    
+
     // 交通全局配置对应标定相关配置
     public static class TRAFFIC_CALIBRATION_INFO extends MyStructure {
     	public byte[]               szUnit = new byte[CFG_COMMON_STRING_256];              // 标定单位
     	public byte[]               szCertificate = new byte[CFG_COMMON_STRING_256];       // 标定证书
         public PERIOD_OF_VALIDITY   stPeriodOfValidity;                         // 标定有效期
     }
-    
+
     // TRAFFIC_EVENT_CHECK_MASK
     public static class TRAFFIC_EVENT_CHECK_MASK extends MyStructure {
         public int                abTrafficGate;                  // 是否携带交通卡口信息
@@ -7616,7 +7616,7 @@ public interface NetSDKLib extends Library {
 
         public int                abTrafficRunRedLight;           // 是否携带交通闯红灯信息
         public int                 nTrafficRunRedLight;            // 交通闯红灯检测模式掩码
-        
+
         public int                abTrafficRunYellowLight;        // 是否携带交通闯黄灯信息
         public int                 nTrafficRunYellowLight;         // 交通闯黄灯检测模式掩码
 
@@ -7810,22 +7810,22 @@ public interface NetSDKLib extends Library {
         public int                 nVehicleOnBus;                  // 车载公交检测模式掩码
 
         public int                abVehicleOnSchoolBus;           // 是否携带车载校车信息
-        public int                 nVehicleOnSchoolBus;            // 车载校车检测模式掩码  
-        
+        public int                 nVehicleOnSchoolBus;            // 车载校车检测模式掩码
+
     }
-    
+
     // 交通全局配置对应灯组状态配置
     public static class ENABLE_LIGHT_STATE_INFO extends MyStructure {
     	public int 				bEnable;      // 是否启动应用层收到的灯组状态给底层
     }
-    
+
     // 车道检测类型
     public static class EM_CHECK_TYPE extends MyStructure {
     	public int EM_CHECK_TYPE_UNKNOWN = 0;             // 不识别的检测类型
     	public int EM_CHECK_TYPE_PHYSICAL = 1;            // 物理检测
     	public int EM_CHECK_TYPE_VIDEO = 2;               // 视频检测
     }
-    
+
     // TRAFFIC_EVENT_CHECK_INFO
     public static class TRAFFIC_EVENT_CHECK_INFO extends MyStructure {
         public int       abTrafficGate;                  // 是否携带交通卡口信息
@@ -7839,7 +7839,7 @@ public interface NetSDKLib extends Library {
 
         public int       abTrafficRunRedLight;           // 是否携带交通闯红灯信息
         public int       emTrafficRunRedLight;           // 交通闯红灯检测类型
-        
+
         public int       abTrafficRunYellowLight;        // 是否携带交通闯黄灯信息
         public int       emTrafficRunYellowLight;        // 交通闯黄灯检测类型
 
@@ -8033,41 +8033,41 @@ public interface NetSDKLib extends Library {
         public int       emVehicleOnBus;                 // 车载公交检测类型
 
         public int       abVehicleOnSchoolBus;           // 是否携带车载校车信息
-        public int       emVehicleOnSchoolBus;           // 车载校车检测类型  
+        public int       emVehicleOnSchoolBus;           // 车载校车检测类型
 
     	public int		 abStandUpDetection;		     // 是否携带学生起立信息
-    	public int		 emStandUpDetection;		     // 学生起立检测类型    	
+    	public int		 emStandUpDetection;		     // 学生起立检测类型
     }
-    
+
     // MixModeConfig中关于车道配置信息
     public static class MIX_MODE_LANE_INFO extends MyStructure {
     	 public  int                nLaneNum;                           // 车道配置个数
     	 public  TRAFFIC_EVENT_CHECK_INFO[]   stCheckInfo = (TRAFFIC_EVENT_CHECK_INFO[]) new TRAFFIC_EVENT_CHECK_INFO().toArray(MAX_LANE_CONFIG_NUMBER);     // 车道配置对应事件检测信息
     }
-    
+
     // MixModeConfig 混合模式违章配置
     public static class MIX_MODE_CONFIG extends MyStructure {
     	public int                         bLaneDiffEnable;                    // 是否按车道区分
     	public MIX_MODE_LANE_INFO          stLaneInfo;
     	public TRAFFIC_EVENT_CHECK_INFO    stCheckInfo;
-    	
+
     }
-    
+
     // CFG_CMD_TRAFFICGLOBAL 交通全局配置配置表
-    public static class CFG_TRAFFICGLOBAL_INFO extends MyStructure 
+    public static class CFG_TRAFFICGLOBAL_INFO extends MyStructure
     {
-    	public VIOLATIONCODE_INFO     stViolationCode;                             // 违章代码配置表                          
+    	public VIOLATIONCODE_INFO     stViolationCode;                             // 违章代码配置表
         public int                    bEnableRedList;                              // 使能红名单检测，使能后，名单内车辆违章不上报
 
         public int                    abViolationTimeSchedule;                     // 是否携带违章抓拍自定义时间配置
         public VIOLATION_TIME_SCHEDULE stViolationTimeSchedule;                    // 违章抓拍自定义时间配置
-        
+
         public int                    abEnableBlackList;                           // 是否携带使能黑名单检测信息
         public int                    bEnableBlackList;                            // 使能黑名单检测
 
         public int                    abPriority;                                  // 是否携带违章优先级参数
         public int            		  nPriority;                                   // 违章优先级个数
-        public byte[]                 szPriority = new byte[MAX_PRIORITY_NUMBER*CFG_COMMON_STRING_256]; // 违章优先级, 0为最高优先级    
+        public byte[]                 szPriority = new byte[MAX_PRIORITY_NUMBER*CFG_COMMON_STRING_256]; // 违章优先级, 0为最高优先级
 
         public int                    abNamingFormat;                              // 是否携带图片命名格式参数
         public TRAFFIC_NAMING_FORMAT  stNamingFormat;                              // 图片命名格式参数配置
@@ -8077,23 +8077,23 @@ public interface NetSDKLib extends Library {
 
         public int                    abCalibration;                               // 是否携带标定信息
         public TRAFFIC_CALIBRATION_INFO stCalibration;                             // 标定信息
-        
+
         public int                    abAddress;                                   // 是否携带查询地址参数
         public byte[]                 szAddress = new byte[CFG_COMMON_STRING_256]; // 查询地址，UTF-8编码
 
         public int                    abTransferPolicy;                            // 是否携带传输策略参数
         public int      			  emTransferPolicy;                            // 传输策略, EM_TRANSFER_POLICY
 
-        public int                    abSupportModeMaskConfig;                     // 是否携带违章掩码 
+        public int                    abSupportModeMaskConfig;                     // 是否携带违章掩码
         public TRAFFIC_EVENT_CHECK_MASK stSupportModeMaskConfig;                   // 违章类型支持的检测模式掩码配置
 
         public int                    abIsEnableLightState;                        // 是否携带灯组状态
         public ENABLE_LIGHT_STATE_INFO stIsEnableLightState;                       // 交通全局配置对应图片命名格式参数配置
-        
+
         public int                    abMixModeInfo;                               // 是否含有混合模式配置
         public MIX_MODE_CONFIG        stMixModeInfo;                               // 混合模式配置
     }
-    
+
     // 手动抓拍参数
     public static class MANUAL_SNAP_PARAMETER extends MyStructure
     {
@@ -8101,7 +8101,7 @@ public interface NetSDKLib extends Library {
     	public byte[]                bySequence = new byte[64];	        // 抓图序列号字符串
     	public byte[]                byReserved = new byte[60];         // 保留字段
     }
-    
+
     // 视频统计小计信息
     public static class NET_VIDEOSTAT_SUBTOTAL extends MyStructure
     {
@@ -8123,27 +8123,27 @@ public interface NetSDKLib extends Library {
     	public int						nInsidePeopleNum;				// 区域内人数
     	public int						emRuleType;						// 规则类型, 参考枚举 EM_RULE_TYPE
     	public int						nRetExitManNum;					// 离开的人数个数
-    	public NET_EXITMAN_STAY_STAT[]	stuExitManStayInfo 
+    	public NET_EXITMAN_STAY_STAT[]	stuExitManStayInfo
     									= (NET_EXITMAN_STAY_STAT[])new NET_EXITMAN_STAY_STAT().toArray(MAX_EXIT_MAN_NUM);	// 离开人员的滞留时间信息
         public byte[]                   reserved = new byte[1024];		// 保留字节
     }
-    
+
     // 离开人员的滞留时间信息
     public static class NET_EXITMAN_STAY_STAT extends MyStructure
     {
     	public NET_TIME					stuEnterTime;					// 人员进入区域时间
     	public NET_TIME					stuExitTime;					// 人员离开区域时间
     	public byte[]					reserved = new byte[128];		// 保留字节
-    } 
+    }
 
     // CLIENT_AttachVideoStatSummary 入参
     public static class NET_IN_ATTACH_VIDEOSTAT_SUM extends MyStructure
     {
     	 public int                   	dwSize;
-         public int                     nChannel;                    // 视频通道号         
+         public int                     nChannel;                    // 视频通道号
          public StdCallCallback   		cbVideoStatSum;              // 视频统计摘要信息回调, fVideoStatSumCallBack 回调
-         public Pointer              	dwUser;                      // 用户数据                  
-         
+         public Pointer              	dwUser;                      // 用户数据
+
          public NET_IN_ATTACH_VIDEOSTAT_SUM()
          {
         	 this.dwSize = this.size();
@@ -8153,16 +8153,16 @@ public interface NetSDKLib extends Library {
     public static class NET_OUT_ATTACH_VIDEOSTAT_SUM extends MyStructure
     {
     	public int 					dwSize;
-    	
+
     	public NET_OUT_ATTACH_VIDEOSTAT_SUM()
     	{
     		this.dwSize = this.size();
     	}
-   
+
     }
 
     // 接口(CLIENT_StartFindNumberStat)输入参数
-    public static class NET_IN_FINDNUMBERSTAT extends MyStructure 
+    public static class NET_IN_FINDNUMBERSTAT extends MyStructure
     {
         public int                 dwSize;                     // 此结构体大小
         public int                 nChannelID;                 // 要进行查询的通道号
@@ -8175,26 +8175,26 @@ public interface NetSDKLib extends Library {
         public int				   emRuleType;				   // 规则类型
         public int				   nMinStayTime;			   // 参考枚举 EM_RULE_TYPE, 区域人数查询最小滞留时间，不填默认为0，返回滞留时长大于等于该时间的人数信息
     														   // NumberStat时不需要此参数
-        
+
         public NET_IN_FINDNUMBERSTAT() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 规则类型
     public static class EM_RULE_TYPE extends MyStructure
     {
     	public static final int EM_RULE_UNKNOWN = 0;			// 未知
     	public static final int EM_RULE_NUMBER_STAT = 1;		// 人数统计
     	public static final int EM_RULE_MAN_NUM_DETECTION = 2;	// 区域内人数统计
-    } 
+    }
 
     // 接口(CLIENT_StartFindNumberStat)输出参数
-    public static class NET_OUT_FINDNUMBERSTAT extends MyStructure 
+    public static class NET_OUT_FINDNUMBERSTAT extends MyStructure
     {
         public int               dwSize;                     // 此结构体大小
         public int               dwTotalCount;               // 符合此次查询条件的结果总条数
-        
+
         public NET_OUT_FINDNUMBERSTAT() {
         	this.dwSize = this.size();
 		}
@@ -8202,19 +8202,19 @@ public interface NetSDKLib extends Library {
 
 
     // 接口(CLIENT_DoFindNumberStat)输入参数
-    public static class NET_IN_DOFINDNUMBERSTAT extends MyStructure 
+    public static class NET_IN_DOFINDNUMBERSTAT extends MyStructure
     {
         public int               dwSize;                     // 此结构体大小
-        public int        		 nBeginNumber;               // [0, totalCount-1], 查询起始序号,表示从beginNumber条记录开始,取count条记录返回; 
+        public int        		 nBeginNumber;               // [0, totalCount-1], 查询起始序号,表示从beginNumber条记录开始,取count条记录返回;
         public int        		 nCount;                     // 每次查询的流量统计条数
-        public int               nWaittime;                  // 等待接收数据的超时时间            
-        
+        public int               nWaittime;                  // 等待接收数据的超时时间
+
         public NET_IN_DOFINDNUMBERSTAT() {
         	this.dwSize = this.size();
 		}
     }
 
-    public static class NET_NUMBERSTAT extends MyStructure 
+    public static class NET_NUMBERSTAT extends MyStructure
     {
         public int      		dwSize;
         public int      		nChannelID;                           	  // 统计通道号
@@ -8230,26 +8230,26 @@ public interface NetSDKLib extends Library {
         public int      		nExitedWithHelmet;                        // 戴安全帽出去人数小计
         public int      		nExitedWithoutHelmet;                     // 不戴安全帽出去人数小计
         public int				nInsideSubtotal;						  // 在区域内人数小计
-        
+
         public NET_NUMBERSTAT() {
         	this.dwSize = this.size();
         }
     }
 
     // 接口(CLIENT_DoFindNumberStat)输出参数
-    public static class NET_OUT_DOFINDNUMBERSTAT extends MyStructure 
+    public static class NET_OUT_DOFINDNUMBERSTAT extends MyStructure
     {
         public int                          dwSize;                // 此结构体大小
         public int                 			nCount;                // 查询返回人数统计信息个数
-        public Pointer   					pstuNumberStat;        // 返回人数统计信息数组, NET_NUMBERSTAT 类型 
+        public Pointer   					pstuNumberStat;        // 返回人数统计信息数组, NET_NUMBERSTAT 类型
         public int                 			nBufferLen;            // 用户申请的内存大小,以NET_NUMBERSTAT中的dwsize大小为单位
         public int							nMinStayTime;		   // 区域人数查询时指定的最小滞留时间
-        
+
         public NET_OUT_DOFINDNUMBERSTAT() {
         	this.dwSize = this.size();
         }
     }
-    
+
     public static class CONNECT_STATE extends MyStructure
     {
         public static final int CONNECT_STATE_UNCONNECT = 0;
@@ -8272,13 +8272,13 @@ public interface NetSDKLib extends Library {
         public int				 nVideoInput;							 //视频输入
         public int 				 nAudioInput;							 //音频输入
         public int     			 nAlarmOutput;							 //外部报警
-        
+
         public NET_DEV_VIRTUALCAMERA_STATE_INFO()
         {
         	this.nStructSize = this.size();
         }
     }
-    
+
     // 录像文件类型
     public static class NET_RECORD_TYPE extends MyStructure
     {
@@ -8287,7 +8287,7 @@ public interface NetSDKLib extends Library {
     	public final static int NET_RECORD_TYPE_ALARM = 2; 		 // 外部报警录像
     	public final static int NET_RECORD_TYPE_MOTION = 3; 	 // 动检报警录像
     }
-    
+
     // 对讲方式
     public static class EM_USEDEV_MODE extends MyStructure
     {
@@ -8297,7 +8297,7 @@ public interface NetSDKLib extends Library {
     	public static final int NET_ALARM_LISTEN_MODE 	  = 3;   // 设置报警订阅方式
     	public static final int NET_CONFIG_AUTHORITY_MODE = 4;   // 设置通过权限进行配置管理
     	public static final int NET_TALK_TALK_CHANNEL 	  = 5;   // 设置对讲通道(0~MaxChannel-1)
-    	public static final int NET_RECORD_STREAM_TYPE	  = 6;   // 设置待查询及按时间回放的录像码流类型(0-主辅码流,1-主码流,2-辅码流)  
+    	public static final int NET_RECORD_STREAM_TYPE	  = 6;   // 设置待查询及按时间回放的录像码流类型(0-主辅码流,1-主码流,2-辅码流)
     	public static final int NET_TALK_SPEAK_PARAM      = 7;   // 设置语音对讲喊话参数,对应结构体 NET_SPEAK_PARAM
     	public static final int NET_RECORD_TYPE           = 8;   // 设置按时间录像回放及下载的录像文件类型(详见  NET_RECORD_TYPE)
     	public static final int NET_TALK_MODE3            = 9;   // 设置三代设备的语音对讲参数, 对应结构体 NET_TALK_EX
@@ -8306,9 +8306,9 @@ public interface NetSDKLib extends Library {
     	public static final int NET_TALK_VT_PARAM         = 12;  // 设置VT对讲参数, 对应结构体 NET_VT_TALK_PARAM
     	public static final int NET_TARGET_DEV_ID         = 13;  // 设置目标设备标示符, 用以查询新系统能力(非0-转发系统能力消息)
     }
-    
+
     // 语音编码类型
-    public static class NET_TALK_CODING_TYPE extends MyStructure 
+    public static class NET_TALK_CODING_TYPE extends MyStructure
     {
     	public static final int NET_TALK_DEFAULT = 0;            // 无头PCM
     	public static final int NET_TALK_PCM = 1;                // 带头PCM
@@ -8327,28 +8327,28 @@ public interface NetSDKLib extends Library {
     	public static final int	NET_TALK_ADPCM = 21;             // ADPCM
 		public static final int	NET_TALK_MP3   = 22;             // MP3
     }
-   
+
     // 设备支持的语音对讲类型
-    public static class NETDEV_TALKFORMAT_LIST extends MyStructure 
+    public static class NETDEV_TALKFORMAT_LIST extends MyStructure
     {
     	public int 						 nSupportNum;                                                  				    // 个数
         public NETDEV_TALKDECODE_INFO[] type = (NETDEV_TALKDECODE_INFO[])new NETDEV_TALKDECODE_INFO().toArray(64);   // 编码类型
-        
+
         public byte[] reserved = new byte[64];
     }
-    
-    // 语音编码信息  
-    public static class NETDEV_TALKDECODE_INFO extends MyStructure 
+
+    // 语音编码信息
+    public static class NETDEV_TALKDECODE_INFO extends MyStructure
     {
     	public int                 encodeType;                       // 编码类型, encodeType对应NET_TALK_CODING_TYPE
         public int                 nAudioBit;                        // 位数,如8或16, 目前只能是16
         public int                 dwSampleRate;                     // 采样率,如8000或16000, 目前只能是16000
         public int                 nPacketPeriod;                    // 打包周期, 单位ms, 目前只能是25
-        public byte[]    		   reserved = new byte[60];    
+        public byte[]    		   reserved = new byte[60];
     }
-    
+
     // 语音对讲喊话参数
-    public static class NET_SPEAK_PARAM extends MyStructure 
+    public static class NET_SPEAK_PARAM extends MyStructure
     {
     	public int 				  dwSize;                     		// 结构体大小
         public int 				  nMode;                      		// 0：对讲（默认模式）,1：喊话；从喊话切换到对讲要重新设置
@@ -8360,19 +8360,19 @@ public interface NetSDKLib extends Library {
 	    	this.dwSize = this.size();
 	    }
     }
-    
+
     // 是否开启语音对讲的转发模式
-    public static class NET_TALK_TRANSFER_PARAM extends MyStructure 
+    public static class NET_TALK_TRANSFER_PARAM extends MyStructure
     {
     	public int 				 dwSize;
         public int 			 	 bTransfer;                 	   // 是否开启语音对讲转发模式, TRUE: 开启转发
-        
+
         public NET_TALK_TRANSFER_PARAM()
 	    {
 	    	this.dwSize = this.size();
 	    }
     }
-    
+
     // 预览类型,对应CLIENT_RealPlayEx接口
     public static class NET_RealPlayType extends MyStructure
     {
@@ -8381,7 +8381,7 @@ public interface NetSDKLib extends Library {
     	public static final int NET_RType_Realplay_0 = 2; 		// 实时监视-主码流 ,等同于NET_RType_Realplay
     	public static final int NET_RType_Realplay_1 = 3; 		// 实时监视-从码流1
     	public static final int NET_RType_Realplay_2 = 4; 		// 实时监视-从码流2
-    	public static final int NET_RType_Realplay_3 = 5; 		// 实时监视-从码流3    
+    	public static final int NET_RType_Realplay_3 = 5; 		// 实时监视-从码流3
     	public static final int NET_RType_Multiplay_1 = 6;		// 多画面预览－1画面
     	public static final int NET_RType_Multiplay_4 = 7; 		// 多画面预览－4画面
     	public static final int NET_RType_Multiplay_8 = 8; 		// 多画面预览－8画面
@@ -8393,7 +8393,7 @@ public interface NetSDKLib extends Library {
     	public static final int NET_RType_Multiplay_36 = 14; 	// 多画面预览－36画面
     	public static final int NET_RType_Realplay_Test = 255;  // 带宽测试码流
     }
-    
+
     // 回调视频数据帧的帧参数结构体
     public static class tagVideoFrameParam extends MyStructure
     {
@@ -8408,9 +8408,9 @@ public interface NetSDKLib extends Library {
     	public short				 height;				 // 高，单位是像素，当size=255时有效
         public NET_TIME              struTime;               // 时间信息
     }
-    
+
     // 回调音频数据帧的帧参数结构体
-    public static class tagCBPCMDataParam extends MyStructure 
+    public static class tagCBPCMDataParam extends MyStructure
     {
         public byte                channels;                // 声道数
         public byte                samples;                 // 采样 0 - 8000, 1 - 11025, 2 - 16000, 3 - 22050, 4 - 32000, 5 - 44100, 6 - 48000
@@ -8418,15 +8418,15 @@ public interface NetSDKLib extends Library {
         public byte                param1;                  // 0 - 指示无符号,1-指示有符号
         public int                 reserved;                // 保留
     }
-    
+
     // 视频监视断开事件类型
-    public static class EM_REALPLAY_DISCONNECT_EVENT_TYPE extends MyStructure 
+    public static class EM_REALPLAY_DISCONNECT_EVENT_TYPE extends MyStructure
     {
         public static final int DISCONNECT_EVENT_REAVE 		= 0;                 // 表示高级用户抢占低级用户资源
         public static final int DISCONNECT_EVENT_NETFORBID  = 1;                 // 禁止入网
         public static final int DISCONNECT_EVENT_SUBCONNECT = 2;                 // 动态子链接断开
     }
-    
+
     // 电池电压过低报警
     public static class ALARM_BATTERYLOWPOWER_INFO extends MyStructure
     {
@@ -8435,13 +8435,13 @@ public interface NetSDKLib extends Library {
 	    public int nBatteryLeft;	//剩余电量百分比,单位%
 	    public NET_TIME stTime;		//事件发生时间
 	    public int nChannelID;		//通道号,标识子设备电池,从0开始
-	    
+
 	    public ALARM_BATTERYLOWPOWER_INFO()
 	    {
 	    	this.dwSize = this.size();
 	    }
     }
-    
+
     // 温度过高报警
     public static class ALARM_TEMPERATURE_INFO extends MyStructure
     {
@@ -8451,15 +8451,15 @@ public interface NetSDKLib extends Library {
 	    public int      nAction;				//0:开始1:停止
 	    public float    fTemperature;			//当前温度值,单位摄氏度
 	    public NET_TIME stTime;					//事件发生时间
-	    
+
 	    public ALARM_TEMPERATURE_INFO()
 	    {
 	    	this.dwSize = this.size();
 	    }
     }
-    
+
     // 普通报警信息
-    public static class NET_CLIENT_STATE_EX extends MyStructure 
+    public static class NET_CLIENT_STATE_EX extends MyStructure
     {
         public int                channelcount;
         public int                alarminputcount;
@@ -8467,34 +8467,34 @@ public interface NetSDKLib extends Library {
         public byte[]       	  motiondection 	= new byte[32];        // 动态检测
         public byte[]             videolost 		= new byte[32];        // 视频丢失
         public byte[]             bReserved 		= new byte[32];
-    } 
-   
+    }
+
     // 视频遮挡报警状态信息对应结构体
     public static class NET_CLIENT_VIDEOBLIND_STATE extends MyStructure
     {
 	    public int dwSize;
 	    public int channelcount;
 	    public int[] dwAlarmState = new int[NET_MAX_CHANMASK];//每一个int按位表示32通道的报警状态,0-表示无报警,1-表示有报警
-	    
+
 	    public NET_CLIENT_VIDEOBLIND_STATE()
 	    {
 	    	this.dwSize = this.size();
 	    }
     }
-    
+
     // 视频丢失报警状态信息对应结构体
     public static class NET_CLIENT_VIDEOLOST_STATE extends MyStructure
     {
 	    public int	    dwSize;
 	    public int	    channelcount;
 	    public int[]	dwAlarmState = new int[NET_MAX_CHANMASK];//每一个int按位表示32通道的报警状态（只有dwAlarmState[0]有效）,0-表示无报警,1-表示有报警
-	    
+
 	    public NET_CLIENT_VIDEOLOST_STATE()
 	    {
 	    	this.dwSize = this.size();
 	    }
     }
-    
+
     // 门禁开门 CLIENT_ControlDevice接口的 CTRLTYPE_CTRL_ACCESS_OPEN 命令参数
     public static class NET_CTRL_ACCESS_OPEN extends MyStructure {
     	public int          dwSize;
@@ -8502,12 +8502,12 @@ public interface NetSDKLib extends Library {
         public Pointer      szTargetID;			    				  // 转发目标设备ID,为NULL表示不转发
         public byte[]       szUserID = new byte[MAX_COMMON_STRING_32];//远程用户ID
     	public int			emOpenDoorType;                			  // 开门方式, 参考 EM_OPEN_DOOR_TYPE
-        
+
         public NET_CTRL_ACCESS_OPEN() {
         	this.dwSize = this.size();
         }
-    }    
-    
+    }
+
     // 门禁控制--开门方式
     public static class EM_OPEN_DOOR_TYPE extends MyStructure
     {
@@ -8517,18 +8517,18 @@ public interface NetSDKLib extends Library {
     	public static final int EM_OPEN_DOOR_TYPE_LOCAL_CARD = 3;		// 本地刷卡开门
     	public static final int EM_OPEN_DOOR_TYPE_LOCAL_BUTTON = 4;		// 本地按钮开门
     }
-    
+
     // 门禁关门CLIENT_ControlDevice接口的 CTRLTYPE_CTRL_ACCESS_CLOSE 命令参数
     public static class NET_CTRL_ACCESS_CLOSE extends MyStructure
     {
 	    public int dwSize;
 	    public int nChannelID;//通道号(0开始)
-	    
+
         public NET_CTRL_ACCESS_CLOSE() {
         	this.dwSize = this.size();
         }
     }
-    
+
 	 // 门禁状态类型
 	 public static class EM_NET_DOOR_STATUS_TYPE extends MyStructure
 	 {
@@ -8544,30 +8544,30 @@ public interface NetSDKLib extends Library {
 		 public int dwSize;
 		 public int nChannel;//门禁通道号
 		 public int emStateType;//门禁状态信息, 对应枚举EM_NET_DOOR_STATUS_TYPE
-		 
+
     	public NET_DOOR_STATUS_INFO() {
     		this.dwSize = this.size();
     	}
 	 }
 
     // 开启道闸参数(对应 CTRLTYPE_CTRL_OPEN_STROBE 命令)
-    public static class NET_CTRL_OPEN_STROBE extends MyStructure 
+    public static class NET_CTRL_OPEN_STROBE extends MyStructure
     {
     	public int dwSize;
-    	public int nChannelId;                      // 通道号 
+    	public int nChannelId;                      // 通道号
     	public byte[] szPlateNumber = new byte[64]; // 车牌号码
- 
+
     	public NET_CTRL_OPEN_STROBE() {
     		this.dwSize = this.size();
     	}
     }
-    
+
     // 关闭道闸参数(对应  CTRLTYPE_CTRL_CLOSE_STROBE 命令)
-    public static class NET_CTRL_CLOSE_STROBE extends MyStructure 
+    public static class NET_CTRL_CLOSE_STROBE extends MyStructure
     {
     	public int	dwSize;
     	public int	nChannelId; // 通道号
-    	
+
     	public NET_CTRL_CLOSE_STROBE() {
     		this.dwSize = this.size();
     	}
@@ -8605,56 +8605,56 @@ public interface NetSDKLib extends Library {
     	public int							nCtrlTypeCount;									// 道闸控制方式个数
     	public int[]    					emCtrlType = new int[NET_CFG_MAX_CTRLTYPE_NUM];  // 道闸控制方式, 详见NET_EM_CFG_TRAFFICSTROBE_CTRTYPE
     	public int							nAllSnapCarCount;								// 所有车开闸种类个数
-    	public int[]						emAllSnapCar = new int[NET_MAX_ALL_SNAP_CAR_COUNT];	// 所有车开闸种类, 详见NET_EM_CFG_ALL_SNAP_CAR	
+    	public int[]						emAllSnapCar = new int[NET_MAX_ALL_SNAP_CAR_COUNT];	// 所有车开闸种类, 详见NET_EM_CFG_ALL_SNAP_CAR
     	public NET_ALARM_MSG_HANDLE			stuEventHandler;								// 开启道闸联动参数
     	public NET_ALARM_MSG_HANDLE			stuEventHandlerClose;							// 关闭道闸联动参数
     	public byte[]						szOrderIP = new byte[NET_MAX_IPADDR_EX_LEN];	// 负责命令开闸的平台IP
     	public int							emCtrlTypeOnDisconnect;							// 平台IP与设备断开连接后，设备采用的开闸方式, 详见NET_EM_CFG_TRAFFICSTROBE_CTRTYPE
     	public NET_CFG_STATIONARY_OPEN		stuStationaryOpen;								// 道闸常开配置
-    	
+
     	public NET_CFG_TRAFFICSTROBE_INFO() {
     		this.dwSize = this.size();
     	}
     }
-    
+
     // 报警状态 (对应   CTRLTYPE_TRIGGER_ALARM_OUT 命令)
-    public static class ALARMCTRL_PARAM extends MyStructure 
+    public static class ALARMCTRL_PARAM extends MyStructure
     {
     	public int	dwSize;
     	public int	nAlarmNo; // 报警通道号,从0开始
     	public int	nAction; // 1：触发报警,0：停止报警
-    	
+
     	public ALARMCTRL_PARAM() {
     		this.dwSize = this.size();
     	}
     }
-    
+
     // 查询 IVS 前端设备入参
-    public static class NET_IN_IVS_REMOTE_DEV_INFO extends MyStructure 
+    public static class NET_IN_IVS_REMOTE_DEV_INFO extends MyStructure
     {
-        public int                     dwSize;                         // 该结构体大小   
+        public int                     dwSize;                         // 该结构体大小
         public int                     nChannel;                       // 通道号
-        
+
         public NET_IN_IVS_REMOTE_DEV_INFO() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 查询 IVS 前端设备出参
-    public static class NET_OUT_IVS_REMOTE_DEV_INFO extends MyStructure   
+    public static class NET_OUT_IVS_REMOTE_DEV_INFO extends MyStructure
     {
-        public int                   dwSize;                         	// 该结构体大小 
+        public int                   dwSize;                         	// 该结构体大小
         public int     			     nPort;								// 端口
         public byte[]				 szIP = new byte[64];	            // 设备IP
         public byte[]				 szUser = new byte[64];	            // 用户名
-    	public byte[]				 szPassword = new byte[64];         // 密码    
+    	public byte[]				 szPassword = new byte[64];         // 密码
         public byte[]				 szAddress = new byte[128];	        // 机器部署地点
-    
+
         public NET_OUT_IVS_REMOTE_DEV_INFO() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 传感器感应方式枚举类型
     public static class NET_SENSE_METHOD extends MyStructure
     {
@@ -8697,7 +8697,7 @@ public interface NetSDKLib extends Library {
     	public static final int	NET_SENSE_HUMIDITY1500 = 35; //1500湿度传感器
     	public static final int	NET_SENSE_NUM = 36; //枚举类型总数
     }
-    
+
     // 热成像色彩
     public static class NET_THERMO_COLORIZATION extends MyStructure
     {
@@ -8731,7 +8731,7 @@ public interface NetSDKLib extends Library {
     	public static final int NET_THERMO_ROI_CENTER_25 = 7;		// 中心点 25%
     	public static final int NET_THERMO_ROI_CUSTOM = 8;			// 自定义
     }
-    
+
     // 热成像模式
     public static class NET_THERMO_MODE extends MyStructure
     {
@@ -8740,42 +8740,42 @@ public interface NetSDKLib extends Library {
     	public static final int NET_THERMO_MODE_INDOOR = 2; 	// 室内
     	public static final int NET_THERMO_MODE_OUTDOOR = 3; 	// 室外
     }
-    
+
     // CLIENT_QueryDevInfo 接口 NET_QUERY_DEV_THERMO_GRAPHY_PRESET 命令入参
-    public static class NET_IN_THERMO_GET_PRESETINFO extends MyStructure 
+    public static class NET_IN_THERMO_GET_PRESETINFO extends MyStructure
     {
         public int              dwSize;
         public int              nChannel;                           // 通道号
         public int     			emMode;                             // 模式, 参考NET_THERMO_MODE
-        
+
         public NET_IN_THERMO_GET_PRESETINFO() {
         	this.dwSize = this.size();
         }
     }
 
     // CLIENT_QueryDevInfo 接口 NET_QUERY_DEV_THERMO_GRAPHY_PRESET 命令出参
-    public static class NET_OUT_THERMO_GET_PRESETINFO extends MyStructure 
+    public static class NET_OUT_THERMO_GET_PRESETINFO extends MyStructure
     {
     	public int              		dwSize;
         public NET_THERMO_GRAPHY_INFO   stInfo;     // 热成像信息
-        
+
         public NET_OUT_THERMO_GET_PRESETINFO() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 热成像优化区域
-    public static class NET_THERMO_GRAPHY_OPTREGION extends MyStructure 
+    public static class NET_THERMO_GRAPHY_OPTREGION extends MyStructure
     {
     	public int                 bOptimizedRegion;                   // 是否开启优化区域
     	public int                 nOptimizedROIType;                  // 优化区域类型,见NET_THERMO_ROI
     	public int                 nCustomRegion;                      // 自定义区域个数
-    	public NET_RECT[] 		   stCustomRegions = (NET_RECT[])new NET_RECT().toArray(64); // 自定义区域,仅在 nOptimizedROIType 为 NET_THERMO_ROI_CUSTOM 时有效            
+    	public NET_RECT[] 		   stCustomRegions = (NET_RECT[])new NET_RECT().toArray(64); // 自定义区域,仅在 nOptimizedROIType 为 NET_THERMO_ROI_CUSTOM 时有效
         public byte[]              Reserved = new byte[256];
     }
-    
+
     // 热成像信息
-    public static class NET_THERMO_GRAPHY_INFO extends MyStructure 
+    public static class NET_THERMO_GRAPHY_INFO extends MyStructure
     {
     	public int                         nBrightness;                // 亮度
     	public int                         nSharpness;                 // 锐度
@@ -8789,13 +8789,13 @@ public interface NetSDKLib extends Library {
     	public int                         nAgcPlateau;                // 增益均衡
     	public byte[]                      reserved = new byte[244];   // 保留字段
     }
-    
+
     // CLIENT_QueryDevInfo 接口 NET_QUERY_DEV_THERMO_GRAPHY_OPTREGION 命令入参
     public static class NET_IN_THERMO_GET_OPTREGION extends MyStructure
     {
     	public int                 dwSize;
     	public int                 nChannel;                           // 通道号
-        
+
         public NET_IN_THERMO_GET_OPTREGION() {
         	this.dwSize = this.size();
         }
@@ -8806,34 +8806,34 @@ public interface NetSDKLib extends Library {
     {
     	public int                       dwSize;
     	public NET_THERMO_GRAPHY_OPTREGION stInfo;                     // 优化区域信息
-    	
+
     	public NET_OUT_THERMO_GET_OPTREGION() {
     		this.dwSize = this.size();
     	}
     }
-    
+
     // CLIENT_QueryDevInfo 接口 NET_QUERY_DEV_THERMO_GRAPHY_EXTSYSINFO 命令入参
     public static class NET_IN_THERMO_GET_EXTSYSINFO extends MyStructure
     {
     	public int               dwSize;
     	public int               nChannel;                           // 通道号
-    	
+
     	public NET_IN_THERMO_GET_EXTSYSINFO() {
     		this.dwSize = this.size();
     	}
     }
-    
+
     // CLIENT_QueryDevInfo 接口 NET_QUERY_DEV_THERMO_GRAPHY_EXTSYSINFO 命令出参
     public static class NET_OUT_THERMO_GET_EXTSYSINFO extends MyStructure
     {
     	public int               	dwSize;
     	public NET_THERMO_SYSINFO   stInfo;                           // 通道号
-    	
+
     	public NET_OUT_THERMO_GET_EXTSYSINFO() {
     		this.dwSize = this.size();
     	}
     }
-    
+
     // 外部系统信息
     public static class NET_THERMO_SYSINFO extends MyStructure
     {
@@ -8843,13 +8843,13 @@ public interface NetSDKLib extends Library {
     	public byte[]                szLibVersion = new byte[64];                   // 库版本
     	public byte[]                reserved = new byte[256];
     }
-    
+
     // CLIENT_GetDevCaps 接口 NET_THERMO_GRAPHY_CAPS 命令入参
     public static class NET_IN_THERMO_GETCAPS extends MyStructure
     {
     	public int               dwSize;
     	public int               nChannel;                           // 通道号
-    	
+
     	public NET_IN_THERMO_GETCAPS() {
     		this.dwSize = this.size();
     	}
@@ -8867,12 +8867,12 @@ public interface NetSDKLib extends Library {
     	public RANGE             stEZoom;              				// 倍数相关能力
     	public RANGE             stThermographyGamma;  				// 伽马相关能力
     	public RANGE             stSmartOptimizer;     				// 优化参数相关能力
-        
+
         public NET_OUT_THERMO_GETCAPS() {
     		this.dwSize = this.size();
     	}
     }
-    
+
     // range
     public static class RANGE extends MyStructure
     {
@@ -8890,7 +8890,7 @@ public interface NetSDKLib extends Library {
     {
     	public int               dwSize;
     	public int               nChannel;                           // 通道号
-    	
+
     	public NET_IN_RADIOMETRY_GETCAPS() {
     		this.dwSize = this.size();
     	}
@@ -8902,7 +8902,7 @@ public interface NetSDKLib extends Library {
     	public static final int NET_RADIOMETRY_METERTYPE_UNKNOWN = 0;
     	public static final int NET_RADIOMETRY_METERTYPE_SPOT = 1; // 点
     	public static final int NET_RADIOMETRY_METERTYPE_LINE = 2; // 线
-    	public static final int NET_RADIOMETRY_METERTYPE_AREA = 3; // 区域               
+    	public static final int NET_RADIOMETRY_METERTYPE_AREA = 3; // 区域
     }
 
     // 点,线,区域总个数能力
@@ -8930,7 +8930,7 @@ public interface NetSDKLib extends Library {
         public int                         nStatisticsMinPeriod;       // 测温点统计功能最小存储数据间隔  单位为秒
         public float                       fIsothermMaxTemp;           // 色标条最高温度值
         public float                       fIsothermMinTemp;           // 色标条最低温度值
-        
+
         public NET_OUT_RADIOMETRY_GETCAPS() {
     		this.dwSize = this.size();
     	}
@@ -8942,18 +8942,18 @@ public interface NetSDKLib extends Library {
     	public int                 nMeterType;                         // 返回测温类型,见NET_RADIOMETRY_METERTYPE
         public int                 nTemperUnit;                        // 温度单位(当前配置的温度单位),见 NET_TEMPERATURE_UNIT
         public float               fTemperAver;                        // 点的温度或者平均温度   点的时候 只返回此字段
-        public float               fTemperMax;                         // 最高温度 
-        public float               fTemperMin;                         // 最低温度 
-        public float               fTemperMid;                         // 中间温度值    
+        public float               fTemperMax;                         // 最高温度
+        public float               fTemperMin;                         // 最低温度
+        public float               fTemperMid;                         // 中间温度值
         public float               fTemperStd;                         // 标准方差值
         public byte[]              reserved = new byte[64];
     }
 
-    // 获取测温项温度的条件   
+    // 获取测温项温度的条件
     public static class NET_RADIOMETRY_CONDITION extends MyStructure
     {
-    	public int                 nPresetId;                          // 预置点编号    
-    	public int                 nRuleId;                            // 规则编号 
+    	public int                 nPresetId;                          // 预置点编号
+    	public int                 nRuleId;                            // 规则编号
     	public int                 nMeterType;                         // 测温项类别,见NET_RADIOMETRY_METERTYPE
     	public byte[]              szName = new byte[64];              // 测温项的名称,从测温配置规则名字中选取
         public int                 nChannel;                           // 通道号
@@ -8966,7 +8966,7 @@ public interface NetSDKLib extends Library {
     	public int               dwSize;
     	public int               nChannel;                           // 通道号
     	public NET_POINT         stCoordinate;                       // 测温点的坐标,坐标值 0~8192
-    	
+
     	public NET_IN_RADIOMETRY_GETPOINTTEMPER() {
     		this.dwSize = this.size();
     	}
@@ -8977,18 +8977,18 @@ public interface NetSDKLib extends Library {
     {
     	public int               	dwSize;
     	public NET_RADIOMETRYINFO   stPointTempInfo;                    // 获取测温点的参数值
-        
+
         public NET_OUT_RADIOMETRY_GETPOINTTEMPER() {
     		this.dwSize = this.size();
     	}
     }
-    
+
     // CLIENT_QueryDevInfo 接口 NET_QUERY_DEV_RADIOMETRY_TEMPER 命令入参
     public static class NET_IN_RADIOMETRY_GETTEMPER extends MyStructure
     {
     	public int                         dwSize;
     	public NET_RADIOMETRY_CONDITION    stCondition;                // 获取测温项温度的条件
-    	
+
     	public NET_IN_RADIOMETRY_GETTEMPER() {
     		this.dwSize = this.size();
     	}
@@ -8999,12 +8999,12 @@ public interface NetSDKLib extends Library {
     {
     	public int               	dwSize;
     	public NET_RADIOMETRYINFO   stTempInfo;                         // 获取测温参数值
-    	
+
     	public NET_OUT_RADIOMETRY_GETTEMPER() {
     		this.dwSize = this.size();
     	}
     }
-    
+
     // 云台预置点
     public static class NET_PTZ_PRESET extends MyStructure
     {
@@ -9012,7 +9012,7 @@ public interface NetSDKLib extends Library {
     	public byte[]                  szName = new byte[PTZ_PRESET_NAME_LEN];    // 名称
     	public byte[]                  szReserve = new byte[64];                  // 预留64字节
     }
-    
+
     // 云台预置点列表
     public static class NET_PTZ_PRESET_LIST extends MyStructure
 	{
@@ -9020,12 +9020,12 @@ public interface NetSDKLib extends Library {
     	public int                   dwMaxPresetNum;                 // 预置点最大个数
     	public int                   dwRetPresetNum;                 // 返回预置点个数
     	public Pointer          	 pstuPtzPorsetList;              // 预置点列表(入参需要根据最大个数申请内存),内存大小为sizeof(NET_PTZ_PRESET)*dwMaxPresetNum
-    
+
     	public NET_PTZ_PRESET_LIST() {
     		this.dwSize = this.size();
     	}
 	}
-    
+
     //-------------------------------报警属性---------------------------------
 	// 云台联动
 	public static class NET_PTZ_LINK extends MyStructure
@@ -9114,14 +9114,14 @@ public interface NetSDKLib extends Library {
     	public NET_MSG_HANDLE_EX stuEventHandler;	//联动信息
     	public int emDefenceAreaType;				//防区类型, 取值类型为EM_NET_DEFENCE_AREA_TYPE中的值
     	public int nEventID;					    //事件ID
-        public byte[]     szName = new byte[NET_COMMON_STRING_32];  // 通道名称               
+        public byte[]     szName = new byte[NET_COMMON_STRING_32];  // 通道名称
         public int nCount;                 			// 事件发生次数
-        
+
     	public ALARM_ALARM_INFO_EX2() {
     		this.dwSize = this.size();
     	}
     }
-    
+
     // 布撤防状态变化事件的信息
     public static class ALARM_ARMMODE_CHANGE_INFO extends MyStructure
     {
@@ -9131,14 +9131,14 @@ public interface NetSDKLib extends Library {
         public int 			       emSceneMode;    // 情景模式，对应  NET_SCENE_MODE
         public int                 dwID;           // ID号, 遥控器编号或键盘地址, emTriggerMode为NET_EM_TRIGGER_MODE_NET类型时为0
         public int       		   emTriggerMode;  // 触发方式,对应  NET_EM_TRIGGER_MODE
-        
+
         public ALARM_ARMMODE_CHANGE_INFO() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 布撤防模式
-    public static class NET_ALARM_MODE extends MyStructure 
+    public static class NET_ALARM_MODE extends MyStructure
     {
         public static final int NET_ALARM_MODE_UNKNOWN    = -1;          // 未知
         public static final int NET_ALARM_MODE_DISARMING  = 0;           // 撤防
@@ -9146,9 +9146,9 @@ public interface NetSDKLib extends Library {
         public static final int NET_ALARM_MODE_FORCEON	  = 2;           // 强制布防
         public static final int NET_ALARM_MODE_PARTARMING = 3;           // 部分布防
     }
-    
+
     // 布撤防场景模式
-    public static class NET_SCENE_MODE extends MyStructure 
+    public static class NET_SCENE_MODE extends MyStructure
     {
     	public static final int NET_SCENE_MODE_UNKNOWN   = 0;            // 未知场景
     	public static final int NET_SCENE_MODE_OUTDOOR   = 1;            // 外出模式
@@ -9158,18 +9158,18 @@ public interface NetSDKLib extends Library {
     	public static final int NET_SCENE_MODE_SLEEPING  = 5;            // 就寝模式
     	public static final int NET_SCENE_MODE_CUSTOM    = 6;            // 自定义模式
     }
-    
+
     // 触发方式
-    public static class NET_EM_TRIGGER_MODE extends MyStructure 
-    { 
+    public static class NET_EM_TRIGGER_MODE extends MyStructure
+    {
     	public static final int NET_EM_TRIGGER_MODE_UNKNOWN 		= 0;
     	public static final int NET_EM_TRIGGER_MODE_NET			    = 1;   // 网络用户(平台或Web)
     	public static final int NET_EM_TRIGGER_MODE_KEYBOARD		= 2;   // 键盘
     	public static final int NET_EM_TRIGGER_MODE_REMOTECONTROL	= 3;   // 遥控器
     }
-    
+
     // 紧急救助事件详情
-    public static class ALARM_RCEMERGENCY_CALL_INFO extends MyStructure 
+    public static class ALARM_RCEMERGENCY_CALL_INFO extends MyStructure
     {
     	public int                       dwSize;
 	    public int                       nAction;                // -1:未知 0:开始 1:停止
@@ -9177,14 +9177,14 @@ public interface NetSDKLib extends Library {
 	    public NET_TIME                  stuTime;                // 事件发生时间
 	    public int   					 emMode;                 // 报警方式，对应 EM_RCEMERGENCY_MODE_TYPE
 	    public int                       dwID;                   // 用于标示不同的紧急事件(只有emMode是遥控器类型时有效, 表示遥控器的编号, 0表示无效ID)
-	    
+
 	    public ALARM_RCEMERGENCY_CALL_INFO() {
 	    	this.dwSize = this.size();
 	    }
     }
-    
+
     // 紧急救助事件类型
-    public static class EM_RCEMERGENCY_CALL_TYPE extends MyStructure 
+    public static class EM_RCEMERGENCY_CALL_TYPE extends MyStructure
     {
     	public static final int EM_RCEMERGENCY_CALL_UNKNOWN   = 0;
     	public static final int EM_RCEMERGENCY_CALL_FIRE	  = 1;             // 火警
@@ -9193,15 +9193,15 @@ public interface NetSDKLib extends Library {
     	public static final int EM_RCEMERGENCY_CALL_MEDICAL	  = 4;             // 医疗
     	public static final int EM_RCEMERGENCY_CALL_EMERGENCY = 5;             // 紧急
     }
-    
+
     // 报警方式
-    public static class EM_RCEMERGENCY_MODE_TYPE extends MyStructure 
+    public static class EM_RCEMERGENCY_MODE_TYPE extends MyStructure
     {
     	public static final int EM_RCEMERGENCY_MODE_UNKNOWN          = 0;
     	public static final int EM_RCEMERGENCY_MODE_KEYBOARD		 = 1;       // 键盘
     	public static final int EM_RCEMERGENCY_MODE_WIRELESS_CONTROL = 2;       // 遥控器
     }
-    
+
     /////////////////////////////////////////////////////
     ////////用户信息管理对应接口CLIENT_QueryUserInfoNew/////////
     // 用户信息表
@@ -9218,37 +9218,37 @@ public interface NetSDKLib extends Library {
     	public byte 					byPSWMaxLength; 														// 支持的密码最大长度
     	public byte[] 					byReserve = new byte[254];
     	public USER_GROUP_INFO_EX2[]    groupListEx = new USER_GROUP_INFO_EX2[NET_MAX_GROUP_NUM]; 				// 用户组信息扩展, 用户组个数上限NET_MAX_GROUP_NUM=20
-    	
+
     	public USER_MANAGE_INFO_NEW() {
     		this.dwSize = this.size();
-    		
+
     		for(int i = 0; i < NET_NEW_MAX_RIGHT_NUM; i++) {
     			rightList[i] = new OPR_RIGHT_NEW();
     		}
-    		
+
     		for(int i = 0; i < NET_MAX_USER_NUM; i++) {
     			userList[i] = new USER_INFO_NEW();
     		}
-    		
+
     		for(int i = 0; i < NET_MAX_GROUP_NUM; i++) {
     			groupList[i] = new USER_GROUP_INFO_NEW();
     			groupListEx[i] = new USER_GROUP_INFO_EX2();
     		}
-    	}  	
+    	}
     }
-    
+
     // 权限信息
     public static class OPR_RIGHT_NEW extends MyStructure {
     	public int 						dwSize;										  //结构体大小
     	public int 						dwID; 										  //权限ID，每个 权限都有各自的ID
     	public byte[] 					name = new byte[NET_RIGHT_NAME_LENGTH]; 	  //名称 权限名长度 NET_RIGHT_NAME_LENGTH=32
     	public byte[] 					memo = new byte[NET_MEMO_LENGTH];			  //说明备注长度NET_MEMO_LENGTH=32
-    	
+
     	public OPR_RIGHT_NEW() {
     		this.dwSize = this.size();
     	}
     }
-    
+
     // 用户组信息
     public static class USER_GROUP_INFO_NEW extends MyStructure {
     	public int 						dwSize;
@@ -9261,7 +9261,7 @@ public interface NetSDKLib extends Library {
     		this.dwSize = this.size();
     	}
     }
-    
+
     // 用户组信息扩展，用户组名加长
     public static class USER_GROUP_INFO_EX2 extends MyStructure {
     	public int 						 dwSize; 										// 结构体大小
@@ -9270,12 +9270,12 @@ public interface NetSDKLib extends Library {
         public int 						 dwRightNum;  									// 权限数量
         public int[] 					 rights = new int[NET_NEW_MAX_RIGHT_NUM]; 		// 用户权限 个数上限 NET_NEW_MAX_RIGHT_NUM = 1024
         public byte[]					 memo = new byte[NET_MEMO_LENGTH]; 				// 说明， 备注长度NET_MEMO_LENGTH=32
-        
+
         public USER_GROUP_INFO_EX2() {
     		this.dwSize = this.size();
     	}
     }
-    
+
     // 用户信息结构体
     public static class USER_INFO_NEW extends MyStructure {
     	public int 						dwSize; 									   // 结构体大小
@@ -9290,55 +9290,55 @@ public interface NetSDKLib extends Library {
         public NET_TIME 				stuTime;           							   // 最后修改时间
         public byte 					byIsAnonymous;         					       // 是否可以匿名登录, 0:不可匿名登录, 1: 可以匿名登录
         public byte[] 					byReserve = new byte[7];  					   // 保留字节
-        
+
         public USER_INFO_NEW() {
     		this.dwSize = this.size();
     	}
     }
-    
-    
+
+
     //------------------------白名单相关结构体-------------------------
     // CLIENT_FindRecord接口输入参数
     public static class NET_IN_FIND_RECORD_PARAM extends MyStructure {
         public int                       dwSize;          							 // 结构体大小
         public int                       emType;          							 // 待查询记录类型,emType对应  EM_NET_RECORD_TYPE
         public Pointer                   pQueryCondition;							 // 查询类型对应的查询条件
-        
+
         public NET_IN_FIND_RECORD_PARAM() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 交通黑白名单账户记录查询条件
     public static class FIND_RECORD_TRAFFICREDLIST_CONDITION extends MyStructure {
     	public int          dwSize;
         public byte[]       szPlateNumber = new byte[NET_MAX_PLATE_NUMBER_LEN];      // 车牌号
         public byte[]       szPlateNumberVague = new byte[NET_MAX_PLATE_NUMBER_LEN]; // 车牌号码模糊查询
-        public int          nQueryResultBegin;                          			 // 第一个条返回结果在查询结果中的偏移量 
+        public int          nQueryResultBegin;                          			 // 第一个条返回结果在查询结果中的偏移量
         public boolean      bRapidQuery;       										 // 是否快速查询, TRUE:为快速,快速查询时不等待所有增、删、改操作完成。默认为非快速查询
-        
+
         public FIND_RECORD_TRAFFICREDLIST_CONDITION() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 交通流量记录查询条件
     public static class FIND_RECORD_TRAFFICFLOW_CONDITION extends MyStructure {
     	public int                     dwSize;
-    	public int                     abChannelId;                      // 通道号查询条件是否有效     
+    	public int                     abChannelId;                      // 通道号查询条件是否有效
     	public int                     nChannelId;                       // 通道号
     	public int                     abLane;                           // 车道号查询条件是否有效
     	public int                     nLane;                            // 车道号
-    	public int                     bStartTime;                       // 开始时间查询条件是否有效   
+    	public int                     bStartTime;                       // 开始时间查询条件是否有效
     	public NET_TIME                stStartTime;                      // 开始时间
     	public int					   bEndTime;                         // 结束时间查询条件是否有效
-    	public NET_TIME                stEndTime;                        // 结束时间 
+    	public NET_TIME                stEndTime;                        // 结束时间
         public int                     bStatisticsTime;                  // 查询是否为统计时间,为BOOL类型，bStartTime及bEndTime均为1
     	public FIND_RECORD_TRAFFICFLOW_CONDITION() {
     		this.dwSize = this.size();
     	}
     }
-    
+
     // 门禁出入记录查询条件
     public static class FIND_RECORD_ACCESSCTLCARDREC_CONDITION_EX extends MyStructure {
     	public int                     dwSize;
@@ -9348,14 +9348,14 @@ public interface NetSDKLib extends Library {
         public NET_TIME                stStartTime;                      					// 起始时间
         public NET_TIME                stEndTime;                        					// 结束时间
         public int					   nOrderNum;						 					// 规则数
-        public FIND_RECORD_ACCESSCTLCARDREC_ORDER[]   stuOrders = 
+        public FIND_RECORD_ACCESSCTLCARDREC_ORDER[]   stuOrders =
         							   (FIND_RECORD_ACCESSCTLCARDREC_ORDER[])new FIND_RECORD_ACCESSCTLCARDREC_ORDER().toArray(MAX_ORDER_NUMBER);	// 规则数组
-    	
+
         public FIND_RECORD_ACCESSCTLCARDREC_CONDITION_EX() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 门禁出入记录排序规则详情
     public static class FIND_RECORD_ACCESSCTLCARDREC_ORDER extends MyStructure
     {
@@ -9363,7 +9363,7 @@ public interface NetSDKLib extends Library {
     	public int					emOrderType;    										// 排序类型, 对应枚举 EM_RECORD_ORDER_TYPE
     	public byte[]				byReverse = new byte[64];  								// 保留字节
     }
-    
+
     // 门禁出入记录排序字段
     public static class EM_RECORD_ACCESSCTLCARDREC_ORDER_FIELD extends MyStructure
     {
@@ -9371,7 +9371,7 @@ public interface NetSDKLib extends Library {
     	public static final int EM_RECORD_ACCESSCTLCARDREC_ORDER_FIELD_RECNO = 1;			// 记录集编号
         public static final int EM_RECORD_ACCESSCTLCARDREC_ORDER_FIELD_CREATETIME = 2;		// 创建时间
     }
-    
+
     // 排序类型
     public static class EM_RECORD_ORDER_TYPE extends MyStructure
     {
@@ -9379,7 +9379,7 @@ public interface NetSDKLib extends Library {
     	public static final int EM_RECORD_ORDER_TYPE_ASCENT = 1;                            // 升序
     	public static final int EM_RECORD_ORDER_TYPE_DESCENT = 2;                           // 降序
     }
-    
+
     // 开门方式(门禁事件,门禁出入记录,实际的开门方式)
     public static class NET_ACCESS_DOOROPEN_METHOD extends MyStructure {
         public static final int NET_ACCESS_DOOROPEN_METHOD_UNKNOWN = 0;
@@ -9419,12 +9419,12 @@ public interface NetSDKLib extends Library {
         public static final int NET_ACCESS_DOOROPEN_METHOD_FINGERPRINT_OR_FACE_OR_PWD = 36;                 // 指纹或人脸或密码
         public static final int NET_ACCESS_DOOROPEN_METHOD_CARD_OR_FACE_OR_PWD = 37;                        // 卡或人脸或密码开锁
         public static final int NET_ACCESS_DOOROPEN_METHOD_CARD_OR_FINGERPRINT_OR_FACE = 38;                // 卡或指纹或人脸开锁
-        public static final int NET_ACCESS_DOOROPEN_METHOD_CARD_AND_FINGERPRINT_AND_FACE_AND_PWD = 39;      // 卡+指纹+人脸+密码组合开锁 
+        public static final int NET_ACCESS_DOOROPEN_METHOD_CARD_AND_FINGERPRINT_AND_FACE_AND_PWD = 39;      // 卡+指纹+人脸+密码组合开锁
         public static final int NET_ACCESS_DOOROPEN_METHOD_CARD_OR_FINGERPRINT_OR_FACE_OR_PWD     = 40;     // 卡或指纹或人脸或密码开锁
         public static final int NET_ACCESS_DOOROPEN_METHOD_FACEIPCARDANDIDCARD_OR_CARD_OR_FACE    = 41;     // (身份证+人证比对)或 刷卡 或 人脸
         public static final int NET_ACCESS_DOOROPEN_METHOD_FACEIDCARD_OR_CARD_OR_FACE = 42;                 // 人证比对 或 刷卡(二维码) 或 人脸
     }
-    
+
     // 卡类型
     public static class NET_ACCESSCTLCARD_TYPE {
         public static final int NET_ACCESSCTLCARD_TYPE_UNKNOWN = -1;
@@ -9437,7 +9437,7 @@ public interface NetSDKLib extends Library {
         public static final int NET_ACCESSCTLCARD_TYPE_POLLING  = 6;                    // 巡检卡
         public static final int NET_ACCESSCTLCARD_TYPE_MOTHERCARD = 0xff;           	// 母卡
     }
-    
+
     // 门禁刷卡记录记录集信息
     public static class NET_RECORDSET_ACCESS_CTL_CARDREC extends MyStructure {
     	public int           		dwSize;
@@ -9451,10 +9451,10 @@ public interface NetSDKLib extends Library {
         public byte[]            	szUserID = new byte[NET_MAX_USERID_LEN];// 用户ID
         public int             		nReaderID;                              // 读卡器ID (废弃,不再使用)
     	public byte[]				szSnapFtpUrl = new byte[MAX_PATH];		// 开锁抓拍上传的FTP地址
-    	
+
     	public byte[]            	szReaderID = new byte[NET_COMMON_STRING_32];// 读卡器ID													// 开门并上传抓拍照片,在记录集记录存储地址,成功才有
         public int       			emCardType;                 			// 卡类型 NET_ACCESSCTLCARD_TYPE
-        
+
         public int                  nErrorCode;                 			// 开门失败的原因,仅在bStatus为FALSE时有效
 			                                                                // 0x00 没有错误
 			                                                                // 0x10 未授权
@@ -9488,12 +9488,12 @@ public interface NetSDKLib extends Library {
         public byte[]				szPhoneNumber = new byte[MAX_PHONENUMBER_LEN];	// 电话（考勤肯尼亚定制）
         public byte[]				szCardName = new byte[NET_MAX_CARDNAME_LEN];	// 卡命名
         public byte[]               szSN = new byte[NET_COMMON_STRING_32];          // 智能锁序列号,无线配件需要该字段
-    	
+
         public NET_RECORDSET_ACCESS_CTL_CARDREC() {
         	this.dwSize = this.size();
         }
     }
-    
+
     //考勤状态
     public static class NET_ATTENDANCESTATE extends MyStructure {
         public static final int NET_ATTENDANCESTATE_UNKNOWN = 0;
@@ -9504,46 +9504,46 @@ public interface NetSDKLib extends Library {
         public static final int NET_ATTENDANCESTATE_WORK_OVERTIME_SIGNIN = 5;      // 加班签到
         public static final int NET_ATTENDANCESTATE_WORK_OVERTIME_SIGNOUT = 6;     // 加班签出
     }
-    
+
     // 开门方向
     public static class NET_ENUM_DIRECTION_ACCESS_CTL extends MyStructure {
-    	public static final int NET_ENUM_DIRECTION_UNKNOWN = 0; 
-    	public static final int NET_ENUM_DIRECTION_ENTRY   = 1;                     // 进门             
+    	public static final int NET_ENUM_DIRECTION_UNKNOWN = 0;
+    	public static final int NET_ENUM_DIRECTION_ENTRY   = 1;                     // 进门
     	public static final int NET_ENUM_DIRECTION_EXIT    = 2;                     // 出门
     }
-   
+
     // 记录集类型
     public static class EM_NET_RECORD_TYPE extends MyStructure {
         public static final int NET_RECORD_UNKNOWN = 0;
-        public static final int NET_RECORD_TRAFFICREDLIST = 1; 					 // 交通白名单账户记录, 查询条件对应 FIND_RECORD_TRAFFICREDLIST_CONDITION 结构体,记录信息对应 NET_TRAFFIC_LIST_RECORD 结构体    
-        public static final int NET_RECORD_TRAFFICBLACKLIST = 2;  				 // 交通黑名单账号记录,查询条件对应 FIND_RECORD_TRAFFICREDLIST_CONDITION 结构体,记录信息对应 NET_TRAFFIC_LIST_RECORD 结构体       
+        public static final int NET_RECORD_TRAFFICREDLIST = 1; 					 // 交通白名单账户记录, 查询条件对应 FIND_RECORD_TRAFFICREDLIST_CONDITION 结构体,记录信息对应 NET_TRAFFIC_LIST_RECORD 结构体
+        public static final int NET_RECORD_TRAFFICBLACKLIST = 2;  				 // 交通黑名单账号记录,查询条件对应 FIND_RECORD_TRAFFICREDLIST_CONDITION 结构体,记录信息对应 NET_TRAFFIC_LIST_RECORD 结构体
         public static final int NET_RECORD_BURN_CASE = 3;      					 // 刻录案件记录,查询条件对应 FIND_RECORD_BURN_CASE_CONDITION 结构体,记录信息对应 NET_BURN_CASE_INFO 结构体
         public static final int NET_RECORD_ACCESSCTLCARD = 4;  					 // 门禁卡,查询条件对应 FIND_RECORD_ACCESSCTLCARD_CONDITION 结构体,记录信息对应 NET_RECORDSET_ACCESS_CTL_CARD 结构体
         public static final int NET_RECORD_ACCESSCTLPWD = 5;      				 // 门禁密码,查询条件对应 FIND_RECORD_ACCESSCTLPWD_CONDITION 结构体,记录信息对应 NET_RECORDSET_ACCESS_CTL_PWD
-        public static final int NET_RECORD_ACCESSCTLCARDREC = 6; 				 // 门禁出入记录（必须同时按卡号和时间段查询,建议用 NET_RECORD_ACCESSCTLCARDREC_EX 查询）,查询条件对应 FIND_RECORD_ACCESSCTLCARDREC_CONDITION 结构体,记录信息对应 NET_RECORDSET_ACCESS_CTL_CARDREC 结构体 
+        public static final int NET_RECORD_ACCESSCTLCARDREC = 6; 				 // 门禁出入记录（必须同时按卡号和时间段查询,建议用 NET_RECORD_ACCESSCTLCARDREC_EX 查询）,查询条件对应 FIND_RECORD_ACCESSCTLCARDREC_CONDITION 结构体,记录信息对应 NET_RECORDSET_ACCESS_CTL_CARDREC 结构体
         public static final int NET_RECORD_ACCESSCTLHOLIDAY = 7; 				 // 假日记录集,查询条件对应 FIND_RECORD_ACCESSCTLHOLIDAY_CONDITION 结构体,记录信息对应 NET_RECORDSET_HOLIDAY 结构体
         public static final int NET_RECORD_TRAFFICFLOW_STATE = 8;  				 // 查询交通流量记录,查询条件对应 FIND_RECORD_TRAFFICFLOW_CONDITION 结构体,记录信息对应 NET_RECORD_TRAFFIC_FLOW_STATE 结构体
         public static final int NET_RECORD_VIDEOTALKLOG = 9;    				 // 通话记录,查询条件对应 FIND_RECORD_VIDEO_TALK_LOG_CONDITION 结构体,记录信息对应 NET_RECORD_VIDEO_TALK_LOG 结构体
         public static final int NET_RECORD_REGISTERUSERSTATE = 10;  			 // 状态记录,查询条件对应 FIND_RECORD_REGISTER_USER_STATE_CONDITION 结构体,记录信息对应 NET_RECORD_REGISTER_USER_STATE 结构体
         public static final int NET_RECORD_VIDEOTALKCONTACT = 11;  				 // 联系人记录,查询条件对应 FIND_RECORD_VIDEO_TALK_CONTACT_CONDITION 结构体,记录信息对应 NET_RECORD_VIDEO_TALK_CONTACT 结构体
-        public static final int NET_RECORD_ANNOUNCEMENT = 12;					 // 公告记录,查询条件对应 FIND_RECORD_ANNOUNCEMENT_CONDITION 结构体,记录信息对应 NET_RECORD_ANNOUNCEMENT_INFO 结构体    														
+        public static final int NET_RECORD_ANNOUNCEMENT = 12;					 // 公告记录,查询条件对应 FIND_RECORD_ANNOUNCEMENT_CONDITION 结构体,记录信息对应 NET_RECORD_ANNOUNCEMENT_INFO 结构体
         public static final int NET_RECORD_ALARMRECORD = 13; 					 // 报警记录,查询条件对应 FIND_RECORD_ALARMRECORD_CONDITION 结构体,记录信息对应 NET_RECORD_ALARMRECORD_INFO 结构体
-        public static final int NET_RECORD_COMMODITYNOTICE = 14;  				 // 下发商品记录,查询条件对应 FIND_RECORD_COMMODITY_NOTICE_CONDITION 结构体,记录信息对应 NET_RECORD_COMMODITY_NOTICE 结构体                                                          
+        public static final int NET_RECORD_COMMODITYNOTICE = 14;  				 // 下发商品记录,查询条件对应 FIND_RECORD_COMMODITY_NOTICE_CONDITION 结构体,记录信息对应 NET_RECORD_COMMODITY_NOTICE 结构体
         public static final int NET_RECORD_HEALTHCARENOTICE = 15;  				 // 就诊信息记录,查询条件对应 FIND_RECORD_HEALTH_CARE_NOTICE_CONDITION 结构体,记录信息对应 NET_RECORD_HEALTH_CARE_NOTICE 结构体
         public static final int NET_RECORD_ACCESSCTLCARDREC_EX = 16; 			 // 门禁出入记录(可选择部分条件查询,建议替代NET_RECORD_ACCESSCTLCARDREC),查询条件对应 FIND_RECORD_ACCESSCTLCARDREC_CONDITION_EX 结构体,记录信息对应 NET_RECORDSET_ACCESS_CTL_CARDREC 结构体
         public static final int NET_RECORD_GPS_LOCATION = 17;  					 // GPS位置信息记录, 只实现import和clear,记录信息对应 NET_RECORD_GPS_LOCATION_INFO 结构体
         public static final int NET_RECORD_RESIDENT = 18;      					 // 公租房租户信息,查询条件对应 FIND_RECORD_RESIDENT_CONDTION结构体, 记录信息对应 NET_RECORD_RESIDENT_INFO 结构体
-        public static final int NET_RECORD_SENSORRECORD = 19;   			 	 // 监测量数据记录,查询条件对应 FIND_RECORD_SENSORRECORD_CONDITION 结构体,记录信息对应 NET_RECORD_SENSOR_RECORD 结构体      
+        public static final int NET_RECORD_SENSORRECORD = 19;   			 	 // 监测量数据记录,查询条件对应 FIND_RECORD_SENSORRECORD_CONDITION 结构体,记录信息对应 NET_RECORD_SENSOR_RECORD 结构体
         public static final int NET_RECORD_ACCESSQRCODE = 20;  					 // 开门二维码记录集,记录信息对应 NET_RECORD_ACCESSQRCODE_INFO结构体
         public static final int NET_RECORD_ACCESS_BLUETOOTH = 22;				 // 蓝牙开门记录集, 查询条件对应 FIND_RECORD_ACCESS_BLUETOOTH_INFO_CONDITION 结构体, 记录信息对应 NET_RECORD_ACCESS_BLUETOOTH_INFO 结构体
     }
- 
+
     //交通黑白名单记录信息
     public static class NET_TRAFFIC_LIST_RECORD extends MyStructure {
-		public int                      dwSize; 	
+		public int                      dwSize;
 		public int                	  	nRecordNo;                                		     // 之前查询到的记录号
 		public byte[]      			  	szMasterOfCar = new byte[NET_MAX_NAME_LEN];          // 车主姓名
-		public byte[]      			  	szPlateNumber = new byte[NET_MAX_PLATE_NUMBER_LEN];  // 车牌号码 
+		public byte[]      			  	szPlateNumber = new byte[NET_MAX_PLATE_NUMBER_LEN];  // 车牌号码
 		public int          			emPlateType;                               		     // 车牌类型,对应EM_NET_PLATE_TYPE
 		public int          			emPlateColor;                              		     // 车牌颜色 ，对应EM_NET_PLATE_COLOR_TYPE
 		public int          			emVehicleType;                             		     // 车辆类型 ，对应EM_NET_VEHICLE_TYPE
@@ -9553,19 +9553,19 @@ public interface NetSDKLib extends Library {
 		public int                      nAuthrityNum;                       				 // 权限个数
 		public NET_AUTHORITY_TYPE[]  	stAuthrityTypes = (NET_AUTHORITY_TYPE[])new NET_AUTHORITY_TYPE().toArray(NET_MAX_AUTHORITY_LIST_NUM); // 权限列表 , 白名单仅有
 		public int           		  	emControlType;                    			         // 布控类型 ,黑名单仅有，对应EM_NET_TRAFFIC_CAR_CONTROL_TYPE
-		  
+
 		public static class ByReference extends NET_TRAFFIC_LIST_RECORD implements Structure.ByReference {}
-		  
+
 		public NET_TRAFFIC_LIST_RECORD() {
 			this.dwSize = this.size();
 		}
     }
-    
+
     // 交通流量记录
     public static class NET_RECORD_TRAFFIC_FLOW_STATE extends MyStructure {
         public int                       dwSize;
         public int                       nRecordNum;                 // 记录编号
-        public int                       nChannel;                   // 通道号   
+        public int                       nChannel;                   // 通道号
         public int                       nLane;                      // 车道号
         public int                       nVehicles;                  // 通过车辆总数
         public float                     fAverageSpeed;              // 平均车速,单位km/h
@@ -9577,18 +9577,18 @@ public interface NetSDKLib extends Library {
         public int                       nMediumVehicles;            // 中型车交通量(6米<车长<9米),辆/单位时间
         public int                       nSmallVehicles;             // 小车交通量(4米<车长<6米),辆/单位时间,
         public float                     fBackOfQueue;               // 排队长度,单位：米, 从信号交叉口停车线到上游排队车辆末端之间的距离
-        
+
         public NET_RECORD_TRAFFIC_FLOW_STATE() {
         	this.dwSize = this.size();
         }
     }
- 
+
     //权限列表 , 白名单仅有
     public static class NET_AUTHORITY_TYPE extends MyStructure {
-    	  public int                     dwSize; 
+    	  public int                     dwSize;
     	  public int              		 emAuthorityType;                 		 //权限类型，对应EM_NET_AUTHORITY_TYPE
     	  public boolean         		 bAuthorityEnable;                 		 //权限使能
-    	  
+
     	  public NET_AUTHORITY_TYPE() {
     		  this.dwSize = this.size();
     	  }
@@ -9599,69 +9599,69 @@ public interface NetSDKLib extends Library {
     	public static final int     	NET_AUTHORITY_UNKNOW = 0;
     	public static final int		    NET_AUTHORITY_OPEN_GATE = 1;             //开闸权限
     }
-    
+
     // CLIENT_FindRecord接口输出参数
     public static class NET_OUT_FIND_RECORD_PARAM extends MyStructure {
     	 public int                     dwSize;          						// 结构体大小
     	 public LLong                    lFindeHandle; 						    // 查询记录句柄,唯一标识某次查询
-    	 
+
     	 public NET_OUT_FIND_RECORD_PARAM() {
     		 this.dwSize = this.size();
     	 }
     }
-    
+
     // CLIENT_FindNextRecord接口输入参数
     public static class NET_IN_FIND_NEXT_RECORD_PARAM extends MyStructure {
         public int                      dwSize;          						// 结构体大小
         public LLong              		lFindeHandle;    						// 查询句柄
         public int                      nFileCount;      						// 当前想查询的记录条数
-        
+
         public NET_IN_FIND_NEXT_RECORD_PARAM() {
         	this.dwSize = this.size();
         }
     }
-    
+
     //CLIENT_FindNextRecord接口输出参数
     public static class NET_OUT_FIND_NEXT_RECORD_PARAM extends MyStructure {
         public int                     dwSize;          						// 结构体大小
         public Pointer                 pRecordList;     				   	 	// 记录列表,用户分配内存，对应 交通黑白名单记录信息 NET_TRAFFIC_LIST_RECORD
         public int                     nMaxRecordNum;   						// 列表记录数
         public int                     nRetRecordNum;   						// 查询到的记录条数,当查询到的条数小于想查询的条数时,查询结束
-        
+
         public NET_OUT_FIND_NEXT_RECORD_PARAM() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // CLIENT_QueryRecordCount接口输入参数
     public static class NET_IN_QUEYT_RECORD_COUNT_PARAM extends MyStructure
     {
 	    public int dwSize;//结构体大小
 	    public LLong lFindeHandle;//查询句柄
-	    
+
         public NET_IN_QUEYT_RECORD_COUNT_PARAM() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // CLIENT_QueryRecordCount接口输出参数
     public static class NET_OUT_QUEYT_RECORD_COUNT_PARAM extends MyStructure
     {
 	    public int dwSize;//结构体大小
 	    public int nRecordCount;//设备返回的记录条数
-	    
+
         public NET_OUT_QUEYT_RECORD_COUNT_PARAM() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // CLIENT_OperateTrafficList接口输入参数,
     public static class NET_IN_OPERATE_TRAFFIC_LIST_RECORD extends MyStructure {
         public int                       dwSize;
         public int                       emOperateType;  					 // emOperateType对应EM_RECORD_OPERATE_TYPE
         public int                       emRecordType;    					 // 要操作记录信息类型,emRecordType对应EM_NET_RECORD_TYPE
         public Pointer                   pstOpreateInfo;  				    // 对应 添加NET_INSERT_RECORD_INFO/ 删除NET_REMOVE_RECORD_INFO / 修改NET_UPDATE_RECORD_INFO
-        
+
         public NET_IN_OPERATE_TRAFFIC_LIST_RECORD() {
         	this.dwSize = this.size();
         }
@@ -9670,7 +9670,7 @@ public interface NetSDKLib extends Library {
     public static class NET_INSERT_RECORD_INFO extends MyStructure {
         public int                       			dwSize;
         public NET_TRAFFIC_LIST_RECORD.ByReference  pRecordInfo = new NET_TRAFFIC_LIST_RECORD.ByReference();      		// 记录内容信息
-                    
+
         public NET_INSERT_RECORD_INFO () {
         	this.dwSize = this.size();
         }
@@ -9679,7 +9679,7 @@ public interface NetSDKLib extends Library {
     public static class NET_REMOVE_RECORD_INFO extends MyStructure {
         public int                      dwSize;
         public int                      nRecordNo;      			    	 // 之前查询到的记录号，对应NET_TRAFFIC_LIST_RECORD里的nRecordNo
-        
+
         public NET_REMOVE_RECORD_INFO() {
         	this.dwSize = this.size();
         }
@@ -9688,12 +9688,12 @@ public interface NetSDKLib extends Library {
     public static class NET_UPDATE_RECORD_INFO extends MyStructure{
         public int                  			    dwSize;
         public NET_TRAFFIC_LIST_RECORD.ByReference 	pRecordInfo;    	   // 记录内容信息 ，对应  NET_TRAFFIC_LIST_RECORD
-        
+
         public NET_UPDATE_RECORD_INFO() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 黑白名单操作类型
     public static class EM_RECORD_OPERATE_TYPE extends MyStructure {
         public static final int NET_TRAFFIC_LIST_INSERT = 0;               // 增加记录操作
@@ -9701,17 +9701,17 @@ public interface NetSDKLib extends Library {
         public static final int NET_TRAFFIC_LIST_REMOVE = 2;               // 删除记录操作
         public static final int NET_TRAFFIC_LIST_MAX = 3;
     }
-    
+
     // CLIENT_OperateTrafficList接口输出参数,现阶段实现的操作接口中,只有返回nRecordNo的操作,stRetRecord暂时不可用,是null
     public static class NET_OUT_OPERATE_TRAFFIC_LIST_RECORD extends MyStructure {
         public int                     dwSize;
-        public int                     nRecordNo;        //记录号 
-        
+        public int                     nRecordNo;        //记录号
+
         public NET_OUT_OPERATE_TRAFFIC_LIST_RECORD() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 记录集操作参数
     public static class NET_CTRL_RECORDSET_PARAM extends MyStructure {
         public int               dwSize;
@@ -9719,21 +9719,21 @@ public interface NetSDKLib extends Library {
         public Pointer           pBuf;                           // 新增\更新\查询\导入时,为记录集信息缓存,详见EM_NET_RECORD_TYPE注释
                                                                  // 删除时,为记录编号(int型)
         public int               nBufLen;                        // 记录集信息缓存大小
-        
+
         public NET_CTRL_RECORDSET_PARAM() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 黑白名单上传
     public static class NETDEV_BLACKWHITE_LIST_INFO extends MyStructure {
         public byte[]        						  szFile = new byte[MAX_PATH_STOR];      // 黑白名单文件路径
         public int                                    nFileSize;            				 // 升级文件大小
-        public byte                  			      byFileType;         					 // 当前文件类型,0-黑名单,1-白名单 
+        public byte                  			      byFileType;         					 // 当前文件类型,0-黑名单,1-白名单
         public byte                   			      byAction;            					 // 动作,0-覆盖,1-追加
         public byte[]      		   					  byReserved = new byte[126];            // 保留
     }
-    
+
     // GPS信息(车载设备)
     public static class GPS_Info extends MyStructure {
         public NET_TIME           revTime;                          // 定位时间
@@ -9746,36 +9746,36 @@ public interface NetSDKLib extends Library {
         public short              starCount;                     	// 定位星数,无符号
         public int           	  antennaState;                 	// 天线状态(true 好,false 坏)
         public int                orientationState;              	// 定位状态(true 定位,false 不定位)
-        
+
         public static class ByValue extends GPS_Info implements Structure.ByValue { }
     }
-    
+
     // 报警状态信息
     public static class ALARM_STATE_INFO extends MyStructure {
         public int                nAlarmCount;                       // 发生的报警事件个数
         public int[]              nAlarmState = new int[128];        // 发生的报警事件类型
         public byte[]             byRserved   = new byte[128];       // 保留字节
-        
+
         public static class ByValue extends ALARM_STATE_INFO implements Structure.ByValue { }
     }
-    
+
     // 对应CLIENT_SearchDevicesByIPs接口
     public static class DEVICE_IP_SEARCH_INFO extends MyStructure {
         public int               dwSize;                                    		 		    // 结构体大小
         public int               nIpNum;                                				    	// 当前搜索的IP个数
-        public DEVICE_IP[]       szIPArr       
+        public DEVICE_IP[]       szIPArr
         					     = (DEVICE_IP[])new DEVICE_IP().toArray(NET_MAX_SAERCH_IP_NUM); // 具体待搜索的IP信息数组
-        
+
         public DEVICE_IP_SEARCH_INFO() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 具体待搜索的IP信息
     public static class DEVICE_IP extends MyStructure {
     	 public byte[]            szIP        = new byte[64];          // 具体待搜索的IP信息
     }
-    
+
     // CLIENT_UploadRemoteFile 接口输入参数(上传文件到设备)
     public static class NET_IN_UPLOAD_REMOTE_FILE extends MyStructure {
         public int               dwSize;
@@ -9783,21 +9783,21 @@ public interface NetSDKLib extends Library {
         public Pointer         	 pszFileDst;                     	// 目标文件路径
         public Pointer         	 pszFolderDst;                   	// 目标文件夹路径：可为NULL, NULL时设备使用默认路径
         public int          	 nPacketLen;                     	// 文件分包大小(字节): 0表示不分包
-        
+
         public NET_IN_UPLOAD_REMOTE_FILE(){
         	this.dwSize = this.size();
         }
-    } 
-    
+    }
+
     // CLIENT_UploadRemoteFile 接口输出参数(上传文件到设备)
     public static class NET_OUT_UPLOAD_REMOTE_FILE extends MyStructure {
         public int               dwSize;
-        
+
         public NET_OUT_UPLOAD_REMOTE_FILE() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // CLIENT_ListRemoteFile 接口输入参数
     public static class NET_IN_LIST_REMOTE_FILE extends MyStructure
     {
@@ -9805,11 +9805,11 @@ public interface NetSDKLib extends Library {
         public String         		pszPath;                        // 路径
         public int                	bFileNameOnly;                  // 只获取文件名称, 不返回文件夹信息, 文件信息中只有文件名有效, BOOL类型
         public int 					emCondition;                    // 指定获取文件的条件, 对应  NET_REMOTE_FILE_COND
-        
+
         public NET_IN_LIST_REMOTE_FILE() {
         	this.dwSize = this.size();
         }
-    } 
+    }
 
     // CLIENT_ListRemoteFile 接口输出参数
     public static class NET_OUT_LIST_REMOTE_FILE extends MyStructure
@@ -9818,12 +9818,12 @@ public interface NetSDKLib extends Library {
         public Pointer    			 pstuFiles;                  // 文件信息数组, 用户分配内存, 对应 NET_REMOTE_FILE_INFO[],大小为sizeof(NET_REMOTE_FILE_INFO)*nMaxFileCount
         public int                   nMaxFileCount;              // 文件信息数组大小, 用户填写
         public int                   nRetFileCount;              // 返回的文件数量
-        
+
         public NET_OUT_LIST_REMOTE_FILE() {
         	this.dwSize = this.size();
         }
-    } 
-    
+    }
+
     // 文件/目录信息
     public static class NET_REMOTE_FILE_INFO extends MyStructure
     {
@@ -9834,31 +9834,31 @@ public interface NetSDKLib extends Library {
         public NET_TIME             stuModifyTime;                  			// 修改时间
         public long                 nFileSize;                      			// 文件大小
         public byte[]               szFileType = new byte[NET_FILE_TYPE_LEN];   // 文件类型
-        
+
         public NET_REMOTE_FILE_INFO() {
         	this.dwSize = this.size();
         }
-    } 
-    
+    }
+
     // 获取文件的条件
     public static class NET_REMOTE_FILE_COND extends MyStructure
     {
         public static final int NET_REMOTE_FILE_COND_NONE = 0;              // 无条件
         public static final int NET_REMOTE_FILE_COND_VOICE = 1;             // 语音联动的文件,*无法*按路径获取,*只能*获取获取文件名称
-    } 
-    
+    }
+
     // CLIENT_RemoveRemoteFiles 接口输入参数
     public static class NET_IN_REMOVE_REMOTE_FILES extends MyStructure
     {
         public int                 dwSize;
         public Pointer             pszPathPointer;         // 文件路径数组指针,对应 FILE_PATH[]
         public int                 nFileCount;             // 文件路径数量
-        
-        public NET_IN_REMOVE_REMOTE_FILES() { 
+
+        public NET_IN_REMOVE_REMOTE_FILES() {
         	this.dwSize = this.size();
         }
-    } 
-    
+    }
+
     public static class FILE_PATH extends MyStructure {
     	public String pszPath;
     }
@@ -9867,45 +9867,45 @@ public interface NetSDKLib extends Library {
    public static class NET_OUT_REMOVE_REMOTE_FILES extends MyStructure
     {
         public int               dwSize;
-        
+
         public NET_OUT_REMOVE_REMOTE_FILES() {
         	this.dwSize = this.size();
         }
-    } 
-    
+    }
+
     // CLIENT_ParkingControlAttachRecord()接口输入参数
     public static class NET_IN_PARKING_CONTROL_PARAM extends MyStructure {
         public int                              dwSize;
         public StdCallCallback					cbCallBack;                 // 数据回调函数,fParkingControlRecordCallBack 回调
         public Pointer                      	dwUser;                     // 用户定义参数
-        
+
         public NET_IN_PARKING_CONTROL_PARAM() {
         	this.dwSize = this.size();
         }
-    } 
+    }
 
     // CLIENT_ParkingControlDetachRecord()接口输出参数
     public static class NET_OUT_PARKING_CONTROL_PARAM extends MyStructure {
         public int    							dwSize;
-        
+
         public NET_OUT_PARKING_CONTROL_PARAM() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 过车记录信息
     public static class NET_CAR_PASS_ITEM extends MyStructure {
-        public int                      dwSize; 
+        public int                      dwSize;
         public NET_TIME                 stuTime;          // 过车时间
         public int                      dwCardNo;         // 卡号
         public int      			    emCardType;       // 智能停车系统出入口机IC卡用户类型,对应 NET_ECK_IC_CARD_USER_TYPE
         public int     				    emFlag;           // 过车记录类型，对应 NET_ECK_CAR_PASS_FLAG
-        
+
         public NET_CAR_PASS_ITEM(){
         	this.dwSize = this.size();
         }
     }
-    
+
     // 智能停车系统出入口机IC卡用户类型
     public static class NET_ECK_IC_CARD_USER_TYPE extends MyStructure {
     	public static final int NET_ECK_IC_CARD_USER_UNKNOWN     = 0;
@@ -9915,13 +9915,13 @@ public interface NetSDKLib extends Library {
     	public static final int NET_ECK_IC_CARD_USER_ADMIN		 = 4;               // 管理员
     	public static final int NET_ECK_IC_CARD_USER_BLACK_LIST  = 5;               // 黑名单
     }
-    
+
     // 智能停车系统出入口机异常过车记录类型
     public static class NET_ECK_CAR_PASS_FLAG extends MyStructure {
     	public static final int NET_ECK_CAR_PASS_FLAG_NORMAL   = 0;                 // 正常
     	public static final int NET_ECK_CAR_PASS_FLAG_ABNORMAL = 1;                 // 异常
     	public static final int NET_ECK_CAR_PASS_FLAG_ALL      = 2;                 // 全部
-    } 
+    }
 
     // CLIENT_ParkingControlStartFind接口输入参数******************
     public static class NET_IN_PARKING_CONTROL_START_FIND_PARAM extends MyStructure {
@@ -9936,31 +9936,31 @@ public interface NetSDKLib extends Library {
         public int 					    emCardType;      // 卡类型,对应 NET_ECK_IC_CARD_USER_TYPE
         public int                      bFlag;           // 过车标记是否有效
         public int                      emFlag;          // 过车标记，对应 NET_ECK_CAR_PASS_FLAG
-        
+
         public NET_IN_PARKING_CONTROL_START_FIND_PARAM() {
         	this.dwSize = this.size();
         }
-    } 
+    }
 
     // CLIENT_ParkingControlStartFind接口输出参数
     public static class NET_OUT_PARKING_CONTROL_START_FIND_PARAM extends MyStructure {
         public int                     dwSize;          // 结构体大小
         public int                     dwTotalCount;    // 符合此次查询条件的结果总条数
-        
+
         public NET_OUT_PARKING_CONTROL_START_FIND_PARAM(){
         	this.dwSize = this.size();
         }
     }
-    
+
     // CLIENT_ParkingControlDoFind接口输入参数*******************
     public static class NET_IN_PARKING_CONTROL_DO_FIND_PARAM extends MyStructure {
         public int                     dwSize;          // 结构体大小
         public int                     dwFileCount;     // 当前想查询的记录条数
-        
+
         public NET_IN_PARKING_CONTROL_DO_FIND_PARAM(){
         	this.dwSize = this.size();
         }
-    } 
+    }
 
     // CLIENT_ParkingControlDoFind接口输出参数
     public static class NET_OUT_PARKING_CONTROL_DO_FIND_PARAM extends MyStructure{
@@ -9968,77 +9968,77 @@ public interface NetSDKLib extends Library {
         public Pointer      				   pstuRecordList;  // 记录列表,用户分配内存,对应NET_CAR_PASS_ITEM[],大小nMaxRecordNum个NET_CAR_PASS_ITEM
         public int                     		   nMaxRecordNum;   // 列表记录数
         public int                     	 	   nRetRecordNum;   // 查询到的记录条数,当查询到的条数小于想查询的条数时,查询结束
-        
+
         public NET_OUT_PARKING_CONTROL_DO_FIND_PARAM(){
         	this.dwSize = this.size();
         }
-    } 
-    
+    }
+
     // CLIENT_ParkingControlAttachParkInfo()接口输入参数
-    public static class NET_IN_PARK_INFO_PARAM extends MyStructure 
+    public static class NET_IN_PARK_INFO_PARAM extends MyStructure
     {
         public int                             dwSize;
         public NET_PARK_INFO_FILTER            stuFilter;
         public StdCallCallback			       cbCallBack;        // 数据回调函数,fParkInfoCallBack 回调
         public Pointer                         dwUser;            // 用户定义参数
-        
+
         public NET_IN_PARK_INFO_PARAM() {
         	this.dwSize = this.size();
         }
-    } 
-    
+    }
+
     // CLIENT_ParkingControlAttachParkInfo()接口输出参数
     public static class NET_OUT_PARK_INFO_PARAM extends MyStructure
     {
         public int    				dwSize;
-        
+
         public NET_OUT_PARK_INFO_PARAM() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 车位检测器信息查询条件
     public static class NET_PARK_INFO_FILTER extends MyStructure
     {
-        public int           dwSize; 
+        public int           dwSize;
         public int           dwNum;                               // 车位检测器类型数量
         public int[] 		 emType = new int[NET_ECK_PARK_DETECTOR_TYPE.NET_ECK_PARK_DETECTOR_TYPE_ALL];   // 车位检测器类型
-        
+
         public NET_PARK_INFO_FILTER() {
         	this.dwSize = this.size();
         }
-    } 
-    
+    }
+
     // 车位检测器类型
     public static class NET_ECK_PARK_DETECTOR_TYPE extends MyStructure
     {
         public static final int NET_ECK_PARK_DETECTOR_TYPE_SONIC  = 0;         // 超声波探测器
         public static final int NET_ECK_PARK_DETECTOR_TYPE_CAMERA = 1;         // 相机检测器
         public static final int NET_ECK_PARK_DETECTOR_TYPE_ALL	  = 2;
-    } 
-    
+    }
+
     // 车位信息
     public static class NET_PARK_INFO_ITEM extends MyStructure
     {
-        public int                 dwSize; 
+        public int                 dwSize;
         public byte[]              szParkNo = new byte[NET_COMMON_STRING_32];   // 车位号
         public int  			   emState;                         			// 车位状态,对应  NET_ECK_PARK_STATE
         public int                 dwScreenIndex;                   			// 车位号显示对应的诱导屏分屏号
         public int                 dwFreeParkNum;                   			// 屏号显示的当前空余车位数目
-        
+
         public NET_PARK_INFO_ITEM(){
         	this.dwSize = this.size();
         }
     }
-    
+
     // 智能停车系统车位状态
     public static class NET_ECK_PARK_STATE extends MyStructure
     {
         public static final int NET_ECK_PARK_STATE_UNKOWN = 0;
         public static final int NET_ECK_PARK_STATE_PARK   = 1;       // 车位有车
         public static final int NET_ECK_PARK_STATE_NOPARK = 2;       // 车位无车
-    } 
-    
+    }
+
     // 智能停车系统出入口机设置车位信息 参数 NET_CTRL_ECK_SET_PARK_INFO
     public static class NET_CTRL_ECK_SET_PARK_INFO_PARAM extends MyStructure
     {
@@ -10051,7 +10051,7 @@ public interface NetSDKLib extends Library {
         	this.dwSize = this.size();
         }
     }
-    
+
     // CLIENT_PowerControl接口输入参数(电视墙电源控制)
     public static class NET_IN_WM_POWER_CTRL extends MyStructure
     {
@@ -10060,43 +10060,43 @@ public interface NetSDKLib extends Library {
         public String          		pszBlockID;                 // 区块ID, NULL/""-所有区块
         public int                  nTVID;                      // 显示单元序号, -1表示区块中所有显示单元
         public int                  bPowerOn;                   // 是否打开电源
-        
+
         public NET_IN_WM_POWER_CTRL() {
         	this.dwSize = this.size();
         }
-    } 
+    }
 
     // CLIENT_PowerControl接口输出参数(电视墙电源控制)
     public static class NET_OUT_WM_POWER_CTRL extends MyStructure
     {
         public int                 dwSize;
-        
+
         public NET_OUT_WM_POWER_CTRL() {
         	this.dwSize = this.size();
         }
-    } 
-    
+    }
+
     // CLIENT_LoadMonitorWallCollection接口输入参数(载入电视墙预案)
     public static class NET_IN_WM_LOAD_COLLECTION extends MyStructure
     {
         public int                dwSize;
         public int                nMonitorWallID;             // 电视墙序号
         public Pointer         	  pszName;                    // 预案名称
-        
+
         public NET_IN_WM_LOAD_COLLECTION() {
         	this.dwSize = this.size();
         }
-    } 
+    }
 
     // CLIENT_LoadMonitorWallCollection接口输出参数(载入电视墙预案)
     public static class NET_OUT_WM_LOAD_COLLECTION extends MyStructure
     {
         public int               dwSize;
-        
+
         public NET_OUT_WM_LOAD_COLLECTION() {
         	this.dwSize = this.size();
         }
-    } 
+    }
 
     // CLIENT_SaveMonitorWallCollection接口输入参数(保存电视墙预案)
     public static class NET_IN_WM_SAVE_COLLECTION extends MyStructure
@@ -10105,22 +10105,22 @@ public interface NetSDKLib extends Library {
         public int               nMonitorWallID;             // 电视墙序号
         public Pointer           pszName;                    // 预案名称
         public String            pszControlID;               // 控制id
-        
+
         public NET_IN_WM_SAVE_COLLECTION() {
         	this.dwSize = this.size();
         }
-    } 
+    }
 
     // CLIENT_SaveMonitorWallCollection接口输出参数(保存电视墙预案)
     public static class NET_OUT_WM_SAVE_COLLECTION extends MyStructure
     {
         public int               dwSize;
-        
+
         public NET_OUT_WM_SAVE_COLLECTION() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // 分割模式
     public static class NET_SPLIT_MODE extends MyStructure
     {
@@ -10143,7 +10143,7 @@ public interface NetSDKLib extends Library {
         public static final int NET_COMPOSITE_SPLIT_1 = NET_SPLIT_PIP_BASE * 3 + 1;// 融合屏成员1分割
         public static final int NET_COMPOSITE_SPLIT_4 = NET_SPLIT_PIP_BASE * 3 + 4;// 融合屏成员4分割
     }
-    
+
     // 区块窗口信息
     public static class NET_WINDOW_COLLECTION extends MyStructure
     {
@@ -10159,13 +10159,13 @@ public interface NetSDKLib extends Library {
         public int               nVideoStream;                   // 视频码流类型
         public int               nAudioChannel;                  // 音频通道
         public int               nAudioStream;                   // 音频码流类型
-        public int               nUniqueChannel;                 // 设备内统一编号的唯一通道号       
-        
+        public int               nUniqueChannel;                 // 设备内统一编号的唯一通道号
+
         public NET_WINDOW_COLLECTION() {
         	this.dwSize = this.size();
         }
-    } 
-    
+    }
+
     // 区块收藏
     public static class NET_BLOCK_COLLECTION extends MyStructure
     {
@@ -10175,14 +10175,14 @@ public interface NetSDKLib extends Library {
         public int                   			  nWndsCount;                    							  // 窗口数量
         public byte[]                			  szName        = new byte[NET_DEVICE_NAME_LEN];    		  // 收藏夹名称
         public int                   			  nScreen;                       							  // 输出通道号, 包括拼接屏
-        public byte[]                  			  szCompositeID = new byte[NET_DEV_ID_LEN_EX]; 				  // 拼接屏ID    
+        public byte[]                  			  szCompositeID = new byte[NET_DEV_ID_LEN_EX]; 				  // 拼接屏ID
         public Pointer  		  				  pstuWndsEx;                  							      // 窗口信息数组指针 NET_WINDOW_COLLECTION[] , 由用户分配内存. 当stuWnds数组大小不够用时可以使用
         public int                  			  nMaxWndsCountEx;               							  // 最大窗口数量, 用户填写. pstuWndsEx数组的元素个数
         public int                  			  nRetWndsCountEx;               							  // 返回窗口数量
-        
+
         public NET_BLOCK_COLLECTION() {
         	this.dwSize = this.size();
-        }      
+        }
     }
 
     // 电视墙显示单元
@@ -10192,11 +10192,11 @@ public interface NetSDKLib extends Library {
         public byte[]            szDeviceID = new byte[NET_DEV_ID_LEN];          // 设备ID, 本机时为""
         public int               nChannel;                           		     // 通道号
         public byte[]            szName 	= new byte[NET_DEV_NAME_LEN];        // 屏幕名称
-        
+
         public NET_MONITORWALL_OUTPUT() {
         	this.dwSize = this.size();
         }
-    } 
+    }
 
     // 电视墙显示区块
     public static class NET_MONITORWALL_BLOCK extends MyStructure
@@ -10213,15 +10213,15 @@ public interface NetSDKLib extends Library {
         public int               nMaxOutputCount;                			   // 显示单元数组大小, 用户填写
         public int               nRetOutputCount;                			   // 返回的显示单元数量
         public byte[]            szBlockType = new byte[NET_COMMON_STRING_32]; // 显示单元组类型,为支持由接收卡组成单元的小间距LED区块而增加该字段,其他类型
-        
+
         public NET_MONITORWALL_BLOCK() {
         	this.dwSize = this.size();
         }
-    } 
-    
-    public static class NET_TSECT_WEEK_DAY extends MyStructure 
+    }
+
+    public static class NET_TSECT_WEEK_DAY extends MyStructure
     {
-    	public NET_TSECT[]       stuPowerSchedule = (NET_TSECT[])new NET_TSECT().toArray(NET_TSCHE_SEC_NUM); 
+    	public NET_TSECT[]       stuPowerSchedule = (NET_TSECT[])new NET_TSECT().toArray(NET_TSCHE_SEC_NUM);
     }
 
     // 电视墙配置
@@ -10236,11 +10236,11 @@ public interface NetSDKLib extends Library {
         public int                nRetBlockCount;                 			// 返回的显示区块数量
         public int                bDisable;                       			// 是否禁用, 0-该电视墙有效, 1-该电视墙无效
         public byte[]             szDesc = new byte[NET_COMMON_STRING_256]; // 电视墙描述信息
-        
+
         public NET_MONITORWALL() {
         	this.dwSize = this.size();
         }
-    } 
+    }
 
     // 电视墙预案
     public static class NET_MONITORWALL_COLLECTION extends MyStructure
@@ -10251,40 +10251,40 @@ public interface NetSDKLib extends Library {
         public int                 	  nBlocksCount;                  							// 区块数量
         public byte[]                 szControlID = new byte[NET_DEV_ID_LEN_EX]; 				// 控制ID
         public NET_MONITORWALL        stuMonitorWall;                							// 电视墙配置
-        
+
         public NET_MONITORWALL_COLLECTION() {
         	this.dwSize = this.size();
-        	
+
         	for(int i = 0; i < NET_MAX_BLOCK_NUM; i++) {
         		stuBlocks[i] = new NET_BLOCK_COLLECTION();
         	}
         }
-    } 
+    }
 
     // CLIENT_GetMonitorWallCollections接口输入参数(获取电视墙预案信息)
     public static class NET_IN_WM_GET_COLLECTIONS extends MyStructure
     {
         public int                	dwSize;
         public int                  nMonitorWallID;                // 电视墙ID
-        
+
         public NET_IN_WM_GET_COLLECTIONS() {
         	this.dwSize = this.size();
         }
-    } 
+    }
 
     // CLIENT_GetMonitorWallCollections接口输出参数(获取电视墙预案信息)
     public static class NET_OUT_WM_GET_COLLECTIONS extends MyStructure
     {
-        public int                   dwSize;    
+        public int                   dwSize;
         public Pointer			   	 pCollections;  		      // 电视墙预案数组, 对应   NET_MONITORWALL_COLLECTION 指针
         public int                   nMaxCollectionsCount;   	  // 电视墙预案数组大小
         public int                   nCollectionsCount;      	  // 电视墙预案数量
-        
+
         public NET_OUT_WM_GET_COLLECTIONS() {
         	this.dwSize = this.size();
         }
-    } 
-    
+    }
+
     // 级联权限验证信息
     public static class NET_CASCADE_AUTHENTICATOR extends MyStructure
     {
@@ -10292,22 +10292,22 @@ public interface NetSDKLib extends Library {
         public byte[]               szUser	   = new byte[NET_NEW_USER_NAME_LENGTH];    // 用户名
         public byte[]               szPwd  	   = new byte[NET_NEW_USER_PSW_LENGTH];     // 密码
         public byte[]               szSerialNo = new byte[NET_SERIALNO_LEN];        	// 设备序列号
-        
+
         public NET_CASCADE_AUTHENTICATOR() {
         	this.dwSize = this.size();
         }
     }
-    
+
 
     public static class EM_SRC_PUSHSTREAM_TYPE extends MyStructure
-    {   
+    {
         public static final int EM_SRC_PUSHSTREAM_AUTO			= 0;       // 设备端根据码流头自动识别，默认值
         public static final int EM_SRC_PUSHSTREAM_HIKVISION		= 1;       // 海康私有码流
         public static final int EM_SRC_PUSHSTREAM_PS			= 2;       // PS流
         public static final int EM_SRC_PUSHSTREAM_TS			= 3;       // TS流
         public static final int EM_SRC_PUSHSTREAM_SVAC			= 4;       // SVAC码流
     }
-    
+
     // 显示源
     public static class NET_SPLIT_SOURCE extends MyStructure
     {
@@ -10365,12 +10365,12 @@ public interface NetSDKLib extends Library {
         public byte[]             szPwdEx  = new byte[NET_NEW_USER_PSW_LENGTH]; // 密码
         public int  			  emPushStream;          			        	// 推流方式的码流类型,只有byConnType为TCP-Push或UDP-Push才有该字段,对应  EM_SRC_PUSHSTREAM_TYPE
         public NET_RECT			  stuSRect;										// 视频源区域,当szDeviceID不为空时有效
-    	
+
         public NET_SPLIT_SOURCE() {
         	this.dwSize = this.size();
         }
-    } 
-    
+    }
+
     // 矩阵子卡信息
     public static class NET_MATRIX_CARD extends MyStructure
     {
@@ -10398,7 +10398,7 @@ public interface NetSDKLib extends Library {
         public int               nVideoOutChnMin;                        // 视频输出通道号最小值
         public int               nVideoOutChnMax;                        // 视频输出通道号最大值
         public int               nAudioOutChnMin;                        // 音频输出通道号最小值
-        public int               nAudioOutChnMax;                        // 音频输出通道号最大值    
+        public int               nAudioOutChnMax;                        // 音频输出通道号最大值
         public int               nVideoEncChnMin;                        // 视频编码通道号最小值
         public int               nVideoEncChnMax;                        // 视频编码通道号最大值
         public int               nAudioEncChnMin;                        // 音频编码通道号最小值
@@ -10424,36 +10424,36 @@ public interface NetSDKLib extends Library {
         public NET_TIME          stuBuildTime;                           // 编译时间
         public byte[]            szBIOSVersion = new byte[NET_COMMON_STRING_64];    // BIOS版本号
         public byte[]			 szMAC         = new byte[NET_MACADDR_LEN];			// MAC地址
-        
+
         public NET_MATRIX_CARD() {
         	this.dwSize = this.size();
         }
-    } 
-    
+    }
+
     // 矩阵子卡列表
     public static class NET_MATRIX_CARD_LIST extends MyStructure
     {
         public int               dwSize;
         public int               nCount;                                 				  // 子卡数量
         public NET_MATRIX_CARD[] stuCards = new NET_MATRIX_CARD[NET_MATRIX_MAX_CARDS];    // 子卡列表
-        
+
         public NET_MATRIX_CARD_LIST() {
         	this.dwSize = this.size();
         	for(int i = 0; i < NET_MATRIX_MAX_CARDS; i++) {
         		stuCards[i] = new NET_MATRIX_CARD();
         	}
         }
-    } 
-    
+    }
+
     // CLIENT_FindFramInfo 接口输入参数
     public static class NET_IN_FIND_FRAMEINFO_PRAM extends MyStructure
     {
-        public int                 dwSize;                   // 结构体大小 
+        public int                 dwSize;                   // 结构体大小
         public boolean             abFileName;               // 文件名是否作为有效的查询条件,若文件名有效,则不用填充文件信息（stRecordInfo）
         public byte[]              szFileName = new byte[MAX_PATH];     // 文件名
         public NET_RECORDFILE_INFO stuRecordInfo;            // 文件信息
         public int                 dwFramTypeMask;           // 帧类型掩码,详见“帧类型掩码定义”
-        
+
         public NET_IN_FIND_FRAMEINFO_PRAM() {
         	this.dwSize = this.size();
         }
@@ -10462,78 +10462,78 @@ public interface NetSDKLib extends Library {
     // CLIENT_FindFramInfo 接口输出参数
     public static class NET_OUT_FIND_FRAMEINFO_PRAM extends MyStructure
     {
-        public int                 dwSize;                 // 结构体大小 
+        public int                 dwSize;                 // 结构体大小
         public LLong          	   lFindHandle;            // 文件查找句柄
-        
+
         public NET_OUT_FIND_FRAMEINFO_PRAM() {
         	this.dwSize = this.size();
         }
     }
-    
+
     // CLIENT_FileStreamClearTags / CLIENT_FileStreamSetTags 接口输入参数
     public static class NET_IN_FILE_STREAM_TAGS_INFO extends MyStructure
     {
-    	public int				   dwSize;					// 结构体大小 
+    	public int				   dwSize;					// 结构体大小
     	public int				   nArrayCount;				// 标签数组个数
-    	public Pointer			   pstuTagInfo;  			// 标签数组，各项内容关系为"且", 用户分配内存,大小为sizeof( NET_FILE_STREAM_TAG_INFO )*nArrayCount						
-    
+    	public Pointer			   pstuTagInfo;  			// 标签数组，各项内容关系为"且", 用户分配内存,大小为sizeof( NET_FILE_STREAM_TAG_INFO )*nArrayCount
+
         public NET_IN_FILE_STREAM_TAGS_INFO() {
         	this.dwSize = this.size();
         }
-    } 
+    }
 
     // CLIENT_FileStreamClearTags / CLIENT_FileStreamSetTags 接口输出参数
     public static class NET_OUT_FILE_STREAM_TAGS_INFO extends MyStructure
     {
-    	public int				  dwSize;			       // 结构体大小 
-    	
+    	public int				  dwSize;			       // 结构体大小
+
     	public NET_OUT_FILE_STREAM_TAGS_INFO() {
     		this.dwSize = this.size();
     	}
-    } 
-    
+    }
+
     // 标签数组
     public static class NET_FILE_STREAM_TAG_INFO extends MyStructure
     {
-    	public int				dwSize;											// 结构体大小 
+    	public int				dwSize;											// 结构体大小
     	public NET_TIME			stuTime;										// 标签时间
     	public byte[]			szContext = new byte[NET_COMMON_STRING_64];		// 标签内容，中文必须使用utf8编码
     	public byte[]			szUserName = new byte[NET_COMMON_STRING_32];	// 用户名，中文必须使用utf8编码，EVS定制增加
     	public byte[]			szChannelName = new byte[NET_COMMON_STRING_64]; // 通道名称，中文必须使用utf8编码，EVS定制增加
     	public int 				nDuration;							            // 打标的录像持续时间，单位秒
-    	
+
     	public NET_FILE_STREAM_TAG_INFO() {
     		this.dwSize = this.size();
     	}
-    } 
-    
+    }
+
     // CLIENT_FileStreamGetTags 接口输入参数
     public static class NET_IN_FILE_STREAM_GET_TAGS_INFO extends MyStructure
     {
-    	public int			   dwSize;					// 结构体大小 
-    	
+    	public int			   dwSize;					// 结构体大小
+
     	public NET_IN_FILE_STREAM_GET_TAGS_INFO() {
     		this.dwSize = this.size();
     	}
-    } 
+    }
 
     // CLIENT_FileStreamGetTags 接口输出参数
     public static class NET_OUT_FILE_STREAM_GET_TAGS_INFO extends MyStructure
     {
-    	public int			  dwSize;					// 结构体大小 
+    	public int			  dwSize;					// 结构体大小
     	public int			  nMaxNumber;				// 标签数组最大个数
     	public int			  nRetTagsCount;	        // 实际返回的标签信息个数
     	public Pointer	 	  pstuTagInfo; 				// 标签数组  NET_FILE_STREAM_TAG_INFO_EX
-    	
+
     	public NET_OUT_FILE_STREAM_GET_TAGS_INFO() {
     		this.dwSize = this.size();
     	}
-    }  
+    }
 
 	// 查询到的标签信息
     public static class NET_FILE_STREAM_TAG_INFO_EX extends MyStructure
 	{
-	    public int				dwSize;										// 结构体大小 
+	    public int				dwSize;										// 结构体大小
 	 	public NET_TIME			stuTime;									// 标签所对于视频的时间，精确到秒
 	 	public int				nMillisecond;								// 毫秒
 	 	public int				nSequence;									// 视频序列号
@@ -10544,12 +10544,12 @@ public interface NetSDKLib extends Library {
 	 	public byte[]			szUserName = new byte[NET_COMMON_STRING_32];	// 用户名，中文必须使用utf8编码，EVS定制增加
 	 	public byte[]			szChannelName = new byte[NET_COMMON_STRING_64]; // 通道名称，中文必须使用utf8编码，EVS定制增加
 	 	public int				nDuration;								   // 打标的录像持续时间，单位秒
-		
+
 	 	public NET_FILE_STREAM_TAG_INFO_EX() {
 	 		this.dwSize = this.size();
 	 	}
-	} 
-	 
+	}
+
 	// 文件类型
 	public static class NET_FILE_STREAM_TYPE extends MyStructure
 	{
@@ -10557,7 +10557,7 @@ public interface NetSDKLib extends Library {
 	 	public static final int NET_FILE_STREAM_TYPE_NORMAL    = 1;			// 普通
 	 	public static final int NET_FILE_STREAM_TYPE_ALARM     = 2;			// 报警
 	 	public static final int NET_FILE_STREAM_TYPE_DETECTION = 3;			// 动检
-	} 
+	}
 
 	// 一屏幕的分割模式信息， CLIENT_GetSplitMode/CLIENT_SetSplitMode参数
 	public static class NET_SPLIT_MODE_INFO extends MyStructure
@@ -10566,12 +10566,12 @@ public interface NetSDKLib extends Library {
 	    public int               emSplitMode;            // 分割模式, NET_SPLIT_MODE
 	    public int               nGroupID;               // 分组序号
 	    public int               dwDisplayType;          // 显示类型；具体见NET_SPLIT_DISPLAY_TYPE（注释各模式下显示内容由"PicInPic"决定, 各模式下显示内容按NVD旧有规则决定（即DisChn字段决定）。兼容,没有这一个项时,默认为普通显示类型,即"General"）
-	
+
 	    public NET_SPLIT_MODE_INFO() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 分割能力， CLIENT_GetSplitCaps 参数
 	public static class NET_SPLIT_CAPS extends MyStructure
 	{
@@ -10588,12 +10588,12 @@ public interface NetSDKLib extends Library {
 	    public int               nInputChannelCount;                     			// 支持的输入通道个数, 0表示没有输入通道限制
 	    public int               nBootModeCount;                         			// 启动分割模式数量
 	    public int[]             emBootMode = new int[NET_MAX_SPLIT_MODE_NUM];      // 支持的启动默认画面分割模式, 见 NET_SPLIT_MODE
-	    
+
 	    public NET_SPLIT_CAPS() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// (设置显示源, 支持同时设置多个窗口)CLIENT_SplitSetMultiSource 接口的输入参数
 	public static class NET_IN_SPLIT_SET_MULTI_SOURCE extends MyStructure
 	{
@@ -10607,22 +10607,22 @@ public interface NetSDKLib extends Library {
 	    public Pointer             	pnWindows;          // 窗口号数组 int[],由用户申请内存，大小为sizeof(int)*nWindowCount
 	    public int               	nWindowCount;       // 窗口数量
 	    public Pointer	   		    pstuSources;        // 视频源信息, 分别对应每个窗口, 数量同窗口数  NET_SPLIT_SOURCE[] ,由用户申请内存，大小为sizeof(NET_SPLIT_SOURCE)*nWindowCount
-	
+
 	    public NET_IN_SPLIT_SET_MULTI_SOURCE() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// (设置显示源, 支持同时设置多个窗口) CLIENT_SplitSetMultiSource 接口的输出参数
 	public static class NET_OUT_SPLIT_SET_MULTI_SOURCE extends MyStructure
 	{
 	    public int                  dwSize;
-	    
+
 	    public NET_OUT_SPLIT_SET_MULTI_SOURCE() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// (下位矩阵切换) CLIENT_MatrixSwitch 输入参数
 	public static class NET_IN_MATRIX_SWITCH extends MyStructure
 	{
@@ -10634,22 +10634,22 @@ public interface NetSDKLib extends Library {
 	    public Pointer       pnInputChannels;            // 输入通道, 每个分割窗口一个对应一个输入通道
 														 // 由用户申请内存 int[] ，大小为sizeof(int)*nInputChannelCount
 	    public int           nInputChannelCount;         // 输入通道数
-	    
+
 	    public NET_IN_MATRIX_SWITCH() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// (下位矩阵切换) CLIENT_MatrixSwitch 输出参数
 	public static class NET_OUT_MATRIX_SWITCH extends MyStructure
 	{
 	    public int            dwSize;
-	    
+
 	    public NET_OUT_MATRIX_SWITCH() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 刻录模式
 	public static class NET_BURN_MODE extends MyStructure
 	{
@@ -10657,7 +10657,7 @@ public interface NetSDKLib extends Library {
 	    public static final int BURN_MODE_TURN 	= 1;                    // 轮流
 	    public static final int BURN_MODE_CYCLE = 2;                    // 循环
 	}
-	
+
 	// 刻录流格式
 	public static class NET_BURN_RECORD_PACK extends MyStructure
 	{
@@ -10667,7 +10667,7 @@ public interface NetSDKLib extends Library {
 		public static final int BURN_PACK_MP4  = 3;                     // MP4
 		public static final int BURN_PACK_TS   = 4;                     // TS
 	}
-	
+
 	// 刻录扩展模式
 	public static class NET_BURN_EXTMODE extends MyStructure
 	{
@@ -10675,7 +10675,7 @@ public interface NetSDKLib extends Library {
 		public static final int BURN_EXTMODE_NORMAL  = 1;               // 正常刻录
 		public static final int BURN_EXTMODE_NODISK  = 2;               // 无盘刻录
 	}
-	
+
 	// (开始刻录) CLIENT_StartBurn 接口输入参数
 	public static class NET_IN_START_BURN extends MyStructure
 	{
@@ -10686,43 +10686,43 @@ public interface NetSDKLib extends Library {
 	    public int             emMode;                                // 刻录模式,见  NET_BURN_MODE
 	    public int             emPack;                                // 刻录流格式,见  NET_BURN_RECORD_PACK
 	    public int   		   emExtMode;                             // 刻录扩展模式, 见  NET_BURN_EXTMODE
-	    
+
 	    public NET_IN_START_BURN() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// (开始刻录)CLIENT_StartBurn 接口输出参数
 	public static class NET_OUT_START_BURN extends MyStructure
 	{
 	    public int               dwSize;
-	    
+
 	    public NET_OUT_START_BURN() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// (打开会话)CLIENT_StartBurnSession 接口输入参数
 	public static class NET_IN_START_BURN_SESSION extends MyStructure
 	{
 	    public int              dwSize;
 	    public int              nSessionID;                         // 会话ID
-	    
+
 	    public NET_IN_START_BURN_SESSION() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// (打开会话)CLIENT_StartBurnSession 接口输出参数
 	public static class NET_OUT_START_BURN_SESSION extends MyStructure
 	{
 	    public int               dwSize;
-	    
+
 	    public NET_OUT_START_BURN_SESSION() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// CLIENT_ControlDevice接口的 CTRLTYPE_CTRL_EJECT_BURNER、CTRLTYPE_CTRL_CLOSE_BURNER 等 命令参数
 	public static class NET_CTRL_BURNERDOOR extends MyStructure
 	{
@@ -10730,12 +10730,12 @@ public interface NetSDKLib extends Library {
 		public Pointer         	  szBurnerName;                       // 光盘名称,如“/dev/sda”, 用户申请内存
 	    public int                bResult;                            // 操作结果
 	    public int                bSafeEject;                         // 是否安全弹出光驱, 1-弹出前做数据保存, 0-直接弹出
-	    
+
 	    public NET_CTRL_BURNERDOOR() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 光驱托盘状态
 	public static class EM_NET_BURN_DEV_TRAY_TYPE extends MyStructure
 	{
@@ -10771,9 +10771,9 @@ public interface NetSDKLib extends Library {
 	public static class NET_BURNING_DEVINFO extends MyStructure
 	{
 		public int               	dwDevNum;                           // 刻录设备个数
-	    public NET_DEV_BURNING[]    stuList = (NET_DEV_BURNING[])new NET_DEV_BURNING().toArray(NET_MAX_BURNING_DEV_NUM); // 各刻录设备信息 
+	    public NET_DEV_BURNING[]    stuList = (NET_DEV_BURNING[])new NET_DEV_BURNING().toArray(NET_MAX_BURNING_DEV_NUM); // 各刻录设备信息
 	}
-	
+
 	// CLIENT_AttachBurnState()输入参数
 	public static class NET_IN_ATTACH_STATE extends MyStructure
 	{
@@ -10784,7 +10784,7 @@ public interface NetSDKLib extends Library {
 	    public LLong                 lBurnSession;                  // 刻录会话句柄, CLIENT_StartBurnSession的返回值. 该值为0时, szDeviceName有效, 此时按刻录设备订阅刻录状态
 	    public fAttachBurnStateCBEx  cbAttachStateEx;               // 扩展刻录监听回调
 	    public Pointer               dwUserEx;                      // 扩展刻录监听回调用户数据
-	    
+
 	    public NET_IN_ATTACH_STATE() {
 	    	this.dwSize = this.size();
 	    }
@@ -10794,12 +10794,12 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_ATTACH_STATE extends MyStructure
 	{
 		public int                   dwSize;
-		
+
 		public NET_OUT_ATTACH_STATE() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// fAttachBurnStateCB 参数
 	public static class NET_CB_BURNSTATE extends MyStructure
 	{
@@ -10811,14 +10811,14 @@ public interface NetSDKLib extends Library {
 			                                                        //"BurnExtraFileStop"：刻录停止
 			                                                        //"BurnFilePause":刻录暂停
 			                                                        //"SpaceFull":刻录空间满
-			                                                        //"BurnFileError":刻录出错    
+			                                                        //"BurnFileError":刻录出错
 		public Pointer         		szFileName;                     // 当前刻录附件文件名,用于"UploadFileStart"开始附件上传消息
 		public int        			dwTotalSpace;                   // 总容量,单位KB,用于"Burning"刻录中,显示容量或计算进度
 		public int        			dwRemainSpace;                  // 剩余容量,单位KB,用于"Burning"刻录中
 		public Pointer         		szDeviceName;                   // 刻录设备名称,用于区分不同的刻录设备
 		public int                  nRemainTime;                    // 刻录剩余时间, 单位秒, -1代表无效
 	}
-	
+
 	// 刻录状态
 	public static class NET_BURN_STATE extends MyStructure
 	{
@@ -10851,7 +10851,7 @@ public interface NetSDKLib extends Library {
 	public static class NET_IN_BURN_GET_STATE extends MyStructure
 	{
 		public int                dwSize;
-	    
+
 	    public NET_IN_BURN_GET_STATE() {
 	    	this.dwSize = this.size();
 	    }
@@ -10875,7 +10875,7 @@ public interface NetSDKLib extends Library {
 	    public int                dwRemainSpace;                         // 光驱剩余容量, 单位KB
 	    public int	              emUsedType;							 // 光驱使用状态, 详见EM_NET_BURN_DEV_USED_STATE
 	    public int				  emError;								 // 单个光驱出错状态, 详见NET_BURN_ERROR_CODE
-		
+
 		public NET_BURN_DEV_STATE() {
 	    	this.dwSize = this.size();
 	    }
@@ -10894,31 +10894,31 @@ public interface NetSDKLib extends Library {
 		public int 				  emPack;                                // 刻录流格式, 详见NET_BURN_RECORD_PACK
 		public int                nFileIndex;                            // 当前刻录文件编号
 		public NET_TIME           stuStartTime;                          // 刻录开始时间
-		public NET_BURN_DEV_STATE[] stuDevState = (NET_BURN_DEV_STATE[])new NET_BURN_DEV_STATE().toArray(NET_MAX_BURNING_DEV_NUM); // 刻录设备状态 
+		public NET_BURN_DEV_STATE[] stuDevState = (NET_BURN_DEV_STATE[])new NET_BURN_DEV_STATE().toArray(NET_MAX_BURNING_DEV_NUM); // 刻录设备状态
 	    public int                nRemainTime;                           // 刻录剩余时间, 单位秒, -1代表无效
 	    public int	 			  emExtMode;							 // 扩展模式,当为无盘刻录时，stuDevState可能无效, 详见NET_BURN_EXTMODE
-	    
+
 	    public NET_OUT_BURN_GET_STATE() {
 	    	this.dwSize = this.size();
 	    }
 	}
- 
+
 	// 雷达监测超速报警事件 智能楼宇专用 ( NET_ALARM_RADAR_HIGH_SPEED )
 	public static class ALARM_RADAR_HIGH_SPEED_INFO extends MyStructure
 	{
 	    public NET_TIME_EX             stuTime;  // 事件发生时间
 	    public float                   fSpeed;                       // 速度(单位:km/h)
 		public byte[]				   szPlateNumber = new byte[16]; // 车牌
-	    public byte[]                  byReserved = new byte[1008];  // 预留字段 
+	    public byte[]                  byReserved = new byte[1008];  // 预留字段
 	}
-	
+
 	// 设备巡检报警事件 智网专用 ( NET_ALARM_POLLING_ALARM )
 	public static class ALARM_POLLING_ALARM_INFO extends MyStructure
 	{
 	    public NET_TIME_EX             stuTime;  // 事件发生时间
 	    public byte[]                  byReserved = new byte[1024];           // 预留字段
 	}
-	
+
 	// 门禁事件 ALARM_ACCESS_CTL_EVENT
 	public static class ALARM_ACCESS_CTL_EVENT_INFO extends MyStructure {
 	    public int                      dwSize;
@@ -10966,7 +10966,7 @@ public interface NetSDKLib extends Library {
 	    public int         				 emAttendanceState;                 // 考勤状态, 参考  NET_ATTENDANCESTATE
 	    public byte[]                    szQRCode = new byte[512];          // 二维码
 	    public byte[]                    szCallLiftFloor = new byte[16];	// 呼梯楼层号
-	    
+
 		public ALARM_ACCESS_CTL_EVENT_INFO() {
 			super();
 			this.dwSize = this.size();
@@ -10986,7 +10986,7 @@ public interface NetSDKLib extends Library {
 					+ ", nPunchingRecNo=" + nPunchingRecNo + "]";
 		}
 	}
-	
+
 	// 消警事件
 	public static class ALARM_ALARMCLEAR_INFO extends MyStructure
 	{
@@ -11004,7 +11004,7 @@ public interface NetSDKLib extends Library {
 					+ bEventAction + "]";
 		}
 	}
-	
+
 	public static class NET_ALARM_TYPE
 	{
 		public static final int NET_ALARM_LOCAL = 0;                //开关量防区的报警事件(对应 NET_ALARM_ALARM_EX2 事件)
@@ -11014,7 +11014,7 @@ public interface NetSDKLib extends Library {
 		public static final int NET_ALARM_RCEMERGENCYCALL = 4;      //紧急呼叫报警事件(对应 NET_ALARM_RCEMERGENCY_CALL 事件)
 		public static final int NET_ALARM_ALL = 5;                  //所有报警事件
 	}
-	
+
 	// CLIENT_ControlDevice 接口的 NET_CTRL_CLEAR_ALARM 命令参数
 	public static class NET_CTRL_CLEAR_ALARM extends MyStructure	{
 		public int               	dwSize;
@@ -11035,24 +11035,24 @@ public interface NetSDKLib extends Library {
 				+ nEventType + "]";
 	   }
 	}
-	
+
 	// CLIENT_ControlDevice接口的 CTRLTYPE_CTRL_START_ALARMBELL / CTRLTYPE_CTRL_STOP_ALARMBELL命令参数
 	public static class NET_CTRL_ALARMBELL extends MyStructure
 	{
 	    public int                    dwSize;
-	    public int                    nChannelID;                   // 通道号(0开始)       
-	    
+	    public int                    nChannelID;                   // 通道号(0开始)
+
 	    public NET_CTRL_ALARMBELL(){
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 警灯配置(对应 CFG_CMD_ALARMLAMP)
 	public static class CFG_ALARMLAMP_INFO extends MyStructure
 	{
 	     public int     	         emAlarmLamp;                  // 警灯状态,参考  EM_ALARMLAMP_MODE
 	}
-	
+
 	// 警灯状态
 	public static class EM_ALARMLAMP_MODE extends MyStructure
 	{
@@ -11061,13 +11061,13 @@ public interface NetSDKLib extends Library {
 	    public static final int EM_ALARMLAMP_MODE_ON = 1;          // 亮
 	    public static final int EM_ALARMLAMP_MODE_BLINK = 2;       // 闪烁
 	}
-	
+
 	// 发送的通知类型,对应CLIENT_SendNotifyToDev接口
 	public static class NET_EM_NOTIFY_TYPE extends MyStructure
 	{
 	    public static final int NET_EM_NOTIFY_PATROL_STATUS = 1;   // 发送巡更通知 (对应结构体 NET_IN_PATROL_STATUS_INFO, NET_OUT_PATROL_STATUS_INFO )
-	} 
-	
+	}
+
 	// 巡更状态
 	public static class NET_EM_PATROL_STATUS extends MyStructure
 	{
@@ -11076,28 +11076,28 @@ public interface NetSDKLib extends Library {
 		public static final int NET_EM_PATROL_STATUS_END = 2;      // 巡更结束
 		public static final int NET_EM_PATROL_STATUS_FAIL = 3;     // 巡更失败
 	}
-	
+
 	// CLIENT_SendNotifyToDev 入参 (对应枚举 NET_EM_NOTIFY_PATROL_STATUS)
 	public static class NET_IN_PATROL_STATUS_INFO extends MyStructure
 	{
 	    public int                    dwSize;                       // 结构体大小
 	    public int                    emPatrolStatus;               // 巡更状态,参考  NET_EM_PATROL_STATUS
-	    
+
 	    public NET_IN_PATROL_STATUS_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// CLIENT_SendNotifyToDev 出参 (对应枚举 NET_EM_NOTIFY_PATROL_STATUS)
 	public static class NET_OUT_PATROL_STATUS_INFO extends MyStructure
 	{
 	    public int                    dwSize;                       // 结构体大小
-	    
+
 	    public NET_OUT_PATROL_STATUS_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 报警事件类型  NET_ALARM_TALKING_INVITE (设备请求对方发起对讲事件)对应的数据描述信息
 	public static class ALARM_TALKING_INVITE_INFO extends MyStructure
 	{
@@ -11107,37 +11107,37 @@ public interface NetSDKLib extends Library {
 	    public byte[]                 szCallID = new byte[NET_COMMON_STRING_64];   // 呼叫惟一标识符
 	    public int                    nLevel;                         			   // 表示所呼叫设备所处层级
 	    public TALKINGINVITE_REMOTEDEVICEINFO       stuRemoteDeviceInfo;   	       // 远端设备信息
-		
+
 	    public ALARM_TALKING_INVITE_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 对讲发起方
 	public static class EM_TALKING_CALLER extends MyStructure
 	{
 	    public static final int EM_TALKING_CALLER_UNKNOWN  = 0;                   // 未知发起方
 	    public static final int EM_TALKING_CALLER_PLATFORM = 1;                   // 对讲发起方为平台
 	}
-	
+
 	// Invite事件远程设备协议
 	public static class TALKINGINVITE_REMOTEDEVICE_PROTOCOL extends MyStructure
 	{
 		public static final int EM_TALKINGINVITE_REMOTEDEVICE_PROTOCOL_UNKNOWN   = 0;    // 未知
 		public static final int EM_TALKINGINVITE_REMOTEDEVICE_PROTOCOL_HIKVISION = 1;    // 海康
 	}
-	
+
 	// Invite事件远端设备信息
-	public static class TALKINGINVITE_REMOTEDEVICEINFO extends MyStructure 
+	public static class TALKINGINVITE_REMOTEDEVICEINFO extends MyStructure
     {
 	    public byte[]		         szIP = new byte[MAX_REMOTEDEVICEINFO_IPADDR_LEN];	        // 设备IP
 		public int	                 nPort;					                                    // 端口
 		public int                   emProtocol;                                                // 协议类型,取值参考 EM_TALKINGINVITE_REMOTEDEVICE_PROTOCOL
 		public byte[]		         szUser = new byte[MAX_REMOTEDEVICEINFO_USERNAME_LEN];	    // 用户名
 		public byte[]		         szPassword = new byte[MAX_REMOTEDEVICEINFO_USERPSW_LENGTH];// 密码
-		public byte[]                szReverse = new byte[1024];                                // 保留字段	
+		public byte[]                szReverse = new byte[1024];                                // 保留字段
     }
-	
+
 	// IO控制命令,对应 CLIENT_QueryIOControlState 接口  和  CLIENT_IOControl 接口
 	public static class NET_IOTYPE extends MyStructure
 	{
@@ -11146,33 +11146,33 @@ public interface NetSDKLib extends Library {
 	    public static final int NET_DECODER_ALARMOUT = 3;                       // 控制报警解码器输出，对应结构体为  DECODER_ALARM_CONTROL
 	    public static final int NET_WIRELESS_ALARMOUT = 5;                      // 控制无线报警输出，对应结构体为  ALARM_CONTROL
 	    public static final int NET_ALARM_TRIGGER_MODE = 7;                     // 报警触发方式（手动,自动,关闭）,使用  TRIGGER_MODE_CONTROL 结构体
-	} 
-	
+	}
+
 	// 报警IO控制
-	public static class ALARM_CONTROL extends MyStructure 
+	public static class ALARM_CONTROL extends MyStructure
 	{
 	    public short       			index;                    		// 端口序号
 	    public short       			state;                   	    // 端口状态，0 - 关闭，1 - 打开
-	} 
-	
+	}
+
 	// 报警解码器控制
 	public static class DECODER_ALARM_CONTROL extends MyStructure
 	{
 	    public int                  decoderNo;               		// 报警解码器号,从0开始
 	    public short      			alarmChn;                		// 报警输出口,从0开始
 	    public short      		    alarmState;             	    // 报警输出状态；1：打开,0：关闭
-	} 
-    
+	}
+
 	// 触发方式
 	public static class TRIGGER_MODE_CONTROL extends MyStructure
 	{
 	    public short      			index;                    		// 端口序号
 	    public short       			mode;                     		// 触发方式(0关闭1手动2自动);不设置的通道,sdk默认将保持原来的设置。
-	    public byte[]     			bReserved = new byte[28];            
-	} 
-	
+	    public byte[]     			bReserved = new byte[28];
+	}
+
 	// 报警输出通道的状态的配置, 对应 命令  CFG_CMD_ALARMOUT
-	public static class CFG_ALARMOUT_INFO extends MyStructure		
+	public static class CFG_ALARMOUT_INFO extends MyStructure
 	{
 		public int					nChannelID;									 // 报警通道号(0开始)
 		public byte[]				szChnName = new byte[MAX_CHANNELNAME_LEN];	 // 报警通道名称
@@ -11184,7 +11184,7 @@ public interface NetSDKLib extends Library {
 	    public byte                 abLevel2;                                    // 类型为bool, 表示nLevel2字段是否存在
 	    public int                  nLevel2;                                     // 第二级级联地址, 表示连接在第nLevel1个的仪表上的探测器序号, 从0开始
 	}
-	
+
 	// 检测采集设备报警事件, 对应事件类型 NET_ALARM_SCADA_DEV_ALARM
 	public static class ALARM_SCADA_DEV_INFO extends MyStructure
 	{
@@ -11199,12 +11199,12 @@ public interface NetSDKLib extends Library {
 	    public byte[]                szDevID = new byte[NET_COMMON_STRING_32];       // 设备ID, 目前使用16字节
 	    public byte[]                szPointName = new byte[NET_COMMON_STRING_64];   // 点位名,与点表匹配
 	    public int                   nAlarmFlag;                         			 // 0:开始, 1:结束
-	    
+
 	    public ALARM_SCADA_DEV_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 点位类型
 	public static class EM_NET_SCADA_POINT_TYPE extends MyStructure
 	{
@@ -11214,8 +11214,8 @@ public interface NetSDKLib extends Library {
 		public static final int EM_NET_SCADA_POINT_TYPE_YX		= 3;                  // 遥信 开关量输入
 		public static final int EM_NET_SCADA_POINT_TYPE_YT		= 4;                  // 遥调 模拟量输出
 		public static final int EM_NET_SCADA_POINT_TYPE_YK		= 5;                  // 遥控 开关量输出
-	} 
-	
+	}
+
 	// CLIENT_SCADAAttachInfo()接口输入参数
 	public static class NET_IN_SCADA_ATTACH_INFO extends MyStructure
 	{
@@ -11223,38 +11223,38 @@ public interface NetSDKLib extends Library {
 	    public StdCallCallback				cbCallBack;                 // 数据回调函数, fSCADAAttachInfoCallBack 回调
 	    public int         					emPointType;                // 点位类型,取值参考  EM_NET_SCADA_POINT_TYPE
 	    public Pointer                   	dwUser;                     // 用户定义参数
-	    
+
 	    public NET_IN_SCADA_ATTACH_INFO() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// CLIENT_SCADAAttachInfo()接口输出参数
 	public static class NET_OUT_SCADA_ATTACH_INFO extends MyStructure
 	{
 	    public int    					   dwSize;
-	    
+
 	    public NET_OUT_SCADA_ATTACH_INFO() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 监测点位信息列表
 	public static class NET_SCADA_NOTIFY_POINT_INFO_LIST extends MyStructure
 	{
 	    public int                           	dwSize;
 	    public int                              nList;                        // 监测点位信息个数
 	    public NET_SCADA_NOTIFY_POINT_INFO[]    stuList = (NET_SCADA_NOTIFY_POINT_INFO[])new NET_SCADA_NOTIFY_POINT_INFO().toArray(MAX_SCADA_POINT_LIST_INFO_NUM); // 监测点位信息
-	
+
 	    public NET_SCADA_NOTIFY_POINT_INFO_LIST() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 监测点位信息
 	public static class NET_SCADA_NOTIFY_POINT_INFO extends MyStructure
 	{
-	    public int                       		dwSize; 
+	    public int                       		dwSize;
 	    public byte[]                        	szDevName = new byte[NET_COMMON_STRING_64];     // 设备名称,与getInfo获取的名称一致
 	    public int     							emPointType;                        			// 点位类型,取值参考 EM_NET_SCADA_POINT_TYPE
 	    public byte[]                        	szPointName = new byte[NET_COMMON_STRING_64];   // 点位名,与点位表的取值一致
@@ -11264,18 +11264,18 @@ public interface NetSDKLib extends Library {
 	    public byte[]                        	szID = new byte[NET_COMMON_STRING_64];          // 点位ID
 	    public byte[]                        	szSensorID = new byte[NET_COMMON_STRING_64];    // 探测器ID
 	    public NET_TIME_EX                 		stuCollectTime;             					// 采集时间
-	    
+
 	    public NET_SCADA_NOTIFY_POINT_INFO() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	public static class CFG_TRAFFICSNAPSHOT_NEW_INFO extends MyStructure
 	{
 		public int									nCount;											// 有效成员个数
 		public CFG_TRAFFICSNAPSHOT_INFO[]	stInfo = (CFG_TRAFFICSNAPSHOT_INFO[])new CFG_TRAFFICSNAPSHOT_INFO().toArray(8);		// 交通抓拍表数组
 	}
-	
+
 	// CFG_CMD_INTELLECTIVETRAFFIC
 	public static class CFG_TRAFFICSNAPSHOT_INFO extends MyStructure
 	{
@@ -11310,11 +11310,11 @@ public interface NetSDKLib extends Library {
 	    public CFG_NET_TIME             stValidUntilTime;									// 标定到期时间，指该时间点之前抓拍照片有效
 	    public RADAR_INFO               stRadar;
 	    public byte[]                   szRoadwayCode = new byte[MAX_ROADWAYNO];        	// 道路代码
-	    public int                      nVideoTitleMask2;					   				// 原始图片OSD叠加类型掩码2 从低位到高位分别表示：0-国别 1-尾气数据    
+	    public int                      nVideoTitleMask2;					   				// 原始图片OSD叠加类型掩码2 从低位到高位分别表示：0-国别 1-尾气数据
 	    public int				        nMergeVideoTitleMask2;				   				// 合成图片OSD叠加类型掩码2 参照nVideoTitleMask2字段
 		public int                      nParkType;                            				// 出入口类型，0-默认( 兼容以前，不区分出口/入口 )，1-入口相机， 2-出口相机
 	}
-	
+
 	// 车检器配置
 	public static class DETECTOR_INFO extends MyStructure
 	{
@@ -11352,12 +11352,12 @@ public interface NetSDKLib extends Library {
 	    public int                  	nDelayTime;						 		 			//延时抓拍时间 闯红灯第三张抓拍位置距离最后一个线圈的时间，单位毫秒
 	    public int				    	nTriggerMode;					 		 			//触发模式 0-入线圈触发 1-出线圈触发 2-出入都抓拍 3-关闭
 	    public int			        	nErrorRange;						 	 			//速度误差值，进线圈2与进线圈3之间的速度误差值，若实际误差大于或等于该值，视速度无效，否则取平均速度 0-20
-	    public double			    	dSpeedCorrection;				 		 			//速度校正系数，即速度值为测出的值乘以该系数 
-	    public int[]                	nDirection = new int[2];                 			//相对车道方向需要上报车辆行驶方向,nDirection[0] 0--空 1--正向 ; nDirection[1] 0--空 1--反向	
+	    public double			    	dSpeedCorrection;				 		 			//速度校正系数，即速度值为测出的值乘以该系数
+	    public int[]                	nDirection = new int[2];                 			//相对车道方向需要上报车辆行驶方向,nDirection[0] 0--空 1--正向 ; nDirection[1] 0--空 1--反向
 	    public byte[]               	szCustomParkNo = new byte[CFG_COMMON_STRING_32 + 1];// 自定义车位号（停车场用）
 	    public byte[]               	btReserved = new byte[3];
 	}
-	
+
 	// 线圈配置
 	public static class COILCONFIG_INFO extends MyStructure
 	{
@@ -11368,7 +11368,7 @@ public interface NetSDKLib extends Library {
 		public int				   		nFlashSerialNum2;				 					//多抓第二张对应闪光灯序号 范围0~5，0表示不打开闪光灯
 		public int				   		nFlashSerialNum3;				 					//多抓第三张对应闪光灯序号 范围0~5，0表示不打开闪光灯
 	}
-	
+
 	// 违章抓拍张数
 	public static class BREAKINGSNAPTIMES_INFO extends MyStructure
 	{
@@ -11388,7 +11388,7 @@ public interface NetSDKLib extends Library {
 		public int			      		nU_Turn;						    				// 违章调头
 		public int			      		nParking;						    				// 违章停车
 		public int               		nWaitingArea;										// 违章进入待行区
-		public int			      		nWrongRoute;					   				    // 不按车道行驶		
+		public int			      		nWrongRoute;					   				    // 不按车道行驶
 		public int               		nParkingSpaceParking;             					// 车位有车
 		public int               		nParkingSpaceNoParking;           					// 车位无车
 		public int               		nRunYellowLight;									// 闯黄灯
@@ -11397,9 +11397,9 @@ public interface NetSDKLib extends Library {
 		public int               		nVehicleInBusRoute;               					// 违章占道
 		public int               		nBacking;                         					// 违章倒车
 		public int				  		nOverStopLine;										// 压停止线
-		public int               		nParkingOnYellowBox;           						// 黄网格线停车	
-		public int               		nRestrictedPlate;									// 受限车牌	
-		public int               		nNoPassing;											// 禁行	
+		public int               		nParkingOnYellowBox;           						// 黄网格线停车
+		public int               		nRestrictedPlate;									// 受限车牌
+		public int               		nNoPassing;											// 禁行
 		public int               		nWithoutSafeBelt;                					// 不系安全带
 		public int               		nDriverSmoking;                   					// 驾驶员抽烟
 		public int               		nDriverCalling;                   					// 驾驶员打电话
@@ -11418,24 +11418,24 @@ public interface NetSDKLib extends Library {
 		public int                 		nRedLightTimeDisplay;  					 			//OSD红灯时间配置 0=未知,1=违法最后一张,2=所有张
 		public byte                		cSeperater;             							//OSD不同项之间的分隔符
 		public byte[]		        	bReserved = new byte[3];           					//字节对齐
-		public byte[]                	szOSDOrder = new byte[MAX_CONF_CHAR];    
+		public byte[]                	szOSDOrder = new byte[MAX_CONF_CHAR];
 		public int                 		nOSDContentScheme;      							//0=未知, 1=Mask , 2=CustomizeSort
 		public OSD_CUSTOM_INFO     		stOSDCustomInfo;        							//OSD自定义项
 	}
-	
+
 	// OSD黑边
 	public static class BLACK_REGION_INFO extends MyStructure
 	{
 		public int 						nHeight;											//黑边高度 取值范围：0 ~ ( 8192-原图片高度)
 		public int 						nOSDPosition;										//黑边位置 0=未知 , 1=顶部 , 2=底部
 	}
-	
+
 	// OSD属性配置方案内容
-	public static class OSD_ATTR_SCHEME extends MyStructure 
+	public static class OSD_ATTR_SCHEME extends MyStructure
 	{
 	    public OSD_WHOLE_ATTR 			stWholeAttr;										//全体OSD项共用属性
 	}
-	
+
 	// 全体OSD项共用属性
 	public static class OSD_WHOLE_ATTR extends MyStructure
 	{
@@ -11444,38 +11444,38 @@ public interface NetSDKLib extends Library {
 	    public int        				bNewLine;                   						//BOOL类型,超出矩形范围是否换行,bPositionAsBlackRegion为true时有效,BOOL类型
 	    public int        				bLoneVehicle;               						//BOOL类型,车辆信息独立显示,true 一行显示一辆车信息,false 允许多辆车信息显示在一行,BOOL类型
 	}
-	
+
 	// OSD叠加内容自定义排序
 	public static class OSD_CUSTOM_SORT extends MyStructure
 	{
 	    public OSD_CUSTOM_ELEMENT[]   	stElements = (OSD_CUSTOM_ELEMENT[])new OSD_CUSTOM_ELEMENT().toArray(MAX_OSD_CUSTOM_SORT_ELEM_NUM);     //具体叠加元素
 	    public int                  	nElementNum;
 	}
-	
+
 	// OSD具体叠加元素
 	public static class OSD_CUSTOM_ELEMENT extends MyStructure
 	{
 	    public int  					nNameType;                          				//名称类型,	0:szName字段含义参照szOSDOrder字段定义的项
 	                                             											//          1:"Name"字段表示自定义项，无需解析
 	    public byte[] 					szName = new byte[MAX_OSD_CUSTOM_VALUE_LEN];        // 该项名称
-	    public byte[] 					szPrefix = new byte[MAX_PRE_POX_STR_LEN];      		// 叠加前缀字符串	
+	    public byte[] 					szPrefix = new byte[MAX_PRE_POX_STR_LEN];      		// 叠加前缀字符串
 	    public byte[] 					szPostfix = new byte[MAX_PRE_POX_STR_LEN];     		//叠加后缀字符串
 	    public int  					nSeperaterCount;                    				//后面添加分隔符个数
-	    
+
 	}
-	
+
 	// OSD自定义项
 	public static class OSD_CUSTOM_INFO extends MyStructure
 	{
 	    public OSD_CUSTOM_GENERAL_INFO[]  stGeneralInfos = (OSD_CUSTOM_GENERAL_INFO[])new OSD_CUSTOM_GENERAL_INFO().toArray(MAX_OSD_CUSTOM_GENERAL_NUM);     //具体叠加元素
 	    public int                        nGeneralInfoNum;
 	}
-	
+
 	public static class OSD_CUSTOM_GENERAL_INFO extends MyStructure
 	{
 	    public int    					bEnable;            							//BOOL类型,是否叠加
 	}
-	
+
 	public static class RADAR_INFO extends MyStructure
 	{
 	    public int     					nAngle;                 						//角度,用于修正雷达探头安装的角度造成的速度误差,范围[0,90]
@@ -11494,18 +11494,18 @@ public interface NetSDKLib extends Library {
 	    public int     					nWentInValue;           						//去向进入门槛值
 	    public int     					nWentOutValue;          						//去向离开门槛值
 	}
-	
-	// 串口状态     		 
+
+	// 串口状态
 	public static class NET_COMM_STATE extends MyStructure
 	{
-	    public int        				uBeOpened; 										// 串口是否打开,0:未打开 1:打开. 
+	    public int        				uBeOpened; 										// 串口是否打开,0:未打开 1:打开.
 	    public int        				uBaudRate;										// 波特率, 1~8分别表示 1200 2400  4800 9600 19200 38400 57600 115200
-	    public int        				uDataBites;										// 数据位，4~8表示4位~8位  
+	    public int        				uDataBites;										// 数据位，4~8表示4位~8位
 	    public int        				uStopBits;										// 停止位, 232串口 ： 数值0 代表停止位1; 数值1 代表停止位1.5; 数值2 代表停止位2.    485串口 ： 数值1 代表停止位1; 数值2 代表停止位2.
-	    public int        				uParity;										// 检验, 0：无校验，1：奇校验；2：偶校验; 
+	    public int        				uParity;										// 检验, 0：无校验，1：奇校验；2：偶校验;
 	    public byte[]                	bReserved = new byte[32];
 	}
-	
+
 
 	// 门禁卡记录查询条件
 	public static class FIND_RECORD_ACCESSCTLCARD_CONDITION extends MyStructure
@@ -11517,12 +11517,12 @@ public interface NetSDKLib extends Library {
 	    public int                  	abCardNo;                         			   // 卡号查询条件是否有效,针对成员 szCardNo,boolean类型，为1或者0
 	    public int                  	abUserID;                         			   // 用户ID查询条件是否有效,针对成员 szUserID, boolean类型，为1或者0
 	    public int                  	abIsValid;                        			   // IsValid查询条件是否有效,针对成员 bIsValid, boolean类型，为1或者0
-	    
+
 	    public FIND_RECORD_ACCESSCTLCARD_CONDITION() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 门禁卡记录集信息
 	public static class NET_RECORDSET_ACCESS_CTL_CARD extends MyStructure
 	{
@@ -11561,23 +11561,23 @@ public interface NetSDKLib extends Library {
 		public int[]             	  nNewDoors = new int[MAX_ACCESSDOOR_NUM];         // 有权限的门序号,即CFG_CMD_ACCESS_EVENT配置的数组下标
 		public int             		  nNewTimeSectionNum;                              // 有效的的开门时间段数目
 		public int[]             	  nNewTimeSectionNo = new int[MAX_ACCESSDOOR_NUM]; // 开门时间段索引,即CFG_ACCESS_TIMESCHEDULE_INFO的数组下标
-		public byte[]				  szCitizenIDNo = new byte[MAX_COMMON_STRING_32];  // 身份证号码		
+		public byte[]				  szCitizenIDNo = new byte[MAX_COMMON_STRING_32];  // 身份证号码
 		public int					  nSpecialDaysScheduleNum;						   // 假日计划表示数量
 		public int[]				  arSpecialDaysSchedule = new int[MAX_ACCESSDOOR_NUM];// 假日计划标识// 缺点：目前方案只支持一卡刷一个设备。
 		public int            		  nUserType;                                       // 用户类型, 0 普通用户, 1 黑名单用户
 		public int             		  nFloorNum;                                              // 有效的楼层数量
 		public FLOOR_NO[]             szFloorNoArr = (FLOOR_NO[])new FLOOR_NO().toArray(MAX_ACCESS_FLOOR_NUM);   // 楼层号
-	    
+
 		public NET_RECORDSET_ACCESS_CTL_CARD() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	public static class FLOOR_NO extends MyStructure
 	{
 		public byte[]            szFloorNo = new byte[NET_COMMON_STRING_4];   // 楼层号
 	}
-	
+
 	// 卡状态
 	public static class NET_ACCESSCTLCARD_STATE extends MyStructure
 	{
@@ -11590,20 +11590,20 @@ public interface NetSDKLib extends Library {
 	    public static final int NET_ACCESSCTLCARD_STATE_OVERDUE = 0x10;             // 逾期
 	    public static final int NET_ACCESSCTLCARD_STATE_PREARREARAGE = 0x20;        // 预欠费(还是可以开门,但有语音提示)
 	}
-	
+
 	// 指纹数据，只用于下发信息
 	public static class NET_ACCESSCTLCARD_FINGERPRINT_PACKET extends MyStructure
 	{
-	    public int   			 dwSize; 
+	    public int   			 dwSize;
 	    public int     			 nLength;        			// 单个数据包长度,单位字节
 	    public int     			 nCount;         			// 包个数
 	    public Pointer   		 pPacketData;    			// 所有指纹数据包，用户申请内存并填充，长度为 nLength*nCount
-	    	
+
 	    public NET_ACCESSCTLCARD_FINGERPRINT_PACKET() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 指纹数据扩展，可用于下发和获取信息
 	public static class NET_ACCESSCTLCARD_FINGERPRINT_PACKET_EX extends MyStructure
 	{
@@ -11614,14 +11614,14 @@ public interface NetSDKLib extends Library {
 	    public int     			 nRealPacketLen; // 返回给用户实际指纹总大小
 	    public byte[]    		 byReverseed = new byte[1024]; //保留大小
 	}
-	
+
 
 	// 查询记录能力集能力集
 	public static class CFG_CAP_RECORDFINDER_INFO extends MyStructure
 	{
 		public int nMaxPageSize;//最大分页条数
 	}
-	
+
 	// 时间同步服务器配置
 	public static class CFG_NTP_INFO extends MyStructure
 	{
@@ -11634,7 +11634,7 @@ public interface NetSDKLib extends Library {
 	    public int                  nSandbyServerNum;                           // 实际备用NTP服务器个数
 	    public CFG_NTP_SERVER[]     stuStandbyServer = (CFG_NTP_SERVER[])new CFG_NTP_SERVER().toArray(MAX_NTP_SERVER);  // 备选NTP服务器地址
 	}
-	
+
 	// NTP服务器
 	public static class CFG_NTP_SERVER extends MyStructure
 	{
@@ -11642,7 +11642,7 @@ public interface NetSDKLib extends Library {
 	    public byte[]				szAddress = new byte[MAX_ADDRESS_LEN];		// IP地址或网络名
 		public int					nPort;										// 端口号
 	}
-	
+
 	// 时区定义(NTP)
 	public static class EM_CFG_TIME_ZONE_TYPE extends MyStructure
 	{
@@ -11683,17 +11683,17 @@ public interface NetSDKLib extends Library {
 
 	// 录像信息对应 CLIENT_FindFileEx 接口的 NET_FILE_QUERY_FILE 命令 查询条件
 	// 目前支持通过路径查询
-	public static class NET_IN_MEDIA_QUERY_FILE extends MyStructure  
+	public static class NET_IN_MEDIA_QUERY_FILE extends MyStructure
 	{
 	    public int               	dwSize;                 // 结构体大小
 	    public String            	szDirs;                 // 工作目录列表,一次可查询多个目录,为空表示查询所有目录。目录之间以分号分隔,如“/mnt/dvr/sda0;/mnt/dvr/sda1”,szDirs==null 或"" 表示查询所有
 	    public int                  nMediaType;             // 文件类型,0:查询任意类型,1:查询jpg图片,2:查询dav
 	    public int                  nChannelID;             // 通道号从0开始,-1表示查询所有通道
-	    public NET_TIME             stuStartTime;           // 开始时间    
+	    public NET_TIME             stuStartTime;           // 开始时间
 	    public NET_TIME             stuEndTime;             // 结束时间
 	    public int[]                nEventLists = new int[MAX_IVS_EVENT_NUM]; // 事件类型列表,参见智能分析事件类型
 	    public int                  nEventCount;            // 事件总数
-	    public byte                 byVideoStream;          // 视频码流 0-未知 1-主码流 2-辅码流1 3-辅码流2 4-辅码流3 
+	    public byte                 byVideoStream;          // 视频码流 0-未知 1-主码流 2-辅码流1 3-辅码流2 4-辅码流3
 	    public byte[]               bReserved 	= new byte[3];           	  // 字节对齐
 	    public int[]     			emFalgLists = new int[EM_RECORD_SNAP_FLAG_TYPE.FLAG_TYPE_MAX]; // 录像或抓图文件标志, 不设置标志表示查询所有文件, 参考 EM_RECORD_SNAP_FLAG_TYPE
 	    public int                  nFalgCount;             // 标志总数
@@ -11702,24 +11702,24 @@ public interface NetSDKLib extends Library {
 	    public byte[]               szUserName  = new byte[MAX_QUERY_USER_NUM * NET_NEW_USER_NAME_LENGTH]; // 用户名
 	    public int 					emResultOrder;          // 查询结果排序方式, 参考 EM_RESULT_ORDER_TYPE
 	    public int                  bTime;                  // 是否按时间查询
-	    
+
 	    public NET_IN_MEDIA_QUERY_FILE() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 录像信息对应 CLIENT_FindFileEx 接口的 NET_FILE_QUERY_FILE 命令 查询结果
-	public static class NET_OUT_MEDIA_QUERY_FILE extends MyStructure  
+	public static class NET_OUT_MEDIA_QUERY_FILE extends MyStructure
 	{
 	    public int                 	 dwSize;                 // 结构体大小
 	    public int                 	 nChannelID;             // 通道号从0开始,-1表示查询所有通道
-	    public NET_TIME            	 stuStartTime;           // 开始时间    
+	    public NET_TIME            	 stuStartTime;           // 开始时间
 	    public NET_TIME            	 stuEndTime;             // 结束时间
 	    public int        		   	 nFileSize;              // 文件长度
 	    public byte                	 byFileType;             // 文件类型 1:jpg图片, 2: dav
 	    public byte                	 byDriveNo;              // 该字段已废弃,后续开发使用 nDriveNo成员
 	    public byte                	 byPartition;            // 分区号
-	    public byte                	 byVideoStream;          // 视频码流 0-未知 1-主码流 2-辅码流1 3-辅码流 4-辅码流 
+	    public byte                	 byVideoStream;          // 视频码流 0-未知 1-主码流 2-辅码流1 3-辅码流 4-辅码流
 	    public int        		   	 nCluster;               // 簇号
 	    public byte[]              	 szFilePath = new byte[MAX_PATH];   				  // 文件路径
 	    public int[]               	 nEventLists = new int[MAX_IVS_EVENT_NUM];  		  // 关联的事件列表,事件类型列表,参见智能分析事件类型
@@ -11732,22 +11732,22 @@ public interface NetSDKLib extends Library {
 	    public byte[]			   	 szSynopsisPicPath = new byte[NET_COMMON_STRING_512]; // 预处理文件提取到的快照	文件路径
 						                                                                  // 支持HTTP URL表示:"http://www.dahuate.com/1.jpg"
 						                                                                  // 支持FTP URL表示: "ftp://ftp.dahuate.com/1.jpg"
-						                                                                  // 支持服务器本地路径 
-						                                                                  // a)"C:/pic/1.jpg" 
+						                                                                  // 支持服务器本地路径
+						                                                                  // a)"C:/pic/1.jpg"
 						                                                                  // b)"/mnt//2010/8/11/dav/15:40:50.jpg"
 	    public int                 	 nSynopsisMaxTime;                      			  // 支持浓缩视频最大时间长度,单位 秒
 	    public int                 	 nSynopsisMinTime;                     				  // 支持浓缩视频最小时间长度,单位 秒
-	   
+
 	    //文件摘要信息
 	    public int                 	 nFileSummaryNum;                                     // 文件摘要信息数
-	    public NET_FILE_SUMMARY_INFO[]   stFileSummaryInfo = (NET_FILE_SUMMARY_INFO[])new NET_FILE_SUMMARY_INFO().toArray(MAX_FILE_SUMMARY_NUM);   // 文件摘要信息    
+	    public NET_FILE_SUMMARY_INFO[]   stFileSummaryInfo = (NET_FILE_SUMMARY_INFO[])new NET_FILE_SUMMARY_INFO().toArray(MAX_FILE_SUMMARY_NUM);   // 文件摘要信息
 		public long                  nFileSizeEx;                           			  // 文件长度扩展,支持文件长度大于4G，单位字节
-		
+
 	    public NET_OUT_MEDIA_QUERY_FILE() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 卡号录像信息
 	public static class NET_RECORD_CARD_INFO extends MyStructure
 	{
@@ -11760,20 +11760,20 @@ public interface NetSDKLib extends Library {
 	    public int                   nFieldCount;                                    // 域数量, 按域查询时有效
 	    public byte[]                szFields  = new byte[MAX_CARD_RECORD_FIELD_NUM * NET_COMMON_STRING_256];   // 域信息, 按域查询时有效
 	    public byte[]				 szChange  = new byte[NET_COMMON_STRING_32];	 // 零钱
-	    
+
 	    public NET_RECORD_CARD_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 文件摘要信息
-	public static class NET_FILE_SUMMARY_INFO extends MyStructure 
+	public static class NET_FILE_SUMMARY_INFO extends MyStructure
 	{
 	    public byte[]	 			 szKey = new byte[NET_COMMON_STRING_64];          // 摘要名称
 	    public byte[] 	 			 szValue = new byte[NET_COMMON_STRING_512];       // 摘要内容
-	    public byte[] 				 bReserved = new byte[256];                       // 保留字段   
+	    public byte[] 				 bReserved = new byte[256];                       // 保留字段
 	}
-	
+
 	// 录像或抓图文件标志
 	public static class EM_RECORD_SNAP_FLAG_TYPE extends MyStructure
 	{
@@ -11792,9 +11792,9 @@ public interface NetSDKLib extends Library {
 	    public static final int FLAG_TYPE_BLACK_PLATE  = 12;            //黑名单图片
 	    public static final int FLAG_TYPE_ORIGINAL_PIC = 13;            //原始图片
 	    public static final int FLAG_TYPE_CARD = 14;                    //卡号录像
-	    public static final int FLAG_TYPE_MAX  = 128; 
+	    public static final int FLAG_TYPE_MAX  = 128;
 	}
-	
+
 	// 交易类型
 	public static class EM_ATM_TRADE_TYPE extends MyStructure
 	{
@@ -11808,94 +11808,94 @@ public interface NetSDKLib extends Library {
 		public static final int ATM_TRADE_CARDLESS_DEPOSIT = 7;         // 无卡存款
 		public static final int ATM_TRADE_OTHER = 8;                    // 其他
 	}
-	
+
 	// 查询结果排序方式
 	public static class EM_RESULT_ORDER_TYPE extends MyStructure
 	{
 		public static final int EM_RESULT_ORDER_UNKNOWN = 0;            // 未知
 		public static final int EM_RESULT_ORDER_ASCENT_BYTIME  = 1;     // 按时间升序排序
-		public static final int EM_RESULT_ORDER_DESCENT_BYTIME = 2;     // 按时间降序排序   
+		public static final int EM_RESULT_ORDER_DESCENT_BYTIME = 2;     // 按时间降序排序
 	}
-	
+
 	// CLIENT_ControlDevice 接口的 CTRLTYPE_CTRL_START_VIDEO_ANALYSE 命令参数, 开始视频智能分析
 	public static class NET_CTRL_START_VIDEO_ANALYSE extends MyStructure
 	{
-	    public int               dwSize; 
-	    public int               nChannelId;             				// 通道号  
-	    
+	    public int               dwSize;
+	    public int               nChannelId;             				// 通道号
+
 	    public NET_CTRL_START_VIDEO_ANALYSE() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// CLIENT_ControlDevice 接口的 CTRLTYPE_CTRL_STOP_VIDEO_ANALYSE 命令参数, 停止视频智能分析
 	public static class NET_CTRL_STOP_VIDEO_ANALYSE extends MyStructure
 	{
-	    public int          	dwSize; 
-	    public int              nChannelId;             			  // 通道号  
-	    
+	    public int          	dwSize;
+	    public int              nChannelId;             			  // 通道号
+
 	    public NET_CTRL_STOP_VIDEO_ANALYSE() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// CLIENT_AttachVideoAnalyseState 接口输入参数
 	public static class NET_IN_ATTACH_VIDEOANALYSE_STATE extends MyStructure
 	{
 	    public int              	dwSize;
 	    public int                  nChannleId;            			// 通道号
 	    public StdCallCallback      cbVideoAnalyseState;   			// 视频分析状态回调函数,fVideoAnalyseState 回调
-	    public Pointer              dwUser;                			// 用户信息 
-	    
+	    public Pointer              dwUser;                			// 用户信息
+
 	    public NET_IN_ATTACH_VIDEOANALYSE_STATE() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// CLIENT_AttachVideoAnalyseState 接口输出参数
 	public static class NET_OUT_ATTACH_VIDEOANALYSE_STATE extends MyStructure
 	{
 	    public int              	dwSize;
 	    public LLong           		lAttachHandle;         			// 分析进度句柄,唯一标识某一通道的分析进度
-	    
+
 	    public NET_OUT_ATTACH_VIDEOANALYSE_STATE() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	public static class NET_VIDEOANALYSE_STATE extends MyStructure
 	{
 	    public int            	   dwSize;
 	    public int            	   dwProgress;                        			  // 分析进度,0-100
 	    public byte[]              szState = new byte[NET_COMMON_STRING_64];      // 通道状态,Running"：运行,"Stop"：停止,"NoStart"：未启动,"Failed"：失败,"Successed"：成功
 	    public byte[]              szFailedCode = new byte[NET_COMMON_STRING_64]; // 错误码
-	    
+
 	    public NET_VIDEOANALYSE_STATE() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 热成像火情报警信息上报事件, 对应事件  NET_ALARM_FIREWARNING_INFO
-	public static class ALARM_FIREWARNING_INFO_DETAIL extends MyStructure 
+	public static class ALARM_FIREWARNING_INFO_DETAIL extends MyStructure
 	{
 	    public int                       nChannel;                                             // 对应视频通道号
 	    public int                       nWarningInfoCount;                                    // 报警信息个数
-	    public NET_FIREWARNING_INFO[]    stuFireWarningInfo 
+	    public NET_FIREWARNING_INFO[]    stuFireWarningInfo
 	    								 = new NET_FIREWARNING_INFO[MAX_FIREWARNING_INFO_NUM]; // 具体报警信息
 	    public byte[]                    reserved = new byte[256];
-		
+
 		public ALARM_FIREWARNING_INFO_DETAIL() {
-			for(int i = 0; i < stuFireWarningInfo.length; i++) { 
+			for(int i = 0; i < stuFireWarningInfo.length; i++) {
 				stuFireWarningInfo[i] = new NET_FIREWARNING_INFO();
 			}
 		}
 	}
-	
+
 	//热成像火情报警信息
 	public static class NET_FIREWARNING_INFO extends MyStructure
 	{
 	    public int                 nPresetId;                          // 预置点编号	从测温规则配置 CFG_RADIOMETRY_RULE_INFO 中选择
-	    public NET_RECT            stuBoundingBox;                     // 着火点矩形框	
+	    public NET_RECT            stuBoundingBox;                     // 着火点矩形框
 	    public int                 nTemperatureUnit;                   // 温度单位(当前配置的温度单位),见 NET_TEMPERATURE_UNIT
 	    public float               fTemperature;                       // 最高点温度值	同帧检测和差分检测提供
 	    public int                 nDistance;                          // 着火点距离,单位米 0表示无效
@@ -11904,7 +11904,7 @@ public interface NetSDKLib extends Library {
 	    public float               fAltitude;                          // 高度(单位：米)
 	    public byte[]              reserved = new byte[208];
 	}
-	
+
 	// 着火点经纬度
 	public static class GPS_POINT extends MyStructure
 	{
@@ -11912,7 +11912,7 @@ public interface NetSDKLib extends Library {
 	    public int         		  dwLatidude;                          // 纬度(单位是百万分之度,范围0-180度)如北纬30.183382度表示为120183382
 	                                                				   // 经纬度的具体转换方式可以参考结构体  NET_WIFI_GPS_INFO 中的注释
 	}
-	
+
 	//云台控制坐标单元
 	public static class PTZ_POSITION_UNIT extends MyStructure
 	{
@@ -11921,7 +11921,7 @@ public interface NetSDKLib extends Library {
 	    public int                 nZoom;                             // 云台光圈放大倍率,归一化到 0~1
 	    public byte[]              szReserve = new byte[32];          // 预留32字节
 	}
-	
+
 	// 搜索到的地点信息
 	public static class NET_WIFI_GPS_INFO extends MyStructure
 	{
@@ -11936,23 +11936,23 @@ public interface NetSDKLib extends Library {
 																	  // 如: 120186268应为 (120186268 - 90*1000000)/1000000 即北纬30. 186268度
 		public int				  nSpeed;					 		  // 速度, 单位千分之一km/H
 		public byte[]			  reserved = new byte[112];	 		  // 保留字段
-	} 
-	
+	}
+
 	// 定位结果
 	public static class NET_GPS_POSITION_RESULT extends MyStructure
-	{			
+	{
 		public static final int NET_GPS_POSITION_RESULT_UNKNOWN = 0;  // 未知
 		public static final int NET_GPS_POSITION_RESULT_FAILED = 1;	  // 有GPS数据,但定位失败,此时定位数据无意义
 		public static final int NET_GPS_POSITION_RESULT_SUCCEED = 2;  // 有GPS数据,且定位成功,此时定位数据有意义
 	}
-	
+
 	// 热成像增益模式
 	public static class CFG_THERMO_GAIN_MODE extends MyStructure
 	{
 		public static final int CFG_THERMO_GAIN_MODE_UNKNOWN = 0;
 		public static final int CFG_THERMO_GAIN_MODE_HIGHTEMP = 1;	// 高温
 		public static final int CFG_THERMO_GAIN_MODE_LOWTEMP = 2;	// 低温
-		public static final int CFG_THERMO_GAIN_MODE_AUTO = 3;		// 自动                     
+		public static final int CFG_THERMO_GAIN_MODE_AUTO = 3;		// 自动
 	}
 
 	// 热成像自动增益设置
@@ -11971,7 +11971,7 @@ public interface NetSDKLib extends Library {
 		public int                         nThermographyGamma;     // 伽马值
 		public int                         nColorization;	       // 伪彩色，见 NET_THERMO_COLORIZATION
 		public int                         nSmartOptimizer;        // 智能场景优化指数 0 ~100， 具体取值范围由能力决定
-		public int                         bOptimizedRegion;       // 是否开启感兴趣区域，只有感兴趣区域内的信息会被纳入统计用来做自动亮度调整（AGC） 
+		public int                         bOptimizedRegion;       // 是否开启感兴趣区域，只有感兴趣区域内的信息会被纳入统计用来做自动亮度调整（AGC）
 		public int                         nOptimizedROIType;      // 感兴趣区域类型，见 NET_THERMO_ROI
 		public int                         nCustomRegion;          // 自定义区域个数
 		public CFG_RECT[]                  stCustomRegions = (CFG_RECT[])new CFG_RECT().toArray(64);    // 自定义区域，仅在 nOptimizedROIType 为 NET_THERMO_ROI_CUSTOM 时有效
@@ -11988,44 +11988,44 @@ public interface NetSDKLib extends Library {
 	{
 		public int                         nModeCount;             // 模式个数，目前只有一个
 		public CFG_THERMOGRAPHY_OPTION[]   stOptions = new CFG_THERMOGRAPHY_OPTION[16]; // 对应不同模式的配置
-		
+
 		public CFG_THERMOGRAPHY_INFO() {
 	    	for(int i = 0; i < stOptions.length; i++) {
 	    		stOptions[i] = new CFG_THERMOGRAPHY_OPTION();
 	    	}
 	    }
 	}
-	
+
 	// 温度单位
 	public static class NET_TEMPERATURE_UNIT extends MyStructure
 	{
 		public static final int NET_TEMPERATURE_UNIT_UNKNOWN = 0;
 		public static final int NET_TEMPERATURE_UNIT_CENTIGRADE = 1;  // 摄氏度
 		public static final int NET_TEMPERATURE_UNIT_FAHRENHEIT = 2;  // 华氏度
-	} 
-	
+	}
+
 	// 测温规则配置结构, 对应命令  CFG_CMD_THERMOMETRY_RULE
 	public static class CFG_RADIOMETRY_RULE_INFO extends MyStructure
 	{
 	    public int                         nCount;                 				  // 规则个数
 	    public CFG_RADIOMETRY_RULE[]       stRule = new CFG_RADIOMETRY_RULE[512]; // 测温规则
-	    
+
 	    public CFG_RADIOMETRY_RULE_INFO() {
 	    	for(int i = 0; i < stRule.length; i++) {
 	    		stRule[i] = new CFG_RADIOMETRY_RULE();
 	    	}
 	    }
 	}
-	
+
 	// 区域测温的子类型
 	public static class EM_CFG_AREA_SUBTYPE extends MyStructure
 	{
-		public static final int EM_CFG_AREA_SUBTYPE_UNKNOWN = 0;		
+		public static final int EM_CFG_AREA_SUBTYPE_UNKNOWN = 0;
 		public static final int EM_CFG_AREA_SUBTYPE_RECT = 1;		// 矩形
 		public static final int EM_CFG_AREA_SUBTYPE_ELLIPSE = 2;	// 椭圆
 		public static final int EM_CFG_AREA_SUBTYPE_POLYGON = 3;	// 多边形
 	}
-	
+
 	// 测温规则
 	public static class CFG_RADIOMETRY_RULE extends MyStructure
 	{
@@ -12045,13 +12045,13 @@ public interface NetSDKLib extends Library {
 			for(int i = 0; i < stCoordinates.length; i++) {
 				stCoordinates[i] = new CFG_POLYGON();
 			}
-			
+
 			for(int i = 0; i < stAlarmSetting.length; i++) {
 				stAlarmSetting[i] = new CFG_RADIOMETRY_ALARMSETTING();
 			}
 		}
 	}
-	
+
 	// 温度统计
 	public static class CFG_TEMP_STATISTICS extends MyStructure
 	{
@@ -12066,18 +12066,18 @@ public interface NetSDKLib extends Library {
 	{
 		public int                         nCount;                 // 个数
 		public CFG_TEMP_STATISTICS[]       stStatistics = new CFG_TEMP_STATISTICS[64]; // 温度统计
-		
+
 		public CFG_TEMP_STATISTICS_INFO() {
 			for(int i = 0; i < stStatistics.length; i++) {
 				stStatistics[i] = new CFG_TEMP_STATISTICS();
 			}
 		}
 	}
-	
+
 	// 温度单位
 	public static class CFG_TEMPERATURE_UNIT extends MyStructure
 	{
-		public static final int TEMPERATURE_UNIT_UNKNOWN = 0;		
+		public static final int TEMPERATURE_UNIT_UNKNOWN = 0;
 		public static final int TEMPERATURE_UNIT_CENTIGRADE = 1;	// 摄氏度
 		public static final int TEMPERATURE_UNIT_FAHRENHEIT = 2;	// 华氏度
 	}
@@ -12093,7 +12093,7 @@ public interface NetSDKLib extends Library {
 	    public int                         nTemperatureUnit;           // 温度单位，见 TEMPERATURE_UNIT
 	    public int                         bIsothermEnable;            // 色标功能使能
 	    public int                         nMinLimitTemp;              // 等温线下限温度值
-	    public int                         nMediumTemp;                // 等温线中位温度值	
+	    public int                         nMediumTemp;                // 等温线中位温度值
 	    public int                         nMaxLimitTemp;              // 等温线上限温度值
 	    public int                         nSaturationTemp;            // 等温线饱和温度值
 	    public CFG_RECT                    stIsothermRect;             // 色温条矩形区域（OSD 位置），使用相对坐标体系，取值均为0-8191
@@ -12103,7 +12103,7 @@ public interface NetSDKLib extends Library {
 	    public CFG_RGBA                    stHighCTMakerColor;         // 高色温标注颜色
 	    public CFG_RGBA                    stLowCTMakerColor;          // 低色温标注颜色
 	}
-	
+
 	// 测温点报警设置
 	public static class CFG_RADIOMETRY_ALARMSETTING extends MyStructure
 	{
@@ -12117,17 +12117,17 @@ public interface NetSDKLib extends Library {
 		public float                       fThreshold;             // 报警阈值温度	浮点数
 		public float                       fHysteresis;            // 温度误差，浮点数，比如0.1 表示正负误差在0.1范围内
 		public int                         nDuration;              // 阈值温度持续时间	单位：秒
-	} 
-	
+	}
+
 	// 测温规则本地参数配置
 	public static class CFG_RADIOMETRY_LOCALPARAM extends MyStructure
 	{
 		public int                         bEnable;                // 是否启用本地配置, BOOL类型
 		public float                       fObjectEmissivity;      // 目标辐射系数	浮点数 0~1
-		public int                         nObjectDistance;        // 目标距离	
+		public int                         nObjectDistance;        // 目标距离
 		public int                         nRefalectedTemp;        // 目标反射温度
-	} 
-	
+	}
+
 	// 统计量类型
 	public static class CFG_STATISTIC_TYPE extends MyStructure
 	{
@@ -12139,8 +12139,8 @@ public interface NetSDKLib extends Library {
 		public static final int CFG_STATISTIC_TYPE_STD = 5; 	   // 标准
 		public static final int CFG_STATISTIC_TYPE_MID = 6; 	   // 中间
 		public static final int CFG_STATISTIC_TYPE_ISO = 7; 	   // ISO
-	} 
-	
+	}
+
 	// 比较运算结果
 	public static class CFG_COMPARE_RESULT extends MyStructure
 	{
@@ -12148,20 +12148,20 @@ public interface NetSDKLib extends Library {
 		public static final int CFG_COMPARE_RESULT_BELOW = 1; 	  // 低于
 		public static final int CFG_COMPARE_RESULT_MATCH = 2; 	  // 匹配
 		public static final int CFG_COMPARE_RESULT_ABOVE = 3; 	  // 高于
-	} 
-	
+	}
+
 	// 记录集新增操作(insert)参数
 	public static class NET_CTRL_RECORDSET_INSERT_PARAM extends MyStructure
 	{
 	    public int                             dwSize;
 	    public NET_CTRL_RECORDSET_INSERT_IN    stuCtrlRecordSetInfo;       // 记录集信息(用户填写)
 	    public NET_CTRL_RECORDSET_INSERT_OUT   stuCtrlRecordSetResult;     // 记录集信息(设备返回)
-	    
+
 	    public NET_CTRL_RECORDSET_INSERT_PARAM() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 记录集新增操作(insert)输入参数
 	public static class NET_CTRL_RECORDSET_INSERT_IN extends MyStructure
 	{
@@ -12169,34 +12169,34 @@ public interface NetSDKLib extends Library {
 	    public int 	 				 emType;                             // 记录集信息类型, 取值参考  EM_NET_RECORD_TYPE
 	    public Pointer          	 pBuf;                               // 记录集信息缓存,详见EM_NET_RECORD_TYPE注释，由用户申请内存.
 		public int             		 nBufLen;                            // 记录集信息缓存大小,大小参照记录集信息类型对应的结构体
-	
+
 		public NET_CTRL_RECORDSET_INSERT_IN() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 记录集新增操作(insert)输出参数
 	public static class NET_CTRL_RECORDSET_INSERT_OUT extends MyStructure
 	{
 	    public int           		dwSize;
 	    public int             		nRecNo;                             // 记录编号(新增insert时设备返回)
-	    
+
 	    public NET_CTRL_RECORDSET_INSERT_OUT() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 门禁密码记录查询条件
 	public static class FIND_RECORD_ACCESSCTLPWD_CONDITION extends MyStructure
 	{
 	    public int                     dwSize;
 	    public byte[]                  szUserID = new byte[NET_MAX_USERID_LEN];      // 用户ID
-	    
+
 	    public FIND_RECORD_ACCESSCTLPWD_CONDITION() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 门禁密码记录集信息
 	public static class NET_RECORDSET_ACCESS_CTL_PWD extends MyStructure
 	{
@@ -12219,12 +12219,12 @@ public interface NetSDKLib extends Library {
 	    public NET_TIME        		  stuValidStartTime;                      			  // 开始有效期
 	    public NET_TIME        		  stuValidEndTime;                       			  // 结束有效期
 	    public int        		      nValidCounts;							              // 有效次数
-	    
+
 	    public NET_RECORDSET_ACCESS_CTL_PWD() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 开门二维码记录集信息
 	public static class NET_RECORD_ACCESSQRCODE_INFO extends MyStructure
 	{
@@ -12235,23 +12235,23 @@ public interface NetSDKLib extends Library {
 		public NET_TIME        		   stuStartTime;                             // 有效期开始时间
 	    public NET_TIME        		   stuEndTime;                               // 有效期截止时间
 	    public byte[]                  szRoomNumber = new byte[16];              // 房间号
-	    
+
 	    public NET_RECORD_ACCESSQRCODE_INFO(){
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 查询盒子工作状态, 对应命令  NET_DEVSTATE_GET_WORK_STATE
 	public static class NET_QUERY_WORK_STATE extends MyStructure
 	{
 	    public int                    dwSize;                            // 保留字段
 	    public NET_WORKSTATE          stuWorkState;                      // 运行状态
-	    
+
 	    public NET_QUERY_WORK_STATE() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 设备工作状态
 	public static class NET_WORKSTATE extends MyStructure
 	{
@@ -12270,14 +12270,14 @@ public interface NetSDKLib extends Library {
 	    public byte[]				   szDevType = new byte[32];		 // 设备型号
 	    public NET_RESOURCE_STATE	   stuResourceStat;					 // 网络资源
 	    public byte[]                  byReserved = new byte[8];         // 保留字节
-	    
+
 	    public NET_WORKSTATE() {
 	    	for(int i = 0; i < MAX_STORAGE_NUM; i++) {
 	    		stuStorages[i] = new NET_STORAGE_INFO();
 	    	}
 	    }
 	}
-	
+
 	// 存储设备信息
 	public static class NET_STORAGE_INFO extends MyStructure
 	{
@@ -12285,14 +12285,14 @@ public interface NetSDKLib extends Library {
 	    public int                      nPartitonNum;                      // 分区个数
 	    public NET_PARTITION_INFO[]     stuPartions = new NET_PARTITION_INFO[MAX_PARTITION_NUM];    // 分区信息
 	    public byte[]                   byReserved = new byte[128];                   // 保留字段
-	    
+
 	    public NET_STORAGE_INFO() {
 	    	for(int i = 0; i < MAX_PARTITION_NUM; i++) {
 	    		stuPartions[i] = new NET_PARTITION_INFO();
 	    	}
 	    }
 	}
-	
+
 	// 网络资源
 	public static class NET_RESOURCE_STATE extends MyStructure
 	{
@@ -12302,10 +12302,10 @@ public interface NetSDKLib extends Library {
 		public int						nRemotePreview;					// 远程预览能力, 单位: kbps
 		public int						nRmtPlayDownload;				// 远程回放及下载能力, 单位: kbps
 		public int						nRemoteSendRemain;				// 远程发送剩余能力, 单位: kbps
-		public int						nRemoteSendCapability;			// 远程发送总能力, 单位: kbps	
+		public int						nRemoteSendCapability;			// 远程发送总能力, 单位: kbps
 		public byte[]                   byReserved = new byte[32];      // 保留字节
-	} 
-	
+	}
+
 	// 存储设备分区信息
 	public static class NET_PARTITION_INFO extends MyStructure
 	{
@@ -12314,46 +12314,46 @@ public interface NetSDKLib extends Library {
 	    public int                       bError;                         // 是否异常, BOOL类型
 	    public byte[]                    byReserved = new byte[64];      // 保留字段
 	}
-	
+
 	// CLIENT_GetSelfCheckInfo 输入参数
 	public static class NET_IN_GET_SELTCHECK_INFO extends MyStructure
 	{
 	    public int               		dwSize;                  				// 用户使用该结构体时,dwSize 需赋值为 sizeof (NET_IN_GET_SELTCHECK_INFO)
-	    
+
 	    public NET_IN_GET_SELTCHECK_INFO() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 设备自检信息
 	public static class NET_SELFCHECK_INFO extends MyStructure
 	{
 	    public int             		  dwSize;
 	    public int               	  nAlarmIn;                 // 报警输入通道数
-	    public int               	  nAlarmOut;                // 报警输出通道数  
+	    public int               	  nAlarmOut;                // 报警输出通道数
 	    public NET_TIME          	  stuTime;                  // 上报时间
 	    public byte[]                 szPlateNo = new byte[NET_MAX_PLATE_NUMBER_LEN]; // 车牌
 	    public byte[]                 szICCID = new byte[NET_MAX_SIM_LEN];  // SIM卡号,建议使用szICCIDExInfo字段
-	    public byte              	  byOrientation;            // 定位状态,0-未定位,1-定位 
+	    public byte              	  byOrientation;            // 定位状态,0-未定位,1-定位
 	    public byte              	  byACCState;               // ACC 状态,0-关闭,1-打开
 	    public byte               	  byConstantElecState;      // 常电状态,0-正常连接,1-断开,2-欠压,3-高压
 	    public byte              	  byAntennaState;           // 通信信号状态,0-正常,1-未知故障,2-未接,3-短路
-	    
+
 	    // 外部设备状态
 	    public byte              	  byReportStation;          // 报站器状态,0-未接,1-正常,2-异常
 	    public byte              	  byControlScreen;          // 调度屏状态,0-未接,1-正常,2-异常
 	    public byte              	  byPOS;                    // POS机状态,0-未接,1-正常,2-异常
 	    public byte              	  byCoinBox;                // 投币箱状态,0-未接,1-正常,2-异常
-	    
+
 	    // 能力集
 	    public int              	  bTimerSnap;               // 定时抓图,TRUE-支持,FALSE-不支持, BOOL类型
 	    public int              	  bElectronEnclosure;       // 电子围栏,TRUE-支持,FALSE-不支持, BOOL类型
-	    public int              	  bTeleUpgrade;             // 远程升级,TRUE-支持,FALSE-不支持, BOOL类型  
-	   
+	    public int              	  bTeleUpgrade;             // 远程升级,TRUE-支持,FALSE-不支持, BOOL类型
+
 	    public int               	  nHddNum;                  // 硬盘个数
 	    public NET_HDD_STATE[]        stuHddStates = new NET_HDD_STATE[NET_MAX_DISKNUM]; // 硬盘状态
-	    
-	    public Pointer 				  pChannleState;           // 通道状态,是一个 NET_CHANNLE_STATE 数组, 
+
+	    public Pointer 				  pChannleState;           // 通道状态,是一个 NET_CHANNLE_STATE 数组,
 	                                                		   // CLIENT_AttachMission接口,NET_MISSION_TYPE_SELFCHECK类型,回调函数,内存由SDK申请,SDK释放
 	                                                		   // CLIENT_GetSelfCheckInfo接口,出参,内存由用户申请,用户释放,大小为sizeof(NET_CHANNLE_STATE)*nChannelMax
 	    public int               	  nChannleNum;             // 实际上报的通道个数
@@ -12367,51 +12367,51 @@ public interface NetSDKLib extends Library {
 		public byte              	  byBlackBoxState;          // BlackBox状态, 0-未接，1-正常
 		public int               	  nCpuUsage;                // CPU使用百分比, 单位%
 		public int               	  nTemperature;             // 设备内部温度, 摄氏度
-		
+
 		public NET_SELFCHECK_INFO() {
 			this.dwSize = this.size();
-			
+
 			for(int i = 0; i < NET_MAX_DISKNUM; i++) {
 				stuHddStates[i] = new NET_HDD_STATE();
 			}
 		}
 	}
-	
+
 	// 硬盘状态
 	public static class NET_HDD_STATE extends MyStructure
 	{
-	    public int             		  dwSize; 
-	    public int               	  nState;                   // 硬盘状态,0-正常,1-错误   
+	    public int             		  dwSize;
+	    public int               	  nState;                   // 硬盘状态,0-正常,1-错误
 	    public double            	  dbTotalSize;              // 硬盘总容量,字节为单位
 	    public NET_PARTITION_STATE[]  stuPartitions = new NET_PARTITION_STATE[NET_MAX_STORAGE_PARTITION_NUM]; // 分区状态
 	    public int               	  nPartitionNum;            // 分区数
-	    
+
 	    public NET_HDD_STATE() {
 	    	this.dwSize = this.size();
-	    	
+
 	    	for(int i = 0; i < NET_MAX_STORAGE_PARTITION_NUM; i++) {
 	    		stuPartitions[i] = new NET_PARTITION_STATE();
 	    	}
 	    }
 	}
-	
+
 	// 分区状态
 	public static class NET_PARTITION_STATE extends MyStructure
 	{
 	    public int             		 dwSize;
-	    public int               	 nStatus;                  // 分区状态,0-正常,1-错误 
+	    public int               	 nStatus;                  // 分区状态,0-正常,1-错误
 	    public double            	 dbTotalSize;              // 分区总容量,字节为单位
 	    public double            	 dbRemainSize;             // 剩余容量,字节为单位
-	    
+
 	    public NET_PARTITION_STATE() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 扩展网络配置结构体
 	public static class NETDEV_NET_CFG_EX extends MyStructure
-	{ 
-	    public int               	dwSize; 
+	{
+	    public int               	dwSize;
 	    public byte[]               sDevName = new byte[NET_MAX_NAME_LEN];  // 设备主机名
 	    public short                wTcpMaxConnectNum;                  	// TCP最大连接数
 	    public short                wTcpPort;                           	// TCP帧听端口
@@ -12433,16 +12433,16 @@ public interface NetSDKLib extends Library {
 	    public NET_REMOTE_HOST      struDns;                            	// DNS服务器
 	    public NET_MAIL_CFG         struMail;                           	// 邮件配置
 	    public byte[]               bReserved = new byte[128];          	// 保留字节
-	    
+
 	    public NETDEV_NET_CFG_EX() {
 	    	this.dwSize = this.size();
-	    	
+
 	    	for(int i = 0; i < NET_MAX_ETHERNET_NUM_EX; i++) {
 	    		stEtherNet[i] = new NET_ETHERNET_EX();
 	    	}
 	    }
-	} 
-		
+	}
+
 	// 以太网扩展配置
 	public static class NET_ETHERNET_EX extends MyStructure
 	{
@@ -12468,9 +12468,9 @@ public interface NetSDKLib extends Library {
 	    public byte                bMode;                              				// 网卡所处模式, 0:绑定模式, 1:负载均衡模式, 2:多址模式, 3:容错模式
 	    public byte[]              bReserved1 = new byte[3];                        // 字节对齐
 	    public byte[]              szEthernetName = new byte[NET_MAX_NAME_LEN];     // 网卡名,只读
-	    public byte[]              bReserved = new byte[12];                        // 保留字节   
-	} 
-	
+	    public byte[]              bReserved = new byte[12];                        // 保留字节
+	}
+
 
 	// 远程主机配置
 	public static class NET_REMOTE_HOST extends MyStructure
@@ -12478,11 +12478,11 @@ public interface NetSDKLib extends Library {
 	    public byte                byEnable;                           				// 连接使能
 	    public byte                byAssistant;                        				// 目前只对于PPPoE服务器有用,0：在有线网卡拨号；1：在无线网卡上拨号
 	    public short               wHostPort;                         				// 远程主机 端口
-	    public byte[]              sHostIPAddr = new byte[NET_MAX_IPADDR_LEN];      // 远程主机 IP 地址        
+	    public byte[]              sHostIPAddr = new byte[NET_MAX_IPADDR_LEN];      // 远程主机 IP 地址
 	    public byte[]              sHostUser = new byte[NET_MAX_HOST_NAMELEN];      // 远程主机 用户名
 	    public byte[]              sHostPassword = new byte[NET_MAX_HOST_PSWLEN];   // 远程主机 密码
-	} 
-	
+	}
+
 	// 邮件配置
 	public static class NET_MAIL_CFG extends MyStructure
 	{
@@ -12496,19 +12496,19 @@ public interface NetSDKLib extends Library {
 	    public byte[]               sCcAddr = new byte[NET_MAX_MAIL_ADDR_LEN];      // 抄送地址
 	    public byte[]               sBccAddr = new byte[NET_MAX_MAIL_ADDR_LEN];     // 暗抄地址
 	    public byte[]               sSubject = new byte[NET_MAX_MAIL_SUBJECT_LEN];  // 标题
-	} 
-	
-	// 向视频输出口投放视频和图片文件, CLIENT_ControlDevice接口的 CTRLTYPE_CTRL_DELIVERY_FILE 命令参数 
-	public static class NET_CTRL_DELIVERY_FILE extends MyStructure 
+	}
+
+	// 向视频输出口投放视频和图片文件, CLIENT_ControlDevice接口的 CTRLTYPE_CTRL_DELIVERY_FILE 命令参数
+	public static class NET_CTRL_DELIVERY_FILE extends MyStructure
 	{
 	    public int                  	 dwSize;                             // 结构体大小
 	    public int                    	 nPort;                              // 视频输出口
 	    public int 						 emPlayMode;                         // 播放类型, 参考  EM_VIDEO_PLAY_MODE_TYPE
 	    public NET_TIME                	 stuStartPlayTime;                   // 开始播放的时间
-	    public NET_TIME                	 stuStopPlayTime;                    // 结束播放的时间，emPlayMode为 EM_VIDEO_PLAY_MODE_TYPE_REPEAT 时，此值有效    
+	    public NET_TIME                	 stuStopPlayTime;                    // 结束播放的时间，emPlayMode为 EM_VIDEO_PLAY_MODE_TYPE_REPEAT 时，此值有效
 	    public int                     	 nFileCount;                         // 投放的文件个数
 	    public NET_DELIVERY_FILE_INFO[]  stuFileInfo = new NET_DELIVERY_FILE_INFO[MAX_DELIVERY_FILE_NUM]; // 投放的文件信息
-	    
+
 	    public NET_CTRL_DELIVERY_FILE() {
 	    	this.dwSize = this.size();
 	    }
@@ -12522,7 +12522,7 @@ public interface NetSDKLib extends Library {
 	    public int                  nImageSustain;                               // 每张图片停留多长时间，单位秒 (emFileType为 EM_DELIVERY_FILE_TYPE_IMAGE 时此字段有效)
 	    public byte[]               byReserved = new byte[1024];                 // 保留字节
 	}
-	
+
 	// 视频播放模式
 	public static class EM_VIDEO_PLAY_MODE_TYPE extends MyStructure
 	{
@@ -12530,7 +12530,7 @@ public interface NetSDKLib extends Library {
 	    public static final int EM_VIDEO_PLAY_MODE_TYPE_ONCE = 1;                 // 播放一次
 	    public static final int EM_VIDEO_PLAY_MODE_TYPE_REPEAT = 2;               // 循环播放
 	}
-	
+
 	// 投放的文件类型
 	public static class EM_DELIVERY_FILE_TYPE extends MyStructure
 	{
@@ -12538,18 +12538,18 @@ public interface NetSDKLib extends Library {
 		public static final int EM_DELIVERY_FILE_TYPE_VIDEO = 1;                  // 视频
 		public static final int EM_DELIVERY_FILE_TYPE_IMAGE = 2;                  // 图片
 	}
-	
+
 	// CLIENT_ControlDevice接口的 CTRLTYPE_CTRL_START_PLAYAUDIO 命令参数
 	public static class NET_CTRL_START_PLAYAUDIO extends MyStructure
 	{
 	    public int               dwSize;
 	    public byte[]            szAudioPath = new byte[NET_MAX_AUDIO_PATH];
-	    
+
 	    public NET_CTRL_START_PLAYAUDIO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 公告记录信息查询条件
 	public static class FIND_RECORD_ANNOUNCEMENT_CONDITION extends MyStructure
 	{
@@ -12557,16 +12557,16 @@ public interface NetSDKLib extends Library {
 		public int                  bTimeEnable;                      // 启用时间段查询, BOOL类型
 		public NET_TIME             stStartTime;                      // 起始时间
 		public NET_TIME             stEndTime;                        // 结束时间
-		
+
 		public FIND_RECORD_ANNOUNCEMENT_CONDITION() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	//公告记录信息
 	public static class NET_RECORD_ANNOUNCEMENT_INFO extends MyStructure
 	{
-		public int					dwSize;									
+		public int					dwSize;
 		public int					nRecNo;									   		    // 记录集编号,只读
 		public NET_TIME             stuCreateTime;                          			// 创建时间
 		public NET_TIME				stuIssueTime;										// 公告发布时间
@@ -12576,12 +12576,12 @@ public interface NetSDKLib extends Library {
 		public NET_TIME				stuExpireTime;										//公告过期的时间
 		public int			 		emAnnounceState;									//公告的状态 , 参考 NET_ANNOUNCE_STATE
 		public int		 			emAnnounceReadFlag;									//公告是否已经浏览, 参考 NET_ANNOUNCE_READFLAG
-		
+
 		public NET_RECORD_ANNOUNCEMENT_INFO() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	//公告的状态
 	public static class NET_ANNOUNCE_STATE extends MyStructure
 	{
@@ -12590,7 +12590,7 @@ public interface NetSDKLib extends Library {
 		public static final int NET_ANNOUNCE_STATE_EXPIRED = 2;		//已经过期
 		public static final int NET_ANNOUNCE_STATE_UNKNOWN = 3;		//未知
 	}
-	
+
 	//公告是否已经浏览
 	public static class NET_ANNOUNCE_READFLAG extends MyStructure
 	{
@@ -12598,34 +12598,34 @@ public interface NetSDKLib extends Library {
 		public static final int NET_ANNOUNCE_READFLAG_READED = 1;	//已读
 		public static final int NET_ANNOUNCE_READFLAG_UNKNOWN = 2;  //未知
 	}
-	
+
 	// 开始实时监视并指定回调数据格式入参
 	public static class NET_IN_REALPLAY_BY_DATA_TYPE extends MyStructure
 	{
 	    public int               		dwSize;                 // 结构体大小
 	    public int                  	nChannelID;             // 通道编号
 	    public Pointer              	hWnd;                   // 窗口句柄, HWND类型
-	    public int     					rType;                  // 码流类型 ，参考  NET_RealPlayType  
+	    public int     					rType;                  // 码流类型 ，参考  NET_RealPlayType
 	    public fRealDataCallBackEx  	cbRealData;             // 数据回调函数
 	    public int   					emDataType;             // 回调的数据类型，参考 EM_REAL_DATA_TYPE
 	    public Pointer           		dwUser;                 // 用户数据
 	    public String         			szSaveFileName;         // 转换后的文件名
-	    
+
 	    public NET_IN_REALPLAY_BY_DATA_TYPE() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 开始实时监视并指定回调数据格式出参
 	public static class NET_OUT_REALPLAY_BY_DATA_TYPE extends MyStructure
 	{
-	    public int               		dwSize;                 // 结构体大小  
-	    
+	    public int               		dwSize;                 // 结构体大小
+
 	    public NET_OUT_REALPLAY_BY_DATA_TYPE() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 实时监视回调数据类型
 	public static class EM_REAL_DATA_TYPE extends MyStructure
 	{
@@ -12647,10 +12647,10 @@ public interface NetSDKLib extends Library {
 		public StdCallCallback   cbDownLoadPos;          // 进度回调
 		public Pointer           dwPosUser;              // 进度回调用户信息
 		public StdCallCallback   fDownLoadDataCallBack;  // 数据回调
-		public int   			 emDataType;             // 回调的数据类型 
+		public int   			 emDataType;             // 回调的数据类型
 		public Pointer           dwDataUser;             // 数据回调用户信息
 		public int               nPlayDirection;         // 播放方向, 0:正放; 1:倒放;
-		
+
 		public NET_IN_PLAYBACK_BY_DATA_TYPE() {
 	    	this.dwSize = this.size();
 	    }
@@ -12659,8 +12659,8 @@ public interface NetSDKLib extends Library {
 	// 开始回放并指定回调数据格式 出参
 	public static class NET_OUT_PLAYBACK_BY_DATA_TYPE extends MyStructure
 	{
-		public int               dwSize;                 // 结构体大小 
-	    
+		public int               dwSize;                 // 结构体大小
+
 	    public NET_OUT_PLAYBACK_BY_DATA_TYPE() {
 	    	this.dwSize = this.size();
 	    }
@@ -12680,7 +12680,7 @@ public interface NetSDKLib extends Library {
 		public StdCallCallback          fDownLoadDataCallBack;  // 数据回调
 		public int           			emDataType;             // 回调的数据类型,详见 EM_REAL_DATA_TYPE
 	    public Pointer                  dwDataUser;             // 数据回调用户信息
-	    
+
 	    public NET_IN_DOWNLOAD_BY_DATA_TYPE() {
 	    	this.dwSize = this.size();
 	    }
@@ -12690,25 +12690,25 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_DOWNLOAD_BY_DATA_TYPE extends MyStructure
 	{
 		public int               dwSize;                 // 结构体大小
-		
+
 		public NET_OUT_DOWNLOAD_BY_DATA_TYPE() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 事件类型 NET_ALARM_HIGH_SPEED (车辆超速报警事件)对应的数据块描述信息
 	public static class ALARM_HIGH_SPEED_INFO extends MyStructure
 	{
 		public int                        nAction;                   	// 事件动作,1表示持续性事件开始,2表示持续性事件结束;
 		public NET_TIME_EX			      stuTime;						// 事件发生的时间
-		public double				      dbPTS;						// 时间戳(单位是毫秒)	
+		public double				      dbPTS;						// 时间戳(单位是毫秒)
 		public NET_GPS_STATUS_INFO 		  stGPSStatusInfo;              // GPS信息
 		public int						  nSpeedLimit;					// 车连限速值km/h
 		public int						  nCurSpeed;					// 当前车辆速度km/h
 		public int						  nMaxSpeed;					// 最高速度Km/h
-		public byte[]                	  byReserved = new byte[508];   // 保留字节    
-	} 
-	
+		public byte[]                	  byReserved = new byte[508];   // 保留字节
+	}
+
 	// GPS状态信息
 	public static class NET_GPS_STATUS_INFO extends MyStructure
 	{
@@ -12722,34 +12722,34 @@ public interface NetSDKLib extends Library {
 		public double                  speed;                          // 速度(单位km/H)
 		public short                   starCount;                      // 定位星数, emDateSource为 EM_DATE_SOURCE_GPS时有效
 		public byte[]                  byRserved2 = new byte[2];       // 对齐字节
-		public int   				   antennaState;                   // 天线状态, 参考  NET_THREE_STATUS_BOOL, emDateSource为 EM_DATE_SOURCE_GPS时有效    
+		public int   				   antennaState;                   // 天线状态, 参考  NET_THREE_STATUS_BOOL, emDateSource为 EM_DATE_SOURCE_GPS时有效
 		public int   				   orientationState;               // 定位状态, 参考  NET_THREE_STATUS_BOOL
-		public int                     workStae;                       // 工作状态(0=未定位,1=非差分定位,2=差分定位,3=无效PPS,6=正在估算 
+		public int                     workStae;                       // 工作状态(0=未定位,1=非差分定位,2=差分定位,3=无效PPS,6=正在估算
 	                                                                   // emDateSource为 EM_DATE_SOURCE_GPS时有效
 		public int                     nAlarmCount;                    // 发生的报警位置个数
 		public int[]                   nAlarmState = new int[128];     // 发生的报警位置,值可能多个, emDateSource为 EM_DATE_SOURCE_GPS时有效
-		public byte                    bOffline;                       // 0-实时 1-补传 
-		public byte                    bSNR;                           // GPS信噪比,表示GPS信号强度,值越大,信号越强 范围：0~100,0表示不可用	
+		public byte                    bOffline;                       // 0-实时 1-补传
+		public byte                    bSNR;                           // GPS信噪比,表示GPS信号强度,值越大,信号越强 范围：0~100,0表示不可用
 		public byte[]                  byRserved3 = new byte[2];       // 对齐字节
 		public int          		   emDateSource;                   // 数据来源, 参考 EM_DATE_SOURCE
 		public byte[]                  byRserved = new byte[124];      // 保留字节
-	} 
-	
+	}
+
 	//三态布尔类型
 	public static class NET_THREE_STATUS_BOOL extends MyStructure
 	{
-		public static final int BOOL_STATUS_FALSE  = 0; 
+		public static final int BOOL_STATUS_FALSE  = 0;
 		public static final int BOOL_STATUS_TRUE   = 1;
 	    public static final int BOOL_STATUS_UNKNOWN = 2;  //未知
 	}
-	
+
 	// 数据来源
 	public static class EM_DATE_SOURCE extends MyStructure
 	{
-	    public static final int EM_DATE_SOURCE_GPS = 0;                // GPS 
+	    public static final int EM_DATE_SOURCE_GPS = 0;                // GPS
 	    public static final int EM_DATE_SOURCE_INERTIALNAVIGATION = 1; // 惯性导航数据
 	}
-	
+
 	// Gps定位信息
 	public static class NET_GPS_LOCATION_INFO extends MyStructure
 	{
@@ -12760,52 +12760,52 @@ public interface NetSDKLib extends Library {
 		public int					nIdleTime;				 		// 怠速时长(单位:秒)
 		public int        			nMileage;				  		// 里程(单位:0.1km)
 		public int					nVoltage;				  		// 设置电压值(单位:0.1伏)
-		public byte[]			    byReserved = new byte[1024];  
+		public byte[]			    byReserved = new byte[1024];
 	}
-	
+
 	// 事件类型 NET_ALARM_VIDEO_LOSS (视频丢失事件)对应的数据块描述信息
 	public static class ALARM_VIDEO_LOSS_INFO extends MyStructure
 	{
 		public int                  nAction;                   		// 事件动作,1表示持续性事件开始,2表示持续性事件结束;
 		public int					nChannelID;						// 通道号
-		public double				dbPTS;							// 时间戳(单位是毫秒)	
+		public double				dbPTS;							// 时间戳(单位是毫秒)
 		public byte[]				byReserved1 = new byte[4];		// 字节对齐
 		public NET_TIME_EX			stuTime;						// 事件发生的时间
-		public byte[]               byReserved = new byte[512];     // 保留字节    
-	} 
-	
+		public byte[]               byReserved = new byte[512];     // 保留字节
+	}
+
 	//报警事件类型 NET_ALARM_BUS_SHARP_ACCELERATE(车辆急加速事件)对应的数据描述信息
 	public static class ALARM_BUS_SHARP_ACCELERATE_INFO extends MyStructure
 	{
 	    public int                  dwSize;
 	    public NET_GPS_STATUS_INFO  stuGPSStatusInfo;       // GPS信息
 	    public NET_TIME_EX			stuTime;				// 事件发生的时间
-	    
+
 	    public ALARM_BUS_SHARP_ACCELERATE_INFO() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	//报警事件类型 NET_ALARM_BUS_SHARP_DECELERATE(车辆急减速事件)对应的数据描述信息
 	public static class ALARM_BUS_SHARP_DECELERATE_INFO extends MyStructure
 	{
 	    public int                  dwSize;
 	    public NET_GPS_STATUS_INFO  stuGPSStatusInfo;       // GPS信息
 	    public NET_TIME_EX			stuTime;				// 事件发生的时间
-	    
+
 	    public ALARM_BUS_SHARP_DECELERATE_INFO() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// GPS未定位报警(NET_ALARM_GPS_NOT_ALIGNED)
 	public static class ALARM_GPS_NOT_ALIGNED_INFO extends MyStructure
 	{
-		public int                 nAction;                        // 事件动作,0表示脉冲事件,1表示报警开始,2表示报警结束;  
+		public int                 nAction;                        // 事件动作,0表示脉冲事件,1表示报警开始,2表示报警结束;
 		public NET_TIME_EX         stuTime;                        // 事件发生的时间
-		public byte[]              byReserved = new byte[1024];    // 保留字节 
+		public byte[]              byReserved = new byte[1024];    // 保留字节
 	}
-	
+
 	// 前端断网报警信息, 对应  NET_ALARM_FRONTDISCONNECT
 	public static class ALARM_FRONTDISCONNET_INFO extends MyStructure
 	{
@@ -12814,12 +12814,12 @@ public interface NetSDKLib extends Library {
 	    public int                nAction;                          // 0:开始 1:停止
 	    public NET_TIME           stuTime;                          // 事件发生时间
 	    public byte[]             szIpAddress = new byte[MAX_PATH]; // 前端IPC的IP地址
-	    
+
 	    public ALARM_FRONTDISCONNET_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 存储错误报警, 对应  NET_ALARM_STORAGE_FAILURE_EX
 	public static class ALARM_STORAGE_FAILURE_EX extends MyStructure
 	{
@@ -12832,12 +12832,12 @@ public interface NetSDKLib extends Library {
 	    public int    			 emError;                            		  // 错误类型, 参考   EM_STORAGE_ERROR
 	    public int               nPhysicNo;                          		  // 硬盘所在槽编码, 从1开始
 	    public NET_TIME_EX	     stuTime;									  // 事件发生的时间
-	    
+
 	    public ALARM_STORAGE_FAILURE_EX() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 存储组不存在事件信息, 对应  NET_ALARM_STORAGE_NOT_EXIST
 	public static class ALARM_STORAGE_NOT_EXIST_INFO extends MyStructure
 	{
@@ -12845,30 +12845,30 @@ public interface NetSDKLib extends Library {
 	    public int              nAction;                            		  // 0:开始 1:停止
 	    public byte[]           szGroup = new byte[NET_STORAGE_NAME_LEN];     // 在录像或抓图存储点中设置但不存在的组
 	    public NET_TIME         stuTime;                           			  // 事件触发时间
-	    
+
 	    public ALARM_STORAGE_NOT_EXIST_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 车辆ACC报警事件, 对应事件类型  NET_ALARM_VEHICLE_ACC
 	public static class ALARM_VEHICLE_ACC_INFO extends MyStructure
 	{
 	    public int                   dwSize;
-	    public int                   nACCStatus;                         // ACC状态, 0:无效, 1:开启, 2:关闭 
+	    public int                   nACCStatus;                         // ACC状态, 0:无效, 1:开启, 2:关闭
 	    public int                   nAction;                            // 事件动作, 0:Start, 1:Stop
 	    public NET_GPS_STATUS_INFO   stuGPSStatusInfo;                   // GPS信息
-	    public int                   nConstantElectricStatus;            // 常电状态, 0:未知, 1:连接, 2:断开                            
+	    public int                   nConstantElectricStatus;            // 常电状态, 0:未知, 1:连接, 2:断开
 	    public NET_TIME_EX		     stuTime;							 // 事件发生的时间
 	    public int					 nTotalMileage;						// 总的里程数,单位:米,当nACCStatus为2时,将ntotalMileage进行上报
 	    public NET_TIME_EX			 stuStartTime;						// nACCStatus为1时刻的时间
 		public NET_GPS_STATUS_INFO	 stuStartGPS;						// nACCStatus为1时刻的GPS信息
-	    
+
 	    public ALARM_VEHICLE_ACC_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 事件类型 NET_ALARM_VIDEOBLIND(视频遮挡事件)对应的数据块描述信息
 	public static class ALARM_VIDEO_BLIND_INFO extends MyStructure
 	{
@@ -12877,52 +12877,52 @@ public interface NetSDKLib extends Library {
 		public double				 dbPTS;							    // 时间戳(单位是毫秒)
 		public NET_TIME_EX			 stuTime;						    // 事件发生的时间
 		public int					 nEventID;						    // 事件ID
-		public byte[]                byReserved = new byte[512];       	// 保留字节    
-	} 
-	
+		public byte[]                byReserved = new byte[512];       	// 保留字节
+	}
+
 	// 紧急事件(对应 NET_URGENCY_ALARM_EX2, 对原有的 NET_URGENCY_ALARM_EX 类型的升级, 指人为触发的紧急事件, 一般处理是联动外部通讯功能请求帮助)
 	public static class ALARM_URGENCY_ALARM_EX2 extends MyStructure
 	{
 	    public int           	   dwSize;
 	    public NET_TIME            stuTime;                     		// 事件产生的时间
 	    public int           	   nID;                         		// 用于标识不同的紧急事件
-	    
+
 	    public ALARM_URGENCY_ALARM_EX2() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 事件类型 NET_ALARM_DRIVER_NOTCONFIRM (司机未按确认按钮报警事件)对应的数据块描述信息
 	public static class ALARM_DRIVER_NOTCONFIRM_INFO extends MyStructure
 	{
 		public int                  nAction;                   			// 事件动作,1表示持续性事件开始,2表示持续性事件结束;
 		public NET_TIME_EX			stuTime;							// 事件发生的时间
 		public double				dbPTS;								// 时间戳(单位是毫秒)
-		public byte[]               byReserved = new byte[512];			// 保留字节    
-	} 
-	
+		public byte[]               byReserved = new byte[512];			// 保留字节
+	}
+
 	// CLIENT_AttachBusState, 订阅Bus状态输入参结构
 	public static class NET_IN_BUS_ATTACH extends MyStructure
 	{
 	    public int                   dwSize;
 	    public fBusStateCallBack     cbBusState;                         // 状态回调函数
 	    public Pointer	             dwUser;                             // 用户数据
-	    
+
 	    public NET_IN_BUS_ATTACH() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// CLIENT_AttachBusState, 订阅Bus状态输出参结构
 	public static class NET_OUT_BUS_ATTACH extends MyStructure
 	{
 	    public int                dwSize;
-	    
+
 	    public NET_OUT_BUS_ATTACH() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 事件类型 NET_ALARM_BUS_PASSENGER_CARD_CHECK (乘客刷卡事件)对应的数据描述信息
 	public static class ALARM_PASSENGER_CARD_CHECK extends MyStructure
 	{
@@ -12934,8 +12934,8 @@ public interface NetSDKLib extends Library {
 	    public int    				   emType;                 					   // 刷卡类型, 参考  EM_PASSENGER_CARD_CHECK_TYPE
 	    public byte[]                  szMac = new byte[NET_MAX_POS_MAC_NUM];      // 刷卡机Mac码 (默认"0000",兼容老设备)
 	    public byte[]                  reserved = new byte[1012];                  // 预留
-	} 
-	
+	}
+
 	public static class EM_PASSENGER_CARD_CHECK_TYPE extends MyStructure
 	{
 	    public static final int EM_PASSENGER_CARD_CHECK_TYPE_UNKOWN = 0;            // 未知
@@ -12943,39 +12943,39 @@ public interface NetSDKLib extends Library {
 	    public static final int EM_PASSENGER_CARD_CHECK_TYPE_SIGNOUT = 2;           // 签出/下车
 	    public static final int EM_PASSENGER_CARD_CHECK_TYPE_NORMAL = 3;            // 正常刷卡，不区分上下车
 	}
-	
+
 	// CLIENT_AttachEventRestore 接口输入参数
 	public static class NET_IN_ATTACH_EVENT_RESTORE extends MyStructure
 	{
 	    public int                dwSize;											//结构体大小
 	    public byte[] 			  szUuid = new byte[MAX_EVENT_RESTORE_UUID];		//客户端惟一标识
-	    
+
 	    public NET_IN_ATTACH_EVENT_RESTORE() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	public static class GPS_TEMP_HUMIDITY_INFO extends MyStructure
 	{
 		public double              dTemperature;               			// 温度值(摄氏度),实际值的1000倍,如30.0摄氏度表示为30000
 		public double              dHumidity;                  			// 湿度值(%),实际值的1000倍,如30.0%表示为30000
 		public byte[]              bReserved = new byte[128];           // 保留字节
-		
+
 		public static class ByValue extends GPS_Info implements Structure.ByValue { }
 	}
-	
+
 
 	// 事件类型 NET_ALARM_FACEINFO_COLLECT (人脸信息录入事件)对应的数据块描述信息
 	public static class ALARM_FACEINFO_COLLECT_INFO extends MyStructure
 	{
-		
+
 		public int                nAction;                   				// 事件动作,1表示持续性事件开始,2表示持续性事件结束;
 		public NET_TIME_EX		  stuTime;									// 事件发生的时间
 		public double			  dbPTS;									// 时间戳(单位是毫秒)
 		public byte[]			  szUserID = new byte[NET_MAX_USERID_LEN];	// 用户ID
-		public byte[]             byReserved = new byte[512];       		// 保留字节    
-	} 
-	
+		public byte[]             byReserved = new byte[512];       		// 保留字节
+	}
+
 	// 人脸信息记录操作类型, 接口  CLIENT_FaceInfoOpreate
 	public static class EM_FACEINFO_OPREATE_TYPE extends MyStructure
 	{
@@ -12984,20 +12984,20 @@ public interface NetSDKLib extends Library {
 		public static final int EM_FACEINFO_OPREATE_UPDATE = 2;				// 更新, pInbuf = NET_IN_UPDATE_FACE_INFO , pOutBuf = NET_OUT_UPDATE_FACE_INFO
 		public static final int EM_FACEINFO_OPREATE_REMOVE = 3;				// 删除, pInbuf = NET_IN_REMOVE_FACE_INFO , pOutBuf = NET_OUT_REMOVE_FACE_INFO
 		public static final int EM_FACEINFO_OPREATE_CLEAR = 4;				// 清除, pInbuf = NET_IN_CLEAR_FACE_INFO, pOutBuf = NET_OUT_CLEAR_FACE_INFO
-	} 
-	
+	}
+
 	// 添加人脸记录信息输入参数
 	public static class NET_IN_ADD_FACE_INFO extends MyStructure
 	{
 		public int 					 dwSize;
 		public byte[]				 szUserID = new byte[NET_MAX_USERID_LEN];	// 用户ID
-		public NET_FACE_RECORD_INFO	 stuFaceInfo;								// 人脸数据 
-		
+		public NET_FACE_RECORD_INFO	 stuFaceInfo;								// 人脸数据
+
 		public NET_IN_ADD_FACE_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 人脸信息
 	public static class NET_FACE_RECORD_INFO extends MyStructure
 	{
@@ -13011,159 +13011,159 @@ public interface NetSDKLib extends Library {
 		public int[]         		nFacePhotoLen = new int[MAX_PHOTO_COUNT];                       // 每张图片的大小
 		public FACE_PHOTO[]      	pszFacePhotoArr = (FACE_PHOTO[])new FACE_PHOTO().toArray(MAX_PHOTO_COUNT);   // 人脸照片数据,大小不超过120K
 	    public byte[]        		byReserved = new byte[384];                                     // 保留字节
-	} 
-	
+	}
+
 	public static class NET_FACE_ROOMNO extends MyStructure {
 		public byte[] szRoomNo = new byte[NET_COMMON_STRING_16];   // 房间号
 	}
-	
+
 	public static class NET_FACE_FACEDATA extends MyStructure {
 		public byte[] szFaceData = new byte[MAX_FACE_DATA_LEN];    // 人脸数据
 	}
-	
+
 	public static class FACE_PHOTO extends MyStructure {
 		public Pointer pszFacePhoto;
 	}
-	
-	
+
+
 	// 添加人脸记录信息输出参数
 	public static class NET_OUT_ADD_FACE_INFO extends MyStructure
 	{
 		public int 			dwSize;
-		
+
 		public NET_OUT_ADD_FACE_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 获取人脸记录信息输入参数
 	public static class NET_IN_GET_FACE_INFO extends MyStructure
 	{
 		public int 			dwSize;
 		public byte[]		szUserID = new byte[NET_MAX_USERID_LEN];	// 用户ID
-		
+
 		public NET_IN_GET_FACE_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 获取人脸记录信息输出参数
 	public static class NET_OUT_GET_FACE_INFO extends MyStructure
 	{
 		public int 					dwSize;
 		public int 					nFaceData;														// 人脸模板数据个数
 		public NET_FACE_FACEDATA[]	szFaceDataArr = (NET_FACE_FACEDATA[])new NET_FACE_FACEDATA().toArray(MAX_FACE_COUTN);		// 人脸模板数据
-		
+
 		public NET_OUT_GET_FACE_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 更新人脸记录信息输入参数
 	public static class NET_IN_UPDATE_FACE_INFO extends MyStructure
 	{
 		public int 					  dwSize;
 		public byte[]				  szUserID = new byte[NET_MAX_USERID_LEN];			  // 用户ID
 		public NET_FACE_RECORD_INFO	  stuFaceInfo;							    		  // 人脸数据
-		
+
 		public NET_IN_UPDATE_FACE_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 更新人脸记录信息输出参数
-	public static class NET_OUT_UPDATE_FACE_INFO extends MyStructure 
+	public static class NET_OUT_UPDATE_FACE_INFO extends MyStructure
 	{
 		public int 			dwSize;
-		
+
 		public NET_OUT_UPDATE_FACE_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 删除人脸记录信息输入参数
 	public static class NET_IN_REMOVE_FACE_INFO extends MyStructure
 	{
 		public int 			dwSize;
 		public byte[]		szUserID = new byte[NET_MAX_USERID_LEN];	// 用户ID
-		
+
 		public NET_IN_REMOVE_FACE_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 删除人脸记录信息输出参数
 	public static class NET_OUT_REMOVE_FACE_INFO extends MyStructure
 	{
 		public int 			dwSize;
-		
+
 		public NET_OUT_REMOVE_FACE_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 清除人脸记录信息输入参数
 	public static class NET_IN_CLEAR_FACE_INFO extends MyStructure
 	{
 		public int 			dwSize;
-		
+
 		public NET_IN_CLEAR_FACE_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 清除人脸记录信息输出参数
-	public static class NET_OUT_CLEAR_FACE_INFO extends MyStructure 
+	public static class NET_OUT_CLEAR_FACE_INFO extends MyStructure
 	{
 		public int 			dwSize;
-		
+
 		public NET_OUT_CLEAR_FACE_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 添加节目信息接口输入参数
 	public static class NET_IN_ADD_ONE_PROGRAMME extends MyStructure
 	{
 		public int           			dwSize;
 		public NET_PROGRAMME_INFO		stuProgrammeInfo;	// 节目信息
-		
+
 		public NET_IN_ADD_ONE_PROGRAMME() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 添加节目信息接口输出参数
 	public static class NET_OUT_ADD_ONE_PROGRAMME extends MyStructure
 	{
 		public int           			 dwSize;
 		public byte[]					 szProgrammeID = new byte[MAX_COMMON_STRING_64];	// 节目ID
-		
+
 		public NET_OUT_ADD_ONE_PROGRAMME() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 诱导屏节目配置信息
 	public static class NET_PROGRAMME_INFO extends MyStructure
 	{
 		public byte[]					szProgrammeName = new byte[MAX_COMMON_STRING_64];	// 节目名称
 		public byte[]					szProgrammeID = new byte[MAX_COMMON_STRING_64];		// 节目ID，添加时无效，用于修改、删除
-		public int						bEnable;											// 节目是否启用,BOOL类型	
+		public int						bEnable;											// 节目是否启用,BOOL类型
 		public NET_ORDINARY_INFO		stuOrdinaryInfo = new NET_ORDINARY_INFO();			// 普通节目信息，此参数需要在库里new对象
 		public byte[]        			byReserved = new byte[512];							// 保留字节
-	} 
-	
+	}
+
 	// 诱导屏普通节目信息
 	public static class NET_ORDINARY_INFO extends MyStructure
 	{
 		public int								bTempletState;										// 节目是否保存为模板, BOOL类型
 		public byte[]							szDescription = new byte[MAX_COMMON_STRING_128];	// 节目描述信息
 		public int								nWhnCount;											// 诱导屏窗口个数
-		public NET_GUIDESCREEN_WINDOW_INFO[]	stuWindowsInfo = (NET_GUIDESCREEN_WINDOW_INFO[])new NET_GUIDESCREEN_WINDOW_INFO().toArray(MAX_WINDOWS_COUNT);		// 诱导屏窗口信息	
+		public NET_GUIDESCREEN_WINDOW_INFO[]	stuWindowsInfo = (NET_GUIDESCREEN_WINDOW_INFO[])new NET_GUIDESCREEN_WINDOW_INFO().toArray(MAX_WINDOWS_COUNT);		// 诱导屏窗口信息
 		public byte[]        					byReserved = new byte[128];							// 保留字节
-	} 
-	
+	}
+
 	// 诱导屏窗口信息
 	public static class NET_GUIDESCREEN_WINDOW_INFO extends MyStructure
 	{
@@ -13180,15 +13180,15 @@ public interface NetSDKLib extends Library {
 																			    // 填充多个元素信息, 每个元素信息内容为 NET_ELEMENT_COMMON_INFO + 元素类型对应的结构体
 		public int				nBufLen;										// 诱导屏窗口元素信息缓存区大小
 		public byte[]        	byReserved = new byte[128];						// 保留字节
-	} 
-	
+	}
+
 	// 窗口元素通有信息
 	public static class NET_ELEMENT_COMMON_INFO extends MyStructure
 	{
 		public int				emElementsType;								 	// 窗口元素类型,对应枚举  EM_ELEMENTS_TYPE
 		public byte[]        	byReserved = new byte[128];						// 保留字节
-	} 
-	
+	}
+
 	//窗口轮训周期类型
 	public static class EM_TOURPERIOD_TYPE extends MyStructure
 	{
@@ -13196,8 +13196,8 @@ public interface NetSDKLib extends Library {
 		public static final int EM_TOURPERIOD_PROGRAMME = 1;			// 节目周期
 		public static final int EM_TOURPERIOD_PLAN = 2;					// 计划周期
 		public static final int EM_TOURPERIOD_CUSTOM = 3;				// 自定义周期
-	} 
-	
+	}
+
 	// 诱导屏窗口元素类型
 	public static class EM_ELEMENTS_TYPE extends MyStructure
 	{
@@ -13207,8 +13207,8 @@ public interface NetSDKLib extends Library {
 		public static final int EM_ELEMENTS_TEXT = 3;					// 文本元素, 对应 NET_TEXT_ELEMENT_INFO
 		public static final int EM_ELEMENTS_PLACEHOLDER = 4;			// 占位符元素, 对应 NET_PLACEHOLDER_ELEMENT_INFO
 		public static final int EM_ELEMENTS_CAPTURE = 5;				// 抓拍元素, 对应 NET_CAPTURE_ELEMENT_INFO
-	} 
-	
+	}
+
 	// 视频元素信息
 	public static class NET_VIDEO_ELEMENT_INFO extends MyStructure
 	{
@@ -13219,8 +13219,8 @@ public interface NetSDKLib extends Library {
 		public int							nNote;												// 注释信息个数
 		public NET_GUIDESCREEN_NOTE_INFO[]	stuNoteInfo = (NET_GUIDESCREEN_NOTE_INFO[])new NET_GUIDESCREEN_NOTE_INFO().toArray(MAX_NOTE_COUNT);			// 注释信息
 		public byte[]        				byReserved = new byte[128];							// 保留字节
-	} 
-	
+	}
+
 	// 诱导屏窗口元素注释信息
 	public static class NET_GUIDESCREEN_NOTE_INFO extends MyStructure
 	{
@@ -13228,8 +13228,8 @@ public interface NetSDKLib extends Library {
 		public NET_GUIDESCREEN_TEXT_INFO	stuTextInfo;				// 文字注释信息
 		public NET_RECT						stuRect;					// 文字注释的坐标
 		public byte[]        				byReserved = new byte[128];	// 保留字节
-	} 
-	
+	}
+
 	// 文本信息
 	public static class NET_GUIDESCREEN_TEXT_INFO extends MyStructure
 	{
@@ -13245,9 +13245,9 @@ public interface NetSDKLib extends Library {
 		public int						nStayTime;											// 停留间隔（切入切出的间隔时间）单位：s
 		public int						emEnterStyle;										// 切入风格, 对应  EM_PIC_STYLE_TYPE
 		public int						emExitStyle;										// 切出风格, 对应  EM_PIC_STYLE_TYPE
-		public byte[]        			byReserved = new byte[128];							// 保留字节		
-	} 
-	
+		public byte[]        			byReserved = new byte[128];							// 保留字节
+	}
+
 	// 水平对齐类型
 	public static class EM_HORI_ALIGN_TYPE extends MyStructure
 	{
@@ -13255,7 +13255,7 @@ public interface NetSDKLib extends Library {
 		public static final int EM_HORI_ALIGN_LEFT = 1;					// 左对齐
 		public static final int EM_HORI_ALIGN_CENTER = 2;				// 居中
 		public static final int EM_HORI_ALIGN_RIGHT = 3;				// 右对齐
-	} 
+	}
 
 	// 垂直对齐类型
 	public static class EM_VERT_ALIGN_TYPE extends MyStructure
@@ -13264,7 +13264,7 @@ public interface NetSDKLib extends Library {
 		public static final int EM_VERT_ALIGN_UP = 1;					// 上对齐
 		public static final int EM_VERT_ALIGN_CENTER = 2;				// 居中
 		public static final int EM_VERT_ALIGN_DOWN = 3;					// 下对齐
-	} 
+	}
 
 	// 切入(切出) 风格
 	public static class EM_PIC_STYLE_TYPE extends MyStructure
@@ -13275,8 +13275,8 @@ public interface NetSDKLib extends Library {
 		public static final int EM_PIC_STYLE_DOWN = 3;					// 下移
 		public static final int EM_PIC_STYLE_LEFT = 4;					// 左移
 		public static final int EM_PIC_STYLE_RIGHT = 5;					// 右移
-	} 
-	
+	}
+
 	// 图片元素信息
 	public static class NET_PICTURE_ELEMENT_INFO extends MyStructure
 	{
@@ -13290,10 +13290,10 @@ public interface NetSDKLib extends Library {
 		public int 							emEnterStyle;										// 切入风格, 对应  EM_PIC_STYLE_TYPE
 		public int							emExitStyle;										// 切出风格, 对应  EM_PIC_STYLE_TYPE
 		public int							nNote;												// 注释信息个数
-		public NET_GUIDESCREEN_NOTE_INFO[]	stuNoteInfo = (NET_GUIDESCREEN_NOTE_INFO[])new NET_GUIDESCREEN_NOTE_INFO().toArray(MAX_NOTE_COUNT);			// 注释信息 
+		public NET_GUIDESCREEN_NOTE_INFO[]	stuNoteInfo = (NET_GUIDESCREEN_NOTE_INFO[])new NET_GUIDESCREEN_NOTE_INFO().toArray(MAX_NOTE_COUNT);			// 注释信息
 		public byte[]        				byReserved = new byte[128];							// 保留字节
-	} 
-	
+	}
+
 	// 诱导屏窗口文本元素信息
 	public static class NET_TEXT_ELEMENT_INFO extends MyStructure
 	{
@@ -13301,10 +13301,10 @@ public interface NetSDKLib extends Library {
 		public int							bFillerState;										// 是否垫片, 对应 BOOL类型
 		public NET_GUIDESCREEN_TEXT_INFO	stuElementsText;									// 文本元素信息
 		public int							nNote;												// 注释信息个数
-		public NET_GUIDESCREEN_NOTE_INFO[]	stuNoteInfo = (NET_GUIDESCREEN_NOTE_INFO[])new NET_GUIDESCREEN_NOTE_INFO().toArray(MAX_NOTE_COUNT);			// 注释信息 
-		public byte[]        				byReserved = new byte[128];							// 保留字节	
-	} 
-	
+		public NET_GUIDESCREEN_NOTE_INFO[]	stuNoteInfo = (NET_GUIDESCREEN_NOTE_INFO[])new NET_GUIDESCREEN_NOTE_INFO().toArray(MAX_NOTE_COUNT);			// 注释信息
+		public byte[]        				byReserved = new byte[128];							// 保留字节
+	}
+
 	// 诱导屏窗口占位符元素信息
 	public static class NET_PLACEHOLDER_ELEMENT_INFO extends MyStructure
 	{
@@ -13313,12 +13313,12 @@ public interface NetSDKLib extends Library {
 		public int							nNote;												// 注释信息个数
 		public NET_GUIDESCREEN_NOTE_INFO[]	stuNoteInfo = (NET_GUIDESCREEN_NOTE_INFO[])new NET_GUIDESCREEN_NOTE_INFO().toArray(MAX_NOTE_COUNT);			// 注释信息
 		public byte[]        				byReserved = new byte[128];							// 保留字节
-	} 
-	
+	}
+
 	// 抓拍元素信息
 	public static class NET_CAPTURE_ELEMENT_INFO extends MyStructure
 	{
-		
+
 		public byte[] 						szName = new byte[MAX_COMMON_STRING_64];			// 素材自定义名称
 		public int							bFillerState;										// 是否垫片, BOOL类型
 		public byte[]						szUserName = new byte[NET_USER_NAME_LEN_EX];		// 用户名
@@ -13329,33 +13329,33 @@ public interface NetSDKLib extends Library {
 		public int 							emCaptureType;										// 抓拍类型, 对应  EM_CAPTURE_TYPE
 		public int							nPlayTime;											// 播放时间, 单位秒
 		public int							nNote;												// 注释信息个数
-		public NET_GUIDESCREEN_NOTE_INFO[]	stuNoteInfo = (NET_GUIDESCREEN_NOTE_INFO[])new NET_GUIDESCREEN_NOTE_INFO().toArray(MAX_NOTE_COUNT);			// 注释信息 
+		public NET_GUIDESCREEN_NOTE_INFO[]	stuNoteInfo = (NET_GUIDESCREEN_NOTE_INFO[])new NET_GUIDESCREEN_NOTE_INFO().toArray(MAX_NOTE_COUNT);			// 注释信息
 		public byte[]        				byReserved = new byte[128];							// 保留字节
-	} 
-	
+	}
+
 	// 抓拍类型
 	public static class EM_CAPTURE_TYPE extends MyStructure
 	{
 		public static final int EM_CAPTURE_UNKNOWN = 0;			// 未知
 		public static final int EM_CAPTURE_VIDEO = 1;			// 视频
 		public static final int EM_CAPTURE_PICTURE = 2;			// 图片
-	} 
-	
+	}
+
 	// 设置诱导屏屏幕配置信息输入参数
 	public static class NET_IN_SET_GUIDESCREEN_CFG extends MyStructure
 	{
-		public int           					dwSize;		
+		public int           					dwSize;
 		public int								nScreenCount;		// 诱导屏属性配置信息个数, 值由用户指定
-		
+
 		// 诱导屏属性配置信息, 内存由用户维护, NET_GUIDESCREEN_ATTRIBUTE_INFO
 		// 大小为nScreenCount 个 NET_GUIDESCREEN_ATTRIBUTE_INFO
 		public Pointer							pstGuideScreenCfg;
-		
+
 		public NET_IN_SET_GUIDESCREEN_CFG() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 设置诱导屏屏幕配置信息输出参数
 	public static class NET_OUT_SET_GUIDESCREEN_CFG extends MyStructure
 	{
@@ -13365,32 +13365,32 @@ public interface NetSDKLib extends Library {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 诱导屏属性配置信息
 	public static class NET_GUIDESCREEN_ATTRIBUTE_INFO extends MyStructure
 	{
 		public int           						dwSize;
-		public byte[] 								szScreenID = new byte[MAX_COMMON_STRING_64];						// 屏幕ID 
+		public byte[] 								szScreenID = new byte[MAX_COMMON_STRING_64];						// 屏幕ID
 		public int									emStatus;															// 显示屏开关状态    对应 EM_SCREEN_STATUS_TYPE
 		public int									bIsForeverOpen;														// 是否永久开屏, 0：开屏     1：关屏
 		public int									nScreenTime;														// 开关屏时间个数
 		public NET_SCREEN_TIME_INFO[]				stuScreenTime = (NET_SCREEN_TIME_INFO[])new NET_SCREEN_TIME_INFO().toArray(MAX_SCREENTIME_COUNT);	// 开关屏时间数组
-		public int									nBright;															// 显示屏亮度, 1-100 
+		public int									nBright;															// 显示屏亮度, 1-100
 		public int									nContrast;															// 显示屏对比度, 1-100
 		public int									nSaturation;														// 显示屏饱和度, 1-100
 		public int									nVolume;															// 屏幕整体音量
 		public int									nWidth;																// 宽度
 		public int									nHeight;															// 高度
 		public int									nWindowsCount;														// 窗口个数
-		public NET_GUIDESCREEN_WINDOW_RECT_INFO[] 	stuWindows = (NET_GUIDESCREEN_WINDOW_RECT_INFO[])new NET_GUIDESCREEN_WINDOW_RECT_INFO().toArray(MAX_WINDOWS_COUNT);	// 窗口信息 
+		public NET_GUIDESCREEN_WINDOW_RECT_INFO[] 	stuWindows = (NET_GUIDESCREEN_WINDOW_RECT_INFO[])new NET_GUIDESCREEN_WINDOW_RECT_INFO().toArray(MAX_WINDOWS_COUNT);	// 窗口信息
 		public NET_GUIDESCREEN_AUTO_BRIGHT			stuAutoBright;														// 诱导屏自动调节屏幕亮度信息
 		public byte[]         						byReserved = new byte[512];											// 保留字节
-		
+
 		public NET_GUIDESCREEN_ATTRIBUTE_INFO() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 诱导屏自动调节屏幕亮度信息
 	public static class NET_GUIDESCREEN_AUTO_BRIGHT extends MyStructure
 	{
@@ -13399,16 +13399,16 @@ public interface NetSDKLib extends Library {
 		public int						nDarkBright;								// 夜间的亮度
 		public NET_SUN_RISE_SET_TIME[]	stuSunTime = (NET_SUN_RISE_SET_TIME[])new NET_SUN_RISE_SET_TIME().toArray(MAX_SUNTIME_COUNT);		// 日出日落时间
 		public byte[]        			byReserved = new byte[128];					// 保留字节
-	} 
-	
+	}
+
 	// 诱导屏配置日出日落时间
 	public static class NET_SUN_RISE_SET_TIME extends MyStructure
 	{
 		public int						nSunrise;									// 日出时间, 默认上午6 时
 		public int						nSunset;									// 日落时间, 默认下午18 时
 		public byte[]        			byReserved = new byte[32];					// 保留字节
-	} 
-	
+	}
+
 	//开关屏时间信息
 	public static class NET_SCREEN_TIME_INFO extends MyStructure
 	{
@@ -13416,32 +13416,32 @@ public interface NetSDKLib extends Library {
 		public int						emDateType;									// 开关屏日期类型  对应 EM_SCREEN_DATE_TYPE
 		public int						nDateCount;									// 开关屏日期个数'
 		public int[]					nPlayDates = new int[MAX_PLAYDATES_COUNT];	// 开关屏日期
-		public NET_PROGRAMME_TIME_INFO	stuOpenTime;								// 开屏时间   
-		public NET_PROGRAMME_TIME_INFO	stuCloseTime;								// 关屏时间   
+		public NET_PROGRAMME_TIME_INFO	stuOpenTime;								// 开屏时间
+		public NET_PROGRAMME_TIME_INFO	stuCloseTime;								// 关屏时间
 		public byte[]         			byReserved = new byte[128];              	// 保留
 	}
-	
-	// 诱导屏窗口坐标信息 
+
+	// 诱导屏窗口坐标信息
 	public static class NET_GUIDESCREEN_WINDOW_RECT_INFO extends MyStructure
 	{
-		public byte[]				szWindowID = new byte[MAX_COMMON_STRING_64];	// 窗口ID 
+		public byte[]				szWindowID = new byte[MAX_COMMON_STRING_64];	// 窗口ID
 		public NET_RECT				stuRect;										// 窗口坐标
 		public int					nWindowBright;									// 诱导屏窗口亮度，单独配置某个子屏的亮度，填0时以整屏亮度为准
 		public byte[]				byReserved = new byte[132];						// 保留
 	}
-	
+
 	// 节目时间信息
 	public static class NET_PROGRAMME_TIME_INFO extends MyStructure
 	{
 		public int                dwHour;                  // 时
 		public int                dwMinute;                // 分
 		public int                dwSecond;                // 秒
-		
+
 	    public String toString() {
 	    	return dwHour + ":" + dwMinute + "：" + dwSecond;
 	    }
 	}
-	
+
 	// 显示屏开关状态（枚举转结构体）
 	public static class EM_SCREEN_STATUS_TYPE extends MyStructure
 	{
@@ -13449,7 +13449,7 @@ public interface NetSDKLib extends Library {
 		public static int EM_SCREEN_STATUS_ON = 1;			// 开
 		public static int EM_SCREEN_STATUS_OFF = 2;			// 关
 	}
-	
+
 	// 日期类型枚（枚举转结构体）
 	public static class EM_SCREEN_DATE_TYPE extends MyStructure
 	{
@@ -13458,131 +13458,131 @@ public interface NetSDKLib extends Library {
 		public static int EM_SCREEN_DATE_WEEK = 2;					// 每周
 		public static int EM_SCREEN_DATE_DAY = 3;					// 每日
 	}
-	
+
 	// 增加即时节目计划输入参数
 	public static class NET_IN_ADD_IMME_PROGRAMMEPLAN extends MyStructure
 	{
 		public int           				dwSize;
 		public NET_IMMEDIATELY_PLAN_INFO	stuImmePlan;		// 即时节目计划信息
-		
+
 		public NET_IN_ADD_IMME_PROGRAMMEPLAN() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 增加节目计划输出参数
 	public static class NET_OUT_ADD_PROGRAMMEPLAN  extends MyStructure
 	{
 		public int           			dwSize;
 		public byte[]					szPlanID = new byte[MAX_COMMON_STRING_64];			// 节目计划ID char[]
-		
+
 		public NET_OUT_ADD_PROGRAMMEPLAN() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 即时节目计划配置信息
 	public static class NET_IMMEDIATELY_PLAN_INFO extends MyStructure
 	{
-		public byte[]				 szPlanName = new byte[MAX_COMMON_STRING_64];			// 节目计划名称  
+		public byte[]				 szPlanName = new byte[MAX_COMMON_STRING_64];			// 节目计划名称
 		public byte[]				 szPlanID = new byte[MAX_COMMON_STRING_64];				// 节目计划ID ，添加时无效，用于修改、删除
 		public byte[]				 szSplitScreenID = new byte[MAX_COMMON_STRING_64];		// 分屏ID
 		public int					 bEnable;												// 计划是否启用 , BOOL类型
 		public int					 nPlayTime;												// 播放时长, 单位 : 分钟
-		public byte[]				 szProgrammeName = new byte[MAX_COMMON_STRING_64];		// 即时发布的节目名称  
-		public byte[]				 szProgrammeID = new byte[MAX_COMMON_STRING_64];		// 即时发布的节目ID  
+		public byte[]				 szProgrammeName = new byte[MAX_COMMON_STRING_64];		// 即时发布的节目名称
+		public byte[]				 szProgrammeID = new byte[MAX_COMMON_STRING_64];		// 即时发布的节目ID
 		public byte[]        		 byReserved = new byte[512];							// 保留字节
 	}
-	
+
 	// 修改节目信息接口输入参数
 	public static class NET_IN_MODIFY_ONE_PROGRAMME extends MyStructure
 	{
 		public int           			dwSize;
 		public NET_PROGRAMME_INFO		stuProgrammeInfo;			// 节目信息
-		
+
 		public NET_IN_MODIFY_ONE_PROGRAMME() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 
 	// 修改节目信息接口输出参数
 	public static class NET_OUT_MODIFY_ONE_PROGRAMME extends MyStructure
 	{
 		public int           			dwSize;
-		
+
 		public NET_OUT_MODIFY_ONE_PROGRAMME() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 批量删除节目信息接口输入参数
 	public static class NET_IN_DEL_PROGRAMMES extends MyStructure
 	{
 		public int           		   dwSize;
 		public int				       nProgrammeID;															    				// 节目ID个数
 		public PRO_GRAMME_ID[]		   szProGrammeIdListArr = (PRO_GRAMME_ID[])new PRO_GRAMME_ID().toArray(MAX_PROGRAMMES_COUNT);	// 需要删除的节目ID列表
-		
+
 		public NET_IN_DEL_PROGRAMMES() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 需要删除的节目ID
-	public static class PRO_GRAMME_ID extends MyStructure 
+	public static class PRO_GRAMME_ID extends MyStructure
 	{
 		public byte[]			       szProGrammeIdList = new byte[MAX_COMMON_STRING_64];	// 需要删除的节目ID
 	}
-	
+
 	// 批量删除节目信息接口输出参数
 	public static class NET_OUT_DEL_PROGRAMMES extends MyStructure
 	{
 		public int           		 dwSize;
-		
+
 		public NET_OUT_DEL_PROGRAMMES() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 修改即时节目计划输入参数
 	public static class NET_IN_MODIFY_IMME_PROGRAMMEPLAN extends MyStructure
 	{
 		public int           				dwSize;
 		public NET_IMMEDIATELY_PLAN_INFO	stuImmePlan;		// 即时节目计划信息
-		
+
 		public NET_IN_MODIFY_IMME_PROGRAMMEPLAN() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 修改即时节目计划输出参数
 	public static class NET_OUT_MODIFY_IMME_PROGRAMMEPLAN extends MyStructure
 	{
 		public int           			dwSize;
-		
+
 		public NET_OUT_MODIFY_IMME_PROGRAMMEPLAN() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 增加定时节目计划输入参数
 	public static class NET_IN_ADD_TIMER_PROGRAMMEPLAN extends MyStructure
 	{
 		public int           			dwSize;
 		public NET_TIMER_PLAN_INFO		stuTimerPlan;		// 定时节目计划信息
-		
+
 		public NET_IN_ADD_TIMER_PROGRAMMEPLAN() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 定时节目计划配置信息
 	public static class NET_TIMER_PLAN_INFO extends MyStructure
 	{
 		public byte[]					szPlanName = new byte[MAX_COMMON_STRING_64];			// 节目计划名称
 		public byte[]					szPlanID = new byte[MAX_COMMON_STRING_64];				// 节目计划ID，添加时无效，用于修改、删除
 		public byte[]					szSplitScreenID = new byte[MAX_COMMON_STRING_64];		// 分屏ID
-		public int						emDataType;											    // 节目计划日期类型, 对应 EM_TIMERPLAN_DATE_TYPE  
+		public int						emDataType;											    // 节目计划日期类型, 对应 EM_TIMERPLAN_DATE_TYPE
 		public int						nDataCount;												// 节目计划日期个数
 		public int[]					nPlayDates = new int[MAX_PLAYDATES_COUNT];				// 节目播放日期列表
 		public NET_PROGRAMME_DATA		stuSatrtDate = new NET_PROGRAMME_DATA();				// 节目开始日期
@@ -13593,8 +13593,8 @@ public interface NetSDKLib extends Library {
 		public int						nProgrammes;											// 节目个数
 		public NET_PROGRAMME_OF_PLAN[]	stuProgrammes = (NET_PROGRAMME_OF_PLAN[])new NET_PROGRAMME_OF_PLAN().toArray(MAX_PROGRAMMES_COUNT);		// 节目组信息
 		public byte[]        			byReserved = new byte[512];								// 保留字节
-	} 
-	
+	}
+
 	// 定时计划日期类型
 	public static class EM_TIMERPLAN_DATE_TYPE extends MyStructure
 	{
@@ -13603,20 +13603,20 @@ public interface NetSDKLib extends Library {
 		public static final int EM_TIMERPLAN_DATE_WEEK = 2;					// 每周
 		public static final int EM_TIMERPLAN_DATE_DAY = 3;					// 每日
 		public static final int EM_TIMERPLAN_DATE_CUSTOM = 4;				// 自定义
-	} 
-	
+	}
+
 	// 节目日期格式
 	public static class NET_PROGRAMME_DATA extends MyStructure
 	{
 		public int                		dwYear;                  // 年
 		public int                		dwMonth;                 // 月
 	    public int                		dwDay;                	 // 日
-	    
+
 	    public String toString() {
 	    	return dwYear + "-" + dwMonth + "-" + dwDay;
 	    }
-	} 
-	
+	}
+
 	// 节目计划中的节目信息
 	public static class NET_PROGRAMME_OF_PLAN extends MyStructure
 	{
@@ -13626,49 +13626,49 @@ public interface NetSDKLib extends Library {
 		public NET_PROGRAMME_TIME_INFO		stuSatrtTime;										// 节目开始时间
 		public NET_PROGRAMME_TIME_INFO		stuEndTime;										    // 节目结束时间
 		public byte[]        				byReserved = new byte[128];							// 保留字节
-	} 
-	
+	}
+
 	// 审核状态
 	public static class EM_REVIES_STATE extends MyStructure
 	{
 		public static final int EM_REVIES_UNKNOWN = 0;			// 未知
 		public static final int EM_REVIES_PASS = 1;				// 通过
 		public static final int EM_REVIES_NOTPASS = 2;			// 不通过
-	} 
-	
+	}
+
 	// 修改定时节目计划输入参数
 	public static class NET_IN_MODIFY_TIMER_PROGRAMMEPLAN extends MyStructure
 	{
 		public int           				dwSize;
 		public NET_TIMER_PLAN_INFO			stuTimerPlan;		// 定时节目计划信息
-		
+
 		public NET_IN_MODIFY_TIMER_PROGRAMMEPLAN() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 修改定时节目计划输出参数
 	public static class NET_OUT_MODIFY_TIMER_PROGRAMMEPLAN extends MyStructure
 	{
 		public int           				dwSize;
-		
+
 		public NET_OUT_MODIFY_TIMER_PROGRAMMEPLAN() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 删除多个节目计划输入参数
 	public static class NET_IN_DEL_PROGRAMMEPLANS extends MyStructure
 	{
 		public int						dwSize;
 		public int						nPlanID;															    // 节目计划ID个数
 		public PLAN_ID[]				szPlanIDArr = (PLAN_ID[])new PLAN_ID().toArray(MAX_PROGRAMMES_COUNT);	// 节目计划ID
-		
+
 		public NET_IN_DEL_PROGRAMMEPLANS() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 节目计划ID
 	public static class PLAN_ID extends MyStructure
 	{
@@ -13679,43 +13679,43 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_DEL_PROGRAMMEPLANS extends MyStructure
 	{
 		public int						dwSize;
-		
+
 		public NET_OUT_DEL_PROGRAMMEPLANS() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 通过诱导屏ID 获取诱导屏配置信息输入参数
 	public static class NET_IN_GET_GUIDESCREEN_CFG_BYID extends MyStructure
 	{
 		public int           			dwSize;
 		public byte[]					szScreenID = new byte[MAX_COMMON_STRING_64];  // 屏ID
-		
+
 		public NET_IN_GET_GUIDESCREEN_CFG_BYID() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 通过诱导屏ID 获取诱导屏配置信息输出参数
 	public static class NET_OUT_GET_GUIDESCREEN_CFG_BYID extends MyStructure
 	{
 		public int           					dwSize;
 		public NET_GUIDESCREEN_ATTRIBUTE_INFO	stuGuideScreenCfg;			// 诱导屏属性信息
-		
+
 		public NET_OUT_GET_GUIDESCREEN_CFG_BYID() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 获取所有诱导屏配置信息输入参数
 	public static class NET_IN_GET_ALL_GUIDESCREEN_CFG extends MyStructure
 	{
 		public int           				dwSize;
-		
+
 		public NET_IN_GET_ALL_GUIDESCREEN_CFG() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 获取所有诱导屏配置信息输出参数
 	public static class NET_OUT_GET_ALL_GUIDESCREEN_CFG extends MyStructure
@@ -13723,45 +13723,45 @@ public interface NetSDKLib extends Library {
 		public int           				dwSize;
 		public int							nMaxScreen;					// 最大诱导屏个数, 值由用户指定
 		public int							nRetScreen;					// 实际返回的诱导屏个数
-		public Pointer						pstGuideScreenCfg;			// 用于存放获取到的诱导屏属性信息, 内存由用户维护 
+		public Pointer						pstGuideScreenCfg;			// 用于存放获取到的诱导屏属性信息, 内存由用户维护
 																	    // 大小为nMaxScreen 个 NET_GUIDESCREEN_ATTRIBUTE_INFO
 																		// 对应 NET_GUIDESCREEN_ATTRIBUTE_INFO[]
 		public NET_OUT_GET_ALL_GUIDESCREEN_CFG() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 通过节目ID 获取节目信息输入参数
 	public static class NET_IN_GET_PROGRAMME_BYID extends MyStructure
 	{
 		public int           				dwSize;
 		public byte[]						szProgrammeID = new byte[MAX_COMMON_STRING_64];	// 节目ID
-		
+
 		public NET_IN_GET_PROGRAMME_BYID() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 通过节目ID 获取节目信息输出参数
 	public static class NET_OUT_GET_PROGRAMME_BYID extends MyStructure
 	{
 		public int           				dwSize;
 		public NET_PROGRAMME_INFO			stuProgrammeInfo;			// 节目配置信息
-		
+
 		public NET_OUT_GET_PROGRAMME_BYID() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 获取所有节目信息输入参数
 	public static class NET_IN_GET_ALL_PROGRAMMES extends MyStructure
 	{
 		public int           				dwSize;
-		
+
 		public NET_IN_GET_ALL_PROGRAMMES() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 获取所有节目信息输出参数
 	public static class NET_OUT_GET_ALL_PROGRAMMES extends MyStructure
@@ -13771,21 +13771,21 @@ public interface NetSDKLib extends Library {
 		public int						    nRetCnt;					// pstProgrammeInfo实际返回的 NET_PROGRAMME_INFO 个数
 		public Pointer					    pstProgrammeInfo;		    // 节目配置信息, 内存由用户维护,对应 NET_PROGRAMME_INFO[]
 																	    // 大小为 nMaxCnt 个  NET_PROGRAMME_INFO
-		
+
 		public NET_OUT_GET_ALL_PROGRAMMES() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 获取所有节目的简要信息输入参数
 	public static class NET_IN_GET_ALL_BRIEFLYPROGRAMMES extends MyStructure
 	{
 		public int           			    dwSize;
-		
+
 		public NET_IN_GET_ALL_BRIEFLYPROGRAMMES() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 获取所有节目的简要信息输出参数
 	public static class NET_OUT_GET_ALL_BRIEFLYPROGRAMMES extends MyStructure
@@ -13793,40 +13793,40 @@ public interface NetSDKLib extends Library {
 		public int           				 dwSize;
 		public int							 nRetCnt;									// 实际返回的个数
 		public NET_BRIEFLY_PROGRAMME_INFO[]	 stuBriProgrammes = (NET_BRIEFLY_PROGRAMME_INFO[])new NET_BRIEFLY_PROGRAMME_INFO().toArray(MAX_PROGRAMMES_COUNT);	// 节目简要信息
-	
+
 		public NET_OUT_GET_ALL_BRIEFLYPROGRAMMES() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 节目简要信息
 	public static class NET_BRIEFLY_PROGRAMME_INFO extends MyStructure
 	{
 		public byte[]						szProgrammeName = new byte[MAX_COMMON_STRING_64];	// 节目名称
 		public byte[]						szProgrammeID = new byte[MAX_COMMON_STRING_64];	    // 节目ID
 		public int							emProgrammeType;									// 简要节目信息类型,对应枚举  EM_BRIEFLYPROGRAM_TYPE
-		public int							bEnable;										    // 节目是否启用, BOOL类型	
+		public int							bEnable;										    // 节目是否启用, BOOL类型
 		public int							bTempletState;										// 节目是否保存为模板, BOOL类型
 		public byte[]        				byReserved = new byte[512];							// 保留字节
-	} 
-	
+	}
+
 	// 简要节目信息类型
 	public static class EM_BRIEFLYPROGRAM_TYPE extends MyStructure
 	{
-		public static final int EM_BRIEFLYPROGRAM_UNKNOWN = 0;				// 未知	
+		public static final int EM_BRIEFLYPROGRAM_UNKNOWN = 0;				// 未知
 		public static final int EM_BRIEFLYPROGRAM_BAR = 1;					// 广告节目
 		public static final int EM_BRIEFLYPROGRAM_ORDINARY = 2;				// 普通节目
 	}
-	
+
 	// 获取所有节目计划输入参数
 	public static class NET_IN_GET_ALL_PROGRAMMEPLANS extends MyStructure
 	{
 		public int           				dwSize;
-		
+
 		public NET_IN_GET_ALL_PROGRAMMEPLANS() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 获取所有节目计划输出参数
 	public static class NET_OUT_GET_ALL_PROGRAMMEPLANS extends MyStructure
@@ -13839,20 +13839,20 @@ public interface NetSDKLib extends Library {
 		public int							nRetTimerCnt;			// 实际返回的定时节目计划个数
 		public Pointer						pstTimerPlan;			// 定时节目计划信息,对应  NET_TIMER_PLAN_INFO[]，
 																	// 大小 nMaxPlanCnt 个 NET_TIMER_PLAN_INFO
-		
+
 		public NET_OUT_GET_ALL_PROGRAMMEPLANS() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 即时计划与定时计划信息数组
 	public static class NET_PROGRAMME_PLANS_INFO extends MyStructure {
-		public NET_IMMEDIATELY_PLAN_INFO[] szImmePlan;   			// 即时节目计划信息数组	
+		public NET_IMMEDIATELY_PLAN_INFO[] szImmePlan;   			// 即时节目计划信息数组
 		public NET_TIMER_PLAN_INFO[] szTimerPlan;					// 定时节目计划信息数组
-		
+
 		public NET_PROGRAMME_PLANS_INFO() {}
-		
-		public NET_PROGRAMME_PLANS_INFO(int maxPlanCount) {		
+
+		public NET_PROGRAMME_PLANS_INFO(int maxPlanCount) {
 			szImmePlan = new NET_IMMEDIATELY_PLAN_INFO[maxPlanCount];
 			szTimerPlan = new NET_TIMER_PLAN_INFO[maxPlanCount];
 			for(int i = 0; i < maxPlanCount; i++) {
@@ -13861,17 +13861,17 @@ public interface NetSDKLib extends Library {
 			}
 		}
 	}
-	
+
 	// 通过节目计划ID 获取节目计划输入参数
 	public static class NET_IN_GET_PROGRAMMEPLAN_BYID extends MyStructure
 	{
 		public int           				dwSize;
 		public byte[]						szPlanID = new byte[MAX_COMMON_STRING_64];		// 节目计划ID
-		
+
 		public NET_IN_GET_PROGRAMMEPLAN_BYID() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 通过节目计划ID 获取节目计划输出参数
 	public static class NET_OUT_GET_PROGRAMMEPLAN_BYID extends MyStructure
@@ -13880,20 +13880,20 @@ public interface NetSDKLib extends Library {
 		public int							emPlanType;				// 节目计划类型, 对应  EM_PROGRAMMEPLAN_TYPE
 		public NET_IMMEDIATELY_PLAN_INFO	stuImmePlan;			// 即时节目计划信息, emPlanType 为 EM_PROGRAMMEPLAN_IMME 时有效
 		public NET_TIMER_PLAN_INFO			stuTimerPlan;			// 定时节目计划信息, emPlanType 为 EM_PROGRAMMEPLAN_TIMER 时有效
-		
+
 		public NET_OUT_GET_PROGRAMMEPLAN_BYID() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 节目计划类型
 	public static class EM_PROGRAMMEPLAN_TYPE extends MyStructure
 	{
 		public static final int EM_PROGRAMMEPLAN_UNKNOWN = 0;		// 未知
 		public static final int EM_PROGRAMMEPLAN_IMME = 1;			// 即时计划
 		public static final int EM_PROGRAMMEPLAN_TIMER = 2;			// 定时计划
-	} 
-	
+	}
+
 	//设置光带状态信息输入参数
 	public static class NET_IN_SET_GD_STATUS extends MyStructure
 	{
@@ -13901,29 +13901,29 @@ public interface NetSDKLib extends Library {
 		public byte[]				szScreenID = new byte[MAX_COMMON_STRING_64];		// 分屏ID, 即窗口ID
 		public int					nGDNum;												// 光带总数
 		public int[]				emStatus = new int[MAX_GD_COUNT];					// 光带信息, 对应  EM_GD_COLOR_TYPE
-		
+
 		public NET_IN_SET_GD_STATUS() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	//设置光带状态信息输出参数
 	public static class NET_OUT_SET_GD_STATUS extends MyStructure
 	{
 		public int					dwSize;
-		
+
 		public NET_OUT_SET_GD_STATUS() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 光带颜色类型
 	public static class EM_GD_COLOR_TYPE extends MyStructure
 	{
 		public static final int EM_GD_COLOR_RED = 0;		// 红色
 		public static final int EM_GD_COLOR_GREEN = 1;		// 绿色
 		public static final int EM_GD_COLOR_YELLOW = 2;		// 黄色
-	} 
+	}
 
 
 	// 用户信息表
@@ -13939,16 +13939,16 @@ public interface NetSDKLib extends Library {
 	    public byte                   byNameMaxLength;               // 支持的用户名最大长度
 	    public byte                   byPSWMaxLength;                // 支持的密码最大长度
 	    public byte[]                 byReserve = new byte[254];
-	} 
-	
+	}
+
 	// 权限信息
 	public static class OPR_RIGHT_EX extends MyStructure
 	{
 	    public int                	  dwID;
 	    public byte[]                 name = new byte[NET_RIGHT_NAME_LENGTH];
 	    public byte[]                 memo = new byte[NET_MEMO_LENGTH];
-	} 
-	
+	}
+
 	// 用户组信息
 	public static class USER_GROUP_INFO_EX extends MyStructure
 	{
@@ -13957,8 +13957,8 @@ public interface NetSDKLib extends Library {
 	    public int                	  dwRightNum;
 	    public int[]                  rights = new int[NET_MAX_RIGHT_NUM];
 	    public byte[]                 memo = new byte[NET_MEMO_LENGTH];
-	} 
-	
+	}
+
 	// 用户信息
 	public static class USER_INFO_EX extends MyStructure
 	{
@@ -13971,65 +13971,65 @@ public interface NetSDKLib extends Library {
 	    public byte[]                 memo = new byte[NET_MEMO_LENGTH];
 	    public int                 	  dwFouctionMask;                // 掩码,0x00000001 - 支持用户复用
 	    public byte[]                 byReserve = new byte[32];
-	} 
-	
+	}
+
 	// CLIENT_DownloadRemoteFile 接口输入参数(文件下载)
 	public static class NET_IN_DOWNLOAD_REMOTE_FILE extends MyStructure
 	{
 	    public int               	 dwSize;
 	    public Pointer           	 pszFileName;                    // 需要下载的文件名
 	    public Pointer         	 	 pszFileDst;                     // 存放文件路径
-	    
+
 	    public NET_IN_DOWNLOAD_REMOTE_FILE() {
 	    	this.dwSize = this.size();
 	    }
-	} 
+	}
 
 	// CLIENT_DownloadRemoteFile 接口输出参数(文件下载)
 	public static class NET_OUT_DOWNLOAD_REMOTE_FILE extends MyStructure
 	{
 	    public int               	dwSize;
-	    
+
 	    public NET_OUT_DOWNLOAD_REMOTE_FILE() {
-	    	this.dwSize = this.size(); 
+	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 车牌对比, 对应事件 EVENT_IVS_VEHICLE_RECOGNITION
-	public static class DEV_EVENT_VEHICLE_RECOGNITION_INFO extends MyStructure 
+	public static class DEV_EVENT_VEHICLE_RECOGNITION_INFO extends MyStructure
 	{
-	    public byte[]                	szName = new byte[128];                     // 事件名称    
+	    public byte[]                	szName = new byte[128];                     // 事件名称
 	    public double              	 	PTS;                                        // 时间戳(单位是毫秒)
 	    public NET_TIME_EX         	 	UTC;                                        // 事件发生的时间
 	    public int                 	 	nEventID;                                   // 事件ID
 	    public int                 		nVehicleAction;                             // 车辆动作 0-未知,1-在检测区域内,2-离开检测区域
-	    
-	    public NET_MSG_OBJECT        	stuObject;                                  // 检测到的物体    
-	    public NET_MSG_OBJECT        	stuVehicle;                                 // 车身信息    
-	    
+
+	    public NET_MSG_OBJECT        	stuObject;                                  // 检测到的物体
+	    public NET_MSG_OBJECT        	stuVehicle;                                 // 车身信息
+
 	    public NET_SEAT_INFO       	 	stuMainSeatInfo; 							// 主驾驶位信息
 	    public NET_SEAT_INFO       	 	stuSlaveSeatInfo; 							// 副驾驶位信息
 	    public int                 	 	nVehicleAttachNum;							// 车上附件数量
 	    public NET_VEHICLE_ATTACH[] 	stuVehicleAttach = (NET_VEHICLE_ATTACH[])new NET_VEHICLE_ATTACH().toArray(8); // 车上附件数据
 	    public byte[]                	szCountry = new byte[32];  					// 国家,2字节,符合ISO3166规范
-	    
-	    public int                 		nCarCandidateNum; 							// 候选车辆数量    
+
+	    public int                 		nCarCandidateNum; 							// 候选车辆数量
 	    public NET_CAR_CANDIDATE_INFO[] stuCarCandidate = (NET_CAR_CANDIDATE_INFO[])new NET_CAR_CANDIDATE_INFO().toArray(MAX_CAR_CANDIDATE_NUM);  // 候选车辆数据
-	    
+
 	    public EVENT_COMM_INFO     		stCommInfo;                                 // 公共信息
 	    public int                 		nChannel;                                   // 通道号
 	    public byte[]                	bReserved = new byte[1024];
-	} 
-	
+	}
+
 	public static class NET_CAR_CANDIDATE_INFO extends MyStructure
 	{
 	    public NET_VEHICLE_INFO    		stuVehicleInfo;							   // 车辆信息
 	    public int                 		nDifferentAttributresNum;				   // 和数据库不相符的属性数目
 	    public int[]                 	nDifferentAttributres = new int[16]; 	   // 和数据库不相符的属性集合,元素值取值意义:0-未知 1-车牌属地 2-车标 3-车型 4-车色 5-车牌颜色
-	    
-	    public byte[]                	bReserved = new byte[512];    
+
+	    public byte[]                	bReserved = new byte[512];
 	}
-	
+
 	public static class NET_VEHICLE_INFO extends MyStructure
 	{
 	    public int                		nUID;									   // 车辆唯一标识符,由服务端生成用于程序中表示惟一
@@ -14037,37 +14037,37 @@ public interface NetSDKLib extends Library {
 	    public byte[]                	szGroupName = new byte[128]; 			   // 车辆所属组名
 	    public byte[]                	szPlateNumber = new byte[64]; 			   // 车牌号码
 	    public byte[]                	szPlateCountry = new byte[4]; 			   // 车辆所在国家,2字节，符合ISO3166规范
-	    
-	    public int                 		nPlateType;								   // 车牌类型     
-																		           // 01  大型汽车号牌 黄底黑字 
-																		           // 02  小型汽车号牌 蓝底白字 
-																		           // 03  使馆汽车号牌 黑底白字、红“使”字 
-																		           // 04  领馆汽车号牌 黑底白字、红“领”字 
-																		           // 05  境外汽车号牌 黑底白、红字 
-																		           // 06  外籍汽车号牌 黑底白字 
-																		           // 13  农用运输车号牌 黄底黑字黑框线 
-																		           // 15  挂车号牌 黄底黑字黑框线 
-																		           // 16  教练汽车号牌 黄底黑字黑框线 
-																		           // 18  试验汽车号牌 
-																		           // 20  临时入境汽车号牌 白底红字黑“临时入境” 
-																		           // 22  临时行驶车号牌 白底黑字黑线框 
+
+	    public int                 		nPlateType;								   // 车牌类型
+																		           // 01  大型汽车号牌 黄底黑字
+																		           // 02  小型汽车号牌 蓝底白字
+																		           // 03  使馆汽车号牌 黑底白字、红“使”字
+																		           // 04  领馆汽车号牌 黑底白字、红“领”字
+																		           // 05  境外汽车号牌 黑底白、红字
+																		           // 06  外籍汽车号牌 黑底白字
+																		           // 13  农用运输车号牌 黄底黑字黑框线
+																		           // 15  挂车号牌 黄底黑字黑框线
+																		           // 16  教练汽车号牌 黄底黑字黑框线
+																		           // 18  试验汽车号牌
+																		           // 20  临时入境汽车号牌 白底红字黑“临时入境”
+																		           // 22  临时行驶车号牌 白底黑字黑线框
 																		           // 23  公安警用汽车号牌
-	    
+
 	    public int                 		nVehicleType;							   // 车型(轿车、卡车等)
-																		           // 001  巡逻车 
-																		           // 002  交警车辆 
-																		           // 003  消防车 
-																		           // 004  单兵 
-																		           // 005  其他警车 
-																		           // 006  其他设备 
-																		           // 020  政府车辆 
-																		           // 031  校车 
-																		           // 032  运钞车 
-																		           // 033  客运车辆 
-																		           // 034  公交车 
-																		           // 035  出租车 
+																		           // 001  巡逻车
+																		           // 002  交警车辆
+																		           // 003  消防车
+																		           // 004  单兵
+																		           // 005  其他警车
+																		           // 006  其他设备
+																		           // 020  政府车辆
+																		           // 031  校车
+																		           // 032  运钞车
+																		           // 033  客运车辆
+																		           // 034  公交车
+																		           // 035  出租车
 																		           // 036  危险品车辆
-	    
+
 	    public int                 		nBrand;									   // 车辆车标,需要通过映射表得到真正的车标.同卡口事件的CarLogoIndex
 	    public int                 		nCarSeries;								   // 车辆子品牌，需要通过映射表得到真正的子品牌,同卡口事件的SubBrand
 	    public int                 		nCarSeriesModelYearIndex; 				   // 车辆品牌年款，需要通过映射表得到真正的年款，同卡口事件的BrandYear 车头年款序号范围1~999；车尾年款序号范围1001~1999；0表示未知；1000预留。
@@ -14076,7 +14076,7 @@ public interface NetSDKLib extends Library {
 	    public byte[]                	szOwnerName = new byte[64];				   // 车主名称
 	    public int                		nSex; 									   // 车主性别
 	    public int                 		nCertificateType; 						   // 车主证件类型 0-未知 1-身份证 2-护照 3-军官证
-	    public byte[]                	szPersonID = new byte[32];				   // 人员身份证号码,工号,或其他编号    
+	    public byte[]                	szPersonID = new byte[32];				   // 人员身份证号码,工号,或其他编号
 	    public byte[]                	szOwnerCountry = new byte[4]; 			   // 车主国籍,2字节,符合ISO3166规范
 	    public byte[]                	szProvince = new byte[64];				   // 省份
 	    public byte[]                	szCity = new byte[64];					   // 城市
@@ -14085,16 +14085,16 @@ public interface NetSDKLib extends Library {
 	    public byte[]                	szPhoneNo = new byte[128];				   // 注册车主电话号码
 	    public byte[]                	bReserved = new byte[512];
 	}
-	
+
 	//获取播放盒上全部节目信息接口输入参数
 	public static class NET_IN_GET_ALL_PLAYBOX_PROGRAM extends MyStructure
 	{
 		public int           			dwSize;
-		
+
 		public NET_IN_GET_ALL_PLAYBOX_PROGRAM() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	//获取播放盒上全部节目信息接口输出参数
 	public static class NET_OUT_GET_ALL_PLAYBOX_PROGRAM extends MyStructure
@@ -14103,42 +14103,42 @@ public interface NetSDKLib extends Library {
 		public int						nMaxProgramCount;			// 节目信息最大个数，由用户指定
 		public int						nRetProgramCount;			// 实际返回的节目信息个数
 		public Pointer				    pstProgramInfo;			    // 播放盒上的节目信息, 内存资源由用户维护,对应 NET_PROGRAM_ON_PLAYBOX[]
-		
+
 		public NET_OUT_GET_ALL_PLAYBOX_PROGRAM() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 播放盒节目信息
 	public static class NET_PROGRAM_ON_PLAYBOX extends MyStructure
 	{
 		public byte[]					  szProgrammeName = new byte[MAX_COMMON_STRING_64];	  // 节目名称
 		public byte[]					  szProgrammeID = new byte[MAX_COMMON_STRING_64];	  // 节目ID, 添加节目时不需要指定
-		public int						  bEnable;											  // 节目是否启用	
+		public int						  bEnable;											  // 节目是否启用
 		public int						  emProgramType;									  // 节目类型, 参考  EM_PLAYBOXPROGRAM_TYPE
 		public NET_PROGRAM_LOGO_INFO	  stuLogoInfo;										  // LOGO节目信息, emProgramType为EM_PROGRAM_ON_PLAYBOX_LOGO时有效
 		public NET_PROGRAM_BAR_INFO		  stuBarInfo;										  // 广告条节目信息, emProgramType为EM_PROGRAM_ON_PLAYBOX_BAR时有效
 		public NET_PROGRAM_ORDINARY_INFO  stuOrdinaryInfo = new NET_PROGRAM_ORDINARY_INFO();  // 普通节目信息, emProgramType为EM_PROGRAM_ON_PLAYBOX_ORDINARY时有效, 此参数需要在库里new对象
-		public byte[]        			  byReserved = new byte[512];						  // 保留字节	
-	} 
-	
+		public byte[]        			  byReserved = new byte[512];						  // 保留字节
+	}
+
 	// 播放盒节目类型
-	public static class EM_PLAYBOXPROGRAM_TYPE extends MyStructure 
+	public static class EM_PLAYBOXPROGRAM_TYPE extends MyStructure
 	{
 		public static final int EM_PROGRAM_ON_PLAYBOX_LOGO = 0;								// LOGO, 对应结构体 NET_PROGRAM_LOGO_INFO
 		public static final int EM_PROGRAM_ON_PLAYBOX_BAR = 1;								// 广告条, 对应结构体 NET_PROGRAM_BAR_INFO
 		public static final int EM_PROGRAM_ON_PLAYBOX_ORDINARY = 2;							// 普通节目, 对应结构体 NET_PROGRAM_ORDINARY_INFO
 	}
-	
+
 	// LOGO节目信息
 	public static class NET_PROGRAM_LOGO_INFO extends MyStructure
 	{
 		public byte[]		 szLogoPath = new byte[MAX_COMMON_STRING_128];			// Logo路径
 		public NET_RECT		 stuBackgroundRect;										// Logo位置
 		public int			 nDiaphaneity;											// 透明度, 0-100
-		public byte[]        byReserved = new byte[128];							// 保留字节	
-	} 
-	
+		public byte[]        byReserved = new byte[128];							// 保留字节
+	}
+
 	// 广告条节目信息
 	public static class NET_PROGRAM_BAR_INFO extends MyStructure
 	{
@@ -14150,9 +14150,9 @@ public interface NetSDKLib extends Library {
 		public NET_RECT			stuBackgroundRect;									// 广告条位置
 		public NET_COLOR_RGBA	stuBackColor;										// 广告条背景颜色
 		public int				nDiaphaneity;										// 透明度, 0-100
-		public byte[]        	byReserved = new byte[128];							// 保留字节	
-	} 
-	
+		public byte[]        	byReserved = new byte[128];							// 保留字节
+	}
+
 	// 普通广告节目信息
 	public static class NET_PROGRAM_ORDINARY_INFO extends MyStructure
 	{
@@ -14163,8 +14163,8 @@ public interface NetSDKLib extends Library {
 		public int							nWinCount;								// 窗口数量
 		public NET_PLAYBOX_WINDOWS_INFO[]	stuWindowsInfo = (NET_PLAYBOX_WINDOWS_INFO[])new NET_PLAYBOX_WINDOWS_INFO().toArray(MAX_WINDOWS_COUNT);		// 窗口信息
 		public byte[]        				byReserved = new byte[128];						// 保留字节
-	} 
-	
+	}
+
 	// 播放盒上窗口信息
 	public static class NET_PLAYBOX_WINDOWS_INFO extends MyStructure
 	{
@@ -14182,81 +14182,81 @@ public interface NetSDKLib extends Library {
 																			// 填充多个元素信息, 每个元素信息内容为 NET_ELEMENT_COMMON_INFO + 元素类型对应的结构体
 		public int 						nBufLen;							// 诱导屏窗口元素信息缓存区大小
 		public byte[]        			byReserved = new byte[128];			// 保留字节
-	} 
-	
+	}
+
 	// 通过programme ID 获取播放盒上对应的节目信息输入参数
 	public static class NET_IN_GET_PLAYBOX_PROGRAM_BYID extends MyStructure
 	{
 		public int           			dwSize;
 		public byte[]					szProgrammeID = new byte[MAX_COMMON_STRING_64];	// 节目ID
-		
+
 		public NET_IN_GET_PLAYBOX_PROGRAM_BYID() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 通过programme ID 获取播放盒上对应的节目信息输出参数
 	public static class NET_OUT_GET_PLAYBOX_PROGRAM_BYID extends MyStructure
 	{
 		public int           			dwSize;
 		public NET_PROGRAM_ON_PLAYBOX	stuPlayBoxProgram;					// 播放盒节目信息
-		
+
 		public NET_OUT_GET_PLAYBOX_PROGRAM_BYID() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 在播放盒上添加一个节目信息输入参数
 	public static class NET_IN_ADD_ONE_PLAYBOX_PRAGROM extends MyStructure
 	{
 		public int           			dwSize;
 		public NET_PROGRAM_ON_PLAYBOX	stuPlayBoxProgram;			// 播放盒节目信息
-		
+
 		public NET_IN_ADD_ONE_PLAYBOX_PRAGROM() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 在播放盒上添加一个节目信息输出参数
 	public static class NET_OUT_ADD_ONE_PLAYBOX_PRAGROM extends MyStructure
 	{
 		public int           			dwSize;
 		public byte[]					szProgrammeID = new byte[MAX_COMMON_STRING_64];	// 节目ID
-		
+
 		public NET_OUT_ADD_ONE_PLAYBOX_PRAGROM() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 在播放盒上修改指定ID的节目信息输入参数
 	public static class NET_IN_MODIFY_PLAYBOX_PROGRAM_BYID extends MyStructure
 	{
 		public int           			dwSize;
 		public NET_PROGRAM_ON_PLAYBOX	stuPlayBoxProgram;			// 播放盒节目信息
-		
+
 		public NET_IN_MODIFY_PLAYBOX_PROGRAM_BYID() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 在播放盒上修改指定ID的节目信息输出参数
 	public static class NET_OUT_MODIFY_PLAYBOX_PROGRAM_BYID extends MyStructure
 	{
 		public int           			dwSize;
-		
+
 		public NET_OUT_MODIFY_PLAYBOX_PROGRAM_BYID() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	//云台定位信息报警
 	public static class NET_PTZ_LOCATION_INFO extends MyStructure
 	{
-	    public int     			nChannelID;                 		// 通道号 
+	    public int     			nChannelID;                 		// 通道号
 	    public int     			nPTZPan;                    		// 云台水平运动位置,有效范围：[0,3600]
 	    public int     			nPTZTilt;                   		// 云台垂直运动位置,有效范围：[-1800,1800]
 	    public int    			nPTZZoom;                   		// 云台光圈变动位置,有效范围：[0,128]
-	    public byte    			bState;                     		// 云台运动状态, 0-未知 1-运动 2-空闲 
+	    public byte    			bState;                     		// 云台运动状态, 0-未知 1-运动 2-空闲
 	    public byte   		 	bAction;                    		// 云台动作,255-未知,0-预置点,1-线扫,2-巡航,3-巡迹,4-水平旋转,5-普通移动,6-巡迹录制,7-全景云台扫描,8-热度图
 	                                        						// 9-精确定位,10-设备校正,11-智能配置，12-云台重启
 	    public byte    			bFocusState;                		// 云台聚焦状态, 0-未知, 1-运动状态, 2-空闲
@@ -14273,7 +14273,7 @@ public interface NetSDKLib extends Library {
 	    public int	    		nZoomValue;				    		// 真实变倍值 当前倍率（扩大100倍表示）
 	    public int[]     		reserved = new int[244];            // 保留字段
 	}
-	
+
 	// 预置点状态枚举
 	public static class EM_DH_PTZ_PRESET_STATUS extends MyStructure
 	{
@@ -14281,7 +14281,7 @@ public interface NetSDKLib extends Library {
 	    public static final int EM_DH_PTZ_PRESET_STATUS_REACH = 1;          // 预置点到达
 	    public static final int EM_DH_PTZ_PRESET_STATUS_UNREACH = 2;        // 预置点未到达
 	}
-	
+
 	public static class NET_EM_CFG_OPERATE_TYPE extends MyStructure
 	{
 	    public static final int NET_EM_CFG_SNAP_MODE = 0;                   	  // 抓图模式配置,对应结构体 NET_SNAP_MODE
@@ -14310,7 +14310,7 @@ public interface NetSDKLib extends Library {
 		public static final int NET_EM_CFG_ENCODE_SNAP_INFO = 1106;				  // 编码抓图配置，对应结构体 NET_ENCODE_SNAP_INFO
 		public static final int NET_EM_CFG_ENCODE_SNAPTIME = 1107; 				  // 编码抓图时间相关配置，对应结构体 NET_ENCODE_SNAP_TIME_INFO
 		public static final int NET_EM_CFG_ENCODE_CHANNELTITLE = 1108;			  // 通道名称配置，对应结构体 NET_ENCODE_CHANNELTITLE_INFO
-	
+
 		/**********音频相关配置***************************************************************************************************/
 		public static final int  NET_EM_CFG_AUDIOIN_SOURCE = 1200;				  // 音频输入类型配置，对应结构体 NET_ENCODE_AUDIO_SOURCE_INFO
 		public static final int NET_EM_CFG_AUDIOIN_DENOISE = 1201;				  // 音频降噪配置，对应结构体 NET_AUDIOIN_DENOISE_INFO
@@ -14319,7 +14319,7 @@ public interface NetSDKLib extends Library {
 
 		/**********videoin 相关配置***********************************************************************************************/
 		public static final int NET_EM_CFG_VIDEOIN_SWITCHMODE = 1300;			  // 切换模式配置，对应结构体 NET_VIDEOIN_SWITCH_MODE_INFO
-		public static final int NET_EM_CFG_VIDEOIN_COLOR = 1301;				  // 视频输入颜色配置，对应结构体 NET_VIDEOIN_COLOR_INFO			
+		public static final int NET_EM_CFG_VIDEOIN_COLOR = 1301;				  // 视频输入颜色配置，对应结构体 NET_VIDEOIN_COLOR_INFO
 		public static final int NET_EM_CFG_VIDEOIN_IMAGE_OPT = 1302;			  // 图像属性配置，对应结构体 NET_VIDEOIN_IMAGE_INFO
 		public static final int NET_EM_CFG_VIDEOIN_STABLE = 1303;				  // 图像防抖配置，对应结构体 NET_VIDEOIN_STABLE_INFO
 		public static final int NET_EM_CFG_VIDEOIN_IRISAUTO = 1304;			  	  // 自动光圈配置，对应结构体 NET_VIDEOIN_IRISAUTO_INFO
@@ -14343,18 +14343,18 @@ public interface NetSDKLib extends Library {
 		/***********庭审相关配置*****************************************************************************************/
 		public static final int NET_EM_CFG_ENCODE_PLAN = 1400;					  // 刻录光盘编码计划, 对应结构体 NET_ENCODE_PLAN_INFO
 		public static final int NET_EM_CFG_COMPOSE_CHANNEL = 1401;				  // 合成通道配置, 对应结构体NET_COMPOSE_CHANNEL_INFO
-		
+
 		/**********报警网关相关配置**************************************************************************************/
-		public static final int  NET_EM_CFG_ALARM_SOUND = 1500;           		  // 报警网关语音配置, 对应结构体 NET_ALARM_SOUND_INFO 
+		public static final int  NET_EM_CFG_ALARM_SOUND = 1500;           		  // 报警网关语音配置, 对应结构体 NET_ALARM_SOUND_INFO
 
 	    /**********网络应用相关配置**************************************************************************************/
 		public static final int NET_EM_CFG_ACCESS_POINT = 1600;         		  // 用于WiFi服务端配置(热点功能), 对应结构体 NET_NETAPP_ACCESSPOINT
 
 		/**************安全基线需求**************************************************************************************/
-		public static final int NET_EM_CFG_NAS			= 1700;					  // NAS 配置, 对应结构体 NET_NAS_INFO   
-		public static final int NET_EM_CFG_PPPOE 		= 1701;					  // PPPOE 配置，对应结构体 NET_PPPOE_INFO   
-		public static final int NET_EM_CFG_EMAIL 		= 1702;					  // Email 配置，对应结构体 NET_EAMIL_INFO  
-		public static final int NET_EM_CFG_DDNS 		= 1703;					  // DDNS 配置，对应结构体 NET_DDNS_INFO  
+		public static final int NET_EM_CFG_NAS			= 1700;					  // NAS 配置, 对应结构体 NET_NAS_INFO
+		public static final int NET_EM_CFG_PPPOE 		= 1701;					  // PPPOE 配置，对应结构体 NET_PPPOE_INFO
+		public static final int NET_EM_CFG_EMAIL 		= 1702;					  // Email 配置，对应结构体 NET_EAMIL_INFO
+		public static final int NET_EM_CFG_DDNS 		= 1703;					  // DDNS 配置，对应结构体 NET_DDNS_INFO
 
 		/**************SCADA配置需求**************************************************************************************/
 		public static final int NET_EM_CFG_SCADA_PROTOCOLS_MANAGER = 1800;   	  // 协议管理配置，对应结构体 NET_SCADA_PROTOCOLS_MANAGER
@@ -14364,52 +14364,52 @@ public interface NetSDKLib extends Library {
 		public static final int NET_EM_CFG_NETAPP_LINK_LAYER_VPN = 1900;	  	  // 链路层VPN设置,对应结构体 NET_NETAPP_LINK_LAYER_VPN_CFG
 
 		/**************中国铁塔平台接入***********************************************************************************/
-		public static final int NET_EM_CFG_VSP_CHINA_TOWER = 2000;			  	  // 安徽治超平台接入配置,对应结构体 NET_VSP_CHINA_TOWER 
-		
+		public static final int NET_EM_CFG_VSP_CHINA_TOWER = 2000;			  	  // 安徽治超平台接入配置,对应结构体 NET_VSP_CHINA_TOWER
+
 		/**********智能相关配置*******************************************************************************************/
 		public static final int NET_EM_CFG_STEREO_CALIBRATE = 2100;				  // 双目标定结果, 对应结构体NET_STEREO_CALIBRATE_INFO
 		public static final int NET_EM_CFG_STEREO_CALIBRATEMATRIX_MULTISENSOR = 2101; // 多目相机标定配置CalibrateMatrix(MultiSensor), 对应的结构体 NET_MULTI_SENSOR_INFO
-		
+
 		/**********雷达配置***********************************************************************************************/
 		public static final int NET_EM_CFG_RADAR            = 2200;				  // 雷达配置，对应结构体 DEV_RADAR_CONFIG
-		
+
 		/**********视频对讲电话通用配置***********************************************************************************/
 		public static final int NET_EM_CFG_VTH_PASSWORD		= 2300;				  // 视频对讲电话通用配置,对应结构体 NET_CFG_VTH_PASSWORD_INFO
 		public static final int NET_EM_CFG_REGISTAR         = 2301;     		  // 注册服务器配置,对应结构体 NET_CFG_REGISTAR_INFO
 		public static final int NET_EM_CFG_SIP              = 2302;    			  // sip配置, 对应结构体 NET_CFG_SIPSERVER_INFO
-		
+
 		/**********镜头前遮挡盖配置***************************************************************************************/
 		public static final int NET_EM_CFG_AELENSMASK       = 2400;     		  //镜头前遮挡盖配置，对应结构体NET_CFG_AELENSMASK_INFO
 
-		public static final int NET_EM_CFG_ULTRASONIC       = 2500;     		  //超声波配置，对应结构体NET_CFG_ULTRASONIC_INFO 
-						
+		public static final int NET_EM_CFG_ULTRASONIC       = 2500;     		  //超声波配置，对应结构体NET_CFG_ULTRASONIC_INFO
+
 	    /**********报警主机相关配置***************************************************************************************/
 		public static final int NET_EM_CFG_ARMSCHEDULE      = 2600;     		  // 报警计划配置，对应结构体 NET_CFG_ARMSCHEDULE_INFO
-		
+
 		/**********录像抓图功能相关配置***********************************************************************************/
 		public static final int NET_EM_CFG_RECORDEXTRA	= 3610;					  // 录像辅码流录像配置, 对应结构体 NET_CFG_RECORDEXTRA_INFO
 
 		/**********视频诊断相关配置***************************************************************************************/
 		public static final int NET_EM_VIDEODIAGNOSIS_PROJECT = 3700;			  // 视频诊断计划配置, 对应结构体NET_CFG_VIDEODIAGNOSIS_PROJECT_INFO
-												
+
 		/***********车载相关配置******************************************************************************************/
 		public static final int NET_EM_CFG_POSITIONREPORTPOLICY	  = 3800;		  // 车载GPS位置信息上报策略配置, 对应结构体 NET_CFG_POSITIONREPORTPOLICY_INFO
 		public static final int NET_EM_CFG_VEHICLE_WORKTIMESCHEDULE = 3801;		  // 车载工作计划配置，对应结构体 NET_CFG_VEHICLE_WORKTIMESCHEDULE_INFO
 		public static final int NET_EM_CFG_VEHICLE_LOAD = 3802;					  // 荷载人数配置, 对应结构体 NET_CFG_VEHICLE_LOAD_INFO
-		
+
 	    /***********门禁相关配置******************************************************************************************/
 		public static final int NET_EM_CFG_ACCESSCTL_BLACKLIST = 3900;      	  // 门禁黑名单报警配置，对应结构体 NET_CFG_ACCESSCTL_BLACKLIST
 		public static final int NET_EM_CFG_ACCESSCTL_BLACKLIST_LINK = 3901; 	  // 门禁黑名单报警联动配置,对应结构体 NET_CFG_ALARM_MSG_HANDLE
 		public static final int  NET_EM_CFG_ACCESSCTL_SPECIALDAY_GROUP = 3902;    // 门禁节假日组配置, 对应结构体 NET_CFG_ACCESSCTL_SPECIALDAY_GROUP_INFO
 		public static final int NET_EM_CFG_ACCESSCTL_SPECIALDAYS_SCHEDULE = 3903; // 门禁节假日计划配置, 对应结构体 NET_CFG_ACCESSCTL_SPECIALDAYS_SCHEDULE_INFO
-		
+
 	    /***********定制配置************************************************************************************************/
 		public static final int NET_EM_CFG_SERIALNOWHITETABLE    = 4000;          // 前端序列号白名单下发至NVR 配置, 对应结构体 NET_CFG_SERIALNOWHITETABLE_INFO
-		
+
 		/***********道闸配置************************************************************************************************/
 		public static final int NET_EM_CFG_TRAFFICSTROBE = 9100;				 // 道闸配置, 对应结构体 NET_CFG_TRAFFICSTROBE_INFO
-	} 
-	
+	}
+
 	//通用曝光属性配置
 	public static class NET_VIDEOIN_EXPOSURE_NORMAL_INFO extends MyStructure
 	{
@@ -14424,20 +14424,20 @@ public interface NetSDKLib extends Library {
 		public int					nExposureIris;							// 光圈值，模式为光圈优先时有效，0-100
 		public double				dbExposureValue1;						// 自动曝光时间下限或者手动曝光自定义时间,毫秒为单位，取值0.1ms~80ms
 		public double				dbExposureValue2;						// 自动曝光时间上限,毫秒为单位，取值0.1ms~80ms，且必须不小于"ExposureValue1"取值
-	
+
 		public NET_VIDEOIN_EXPOSURE_NORMAL_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 每个通道对应的配置类型
 	public static class NET_EM_CONFIG_TYPE extends MyStructure
 	{
 		public static final int NET_EM_CONFIG_DAYTIME = 0;				   // 白天
 		public static final int NET_EM_CONFIG_NIGHT = 1;				   // 夜晚
 		public static final int NET_EM_CONFIG_NORMAL = 2;				   // 普通
-	} 
-	
+	}
+
 	// 曝光模式
 	public static class NET_EM_EXPOSURE_MODE extends MyStructure
 	{
@@ -14450,8 +14450,8 @@ public interface NetSDKLib extends Library {
 		public static final int NET_EM_EXPOSURE_GIANFIRST = 7;				// 增益优先
 		public static final int NET_EM_EXPOSURE_SHUTTERFIRST = 8;			// 快门优先
 		public static final int NET_EM_EXPOSURE_FLASHMATCH = 9;				// 闪光灯匹配模式
-	} 
-	
+	}
+
 	// 背光模式
 	public static class NET_EM_BACK_MODE extends MyStructure
 	{
@@ -14461,16 +14461,16 @@ public interface NetSDKLib extends Library {
 		public static final int NET_EM_BACKLIGHT_MODE_WIDEDYNAMIC = 3;		// 宽动态
 		public static final int NET_EM_BACKLIGHT_MODE_GLAREINHIBITION = 4;	// 强光抑制
 		public static final int NET_EM_BACKLIGHT_MODE_SSA = 5;				// 场景自适应
-	} 
-	
+	}
+
 	// 背光补偿模式
 	public static class NET_EM_BLACKLIGHT_MODE extends MyStructure
 	{
 		public static final int NET_EM_BLACKLIGHT_UNKNOW = 0;				// 未知模式
 		public static final int NET_EM_BLACKLIGHT_DEFAULT = 1;				// 默认模式
 		public static final int NET_EM_BLACKLIGHT_REGION = 2;				// 自定义区域模式
-	} 
-	
+	}
+
 	// 背光配置
 	public static class NET_VIDEOIN_BACKLIGHT_INFO extends MyStructure
 	{
@@ -14478,27 +14478,27 @@ public interface NetSDKLib extends Library {
 		public int 					emCfgType;						// 配置类型，获取和设置时都要指定, 对应枚举  NET_EM_CONFIG_TYPE
 		public int					emBlackMode;					// 背光模式, 对应枚举  NET_EM_BACK_MODE
 		public int					emBlackLightMode;				// 背光补偿模式, 对应枚举  NET_EM_BLACKLIGHT_MODE
-		public NET_RECT				stuBacklightRegion;     		// 背光补偿区域   
+		public NET_RECT				stuBacklightRegion;     		// 背光补偿区域
 		public int					nWideDynamicRange;				// 宽动态值，emBlackMode为NET_EM_BACKLIGHT_MODE_WIDEDYNAMIC时生效
 		public int					nGlareInhibition;				// 强光抑制0-100，emBlackMode为NET_EM_BACKLIGHT_MODE_GLAREINHIBITION时生效
-		
+
 		public NET_VIDEOIN_BACKLIGHT_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 聚焦模式配置
 	public static class NET_VIDEOIN_FOCUSMODE_INFO extends MyStructure
 	{
 		public int					dwSize;
 		public int					emCfgType;						// 配置类型，获取和设置时都要指定,对应枚举 NET_EM_CONFIG_TYPE
 		public int				    emFocusMode;					// 聚焦模式, 对应枚举  NET_EM_FOCUS_MODE
-		
+
 		public NET_VIDEOIN_FOCUSMODE_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 聚焦模式
 	public static class NET_EM_FOCUS_MODE extends MyStructure
 	{
@@ -14507,8 +14507,8 @@ public interface NetSDKLib extends Library {
 		public static final int NET_EM_FOCUS_AUTO = 2;				// 自动聚焦
 		public static final int NET_EM_FOCUS_SEMI_AUTO = 3;			// 半自动聚焦
 		public static final int NET_EM_FOCUS_MANUAL = 4;			// 手动聚焦
-	} 
-	
+	}
+
 	// 图像属性配置
 	public static class NET_VIDEOIN_IMAGE_INFO extends MyStructure
 	{
@@ -14517,38 +14517,38 @@ public interface NetSDKLib extends Library {
 		public int					bMirror;						// 是否开启画面镜像功能
 		public int					bFlip;							// 是否开启画面翻转功能
 		public int					nRotate90;						// 0-不旋转，1-顺时针90°，2-逆时针90°
-		
+
 		public NET_VIDEOIN_IMAGE_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 网络协议配置
 	public static class CFG_DVRIP_INFO extends MyStructure
 	{
 		public int                 			nTcpPort;                           			// TCP服务端口,1025~65535
 		public int                 			nSSLPort;                           			// SSL服务端口,1025~65535
 		public int                 			nUDPPort;                          				// UDP服务端口,1025~65535
-		public int                 			nMaxConnections;                    			// 最大连接数 
+		public int                 			nMaxConnections;                    			// 最大连接数
 		public int                			bMCASTEnable;                       			// 组播使能
 		public int                 			nMCASTPort;                         			// 组播端口号
 		public byte[]                		szMCASTAddress = new byte[MAX_ADDRESS_LEN];     // 组播地址
 		public int                 			nRegistersNum;                      			// 主动注册配置个数
-		public CFG_REGISTER_SERVER_INFO[]   stuRegisters = (CFG_REGISTER_SERVER_INFO[])new CFG_REGISTER_SERVER_INFO().toArray(MAX_REGISTER_NUM);// 主动注册配置 
+		public CFG_REGISTER_SERVER_INFO[]   stuRegisters = (CFG_REGISTER_SERVER_INFO[])new CFG_REGISTER_SERVER_INFO().toArray(MAX_REGISTER_NUM);// 主动注册配置
 		public int    						emStreamPolicy;                     			// 带宽不足时码流策略,对应枚举  EM_STREAM_POLICY
 		public CFG_REGISTERSERVER_VEHICLE	stuRegisterServerVehicle;						// 车载专用主动注册配置
 	}
-	
+
 	// 带宽不足时码流策略
 	public static class EM_STREAM_POLICY extends MyStructure
 	{
 	    public static final int STREAM_POLICY_UNKNOWN = 0;
 	    public static final int STREAM_POLICY_NONE = 1;										// 无策略,不开启使能"None"
-		public static final int STREAM_POLICY_QUALITY = 2;                              	// 画质优先"Quality"  
+		public static final int STREAM_POLICY_QUALITY = 2;                              	// 画质优先"Quality"
 		public static final int STREAM_POLICY_FLUENCY = 3;                             		// 流畅度优先"Fluency"
 		public static final int STREAM_POLICY_AUTOADAPT = 4;                           	 	// 自动"AutoAdapt"
 	}
-	
+
 	// 主动注册配置
 	public static class CFG_REGISTER_SERVER_INFO extends MyStructure
 	{
@@ -14557,14 +14557,14 @@ public interface NetSDKLib extends Library {
 		public int                 			nServersNum;                        			// 服务器个数
 		public CFG_SERVER_INFO[]     		stuServers = (CFG_SERVER_INFO[])new CFG_SERVER_INFO().toArray(MAX_SERVER_NUM);  // 服务器数组
 	}
-	
+
 	// 服务器
 	public static class CFG_SERVER_INFO extends MyStructure
 	{
 		public int                 			nPort;                             				// 服务器端口号
 		public byte[]                		szAddress = new byte[MAX_ADDRESS_LEN];          // IP地址或网络名
 	}
-	
+
 	// 车载专用主动注册配置
 	public static class CFG_REGISTERSERVER_VEHICLE extends MyStructure
 	{
@@ -14579,7 +14579,7 @@ public interface NetSDKLib extends Library {
 		public int							nTestPort;										// 测试端口号
 		public byte[]						byReserved = new byte[1024];					// 保留字节
 	}
-	
+
 	// 上传策略
 	public static class EM_CFG_SENDPOLICY extends MyStructure
 	{
@@ -14587,7 +14587,7 @@ public interface NetSDKLib extends Library {
 		public static final int EM_SENDPOLICY_TIMING = 0;									// 定时上报
 		public static final int EM_SENDPOLICY_EVENT = 1;									// 事件触发上报
 	}
-	
+
 	// 网络接口配置
 	public static class CFG_NETWORK_INFO extends MyStructure
 	{
@@ -14596,8 +14596,8 @@ public interface NetSDKLib extends Library {
 		public byte[]						szDefInterface = new byte[MAX_NAME_LEN];		// 默认使用的网卡
 		public int							nInterfaceNum;									// 网卡数量
 		public CFG_NETWORK_INTERFACE[]		stuInterfaces = (CFG_NETWORK_INTERFACE[])new CFG_NETWORK_INTERFACE().toArray(MAX_NETWORK_INTERFACE_NUM);	// 网卡列表
-	} 
-	
+	}
+
 	// 网络接口
 	public static class CFG_NETWORK_INTERFACE extends MyStructure
 	{
@@ -14615,13 +14615,13 @@ public interface NetSDKLib extends Library {
 	    public int 								emNetTranmissionMode;						// 网络传输模式，默认adapt自适应模式, 对应枚举  CFG_ENUM_NET_TRANSMISSION_MODE
 	    public int   	 						emInterfaceType;     						// 网口类型, 对应枚举  CFG_ENUM_NET_INTERFACE_TYPE
 	    public int          					bBond;               						// 是否绑定虚拟网口,对应枚举  CFG_THREE_STATUS_BOOL
-	} 
-	
-	public static class DNS_SERVERS extends MyStructure 
+	}
+
+	public static class DNS_SERVERS extends MyStructure
 	{
 		public byte[]				szDnsServers = new byte[MAX_ADDRESS_LEN];			// DNS服务器地址
 	}
-	
+
 	// 网络传输模式
 	public static class CFG_ENUM_NET_TRANSMISSION_MODE extends MyStructure
 	{
@@ -14631,7 +14631,7 @@ public interface NetSDKLib extends Library {
 	    public static final int CFG_ENUM_NET_MODE_HALF100M = 3;                         // 100M半双工
 	    public static final int CFG_ENUM_NET_MODE_FULL100M = 4;                         // 100M全双工
 	}
-	
+
 	// 网口类型
 	public static class CFG_ENUM_NET_INTERFACE_TYPE extends MyStructure
 	{
@@ -14640,15 +14640,15 @@ public interface NetSDKLib extends Library {
 		public static final int CFG_ENUM_NET_INTERFACE_TYPE_MANAGER = 2;                // 管理网口
 		public static final int CFG_ENUM_NET_INTERFACE_TYPE_EXTEND = 3;                 // 扩展网口
 	}
-	
+
 	//三态布尔类型
 	public static class CFG_THREE_STATUS_BOOL extends MyStructure
 	{
 		public static final int CFG_BOOL_STATUS_UNKNOWN = -1;  							//未知
-		public static final int CFG_BOOL_STATUS_FALSE  = 0; 
+		public static final int CFG_BOOL_STATUS_FALSE  = 0;
 		public static final int CFG_BOOL_STATUS_TRUE   = 1;
 	}
-	
+
 
 	// RTMP配置
 	public static class CFG_RTMP_INFO extends MyStructure
@@ -14663,40 +14663,40 @@ public interface NetSDKLib extends Library {
 		public byte[]					szCustomPath = new byte[MAX_ADDRESS_LEN];			// 定制路径名
 		public byte[]					szStreamPath = new byte[MAX_ADDRESS_LEN];			// 码流路径前缀:不同通道以后缀数字区分
 	}
-	
+
 	// 下载远程文件事件,对应  NET_ALARM_DOWNLOAD_REMOTE_FILE
 	public static class ALARM_DOWNLOAD_REMOTE_FILE_INFO extends MyStructure
-	{	
+	{
 		public double				    dbPTS;											// 时间戳(单位是毫秒)
 		public NET_TIME_EX			    stuTime;										// 事件发生的时间
-		public int					    nEventID;										// 事件ID		
+		public int					    nEventID;										// 事件ID
 		public byte[]					szURL = new byte[NET_COMMON_STRING_256];		// 下载文件对应的URL地址
-		public int						nProgress;										// 下载进度[0,100]				
-		public byte[]                   byReserved = new byte[1020];					// 保留字节		
+		public int						nProgress;										// 下载进度[0,100]
+		public byte[]                   byReserved = new byte[1020];					// 保留字节
 	}
-	
+
 	// CLIENT_GetSplitWindowsInfo接口输入参数
 	public static class NET_IN_SPLIT_GET_WINDOWS extends MyStructure
 	{
 	    public int                dwSize;
 	    public int                nChannel;                        // 通道号
-	    
+
 	    public NET_IN_SPLIT_GET_WINDOWS() {
 	    	this.dwSize = this.size();
 	    }
-	} 
+	}
 
 	// CLIENT_GetSplitWindowsInfo接口输出参数
 	public static class NET_OUT_SPLIT_GET_WINDOWS extends MyStructure
 	{
 	    public int                   	dwSize;
 	    public NET_BLOCK_COLLECTION     stuWindows;                 // 窗口信息
-	    
+
 	    public NET_OUT_SPLIT_GET_WINDOWS() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 融合屏通道信息
 	public static class NET_COMPOSITE_CHANNEL extends MyStructure
 	{
@@ -14704,12 +14704,12 @@ public interface NetSDKLib extends Library {
 	    public byte[]                szMonitorWallName = new byte[NET_DEVICE_NAME_LEN];  // 电视墙名称
 	    public byte[]                szCompositeID = new byte[NET_DEV_ID_LEN_EX];        // 融合屏ID
 	    public int                   nVirtualChannel;                        			 // 虚拟通道号
-	    
+
 	    public NET_COMPOSITE_CHANNEL() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 电视墙
 	public static class AV_CFG_MonitorWall extends MyStructure
 	{
@@ -14721,12 +14721,12 @@ public interface NetSDKLib extends Library {
 		public AV_CFG_MonitorWallBlock[] stuBlocks = (AV_CFG_MonitorWallBlock[])new AV_CFG_MonitorWallBlock().toArray(AV_CFG_Max_Block_In_Wall);// 区块数组
 		public int                	bDisable;                           						// 是否禁用, 0-该电视墙有效, 1-该电视墙无效
 		public byte[]               szDesc = new byte[CFG_COMMON_STRING_256];      				// 电视墙描述信息
-		
+
 		public AV_CFG_MonitorWall() {
 			this.nStructSize = this.size();
 		}
 	}
-	
+
 	// 电视墙区块
 	public static class AV_CFG_MonitorWallBlock extends MyStructure
 	{
@@ -14736,17 +14736,17 @@ public interface NetSDKLib extends Library {
 		public AV_CFG_Rect					stuRect;												// 区块的区域坐标
 		public int							nTVCount;												// TV数量
 		public AV_CFG_MonitorWallTVOut[]	stuTVs = (AV_CFG_MonitorWallTVOut[])new AV_CFG_MonitorWallTVOut().toArray(AV_CFG_Max_TV_In_Block);	// TV数组
-		public TIME_SECTION_WEEK_DAY_6[]	stuTimeSectionWeekDay = 
+		public TIME_SECTION_WEEK_DAY_6[]	stuTimeSectionWeekDay =
 											(TIME_SECTION_WEEK_DAY_6[])new TIME_SECTION_WEEK_DAY_6().toArray(WEEK_DAY_NUM);	  // 开关机时间
 		public byte[]						szName = new byte[AV_CFG_Channel_Name_Len];				// 区块名称
 		public byte[]						szCompositeID = new byte[AV_CFG_Device_ID_Len];			// 融合屏ID
 		public byte[]                       szBlockType = new byte[NET_COMMON_STRING_32];   		// 显示单元组类型,为支持由接收卡组成单元的小间距LED区块而增加该字段,其他类型的区块填写为"LCD",如不存在该字段,默认采用LCD
-		
+
 		public AV_CFG_MonitorWallBlock() {
 			this.nStructSize = this.size();
 		}
 	}
-	
+
 	// 区域
 	public static class AV_CFG_Rect extends MyStructure
 	{
@@ -14755,12 +14755,12 @@ public interface NetSDKLib extends Library {
 		public int				nTop;
 		public int				nRight;
 		public int				nBottom;
-		
+
 		public AV_CFG_Rect() {
 			this.nStructSize = this.size();
 		}
 	};
-	
+
 	// 电视墙输出通道信息
 	public static class AV_CFG_MonitorWallTVOut extends MyStructure
 	{
@@ -14768,12 +14768,12 @@ public interface NetSDKLib extends Library {
 		public byte[]			   szDeviceID = new byte[AV_CFG_Device_ID_Len];			// 设备ID, 为空或"Local"表示本地设备
 		public int				   nChannelID;											// 通道ID
 		public byte[]			   szName = new byte[AV_CFG_Channel_Name_Len];			// 屏幕名称
-		
+
 		public AV_CFG_MonitorWallTVOut() {
 			this.nStructSize = this.size();
 		}
 	}
-	
+
 	// CLIENT_OpenSplitWindow接口输入参数(开窗)
 	public static class NET_IN_SPLIT_OPEN_WINDOW extends MyStructure
 	{
@@ -14781,23 +14781,23 @@ public interface NetSDKLib extends Library {
 	    public int                  nChannel;                   		// 通道号(屏号)
 	    public DH_RECT              stuRect;                    		// 窗口位置, 0~8192
 	    public int                  bDirectable;                 		// 坐标是否满足直通条件, 直通是指拼接屏方式下,此窗口区域正好为物理屏区域
-	    
+
 	    public NET_IN_SPLIT_OPEN_WINDOW() {
 	    	this.dwSize = this.size();
 	    }
-	} 
+	}
 
 	// CLIENT_OpenSplitWindow接口输出参数(开窗)
 	public static class NET_OUT_SPLIT_OPEN_WINDOW extends MyStructure
 	{
 	    public int               	dwSize;
 	    public int        			nWindowID;                  		// 窗口序号
-	    public int        			nZOrder;                    		// 窗口次序  
-	    
+	    public int        			nZOrder;                    		// 窗口次序
+
 	    public NET_OUT_SPLIT_OPEN_WINDOW() {
 	    	this.dwSize = this.size();
 	    }
-	} 
+	}
 
 	// CLIENT_CloseSplitWindow接口输入参数(关窗)
 	public static class NET_IN_SPLIT_CLOSE_WINDOW extends MyStructure
@@ -14806,28 +14806,28 @@ public interface NetSDKLib extends Library {
 	    public int                  nChannel;                   		// 输出通道号或融合屏虚拟通道号, pszCompositeID为NULL时有效
 	    public int                  nWindowID;                  		// 窗口序号
 	    public String               pszCompositeID;             		// 融合屏ID
-	    
+
 	    public NET_IN_SPLIT_CLOSE_WINDOW() {
 	    	this.dwSize = this.size();
 	    }
-	} 
+	}
 
 	// CLIENT_CloseSplitWindow接口输出参数(关窗)
 	public static class NET_OUT_SPLIT_CLOSE_WINDOW extends MyStructure
 	{
 	    public int               	dwSize;
-	    
+
 	    public NET_OUT_SPLIT_CLOSE_WINDOW() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// CLIENT_GetGroupInfoForChannel接口输入参数
 	public static class NET_IN_GET_GROUPINFO_FOR_CHANNEL extends MyStructure
 	{
 	    public int                dwSize;
 	    public int                nChannelID;                    // 通道号
-	    
+
 	    public NET_IN_GET_GROUPINFO_FOR_CHANNEL() {
 	    	this.dwSize = this.size();
 	    }
@@ -14837,36 +14837,36 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_GET_GROUPINFO_FOR_CHANNEL extends MyStructure
 	{
 	    public int                 dwSize;
-	    public int                 nGroupIdNum;                   									 // 人员组数   
-	    public GROUP_ID[]          szGroupIdArr = (GROUP_ID[])new GROUP_ID().toArray(MAX_GOURP_NUM); // 人员组ID 
+	    public int                 nGroupIdNum;                   									 // 人员组数
+	    public GROUP_ID[]          szGroupIdArr = (GROUP_ID[])new GROUP_ID().toArray(MAX_GOURP_NUM); // 人员组ID
 	    public int				   nSimilaryNum;													 // 相似度阈值个数, 与人员组数相同
 	    public int[]			   nSimilary = new int[MAX_GOURP_NUM];								 // 每个人脸组的相似度阈值, 0-100
-	    
+
 	    public NET_OUT_GET_GROUPINFO_FOR_CHANNEL() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// CLIENT_FaceRecognitionPutDisposition 接口输入参数
 	public static class NET_IN_FACE_RECOGNITION_PUT_DISPOSITION_INFO extends MyStructure
 	{
 		public int               				dwSize;
-		public byte[]                			szGroupId = new byte[NET_COMMON_STRING_64]; 					// 人员组ID 
+		public byte[]                			szGroupId = new byte[NET_COMMON_STRING_64]; 					// 人员组ID
 		public int								nDispositionChnNum;											    // 布控视频通道个数
 		public NET_DISPOSITION_CHANNEL_INFO[]	stuDispositionChnInfo = (NET_DISPOSITION_CHANNEL_INFO[])new NET_DISPOSITION_CHANNEL_INFO().toArray(NET_MAX_CAMERA_CHANNEL_NUM);	// 布控视频通道信息
-	
+
 		public NET_IN_FACE_RECOGNITION_PUT_DISPOSITION_INFO() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 布控的视频通道信息
 	public static class NET_DISPOSITION_CHANNEL_INFO extends MyStructure
 	{
 		public int					nChannelID;										// 视频通道号
 		public int					nSimilary;										// 相似度阈值, 0-100
 		public byte[]				bReserved = new byte[256];						// 保留
-	} 
+	}
 
 	// CLIENT_FaceRecognitionPutDisposition 接口输出参数
 	public static class NET_OUT_FACE_RECOGNITION_PUT_DISPOSITION_INFO extends MyStructure
@@ -14874,24 +14874,24 @@ public interface NetSDKLib extends Library {
 		public int               	dwSize;
 		public int					nReportCnt;										// 通道布控结果个数
 		public int[]				bReport = new int[NET_MAX_CAMERA_CHANNEL_NUM];	// 通道布控结果, TRUE追加成功, FALSE追加失败
-		
+
 		public NET_OUT_FACE_RECOGNITION_PUT_DISPOSITION_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// CLIENT_FaceRecognitionDelDisposition 接口输入参数
 	public static class NET_IN_FACE_RECOGNITION_DEL_DISPOSITION_INFO extends MyStructure
 	{
 		public int               	dwSize;
-		public byte[]               szGroupId = new byte[NET_COMMON_STRING_64]; 				// 人员组ID 
+		public byte[]               szGroupId = new byte[NET_COMMON_STRING_64]; 				// 人员组ID
 		public int					nDispositionChnNum;											// 撤控视频通道个数
 		public int[]				nDispositionChn = new int[NET_MAX_CAMERA_CHANNEL_NUM];		// 撤控视频通道列表
-		
+
 		public NET_IN_FACE_RECOGNITION_DEL_DISPOSITION_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// CLIENT_FaceRecognitionDelDisposition 接口输出参数
 	public static class NET_OUT_FACE_RECOGNITION_DEL_DISPOSITION_INFO extends MyStructure
@@ -14899,12 +14899,12 @@ public interface NetSDKLib extends Library {
 		public int                  dwSize;
 		public int					nReportCnt;													// 通道布控结果个数
 		public int[]				bReport = new int[NET_MAX_CAMERA_CHANNEL_NUM];				// 通道布控结果, TRUE删除成功, FALSE删除失败
-		
+
 		public NET_OUT_FACE_RECOGNITION_DEL_DISPOSITION_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 人证比对事件，用实时拍摄的人脸照片，和该人持有的身份证照片进行比对，并上报检测结果
 	// 对应事件类型为 EVENT_IVS_CITIZEN_PICTURE_COMPARE
 	public static class DEV_EVENT_CITIZEN_PICTURE_COMPARE_INFO extends MyStructure
@@ -14913,7 +14913,7 @@ public interface NetSDKLib extends Library {
 		public int                 nChannelID;                         				// 通道号,从0开始
 		public int                 nEventAction;					    			// 事件动作, 0表示脉冲, -1表示未知
 		public double              dbPTS;                              				// 时间戳(单位是毫秒)
-		public byte[]              szName = new byte[NET_EVENT_NAME_LEN];   		// 事件名称    
+		public byte[]              szName = new byte[NET_EVENT_NAME_LEN];   		// 事件名称
 		public NET_TIME_EX         stuUTC;                             				// 事件发生的时间
 		public int                 nEventID;                           				// 事件ID
 
@@ -14923,7 +14923,7 @@ public interface NetSDKLib extends Library {
 		public byte                nThreshold;                         				// 检测阈值,范围[1,100]
 		public int  			   emSex;                        					// 性别, 参考  EM_CITIZENIDCARD_SEX_TYPE
 		public int                 nEthnicity;                         				// 民族(参照 DEV_EVENT_ALARM_CITIZENIDCARD_INFO 的 nEthnicity 定义)
-		public byte[]              szCitizen = new byte[NET_COMMON_STRING_64];      // 居民姓名    
+		public byte[]              szCitizen = new byte[NET_COMMON_STRING_64];      // 居民姓名
 		public byte[]              szAddress = new byte[NET_COMMON_STRING_256];     // 住址
 		public byte[]              szNumber = new byte[NET_COMMON_STRING_64];       // 身份证号
 		public byte[]              szAuthority = new byte[NET_COMMON_STRING_256];   // 签发机关
@@ -14932,12 +14932,12 @@ public interface NetSDKLib extends Library {
 		public int                 bLongTimeValidFlag;                 				// 该值为 TRUE, 截止日期 表示长期有效,此时 stuValidityEnd 值无意义
 	                                                            					// 该值为 FALSE, 此时 截止日期 查看 stuValidityEnd 值
 		public NET_TIME            stuValidityEnd;                     				// 有效期限结束日期(年月日)
-		public CITIZEN_PICTURE_COMPARE_IMAGE_INFO[] stuImageInfo 
+		public CITIZEN_PICTURE_COMPARE_IMAGE_INFO[] stuImageInfo
 							       = (CITIZEN_PICTURE_COMPARE_IMAGE_INFO[])new CITIZEN_PICTURE_COMPARE_IMAGE_INFO().toArray(2);  // 图片信息，第一张为拍摄照片，第二张为身份证照片
 
 		public byte[]              byReserved = new byte[1024];                     // 保留字节
 	}
-	
+
 	// 人证对比图片信息
 	public static class CITIZEN_PICTURE_COMPARE_IMAGE_INFO extends MyStructure
 	{
@@ -14947,8 +14947,8 @@ public interface NetSDKLib extends Library {
 	    public short            	wHeight;                        				// 图片高度, 单位:像素
 	    public byte[]            	byReserved = new byte[256];                		// 保留字节
 	}
-	
-	// 事件类型 EVENT_IVS_HUMANTRAIT(人体特征事件)对应的数据块描述信息 
+
+	// 事件类型 EVENT_IVS_HUMANTRAIT(人体特征事件)对应的数据块描述信息
 	public static class DEV_EVENT_HUMANTRAIT_INFO extends MyStructure
 	{
 		public int					nChannelID;									  // 通道号
@@ -14972,11 +14972,11 @@ public interface NetSDKLib extends Library {
 		public NET_HUMANTRAIT_EXTENSION_INFO   stuHumanTrait;                     // 补充事件，表示当前人体特征是由该事件产生的
 		public byte[]				byReserved = new byte[88];					  // 保留字节,留待扩展.
 	}
-	
+
 	// 人体图片信息
 	public static class HUMAN_IMAGE_INFO extends MyStructure
 	{
-		public int       	nOffSet;					// 偏移 		
+		public int       	nOffSet;					// 偏移
 		public int	   		nLength;					// 图片大小,单位字节
 		public int	   		nWidth;						// 图片宽度
 		public int	   		nHeight;					// 图片高度
@@ -14986,13 +14986,13 @@ public interface NetSDKLib extends Library {
 	// 人脸图片信息
 	public static class FACE_IMAGE_INFO extends MyStructure
 	{
-		public int	   		nOffSet;					// 偏移   
+		public int	   		nOffSet;					// 偏移
 		public int	   		nLength;					// 图片大小,单位字节
 		public int	   		nWidth;						// 图片宽度
 		public int	   		nHeight;					// 图片高度
 		public byte[]		byReserved = new byte[56];	// 预留字节
 	}
-	
+
 	// 检测到的人的信息
 	public static class EM_DETECT_OBJECT extends MyStructure
 	{
@@ -15001,7 +15001,7 @@ public interface NetSDKLib extends Library {
 	    public static final int EM_DETECT_OBJECT_HUMAN_BODY = 2;     		// 仅有人体
 	    public static final int EM_DETECT_OBJECT_HUMAN_FACE = 3;       		// 仅有人脸
 	}
-	
+
 	// 人体属性信息
 	public static class HUMAN_ATTRIBUTES_INFO extends MyStructure
 	{
@@ -15014,7 +15014,7 @@ public interface NetSDKLib extends Library {
 		public NET_RECT     stuBoundingBox;								    // 包围盒(8192坐标系)
 		public byte[]		byReserved = new byte[112];						// 预留字节
 	}
-	
+
 	// 衣服颜色
 	public static class EM_CLOTHES_COLOR extends MyStructure
 	{
@@ -15065,17 +15065,17 @@ public interface NetSDKLib extends Library {
 	    public static final int EM_HAS_BAG_NO = 1;   	// 不带包
 	    public static final int EM_HAS_BAG_YES = 2;     // 带包
 	}
-	
+
 	// 全景广角图
 	public static class SCENE_IMAGE_INFO extends MyStructure
 	{
-		public int	   		nOffSet;					// 在二进制数据块中的偏移   
+		public int	   		nOffSet;					// 在二进制数据块中的偏移
 		public int	   		nLength;					// 图片大小,单位字节
 		public int	   		nWidth;						// 图片宽度(像素)
 		public int	   		nHeight;					// 图片高度(像素)
 		public byte[]		byReserved = new byte[56];	// 预留字节
 	}
-	
+
 	// 人脸属性
 	public static class NET_FACE_ATTRIBUTE extends MyStructure
 	{
@@ -15092,7 +15092,7 @@ public interface NetSDKLib extends Library {
 		public NET_RECT					stuBoundingBox;				// 包围盒(8192坐标系)
 		public byte[]                	bReserved = new byte[112];  // 保留字节,留待扩展.
 	}
-		
+
 	// 肤色
 	public static class EM_COMPLEXION_TYPE extends MyStructure
 	{
@@ -15105,20 +15105,20 @@ public interface NetSDKLib extends Library {
 	// 人脸全景图
 	public static class FACE_SCENE_IMAGE extends MyStructure
 	{
-		public int	   		nOffSet;					// 在二进制数据块中的偏移   
+		public int	   		nOffSet;					// 在二进制数据块中的偏移
 		public int	   		nLength;					// 图片大小,单位字节
 		public int	   		nWidth;						// 图片宽度(像素)
 		public int	   		nHeight;					// 图片高度(像素)
 		public byte[]  		byReserved = new byte[56];  // 预留字节
 	}
-	
+
 	// 事件扩展信息
 	public static class NET_EXTENSION_INFO extends MyStructure
 	{
 		public byte[]        szEventID = new byte[MAX_EVENT_ID_LEN];				// 国标事件ID
 		public byte[]        byReserved = new byte[80];                             // 保留字节
 	}
-	
+
 	// 当前人体特征是由什么事件产生的
 	public static class NET_HUMANTRAIT_EXTENSION_INFO extends MyStructure
 	{
@@ -15136,8 +15136,8 @@ public interface NetSDKLib extends Library {
 		public int					 	bGPSinfo;						 			// 是否包含GPS信息
 		public NET_WIFI_GPS_INFO		stuWifiGPSInfo;				 				// GPS信息
 		public byte[]                   reserved = new byte[376];                   // 预留
-	} 
-	
+	}
+
 	// 搜索到的WIFI设备信息
 	public static class NET_WIFI_DEV_INFO extends MyStructure
 	{
@@ -15160,15 +15160,15 @@ public interface NetSDKLib extends Library {
 	    public byte[]					szManufacturer = new byte[MAX_MANUFACTURER_LEN];// Mac地址所属制造商
 	    public MACHISTORY_SSID[]		szMacHistorySSIDList = (MACHISTORY_SSID[])new MACHISTORY_SSID().toArray(MAX_MACHISTORY_SSID_NUM); // 此设备曾经连接过的历史SSID列表
 	    public int			 			nRetMacHistorySSIDNum;			 				// 此设备实际连接过的SSID个数
-	    public byte[]                   reserved = new byte[264];                  		// 预留	   
-	} 
-	
+	    public byte[]                   reserved = new byte[264];                  		// 预留
+	}
+
 	// 历史SSID
 	public static class MACHISTORY_SSID extends MyStructure
 	{
 		public byte[]    				szMacHistorySSID = new byte[MAX_MACHISTORY_SSID_LEN];	// 历史SSID
 	}
-	
+
 	// 搜索到的WIFI基本信息
 	public static class NET_WIFI_BASIC_INFO extends MyStructure
 	{
@@ -15177,16 +15177,16 @@ public interface NetSDKLib extends Library {
 		public int  					nCurDeviceCount; 			// 本次事件上报的Wifi设备数量，应与ALARM_WIFI_SEARCH_INFO结构体中的nWifiNum值一致；同一上报周期内该值的累积总数与nDeviceSum一致。
 		public byte[]  					reserved = new byte[500];   // 预留字节
 	}
-	
+
 	// 事件类型  NET_ALARM_WIFI_VIRTUALINFO_SEARCH (获取周围wifi设备虚拟信息事件)对应的数据描述信息
 	public static class ALARM_WIFI_VIRTUALINFO_SEARCH_INFO extends MyStructure
 	{
 		public int                      nVirtualInfoNum;								// WIFI设备虚拟身份数量, 指示stuVirtualInfo的有效数量
 		public NET_WIFI_VIRTUALINFO[]   stuVirtualInfo = (NET_WIFI_VIRTUALINFO[])new NET_WIFI_VIRTUALINFO().toArray(MAX_VIRTUALINFO_NUM);    // 周围Wifi虚拟身份信息
 		public int                      nChannel;										// 通道号
-		public byte[]                   reserved = new byte[512];						// 预留 
-	} 
-	
+		public byte[]                   reserved = new byte[512];						// 预留
+	}
+
 	// 搜索到的WIFI设备虚拟身份信息
 	public static class NET_WIFI_VIRTUALINFO extends MyStructure
 	{
@@ -15214,7 +15214,7 @@ public interface NetSDKLib extends Library {
 	    public byte[]                   szIDFA = new byte[MAX_COMMON_STRING_64];                // 苹果手机的IDFA
 	    public byte[]                   reserved = new byte[368];								// 预留
 	}
-	
+
 	// 事件类型 EVENT_IVS_ACCESS_CTL (门禁事件)对应数据块描述信息
 	public static class DEV_EVENT_ACCESS_CTL_INFO extends MyStructure
 	{
@@ -15223,7 +15223,7 @@ public interface NetSDKLib extends Library {
 		public byte[]                	bReserved1 = new byte[4];                       		// 字节对齐
 		public double              		PTS;                                					// 时间戳(单位是毫秒)
 		public NET_TIME_EX         		UTC;                                					// 事件发生的时间
-		public int                 		nEventID;                           					// 事件ID        
+		public int                 		nEventID;                           					// 事件ID
 		public NET_MSG_OBJECT           stuObject;                          					// 检测到的物体
 		public NET_EVENT_FILE_INFO		stuFileInfo;	                    					// 事件对应文件信息
 		public int   					emEventType;                        					// 门禁事件类型, 参考 NET_ACCESS_CTL_EVENT_TYPE
@@ -15235,7 +15235,7 @@ public interface NetSDKLib extends Library {
 		public byte[]                   szReaderID = new byte[NET_COMMON_STRING_32];    		// 门读卡器ID
 		public byte[]                   szUserID = new byte[NET_COMMON_STRING_64];      		// 开门用户
 		public byte[]                   szSnapURL = new byte[NET_COMMON_STRING_128];    		// 抓拍照片存储地址
-		
+
 		public int                      nErrorCode;                         					// 开门失败的原因,仅在bStatus为FALSE时有效
 							                                                                    // 0x00 没有错误
 							                                                                    // 0x10 未授权
@@ -15261,19 +15261,19 @@ public interface NetSDKLib extends Library {
 							                                                                    // 0x50 组合开门顺序错误
 							                                                                    // 0x51 组合开门需要继续验证
 							                                                                    // 0x60 验证通过,控制台未授权
-		
+
 		public int                      nPunchingRecNo;                     					// 刷卡记录集中的记录编号
 		public int						nNumbers;												// 抓图张数
-		public byte						byImageIndex;	                    					// 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始	
+		public byte						byImageIndex;	                    					// 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
 		public byte[]                   byReserved = new byte[3];                      		    // 字节对齐
-		public int						dwSnapFlagMask;											// 抓图标志(按位),具体见 NET_RESERVED_COMMON        
+		public int						dwSnapFlagMask;											// 抓图标志(按位),具体见 NET_RESERVED_COMMON
 	    public int         				emAttendanceState;                  					// 考勤状态, 参考 NET_ATTENDANCESTATE
 	    public byte[]					szClassNumber = new byte[MAX_CLASS_NUMBER_LEN];			// 班级（考勤肯尼亚定制）
 	    public byte[]					szPhoneNumber = new byte[MAX_PHONENUMBER_LEN];			// 电话（考勤肯尼亚定制）
 	    public byte[]					szCardName = new byte[NET_MAX_CARDNAME_LEN];			// 卡命名
-	    public byte[]					bReserved = new byte[908];					    		// 保留字节,留待扩展. 
+	    public byte[]					bReserved = new byte[908];					    		// 保留字节,留待扩展.
 	}
-	
+
 	// 门禁事件类型
 	public static class NET_ACCESS_CTL_EVENT_TYPE extends MyStructure
 	{
@@ -15281,29 +15281,29 @@ public interface NetSDKLib extends Library {
 	    public static final int NET_ACCESS_CTL_EVENT_ENTRY = 1;                          // 进门
 	    public static final int NET_ACCESS_CTL_EVENT_EXIT = 2;                           // 出门
 	}
-	
+
 	// 获取热度统计信息, 对应命令 NET_DEVSTATE_GET_HEAT_MAP
 	public static class NET_QUERY_HEAT_MAP extends MyStructure
 	{
 	    public int                    	dwSize;                         // 该结构体大小
 	    public NET_IN_QUERY_HEAT_MAP    stuIn;                          // 热度统计信息查询条件
 	    public NET_OUT_QUERY_HEAT_MAP   stuOut;                         // 热度统计信息查询结果
-	    
+
 	    public NET_QUERY_HEAT_MAP() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 获取热度统计信息入参
 	public static class NET_IN_QUERY_HEAT_MAP extends MyStructure
 	{
 		public int                      nChannel;                       // 通道号
-		public NET_TIME_EX              stuBegin;                       // 开始时间    
+		public NET_TIME_EX              stuBegin;                       // 开始时间
 		public NET_TIME_EX              stuEnd;                         // 结束时间
 		public int                      nPlanID;                        // 计划ID,仅球机有效,从1开始
 		public int	 					emDataType;					 	// 希望获取的数据类型, 参考  EM_HEAT_PIC_DATA_TYPE
 		public byte[]                   reserved = new byte[1016];      // 预留
-	} 
+	}
 
 	// 获取热度统计信息出参
 	public static class NET_OUT_QUERY_HEAT_MAP extends MyStructure
@@ -15321,8 +15321,8 @@ public interface NetSDKLib extends Library {
 		public int					 	nPixelMax;						// 实际像素点的最大值
 		public int					 	nPixelMin;						// 实际像素点的最小值
 		public byte[]                   reserved = new byte[1004];      // 预留
-	} 
-	
+	}
+
 	// 热度图数据类型
 	public static class EM_HEAT_PIC_DATA_TYPE extends MyStructure
 	{
@@ -15330,19 +15330,19 @@ public interface NetSDKLib extends Library {
 		public static final int EM_HEAT_PIC_DATA_TYPE_GRAYDATA = 1;		// 灰度数据
 		public static final int EM_HEAT_PIC_DATA_TYPE_SOURCEDATA = 2;	// 原始数据
 	}
-	
+
 
 	// 通道名称配置
 	public static class NET_ENCODE_CHANNELTITLE_INFO extends MyStructure
 	{
 		public int					dwSize;
 		public byte[]				szChannelName = new byte[MAX_CHANNEL_NAME_LEN];				// 通道名称
-		
+
 		public NET_ENCODE_CHANNELTITLE_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 视频分析全局配置
 	public static class CFG_ANALYSEGLOBAL_INFO extends MyStructure
 	{
@@ -15356,7 +15356,7 @@ public interface NetSDKLib extends Library {
 		public CFG_POLYGON                      stuFarDectectPoint;                     // 远景检测点
 		public int                              nNearDistance;                          // NearDetectPoint,转换到实际场景中时,离摄像头垂直线的水平距离
 		public int                              nFarDistance;                           // FarDectectPoint,转换到实际场景中时,离摄像头垂直线的水平距离
-		public byte[]                           szSubType = new byte[MAX_NAME_LEN];     // 交通场景的子类型,"Gate",卡口类型,"Junction" 路口类型,"ParkingSpace" 车位检测类型                             
+		public byte[]                           szSubType = new byte[MAX_NAME_LEN];     // 交通场景的子类型,"Gate",卡口类型,"Junction" 路口类型,"ParkingSpace" 车位检测类型
 		public int                              nLaneNum;                               // 车道数
 		public CFG_LANE[]                       stuLanes = (CFG_LANE[])new CFG_LANE().toArray(MAX_LANE_NUM);                 // 车道信息
 		public int                              nPlateHintNum;                          // 车牌字符暗示个数
@@ -15374,11 +15374,11 @@ public interface NetSDKLib extends Library {
 	    public int                              nRightDivisionPtCount;                  // 右转弯分界线点数
 	    public CFG_POLYLINE[]                   stRightDivisionLine = (CFG_POLYLINE[])new CFG_POLYLINE().toArray(MAX_POLYLINE_NUM);  // 右转弯分界线
 	    public CFG_ADJUST_LIGHT_COLOR           stAdjustLightColor;                     // 交通灯颜色校正配置
-	    public int                              nParkingSpaceNum;                       // 车位数                             
+	    public int                              nParkingSpaceNum;                       // 车位数
 	    public CFG_PARKING_SPACE[]              stParkingSpaces = (CFG_PARKING_SPACE[])new CFG_PARKING_SPACE().toArray(MAX_PARKING_SPACE_NUM);  // 车位配置信息,每个元素代表一个车位
 
 
-		// 一般场景信息 
+		// 一般场景信息
 	    public int                              nStaffNum;                              // 标尺数
 	    public CFG_STAFF[]                      stuStaffs = (CFG_STAFF[])new CFG_STAFF().toArray(MAX_STAFF_NUM);               // 标尺
 
@@ -15387,15 +15387,15 @@ public interface NetSDKLib extends Library {
 
 	    public int                            	bFaceRecognition;                       // 人脸识别场景是否有效
 	    public CFG_FACERECOGNITION_SCENCE_INFO  stuFaceRecognitionScene;                // 人脸识别场景
-			
+
 	    public byte                          	abJitter;
-	    public byte                          	abDejitter;	
+	    public byte                          	abDejitter;
 	    public byte[]                           bReserved = new byte[2];                // 保留字段
 
 	    public int					            nJitter;								// 摄像机抖动率 : 摄像机抖动率，取值0-100，反应静止摄像机抖动程度，抖动越厉害，值越大。
 	    public int                              bDejitter;                              // 是否开启去抖动模块 目前不实现
 
-	    public int                              abCompatibleMode;	
+	    public int                              abCompatibleMode;
 	    public int                              nCompatibleMode;                        // 0:"OldTrafficRule" : 交通老规则兼容模式;1:"NewTrafficRule" :  交通新规则兼容模式;-1:字符串错误
 
 	    public int                              nCustomDataLen;                         // 实际数据长度，不能大于1024
@@ -15421,18 +15421,18 @@ public interface NetSDKLib extends Library {
 	    public int								nPtzPresetId;							// 云台预置点编号，0~255
 	    public int								unLongitude;							// 经度 单位百万分之一度
 	    public int								unLatitude;								// 纬度 单位百万分之一度
-	} 
-	
-	public static class PLATE_HINT extends MyStructure 
+	}
+
+	public static class PLATE_HINT extends MyStructure
     {
 		public byte[] 							szPlateHints = new byte[MAX_NAME_LEN];    // 车牌字符暗示数组，在拍摄图片质量较差车牌识别不确定时，根据此数组中的字符进行匹配，数组下标越小，匹配优先级越高
     }
-	
-	public static class SCENE_TYPE_LIST extends MyStructure 
+
+	public static class SCENE_TYPE_LIST extends MyStructure
 	{
 	    public byte[]							szSceneTypeList = new byte[CFG_COMMON_STRING_16]; // 场景列别，同一视频通道下启用多个场景时，表示第2个之后的方案(可选)
 	}
-	
+
 	// 车道信息
 	public static class CFG_LANE extends MyStructure
 	{
@@ -15445,7 +15445,7 @@ public interface NetSDKLib extends Library {
 		public int                				nLeftLineType;                     												// 左车道线属性，1-表示白实线，2- 白虚线，3- 黄线
 		public int               				nRightLineType;                    												// 右车道线属性，1-表示白实线，2- 白虚线，3- 黄线
 		public int               				bDriveDirectionEnable;             												// 车道行驶方向使能, 1-true  0-false
-		public int                				nDriveDirectionNum;                     										// 车道行驶方向数 
+		public int                				nDriveDirectionNum;                     										// 车道行驶方向数
 		public DRIVE_DIRECTION[]               	szDriveDirectionArr = (DRIVE_DIRECTION[])new DRIVE_DIRECTION().toArray(MAX_LIGHT_DIRECTION);  // 车道行驶方向，"Straight" 直行，"TurnLeft" 左转，"TurnRight" 右转,"U-Turn":掉头
 		public int                				nStopLineNum;                      												// 车道对应停止线顶点数
 		public CFG_POLYLINE[]       			stuStopLine = (CFG_POLYLINE[])new CFG_POLYLINE().toArray(MAX_POLYLINE_NUM);     // 车道对应停止线
@@ -15465,28 +15465,28 @@ public interface NetSDKLib extends Library {
 		public CFG_TRAFFIC_FLOWSTAT_DIR_INFO 	stuTrafficFlowDir;	  															// 车道流量信息
 		public int  							emRankType;						  												// 道路等级，用于车流量统计上报交通状态, 参考 EM_LANE_RANK_TYPE
 	}
-	
+
 	public static class DRIVE_DIRECTION extends MyStructure
 	{
 		public byte[]               			szDriveDirection = new byte[MAX_NAME_LEN];  // 车道行驶方向，"Straight" 直行，"TurnLeft" 左转，"TurnRight" 右转,"U-Turn":掉头
 	}
-	
+
 	// 折线的端点信息
 	public static class CFG_POLYLINE extends MyStructure
 	{
 		public int							nX; //0~8191
-		public int							nY;		
-	} 
-	
-	// 车辆流量统计车道方向信息 
+		public int							nY;
+	}
+
+	// 车辆流量统计车道方向信息
 	public static class CFG_TRAFFIC_FLOWSTAT_DIR_INFO extends MyStructure
 	{
 		public int							emDrivingDir;									//行驶方向, 参考 CFG_FLOWSTAT_DIRECTION
-		public byte[]						szUpGoing = new byte[CFG_FLOWSTAT_ADDR_NAME];	//上行地点 
-		public byte[]						szDownGoing = new byte[CFG_FLOWSTAT_ADDR_NAME];	//下行地点 
+		public byte[]						szUpGoing = new byte[CFG_FLOWSTAT_ADDR_NAME];	//上行地点
+		public byte[]						szDownGoing = new byte[CFG_FLOWSTAT_ADDR_NAME];	//下行地点
 	}
-	
-	// 交通灯组配置信息 
+
+	// 交通灯组配置信息
 	public static class CFG_LIGHTGROUPS extends MyStructure
 	{
 		public int                  		nLightGroupId;                     						// 灯组编号
@@ -15498,37 +15498,37 @@ public interface NetSDKLib extends Library {
 		public CFG_LIGHTATTRIBUTE[] 		stuLightAtrributes = (CFG_LIGHTATTRIBUTE[])new CFG_LIGHTATTRIBUTE().toArray(MAX_LIGHT_NUM); // 灯组中各交通灯的属性
 
 	}
-	
+
 	// 交通灯属性
 	public static class CFG_LIGHTATTRIBUTE extends MyStructure
 	{
 		public int              			bEnable;                           											// 当前交通灯是否有效，与车辆通行无关的交通需要设置无效
-		public int              			nTypeNum; 
+		public int              			nTypeNum;
 		public LIGHT_TYPE[]					szLightTypeArr = (LIGHT_TYPE[])new LIGHT_TYPE().toArray(MAX_LIGHT_TYPE);    // 当前交通灯显现内容（包括:红-Red,黄-Yellow,绿-Green,倒计时-Countdown），如某交通灯可以显示红黄绿三种颜色，某交通灯只显示倒计时
 		public int              			nDirectionNum;
 		public DIRECTION[]       		    szDirectionArr = (DIRECTION[])new DIRECTION().toArray(MAX_LIGHT_DIRECTION); // 交通灯指示的行车方向,"Straight": 直行，"TurnLeft":左转，"TurnRight":右转，"U-Turn": 掉头
 		public int              			nYellowTime;                       									    	// 黄灯亮时间
 	}
-	
+
 	public static class LIGHT_TYPE extends MyStructure
 	{
 		public byte[]		     			szLightType = new byte[MAX_NAME_LEN];      // 当前交通灯显现内容（包括:红-Red,黄-Yellow,绿-Green,倒计时-Countdown），如某交通灯可以显示红黄绿三种颜色，某交通灯只显示倒计时
 	}
-	
+
 	public static class DIRECTION extends MyStructure
 	{
 		public byte[]             		szDirection = new byte[MAX_NAME_LEN];         // 交通灯指示的行车方向,"Straight": 直行，"TurnLeft":左转，"TurnRight":右转，"U-Turn": 掉头
 	}
-	
+
 	// 交通灯颜色校正配置
 	public static class CFG_ADJUST_LIGHT_COLOR extends MyStructure
 	{
 	    public int                  nMode;                                  								// 红灯颜色校正模式 0:未定义 1:红绿灯才校正 2:一直校正
 	    public int                  bEnable;                                								// 是否允许图片红绿灯颜色校正
 	    public int                  nLevel;                                 								// 校正等级 范围0~100，数值越大矫正越明显
-	    public int                  bVideoEnable;                           								// 是否启用视频涂红功能，存在此项时，Level值使用LevelSeparate下的Level值                                
+	    public int                  bVideoEnable;                           								// 是否启用视频涂红功能，存在此项时，Level值使用LevelSeparate下的Level值
 	    public ADJUST_LEVEL_SEP[]   stLevelSep = (ADJUST_LEVEL_SEP[])new ADJUST_LEVEL_SEP().toArray(4);     // 分立等级，目前为4个
-	} 
+	}
 
 	// 交通灯颜色校正配置，分立项
 	public static class ADJUST_LEVEL_SEP extends MyStructure
@@ -15536,17 +15536,17 @@ public interface NetSDKLib extends Library {
 		public int                  nType;                                  // 0：未定义，1：视频，2：图片
 		public int                  nTime;                                  // 0：未定义，1：白天，2：夜晚
 		public int                  nLevel;                                 // 范围0~100，数值越大矫正越明显
-	} 
-	
+	}
+
 	public static class CFG_PARKING_SPACE extends MyStructure
 	{
 		public int             	    nNumber;                									 //车位编号
 		public CFG_REGION      	    stArea;                										 //检测区域
 		public int                  nShieldAreaNum;                              				 //有效屏蔽区个数
-		public CFG_REGION[]         stShieldArea = 
+		public CFG_REGION[]         stShieldArea =
 									(CFG_REGION[])new CFG_REGION().toArray(MAX_SHIELD_AREA_NUM); //屏蔽区域
 	}
-	
+
 	public static class CFG_STAFF extends MyStructure
 	{
 		public CFG_POLYLINE         stuStartLocation;      					// 起始坐标点
@@ -15554,29 +15554,29 @@ public interface NetSDKLib extends Library {
 		public float                nLenth;               					// 实际长度,单位米
 		public int	   		        emType;                					// 标尺类型, 参考 EM_STAFF_TYPE
 	}
-	
+
 	// 标定区域,普通场景使用
 	public static class CFG_CALIBRATEAREA_INFO extends MyStructure
 	{
 		public int					nLinePoint;								// 水平方向标尺线顶点数
-		public CFG_POLYGON[]		stuLine = 
+		public CFG_POLYGON[]		stuLine =
 								    (CFG_POLYGON[])new CFG_POLYGON().toArray(MAX_POLYLINE_NUM);// 水平方向标尺线
 		public float				fLenth;                 				// 实际长度
 		public CFG_REGION			stuArea;                  				// 区域
 		public int                 	nStaffNum;                 				// 垂直标尺数
-		public CFG_STAFF[]          stuStaffs = 
-								    (CFG_STAFF[])new CFG_STAFF().toArray(MAX_STAFF_NUM); // 垂直标尺         
+		public CFG_STAFF[]          stuStaffs =
+								    (CFG_STAFF[])new CFG_STAFF().toArray(MAX_STAFF_NUM); // 垂直标尺
 		public int 					emType;									// 区域类型, 参考 EM_CALIBRATEAREA_TYPE
 		public int				    emMethodType;							// 标定方式, 参考  EM_METHOD_TYPE
 	}
-	
+
 	// 人脸识别场景
 	public static class CFG_FACERECOGNITION_SCENCE_INFO extends MyStructure
 	{
 		public double				dbCameraHeight;							// 摄像头离地高度 单位：米
 		public double				dbCameraDistance;						// 摄像头离地面检测区域中心的水平距离 单位：米
 		public int                  nMainDirection;                         // 人流主要方向顶点数
-		public CFG_POLYGON[]        stuMainDirection = 
+		public CFG_POLYGON[]        stuMainDirection =
 									(CFG_POLYGON[])new CFG_POLYGON().toArray(MAX_POLYLINE_NUM); // 人流主要方向，第一个点是起始点，第二个点是终止点
 		public byte                 byFaceAngleDown;                        // 需要检测的人脸向下最大偏角, 单位度，-45~45，负数表示人脸向画面上边，正数表示人脸向画面下边，0表示人脸垂直方向上正对着摄像头。
 		public byte                 byFaceAngleUp;                          // 需要检测的人脸向上最大偏角,单位度，-45~45，负数表示人脸向画面上边，正数表示人脸向画面下边，0表示人脸垂直方向上正对着摄像头。
@@ -15584,7 +15584,7 @@ public interface NetSDKLib extends Library {
 		public byte                 byFaceAngleRight;                       // 需要检测的人脸向右最大偏角,单位度，-45~45，负数表示人脸向画面左边，正数表示人脸向画面右边，0表示人脸水平方向上正对着摄像头
 		public int					emDetectType;							// 人脸检测类型, 参考 EM_FACEDETECTION_TYPE
 	}
-	
+
 	// 人脸检测场景
 	public static class CFG_FACEDETECTION_SCENCE_INFO extends MyStructure
 	{
@@ -15598,20 +15598,20 @@ public interface NetSDKLib extends Library {
 		public byte                 byFaceAngleRight;                       // 需要检测的人脸向右最大偏角,单位度，-45~45，负数表示人脸向画面左边，正数表示人脸向画面右边，0表示人脸水平方向上正对着摄像头
 		public int					emDetectType;							// 人脸检测类型, 参考 EM_FACEDETECTION_TYPE
 	}
-	
+
 	public static class CFG_TIME_PERIOD extends MyStructure
 	{
-		public CFG_TIME				stuStartTime;				
-		public CFG_TIME				stuEndTime;			
+		public CFG_TIME				stuStartTime;
+		public CFG_TIME				stuEndTime;
 	}
-	
+
 	public static class CFG_TIME extends MyStructure
 	{
 		public int					dwHour;									// 时
 		public int					dwMinute;								// 分
 		public int					dwSecond;								// 秒
 	}
-	
+
 	// 多场景标定白天和黑夜配置
 	public static class CFG_TIME_PERIOD_SCENE_INFO extends MyStructure
 	{
@@ -15620,7 +15620,7 @@ public interface NetSDKLib extends Library {
 		public Pointer   			pstuTimePeriodScene;                    // 多场景标白天和黑夜配置域单元,由用户申请内存，大小为sizeof(CFG_TIME_PERIOD_SCENE_UNIT)*dwMaxTimePeriodSceneNum
 																			// 指向  CFG_TIME_PERIOD_SCENE_UNIT[]
 	}
-	
+
 	// 多场景标定区域配置
 	public static class CFG_CALIBRATEAREA_SCENE_INFO extends MyStructure
 	{
@@ -15629,16 +15629,16 @@ public interface NetSDKLib extends Library {
 		public Pointer 				pstuCalibrateArea;                      // 多场景标定区域单元, 由用户申请内存, 指向 CFG_CALIBRATEAREA_SCENE_UNIT[]。
 																			// 大小为  sizeof(CFG_CALIBRATEAREA_SCENE_UNIT)*dwMaxSceneCalibrateAreaNum
 	}
-	
+
 	// 昼夜算法切换模式
 	public static class CFG_TIMEPERIOD_SWITCH_MODE extends MyStructure
 	{
 		public static final int CFG_TIMEPERIOD_SWITCH_MODE_UNKNOWN = 0;        // 未知
-		public static final int CFG_TIMEPERIOD_SWITCH_MODE_BYCOLOR = 1;        // 通过色彩切换                     
+		public static final int CFG_TIMEPERIOD_SWITCH_MODE_BYCOLOR = 1;        // 通过色彩切换
 		public static final int CFG_TIMEPERIOD_SWITCH_MODE_BYBRIGHTNESS = 2;   // 通过亮度切换
 		public static final int CFG_TIMEPERIOD_SWITCH_MODE_BYPOS = 3;		   // 通过经纬度计算日出日落时间切换
 	}
-	
+
 	// 视频分析全局配置场景
 	public static class CFG_ANALYSEGLOBAL_SCENE extends MyStructure
 	{
@@ -15660,19 +15660,19 @@ public interface NetSDKLib extends Library {
 		public SCENE_TYPE_LIST[]				szSceneTypeListArr = (SCENE_TYPE_LIST[])new SCENE_TYPE_LIST().toArray(MAX_SCENE_TYPE_LIST_SIZE);// 场景列别，同一视频通道下启用多个场景时，表示第2个之后的方案
 		// 多个大类业务时有效
 		public CFG_INTELLI_UNIFORM_SCENE 		stuUniformScene; 						// 统一场景配置
-	} 
-	
+	}
+
 	// 交通场景
 	public static class CFG_TRAFFIC_SCENE_INFO extends MyStructure
 	{
-		public int                		abCompatibleMode;	
+		public int                		abCompatibleMode;
 		public int                 		nCompatibleMode;                        	// 0:"OldTrafficRule" : 交通老规则兼容模式;1:"NewTrafficRule" :  交通新规则兼容模式;-1:字符串错误
 		public float					fCameraHeight;								// 摄像头离地高度	单位：米
 		public float					fCameraDistance;							// 摄像头离地面检测区域中心的水平距离	单位：米
-		public byte[]                	szSubType = new byte[MAX_NAME_LEN];     	// 交通场景的子类型,"Gate" 卡口类型,"Junction" 路口类型 
+		public byte[]                	szSubType = new byte[MAX_NAME_LEN];     	// 交通场景的子类型,"Gate" 卡口类型,"Junction" 路口类型
 																					// "Tunnel"隧道类型 , "ParkingSpace"车位检测类型
 																					// "Bridge"桥梁类型
-																					// "Freeway"高速公路类型                 
+																					// "Freeway"高速公路类型
 		public CFG_POLYGON         		stuNearDetectPoint;                     	// 近景检测点
 		public CFG_POLYGON         		stuFarDectectPoint;                     	// 远景检测点
 		public int                 		nNearDistance;                          	// NearDetectPoint,转换到实际场景中时,离摄像头垂直线的水平距离
@@ -15694,10 +15694,10 @@ public interface NetSDKLib extends Library {
 		public int                 		nRightDivisionPtCount;                  	// 右转弯分界线点数
 		public CFG_POLYLINE[]        	stRightDivisionLine = (CFG_POLYLINE[])new CFG_POLYLINE().toArray(MAX_POLYLINE_NUM);    // 右转弯分界线
 		public CFG_ADJUST_LIGHT_COLOR   stAdjustLightColor;                 		// 交通灯颜色校正配置
-		public int                  	nParkingSpaceNum;                       	// 车位数                             
+		public int                  	nParkingSpaceNum;                       	// 车位数
 		public CFG_PARKING_SPACE[]    	stParkingSpaces = (CFG_PARKING_SPACE[])new CFG_PARKING_SPACE().toArray(MAX_PARKING_SPACE_NUM);// 车位配置信息,每个元素代表一个车位
 
-	} 
+	}
 
 	// 普遍场景
 	public static class CFG_NORMAL_SCENE_INFO extends MyStructure
@@ -15707,28 +15707,28 @@ public interface NetSDKLib extends Library {
 		public float					fCameraDistance;						// 摄像头离地面检测区域中心的水平距离	单位：米
 		public CFG_POLYGON				stuLandLineStart;						// 地平线线段起始点(点的坐标坐标归一化到[0,8192)区间。)
 		public CFG_POLYGON				stuLandLineEnd;							// 地平线线段终止点(点的坐标坐标归一化到[0,8192)区间。)
-	} 
+	}
 
 	// 交通巡视场景
 	public static class CFG_TRAFFIC_TOUR_SCENE_INFO extends MyStructure
 	{
 		public int                 		nPlateHintNum;                          // 车牌字符暗示个数
 		public PLATE_HINT[]             szPlateHintsArr = (PLATE_HINT[])new PLATE_HINT().toArray(MAX_PLATEHINT_NUM); // 车牌字符暗示数组，在拍摄图片质量较差车牌识别不确定时，根据此数组中的字符进行匹配，数组下标越小，匹配优先级越高
-	} 
-	
+	}
+
 	// 统一场景配置,TypeList存在时配置此场景
 	public static class CFG_INTELLI_UNIFORM_SCENE extends MyStructure
 	{
-		public byte[]                	szSubType = new byte[MAX_NAME_LEN];                			  // 交通场景的子类型,"Gate" 卡口类型,"Junction" 路口类型 
+		public byte[]                	szSubType = new byte[MAX_NAME_LEN];                			  // 交通场景的子类型,"Gate" 卡口类型,"Junction" 路口类型
 																									  // "Tunnel"隧道类型 , "ParkingSpace"车位检测类型
 																									  // "Bridge"桥梁类型
-																									  // "Freeway"高速公路类型                 
+																									  // "Freeway"高速公路类型
 		public int                 		nPlateHintNum;                          					  // 车牌字符暗示个数
 		public PLATE_HINT[]             szPlateHints = (PLATE_HINT[])new PLATE_HINT[MAX_PLATEHINT_NUM]; // 车牌字符暗示数组，在拍摄图片质量较差车牌识别不确定时，根据此数组中的字符进行匹配，数组下标越小，匹配优先级越高
 		public int                 		nLaneNum;                               					  // 车道数
 		public CFG_LANE[]            	stuLanes = (CFG_LANE[])new CFG_LANE().toArray(MAX_LANE_NUM);  // 车道信息
 	}
-	
+
 	// CLIENT_MatrixAddCamerasByDevice 接口输入参数
 	public static class NET_IN_ADD_LOGIC_BYDEVICE_CAMERA extends MyStructure
 	{
@@ -15738,7 +15738,7 @@ public interface NetSDKLib extends Library {
 	    public int                      nCameraCount;               				// 视频源信息数量
 	    public Pointer 					pCameras;      								// 视频源信息数组,用户分配内存,大小为sizeof(NET_LOGIC_BYDEVICE_ADD_CAMERA_PARAM)*nCameraCount
 	    																			// 对应 NET_LOGIC_BYDEVICE_ADD_CAMERA_PARAM[]
-	    
+
 	    public NET_IN_ADD_LOGIC_BYDEVICE_CAMERA() {
 	    	this.dwSize = this.size();
 	    }
@@ -15747,42 +15747,42 @@ public interface NetSDKLib extends Library {
 	// CLIENT_MatrixAddCamerasByDevice 接口输出参数
 	public static class NET_OUT_ADD_LOGIC_BYDEVICE_CAMERA extends MyStructure
 	{
-	    public int                   	dwSize;                         
+	    public int                   	dwSize;
 	    public byte[]                   szDeviceID = new byte[NET_DEV_ID_LEN];     // 设备ID
 	    public int                      nMaxResultCount;              			   // 结果数组大小, 用户填写
 	    public int                      nRetResultCount;              			   // 实际结果数量
 	    public Pointer 					pResults;        						   // 添加视频源结果数组,用户分配内存,大小为sizeof(NET_LOGIC_BYDEVICE_ADD_CAMERA_RESULT)*nMaxResultCount
 	    																	       // 对应  NET_LOGIC_BYDEVICE_ADD_CAMERA_RESULT[]
-	    
+
 	    public NET_OUT_ADD_LOGIC_BYDEVICE_CAMERA() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 视频源信息
 	public static class NET_LOGIC_BYDEVICE_ADD_CAMERA_PARAM extends MyStructure
 	{
 	    public int                   	dwSize;
 	    public int                      nUniqueChannel;             			  // 统一编号
-	    public int                      nChannel;                   			  // 通道号   
-	    
+	    public int                      nChannel;                   			  // 通道号
+
 	    public NET_LOGIC_BYDEVICE_ADD_CAMERA_PARAM() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 添加视频源结果信息
 	public static class NET_LOGIC_BYDEVICE_ADD_CAMERA_RESULT extends MyStructure
 	{
 		public int                   	dwSize;
 		public int                      nUniqueChannel;             		      // 统一编号
 		public int                      nFailedCode;               			      // 失败码, 0-成功,1-通道不支持设置
-		 
+
 		public NET_LOGIC_BYDEVICE_ADD_CAMERA_RESULT() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 事件类型 EVENT_IVS_FACEDETECT (人脸检测事件)对应的规则配置
 	public static class CFG_FACEDETECT_INFO extends MyStructure
 	{
@@ -15796,10 +15796,10 @@ public interface NetSDKLib extends Library {
 		public int                 				nHumanFaceTypeCount;                                    			// 触发事件的人脸类型个数
 		public MAX_HUMANFACE_LIST[]     		szHumanFaceTypeArr = (MAX_HUMANFACE_LIST[])new MAX_HUMANFACE_LIST().toArray(MAX_HUMANFACE_LIST_SIZE);   // 触发事件的人脸类型
 		public CFG_ALARM_MSG_HANDLE 			stuEventHandler;													// 报警联动
-		public TIME_SECTION_WEEK_DAY_10[]	    stuTimeSectionWeekDay = 
+		public TIME_SECTION_WEEK_DAY_10[]	    stuTimeSectionWeekDay =
 											    (TIME_SECTION_WEEK_DAY_10[])new TIME_SECTION_WEEK_DAY_10().toArray(WEEK_DAY_NUM);	// 事件响应时间段
 		public int                 				nPtzPresetId;														// 云台预置点编号	0~65535
-		public int                 				nMinDuration;                                           			// 最短触发时间,单位：秒 
+		public int                 				nMinDuration;                                           			// 最短触发时间,单位：秒
 		public int                 				nSensitivity;                                           			// 灵敏度,范围[1,10],灵敏度越高越容易检测
 		public int                 				nReportInterval;                                        			// 重复报警间隔,单位:秒,[0,600](等于0表示不重复报警)
 		public int               		 		bSizeFileter;                                           			// 规则特定的尺寸过滤器是否有效
@@ -15809,37 +15809,37 @@ public interface NetSDKLib extends Library {
 		public int								nFaceFeatureNum;													// 需要检测的人脸属性个数
 		public int[]  							emFaceFeatureType = new int[MAX_FEATURE_LIST_SIZE];				 	// 需检测的人脸属性, 通过FaceDetection能力来获取支持哪些人脸属性, 参考  EM_FACEFEATURE_TYPE
 	}
-	
-	public static class MAX_OBJECT_LIST extends MyStructure 
+
+	public static class MAX_OBJECT_LIST extends MyStructure
 	{
 		public byte[]				 			szObjectTypes = new byte[MAX_NAME_LEN];   	// 相应物体类型列表
 	}
-	
+
 	public static class MAX_HUMANFACE_LIST extends MyStructure
 	{
 		public byte[]                			szHumanFaceType = new byte[MAX_NAME_LEN];  // 触发事件的人脸类型
 	}
-	
+
 	public static class TIME_SECTION_WEEK_DAY_10 extends MyStructure
 	{
 		public CFG_TIME_SECTION[]	 			stuTimeSection = (CFG_TIME_SECTION[])new CFG_TIME_SECTION().toArray(MAX_REC_TSECT_EX);	 // 事件响应时间段
 	}
-	
+
 	public static class TIME_SECTION_WEEK_DAY_6 extends MyStructure
 	{
 		public CFG_TIME_SECTION[]	 			stuTimeSection = (CFG_TIME_SECTION[])new CFG_TIME_SECTION().toArray(MAX_REC_TSECT);	     // 事件响应时间段, 每天最多6个时间段
 	}
-	
+
 	public static class TIME_SECTION_WEEK_DAY_4 extends MyStructure
 	{
 		public CFG_TIME_SECTION[]	 			stuTimeSection = (CFG_TIME_SECTION[])new CFG_TIME_SECTION().toArray(MAX_DOOR_TIME_SECTION);	 // 事件响应时间段, 每天最多4个时间段
 	}
-	
+
 	public static class TIME_SECTION_WEEK_DAY_2 extends MyStructure
 	{
 		public CFG_TIME_SECTION[]	 			stuTimeSection = (CFG_TIME_SECTION[])new CFG_TIME_SECTION().toArray(MAX_NAS_TIME_SECTION);	 // 事件响应时间段, 每天最多4个时间段
 	}
-	
+
 	// 设备ID
 	public static class DEVICE_ID extends MyStructure
 	{
@@ -15871,7 +15871,7 @@ public interface NetSDKLib extends Library {
 	    public int                           	dwSize;
 	    public StdCallCallback         			cbDeviceState; 		//回调函数
 	    public Pointer                          dwUser;             //用户数据
-		
+
 		public NET_IN_ATTACH_DEVICE_STATE() {
 	        this.dwSize = this.size();
 	    }
@@ -15881,7 +15881,7 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_ATTACH_DEVICE_STATE extends MyStructure
 	{
 	    public int           dwSize;
-		
+
 		public NET_OUT_ATTACH_DEVICE_STATE() {
 	       this.dwSize = this.size();
 	    }
@@ -15909,7 +15909,7 @@ public interface NetSDKLib extends Library {
 	{
 	    public int           				dwSize;
 		public int							nTaskID;		//任务ID
-		
+
 		public NET_OUT_ASYNC_ADD_DEVICE() {
 	       this.dwSize = this.size();
 	    }
@@ -15941,7 +15941,7 @@ public interface NetSDKLib extends Library {
 	    public int                           	dwSize;
 	    public StdCallCallback         			cbAddDevice; 		//回调函数
 	    public Pointer                          dwUser;             //用户数据
-		
+
 		public NET_IN_ATTACH_ADD_DEVICE() {
 	        this.dwSize = this.size();
 	    }
@@ -15951,7 +15951,7 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_ATTACH_ADD_DEVICE extends MyStructure
 	{
 	    public int               	dwSize;
-	  
+
 		public NET_OUT_ATTACH_ADD_DEVICE() {
 	        this.dwSize = this.size();
 	    }
@@ -15964,7 +15964,7 @@ public interface NetSDKLib extends Library {
 	    public int					nTaskID;										// 任务ID
 	    public int					nCount;											// 设备个数
 	    public int[]              	nIndex = new int[MAX_ADD_DEVICE_NUM];       	// 设备序号列表(NET_IN_ADD_DEVICE中szUrls的序号，从0开始)
-		
+
 		public NET_IN_GET_ADD_DEVICE_LIST_INFO() {
 	        this.dwSize = this.size();
 	    }
@@ -15979,15 +15979,15 @@ public interface NetSDKLib extends Library {
 		public int						nErrorCode;										// 错误码
 		public byte[] 					byReserved = new byte[512];                     // 保留字节
 	}
-		
+
 	// CLIENT_GetAddDeviceInfo 获取添加中的设备状态出参结构
 	public static class NET_OUT_GET_ADD_DEVICE_LIST_INFO extends MyStructure
 	{
 	    public int               			dwSize;
 	    public int							nRetCount;															// 设备个数
-	    public NET_GET_ADD_DEVICE_INFO[]  	stuDeviceInfo = 
+	    public NET_GET_ADD_DEVICE_INFO[]  	stuDeviceInfo =
 	    									(NET_GET_ADD_DEVICE_INFO[])new NET_GET_ADD_DEVICE_INFO().toArray(MAX_ADD_DEVICE_NUM);  	// 设备信息列表
-	    
+
 		public NET_OUT_GET_ADD_DEVICE_LIST_INFO() {
 	        this.dwSize = this.size();
 	    }
@@ -15999,7 +15999,7 @@ public interface NetSDKLib extends Library {
 	    public int               	dwSize;
 	    public int					nCount;															// 设备个数
 	    public DEVICE_ID[]			szDeviceIDsArr = (DEVICE_ID[])new DEVICE_ID().toArray(MAX_LINK_DEVICE_NUM); // 设备列表
-	    
+
 		public NET_IN_GET_DEVICE_LIST_INFO() {
 	        this.dwSize = this.size();
 	    }
@@ -16013,7 +16013,7 @@ public interface NetSDKLib extends Library {
 	    public byte[]                szSerialNo = new byte[NET_COMMON_STRING_32];           					// 设备序列号
 	    public byte[]                szDeviceType = new byte[NET_COMMON_STRING_64];      						// 设备类型
 	    public byte[]                szDeviceClass = new byte[NET_DEV_CLASS_LEN];        						// 设备大类
-	    public int					 nMacCount;																	// 设备mac个数	
+	    public int					 nMacCount;																	// 设备mac个数
 		public DEVICE_MAC[]	 		 szMacsArr = (DEVICE_MAC[])new DEVICE_MAC().toArray(MAX_MACADDR_NUM);		// 设备mac地址组
 	    public byte[]                szDevSoftVersion = new byte[NET_COMMON_STRING_128];       					// 设备软件版本号
 	    public byte[]                szDeviceName = new byte[NET_DEV_NAME_LEN];          						// 设备名称
@@ -16023,7 +16023,7 @@ public interface NetSDKLib extends Library {
 	    public int               	 nAudioInputCh;                          									// 音频输入通道数
 	    public int               	 nAudioOutputCh;                         									// 音频输出通道数
 	    public int               	 nAlarmInputCh;                          									// 报警输入通道数
-	    public int                	 nAlarmOutputCh;                         									// 报警输出通道数 
+	    public int                	 nAlarmOutputCh;                         									// 报警输出通道数
 		public int					 nErrorCode;																// 设备离线错误码
 		public int					 nVtoDoors;																	// 门禁设备可控制的门的总数
 		public byte					 byOnline;																	// 设备是否在线 0:离线 1：在线
@@ -16040,9 +16040,9 @@ public interface NetSDKLib extends Library {
 	{
 	    public int               		dwSize;
 	    public int						nMaxCount;			// 用户申请的设备个数
-	    public int						nRetCount;			// 实际返回的设备个数 
+	    public int						nRetCount;			// 实际返回的设备个数
 	    public Pointer  				pstuDeviceInfo; 	// 设备信息列表 用户分配内存,大小为sizeof(NET_GET_DEVICE_INFO)*nMaxCount, 对应 NET_GET_DEVICE_INFO[]
-		
+
 	    public NET_OUT_GET_DEVICE_LIST_INFO() {
 	        this.dwSize = this.size();
 	    }
@@ -16055,7 +16055,7 @@ public interface NetSDKLib extends Library {
 	    public byte[]               szDeviceID = new byte[NET_DEV_ID_LEN_EX];    	// 设备ID
 	    public int					nCount;											// 通道个数
 	    public int[]            	nChannels = new int[MAX_DEVICE_CHANNEL_NUM];    // 通道列表
-																				
+
 		public NET_IN_SET_CONNECT_CHANNEL() {
 	        this.dwSize = this.size();
 	    }
@@ -16065,7 +16065,7 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_SET_CONNECT_CHANNEL extends MyStructure
 	{
 	    public int					dwSize;
-		
+
 	    public NET_OUT_SET_CONNECT_CHANNEL() {
 	        this.dwSize = this.size();
 	    }
@@ -16076,7 +16076,7 @@ public interface NetSDKLib extends Library {
 	{
 	    public int					dwSize;
 		public byte[]		        szDeviceID = new byte[NET_DEV_ID_LEN_EX]; // 设备ID
-		
+
 	    public NET_IN_GET_CHANNEL_INFO() {
 	        this.dwSize = this.size();
 	    }
@@ -16139,13 +16139,13 @@ public interface NetSDKLib extends Library {
 	        this.dwSize = this.size();
 	    }
 	}
-	
+
 	// CLIENT_CancelAddDeviceTask 接口输入参数
 	public static class NET_IN_CANCEL_ADD_TASK extends MyStructure
 	{
 		public int                          dwSize;
 		public int 							nTaskID;		 // 任务ID
-		
+
 		public NET_IN_CANCEL_ADD_TASK() {
 	        this.dwSize = this.size();
 	    }
@@ -16155,7 +16155,7 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_CANCEL_ADD_TASK extends MyStructure
 	{
 		public int                          dwSize;
-		
+
 		public NET_OUT_CANCEL_ADD_TASK() {
 	        this.dwSize = this.size();
 	    }
@@ -16166,7 +16166,7 @@ public interface NetSDKLib extends Library {
 	{
 		public int                          dwSize;
 		public int 							nTaskID;		 // 任务ID
-		
+
 		public NET_IN_CONFIRM_ADD_TASK() {
 	        this.dwSize = this.size();
 	    }
@@ -16176,34 +16176,34 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_CONFIRM_ADD_TASK extends MyStructure
 	{
 		public int                          dwSize;
-		
+
 		public NET_OUT_CONFIRM_ADD_TASK() {
 	        this.dwSize = this.size();
 	    }
 	}
-	
+
 	// CLIENT_SCADAAlarmAttachInfo()接口输入参数
 	public static class NET_IN_SCADA_ALARM_ATTACH_INFO extends MyStructure
 	{
 	    public int                           	dwSize;
 	    public StdCallCallback    				cbCallBack;                 // 数据回调函数,对应回调 fSCADAAlarmAttachInfoCallBack
 	    public Pointer                          dwUser;	                    // 用户定义参数
-	    
+
 	    public NET_IN_SCADA_ALARM_ATTACH_INFO() {
 	    	this.dwSize = this.size();
 	    }
-	} 
+	}
 
 	// CLIENT_SCADAAlarmAttachInfo()接口输出参数
 	public static class NET_OUT_SCADA_ALARM_ATTACH_INFO extends MyStructure
 	{
 	    public int                       		dwSize;
-	    
+
 	    public NET_OUT_SCADA_ALARM_ATTACH_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// CLIENT_SyncParkingInfo 接口输入参数
 	public static class NET_IN_SYNC_PARKING_INFO extends MyStructure
 	{
@@ -16213,7 +16213,7 @@ public interface NetSDKLib extends Library {
 	    public int						dwPresetNum;							// 预置点编号
 	    public int						bHaveCar;								// 车位是否有车
 	    public int						bParkingFault;							// 车位是否有故障
-	    
+
 	    public NET_IN_SYNC_PARKING_INFO() {
 	    	this.dwSize = this.size();
 	    }
@@ -16223,24 +16223,24 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_SYNC_PARKING_INFO extends MyStructure
 	{
 	    public int                       		dwSize;
-	    
+
 	    public NET_OUT_SYNC_PARKING_INFO() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 监测点位报警信息列表
 	public static class NET_SCADA_NOTIFY_POINT_ALARM_INFO_LIST extends MyStructure
 	{
 	    public int                               	dwSize;
 	    public int	                                nList;                                          // 监测点位报警信息个数
 	    public NET_SCADA_NOTIFY_POINT_ALARM_INFO[]  stuList = (NET_SCADA_NOTIFY_POINT_ALARM_INFO[])new NET_SCADA_NOTIFY_POINT_ALARM_INFO().toArray(MAX_SCADA_POINT_LIST_ALARM_INFO_NUM);   // 监测点位报警信息
-	
+
 	    public NET_SCADA_NOTIFY_POINT_ALARM_INFO_LIST() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 监测点位报警信息
 	public static class NET_SCADA_NOTIFY_POINT_ALARM_INFO extends MyStructure
 	{
@@ -16252,12 +16252,12 @@ public interface NetSDKLib extends Library {
 	    public int	           		nAlarmLevel;                                			// 报警级别（0~6）
 	    public int             		nSerialNo;                                  			// 报警编号,同一个告警的开始和结束的编号是相同的。
 	    public byte[]           	szAlarmDesc = new byte[NET_COMMON_STRING_128];          // 报警描述
-	    
+
 	    public NET_SCADA_NOTIFY_POINT_ALARM_INFO() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 获取指纹事件(对应 NET_ALARM_FINGER_PRINT类型)
 	public static class ALARM_CAPTURE_FINGER_PRINT_INFO extends MyStructure
 	{
@@ -16268,19 +16268,19 @@ public interface NetSDKLib extends Library {
 	    public int             		nPacketLen;                         					// 单个指纹数据包长度
 	    public int             		nPacketNum;                         					// 指纹数据包个数
 	    public Pointer         		szFingerPrintInfo;                  					// 指纹数据(数据总长度即 nPacketLen * nPacketNum)
-	    
+
 	    public ALARM_CAPTURE_FINGER_PRINT_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 指纹采集(对应 CTRLTYPE_CTRL_CAPTURE_FINGER_PRINT 命令)
 	public static class NET_CTRL_CAPTURE_FINGER_PRINT extends MyStructure
 	{
 	    public int           		dwSize;
 	    public int            		nChannelID;                             				// 门禁序号(从开始)
 	    public byte[]            	szReaderID = new byte[NET_COMMON_STRING_32];        	// 读卡器ID
-	    
+
 	    public NET_CTRL_CAPTURE_FINGER_PRINT() {
 	    	this.dwSize = this.size();
 	    }
@@ -16294,12 +16294,12 @@ public interface NetSDKLib extends Library {
 	    public NET_TIME             stuTime;               			 // 事件发生的时间
 	    public int  				emStatus;              			 // 门禁状态, 对应   NET_ACCESS_CTL_STATUS_TYPE
 	    public byte[]               szSerialNumber = new byte[256];  //无线设备序列号(智能锁)
-	    
+
 	    public ALARM_ACCESS_CTL_STATUS_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 门禁状态类型
 	public static class NET_ACCESS_CTL_STATUS_TYPE extends MyStructure
 	{
@@ -16309,7 +16309,7 @@ public interface NetSDKLib extends Library {
 	    public static final int NET_ACCESS_CTL_STATUS_TYPE_ABNORMAL = 3;                // 异常
 	}
 
-	
+
 	//事件类型 EVENT_IVS_SNAPMANUAL(SnapManual事件)对应数据块描述信息
 	public static class DEV_EVENT_SNAPMANUAL extends MyStructure
 	{
@@ -16319,35 +16319,35 @@ public interface NetSDKLib extends Library {
 		public double              	 PTS;                                          		// 时间戳(单位是毫秒)
 		public NET_TIME_EX         	 UTC;                                          		// 事件发生的时间
 		public int                 	 nEventID;                                     		// 事件ID
-		
+
 		public NET_EVENT_FILE_INFO	 stuFileInfo;								  		// 事件对应文件信息
 		public byte				     byImageIndex;								  		// 图片的序号, 同一时间内(精确到秒)可能有多张图片, 从0开始
-		public int				     dwSnapFlagMask;								  	// 抓图标志(按位),具体见 NET_RESERVED_COMMON    
-		public byte[]				 bReserved = new byte[1024];						// 保留字节,留待扩展. 
+		public int				     dwSnapFlagMask;								  	// 抓图标志(按位),具体见 NET_RESERVED_COMMON
+		public byte[]				 bReserved = new byte[1024];						// 保留字节,留待扩展.
 	}
-	
+
 	// 即时抓图(又名手动抓图)入参, 对应命令 CTRLTYPE_CTRL_SNAP_MNG_SNAP_SHOT
 	public static class NET_IN_SNAP_MNG_SHOT extends MyStructure
 	{
 	    public int                    dwSize;                 // 该结构体大小
 	    public int                    nChannel;               // 通道号
 	    public int                    nTime;                  // 连拍次数, 0表示停止抓拍,正数表示连续抓拍的张数
-	    
+
 	    public NET_IN_SNAP_MNG_SHOT() {
 	    	this.dwSize = this.size();
 	    }
-	} 
+	}
 
 	// 即时抓图(又名手动抓图)出参, 对应命令 CTRLTYPE_CTRL_SNAP_MNG_SNAP_SHOT
 	public static class NET_OUT_SNAP_MNG_SHOT extends MyStructure
 	{
 	    public int                    dwSize;                 // 该结构体大小
-	    
+
 	    public NET_OUT_SNAP_MNG_SHOT() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 获取摄像机状态, CLIENT_QueryDevInfo 接口 NET_QUERY_GET_CAMERA_STATE 命令入参
 	public static class NET_IN_GET_CAMERA_STATEINFO extends MyStructure
 	{
@@ -16355,12 +16355,12 @@ public interface NetSDKLib extends Library {
 	    public int               	bGetAllFlag;                                		 // 是否查询所有摄像机状态,若该成员为 TRUE,则 nChannels 成员无需设置, 1-true; 0-false
 	    public int                  nValidNum;                                 			 // 该成员,bGetAllFlag 为 FALSE时有效,表示 nChannels 成员有效个数
 	    public int[]                nChannels = new int[NET_MAX_CAMERA_CHANNEL_NUM];     // 该成员,bGetAllFlag 为 FALSE时有效,将需要查询的通道号依次填入
-	    
+
 	    public NET_IN_GET_CAMERA_STATEINFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 获取摄像机状态, CLIENT_QueryDevInfo 接口 NET_QUERY_GET_CAMERA_STATE 命令出参
 	public static class NET_OUT_GET_CAMERA_STATEINFO extends MyStructure
 	{
@@ -16368,19 +16368,19 @@ public interface NetSDKLib extends Library {
 	    public int                  nValidNum;              	// 查询到的摄像机通道状态有效个数,由sdk返回
 	    public int                  nMaxNum;                	// pCameraStateInfo 数组最大个数,由用户填写
 	    public Pointer      		pCameraStateInfo;           // 摄像机通道信息数组,由用户分配, 对应  NET_CAMERA_STATE_INFO[]
-	    
+
 	    public NET_OUT_GET_CAMERA_STATEINFO() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	public static class NET_CAMERA_STATE_INFO extends MyStructure
 	{
 		public int                  nChannel;           			// 摄像机通道号, -1表示通道号无效
 		public int 				    emConnectionState;  			// 连接状态, 参考  EM_CAMERA_STATE_TYPE
 		public byte[]               szReserved = new byte[1024];    // 保留字节
 	}
-	
+
 	public static class EM_CAMERA_STATE_TYPE extends MyStructure
 	{
 	    public static final int EM_CAMERA_STATE_TYPE_UNKNOWN = 0;       // 未知
@@ -16390,13 +16390,13 @@ public interface NetSDKLib extends Library {
 	    public static final int EM_CAMERA_STATE_TYPE_EMPTY = 4;         // 通道未配置,无信息
 	    public static final int EM_CAMERA_STATE_TYPE_DISABLE = 5;       // 通道有配置,但被禁用
 	}
-	
+
 	// CLIENT_StartFindFaceInfo 输入参数
 	public static class NET_IN_FACEINFO_START_FIND extends MyStructure
 	{
 	    public int 				dwSize;
 	    public byte[]			szUserID = new byte[NET_MAX_USERID_LEN];	// 用户ID
-	    
+
 	    public NET_IN_FACEINFO_START_FIND() {
 	    	this.dwSize = this.size();
 	    }
@@ -16407,7 +16407,7 @@ public interface NetSDKLib extends Library {
 	{
 	    public int 				dwSize;
 	    public int              nTotalCount;                   // 符合查询条件的总数
-	    
+
 	    public NET_OUT_FACEINFO_START_FIND() {
 	    	this.dwSize = this.size();
 	    }
@@ -16419,7 +16419,7 @@ public interface NetSDKLib extends Library {
 	    public int 			   dwSize;
 	    public int             nStartNo;                       // 起始序号
 	    public int             nCount;                         // 本次查询的条数
-	    
+
 	    public NET_IN_FACEINFO_DO_FIND() {
 	    	this.dwSize = this.size();
 	    }
@@ -16433,43 +16433,43 @@ public interface NetSDKLib extends Library {
 	    public Pointer   		pstuInfo;                       // 查询结果, 用户分配内存,大小为sizeof(NET_FACEINFO)*nMaxNum, 对应 NET_FACEINFO[]
 	    public int	            nMaxNum;                        // 用户分配内存的个数
 	    public byte[]           byReserved = new byte[4];
-	    
+
 	    public NET_OUT_FACEINFO_DO_FIND() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 人脸信息
 	public static class NET_FACEINFO extends MyStructure
 	{
 	    public byte[]			szUserID = new byte[NET_MAX_USERID_LEN];	// 用户ID
 	    public int              nMD5;                           			// 有效的MD5编码数量
 	    public MD5[]            szMD5Arr = (MD5[])new MD5().toArray(5);  	// 图片对应的32字节MD5编码加密
-	    public byte[]           byReserved = new byte[512];                
+	    public byte[]           byReserved = new byte[512];
 	}
-	
+
 	// 图片对应的32字节MD5编码加密
-	public static class MD5 extends MyStructure 
+	public static class MD5 extends MyStructure
 	{
 		public byte[]   		szMD5 = new byte[NET_COMMON_STRING_64];
 	}
-	
+
 	// 初始化设备账户输入结构体
 	public static class NET_IN_INIT_DEVICE_ACCOUNT extends MyStructure
 	{
 		public int				dwSize;													// 结构体大小:初始化结构体时赋值
-		public byte[]			szMac = new byte[NET_MACADDR_LEN];						// 设备mac地址	
+		public byte[]			szMac = new byte[NET_MACADDR_LEN];						// 设备mac地址
 		public byte[]			szUserName = new byte[MAX_USER_NAME_LEN];				// 用户名
 		public byte[]			szPwd = new byte[MAX_PWD_LEN];							// 设备密码
 		public byte[]			szCellPhone = new byte[MAX_CELL_PHONE_NUMBER_LEN];		// 预留手机号
 		public byte[]			szMail = new byte[MAX_MAIL_LEN];						// 预留邮箱
-		public byte				byInitStatus;										    // 此字段已经废弃															
-		public byte				byPwdResetWay;											// 设备支持的密码重置方式：搜索设备接口(CLIENT_SearchDevices、CLIENT_StartSearchDevices的回调函数、CLIENT_SearchDevicesByIPs)返回字段byPwdResetWay的值	
+		public byte				byInitStatus;										    // 此字段已经废弃
+		public byte				byPwdResetWay;											// 设备支持的密码重置方式：搜索设备接口(CLIENT_SearchDevices、CLIENT_StartSearchDevices的回调函数、CLIENT_SearchDevicesByIPs)返回字段byPwdResetWay的值
 																						// 该值的具体含义见 DEVICE_NET_INFO_EX 结构体，需要与设备搜索接口返回的 byPwdResetWay 值保持一致
-																						// bit0 : 1-支持预留手机号，此时需要在szCellPhone数组中填入预留手机号(如果需要设置预留手机) ; 
+																						// bit0 : 1-支持预留手机号，此时需要在szCellPhone数组中填入预留手机号(如果需要设置预留手机) ;
 																						// bit1 : 1-支持预留邮箱，此时需要在szMail数组中填入预留邮箱(如果需要设置预留邮箱)
 		public byte[]			byReserved = new byte[2];								// 保留字段
-		
+
 		public NET_IN_INIT_DEVICE_ACCOUNT() {
 			this.dwSize = this.size();
 		}
@@ -16479,12 +16479,12 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_INIT_DEVICE_ACCOUNT extends MyStructure
 	{
 		public int				dwSize;						// 结构体大小:初始化结构体时赋值
-		
+
 		public NET_OUT_INIT_DEVICE_ACCOUNT() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	//用户权限
 	public static class NET_ATTENDANCE_AUTHORITY extends MyStructure
 	{
@@ -16492,21 +16492,21 @@ public interface NetSDKLib extends Library {
 	    public int NET_ATTENDANCE_AUTHORITY_CUSTOMER = 0;           //普通用户
 	    public int NET_ATTENDANCE_AUTHORITY_ADMINISTRATORS = 1;     //管理员
 	}
-	
+
 	//考勤用户信息
 	public static class NET_ATTENDANCE_USERINFO extends MyStructure
 	{
-		public byte[]                    szUserID = new byte[MAX_COMMON_STRING_32];   			//用户编号ID     
+		public byte[]                    szUserID = new byte[MAX_COMMON_STRING_32];   			//用户编号ID
 		public byte[]                    szUserName = new byte[MAX_ATTENDANCE_USERNAME_LEN]; 	//人员姓名
 		public byte[]                    szCardNo = new byte[MAX_COMMON_STRING_32];   			// 卡号
 		public int  					 emAuthority;      										// 用户权限
 		public byte[]                    szPassword = new byte[MAX_COMMON_STRING_32]; 			// 密码
-		public int                       nPhotoLength;                     						// 照片数据长度   
+		public int                       nPhotoLength;                     						// 照片数据长度
 		public byte[]					 szClassNumber = new byte[MAX_CLASS_NUMBER_LEN];  		// 班级（肯尼亚定制）
 		public byte[]					 szPhoneNumber = new byte[MAX_PHONENUMBER_LEN];   		// 电话（肯尼亚定制）
 		public byte[]					 byReserved = new byte[208];				   			// 保留字节
 	}
-	
+
 	// CLIENT_Attendance_AddUser 入参
 	public static class NET_IN_ATTENDANCE_ADDUSER extends MyStructure
 	{
@@ -16523,7 +16523,7 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_ATTENDANCE_ADDUSER extends MyStructure
 	{
 		public int						  dwSize;
-		
+
 	    public NET_OUT_ATTENDANCE_ADDUSER() {
 			this.dwSize = this.size();
 		}
@@ -16533,7 +16533,7 @@ public interface NetSDKLib extends Library {
 	public static class NET_IN_ATTENDANCE_DELUSER extends MyStructure
 	{
 		public int						  dwSize;
-		public byte[]    				  szUserID = new byte[MAX_COMMON_STRING_32];  // 用户ID		 				
+		public byte[]    				  szUserID = new byte[MAX_COMMON_STRING_32];  // 用户ID
 
 		public NET_IN_ATTENDANCE_DELUSER() {
 			this.dwSize = this.size();
@@ -16544,12 +16544,12 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_ATTENDANCE_DELUSER extends MyStructure
 	{
 		public int						  dwSize;
-		
+
 	    public NET_OUT_ATTENDANCE_DELUSER() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// CLIENT_Attendance_ModifyUser 入参
 	public static class NET_IN_ATTENDANCE_ModifyUSER extends MyStructure
 	{
@@ -16566,18 +16566,18 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_ATTENDANCE_ModifyUSER extends MyStructure
 	{
 		public int						  dwSize;
-		
+
 	    public NET_OUT_ATTENDANCE_ModifyUSER() {
 			this.dwSize = this.size();
 		}
 	}
-	
-	
+
+
 	// CLIENT_Attendance_GetUser 入参
 	public static class NET_IN_ATTENDANCE_GetUSER extends MyStructure
 	{
 		public int						  dwSize;
-		public byte[]    				  szUserID = new byte[MAX_COMMON_STRING_32];  // 用户ID		 				
+		public byte[]    				  szUserID = new byte[MAX_COMMON_STRING_32];  // 用户ID
 
 		public NET_IN_ATTENDANCE_GetUSER() {
 			this.dwSize = this.size();
@@ -16596,7 +16596,7 @@ public interface NetSDKLib extends Library {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	//CLIENT_Attendance_InsertFingerByUserID 入参
 	public static class NET_IN_FINGERPRINT_INSERT_BY_USERID extends MyStructure
 	{
@@ -16618,7 +16618,7 @@ public interface NetSDKLib extends Library {
 	    public int[]					nFingerPrintID = new int[NET_MAX_FINGER_PRINT];	//指纹ID数组
 	    public int 						nReturnedCount;									//数组中实际返回的个数
 	    public int						nFailedCode;									//错误码  0：成功;   1：其他错误;  2：超过本用户下指纹能力的限制.
-	    
+
 	    public NET_OUT_FINGERPRINT_INSERT_BY_USERID() {
 			this.dwSize = this.size();
 		}
@@ -16628,7 +16628,7 @@ public interface NetSDKLib extends Library {
 	public static class NET_CTRL_IN_FINGERPRINT_REMOVE_BY_USERID extends MyStructure
 	{
 		public int						  dwSize;
-		public byte[]    				  szUserID = new byte[NET_COMMON_STRING_32];  // 用户ID		 				
+		public byte[]    				  szUserID = new byte[NET_COMMON_STRING_32];  // 用户ID
 
 		public NET_CTRL_IN_FINGERPRINT_REMOVE_BY_USERID() {
 			this.dwSize = this.size();
@@ -16639,7 +16639,7 @@ public interface NetSDKLib extends Library {
 	public static class NET_CTRL_OUT_FINGERPRINT_REMOVE_BY_USERID extends MyStructure
 	{
 		public int						  dwSize;
-		
+
 	    public NET_CTRL_OUT_FINGERPRINT_REMOVE_BY_USERID() {
 			this.dwSize = this.size();
 		}
@@ -16649,7 +16649,7 @@ public interface NetSDKLib extends Library {
 	public static class NET_CTRL_IN_FINGERPRINT_REMOVE extends MyStructure
 	{
 		public int						  dwSize;
-		public int    				  	  nFingerPrintID;  // 指纹编号		 				
+		public int    				  	  nFingerPrintID;  // 指纹编号
 
 		public NET_CTRL_IN_FINGERPRINT_REMOVE() {
 			this.dwSize = this.size();
@@ -16659,7 +16659,7 @@ public interface NetSDKLib extends Library {
 	//CLIENT_Attendance_RemoveFingerRecord 出参
 	public static class NET_CTRL_OUT_FINGERPRINT_REMOVE extends MyStructure
 	{
-		public int						  dwSize; 				
+		public int						  dwSize;
 
 		public NET_CTRL_OUT_FINGERPRINT_REMOVE() {
 			this.dwSize = this.size();
@@ -16670,7 +16670,7 @@ public interface NetSDKLib extends Library {
 	public static class NET_CTRL_IN_FINGERPRINT_GET extends MyStructure
 	{
 		public int						  dwSize;
-		public int    				  	  nFingerPrintID;  // 指纹编号		 				
+		public int    				  	  nFingerPrintID;  // 指纹编号
 
 		public NET_CTRL_IN_FINGERPRINT_GET() {
 			this.dwSize = this.size();
@@ -16687,7 +16687,7 @@ public interface NetSDKLib extends Library {
 		public int							nRetLength;											// 实际返回的二进制指纹数据长度
 		public int							nMaxFingerDataLength;								// 二进制指纹数据的最大长度
 		public Pointer						szFingerPrintInfo;									// 指纹数据
-		
+
 		public NET_CTRL_OUT_FINGERPRINT_GET() {
 			this.dwSize = this.size();
 		}
@@ -16699,7 +16699,7 @@ public interface NetSDKLib extends Library {
 		public int				dwSize;
 		public int				nOffset;						// 查询偏移
 		public int				nPagedQueryCount;				// 查询个数，分页查询，最多不超过100
-		
+
 		public NET_IN_ATTENDANCE_FINDUSER() {
 			this.dwSize = this.size();
 		}
@@ -16711,12 +16711,12 @@ public interface NetSDKLib extends Library {
 		public int 								dwSize;
 		public int								nTotalUser;					// 总的用户数
 		public int								nMaxUserCount;				// 用户信息最大缓存数
-		public Pointer       					stuUserInfo;            	// 用户信息，内存由用户申请，大小为(sizeof(NET_ATTENDANCE_USERINFO)*nMaxUserCount) 
+		public Pointer       					stuUserInfo;            	// 用户信息，内存由用户申请，大小为(sizeof(NET_ATTENDANCE_USERINFO)*nMaxUserCount)
 		public int								nRetUserCount;				// 实际返回的用户个数
 		public int                           	nMaxPhotoDataLength;        // 照片数据最大长度
 		public int								nRetPhoteLength;			// 实际返回的照片数据长度
 		public Pointer                        	pbyPhotoData;           	// 照片数据
-		
+
 		public NET_OUT_ATTENDANCE_FINDUSER() {
 			this.dwSize = this.size();
 		}
@@ -16726,13 +16726,13 @@ public interface NetSDKLib extends Library {
 	public static class NET_IN_FINGERPRINT_GETBYUSER extends MyStructure
 	{
 		public int						  dwSize;
-		public byte[]    				  szUserID = new byte[NET_COMMON_STRING_32];  // 用户ID		 				
+		public byte[]    				  szUserID = new byte[NET_COMMON_STRING_32];  // 用户ID
 
 		public NET_IN_FINGERPRINT_GETBYUSER() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	//CLIENT_Attendance_GetFingerByUserID 出参
 	public static class NET_OUT_FINGERPRINT_GETBYUSER extends MyStructure
 	{
@@ -16743,16 +16743,16 @@ public interface NetSDKLib extends Library {
 		public int							nMaxFingerDataLength;							// 接受指纹数据的缓存的最大长度
 		public int							nRetFingerDataLength;							// 实际返回的总的指纹数据包的长度
 		public Pointer                      pbyFingerData;                       			// 指纹数据
-		
+
 		public NET_OUT_FINGERPRINT_GETBYUSER() {
 			this.dwSize = this.size();
-		} 
+		}
 	}
-	
+
 	// 获取考勤机在线状态入参
 	public static class NET_IN_ATTENDANCE_GETDEVSTATE extends MyStructure
 	{
-		public int						  dwSize;	 				
+		public int						  dwSize;
 
 		public NET_IN_ATTENDANCE_GETDEVSTATE() {
 			this.dwSize = this.size();
@@ -16764,12 +16764,12 @@ public interface NetSDKLib extends Library {
 	{
 		public int 			           		dwSize;
 		public int                          nState;     // 0:离线;1:在线;其他:未知;考勤机状态
-		
+
 		public NET_OUT_ATTENDANCE_GETDEVSTATE() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 门禁事件配置
 	public static class CFG_ACCESS_EVENT_INFO extends MyStructure
 	{
@@ -16778,7 +16778,7 @@ public interface NetSDKLib extends Library {
 		public int     				emMode;										// 门禁模式, 参考  CFG_ACCESS_MODE
 		public int					nEnableMode;								// 门禁使能电平值, 0:低电平有效(断电启动); 1:高电平有效(通电启动);
 		public int                	bSnapshotEnable;							// 事件联动抓图使能, 1-true, 0-false
-		
+
 	    // 能力
 		public byte                 abDoorOpenMethod;
 		public byte                 abUnlockHoldInterval;
@@ -16810,7 +16810,7 @@ public interface NetSDKLib extends Library {
 	    public int					bRepeatEnterAlarm;							// 反潜报警使能, 1-true, 0-false
 	    public int 					bDoorNotClosedAlarmEnable;					// 门未关报警使能, 1-true, 0-false
 	    public int					bDuressAlarmEnable;							// 胁迫报警使能, 1-true, 0-false
-	    public CFG_DOOROPEN_TIMESECTION_WEEK_DAY[]	stuDoorTimeSectionArr = 
+	    public CFG_DOOROPEN_TIMESECTION_WEEK_DAY[]	stuDoorTimeSectionArr =
 	    										    (CFG_DOOROPEN_TIMESECTION_WEEK_DAY[])new CFG_DOOROPEN_TIMESECTION_WEEK_DAY().toArray(WEEK_DAY_NUM);// 分时段开门信息
 		public int 					bSensorEnable;								// 门磁使能, 1-true, 0-false
 		public CFG_ACCESS_FIRSTENTER_INFO stuFirstEnterInfo;					// 首卡开门信息
@@ -16846,22 +16846,22 @@ public interface NetSDKLib extends Library {
 		public int                	bUnAuthorizedMaliciousSwipEnable;   		// 未授权恶意刷卡事件使能, 1-true, 0-false
 		public int                	bFakeLockedAlarmEnable;             		// 假锁报警使能, 1-true, 0-false
 	}
-	
+
 	// 分时段开门信息
 	public static class CFG_DOOROPEN_TIMESECTION_WEEK_DAY extends MyStructure
 	{
-		
-		 public CFG_DOOROPEN_TIMESECTION_INFO[]	stuDoorTimeSection = 
+
+		 public CFG_DOOROPEN_TIMESECTION_INFO[]	stuDoorTimeSection =
 				 							    (CFG_DOOROPEN_TIMESECTION_INFO[])new CFG_DOOROPEN_TIMESECTION_INFO().toArray(MAX_DOOR_TIME_SECTION);
 	}
-	
+
 	// 分时段开门
 	public static class CFG_DOOROPEN_TIMESECTION_INFO extends MyStructure
 	{
 		public CFG_TIME_PERIOD			stuTime;						// 时间段
 		public int						emDoorOpenMethod;				// 开门模式, 参考 CFG_DOOR_OPEN_METHOD
 	}
-	
+
 	// 首卡开门信息
 	public static class CFG_ACCESS_FIRSTENTER_INFO extends MyStructure
 	{
@@ -16869,9 +16869,9 @@ public interface NetSDKLib extends Library {
 		public int						emStatus;						// 首卡权限验证通过后的门禁状态, 参考 CFG_ACCESS_FIRSTENTER_STATUS
 		public int						nTimeIndex;						// 需要首卡验证的时间段, 值为  配置 "AccessTimeSchedule"的门禁刷卡时间段的下标
 	}
-	
+
 	// 远程开门验证
-	public static class CFG_REMOTE_DETAIL_INFO extends MyStructure 
+	public static class CFG_REMOTE_DETAIL_INFO extends MyStructure
 	{
 		public int                 		nTimeOut;                       // 超时时间, 0表示永久等待, 其他值表示超时时间(单位为秒)
 		public int                		bTimeOutDoorStatus;             // 超时后的门状态, 1-true:打开, 0-false:关闭
@@ -16880,43 +16880,43 @@ public interface NetSDKLib extends Library {
 	// 针对残疾人的开门信息
 	public static class CFG_HANDICAP_TIMEOUT_INFO extends MyStructure
 	{
-		public int                	    nUnlockHoldInterval;            // 门锁保持时间(自动关门时间),单位毫秒,[250, 60000]  
+		public int                	    nUnlockHoldInterval;            // 门锁保持时间(自动关门时间),单位毫秒,[250, 60000]
 		public int                 		nCloseTimeout;                  // 关门超时时间, 超过阈值未关会触发报警，单位秒,[0,9999];0表示不检测超时
 	}
-	
+
 	// 开门远程验证
 	public static class CFG_AUTO_REMOTE_CHECK_INFO extends MyStructure
 	{
 	    public int                		bEnable;                        // 使能项, 1-true: 开启, 0-false: 关闭
 	    public int                	 	nTimeSechdule;                  // 对应CFG_CMD_ACCESSTIMESCHEDULE配置的索引
 	}
-	
+
 	// 大华门禁udp开锁信息
 	public static class CFG_ACCESS_CONTROL_UDP_INFO extends MyStructure
 	{
 		public byte[]					szAddress = new byte[CFG_MAX_ACCESS_CONTROL_ADDRESS_LEN];// 地址
 		public int						nPort;													 // 端口
 	}
-	
+
 	// 门禁状态
 	public static class CFG_ACCESS_STATE extends MyStructure
 	{
 		public static final int ACCESS_STATE_NORMAL = 0;                                        // 普通
 		public static final int ACCESS_STATE_CLOSEALWAYS = 1;                                   // 常关
-		public static final int ACCESS_STATE_OPENALWAYS = 2;                                    // 常开 
+		public static final int ACCESS_STATE_OPENALWAYS = 2;                                    // 常开
 	                                                                							// 常开常闭状态下,Opendoor开门无效.
 		public static final int ACCESS_STATE_NOPERSONNC = 3;                                    // 无人状态常闭
 		public static final int ACCESS_STATE_NOPERSONNO = 4;                                    // 无人状态常开
 	}
-	
+
 	// 门禁模式
 	public static class CFG_ACCESS_MODE extends MyStructure
 	{
 		public static final int ACCESS_MODE_HANDPROTECTED = 0;                                  // 防夹模式
-		public static final int ACCESS_MODE_SAFEROOM = 1;                                       // 防护房间模式    
+		public static final int ACCESS_MODE_SAFEROOM = 1;                                       // 防护房间模式
 		public static final int ACCESS_MODE_OTHER = 2;                                          // 其它
 	}
-	
+
 	// 自定义开门方式
 	public static class CFG_DOOR_OPEN_METHOD extends MyStructure
 	{
@@ -16955,12 +16955,12 @@ public interface NetSDKLib extends Library {
 		public static final int CFG_DOOR_OPEN_METHOD_FINGERPRINT_OR_FACE_OR_PWD     = 32;   	 // 指纹或人脸或密码
 		public static final int CFG_DOOR_OPEN_METHOD_CARD_OR_FACE_OR_PWD               = 33;	 // 卡或人脸或密码开锁
 		public static final int CFG_DOOR_OPEN_METHOD_CARD_OR_FINGERPRINT_OR_FACE    = 34;   	 // 卡或指纹或人脸开锁
-		public static final int CFG_DOOR_OPEN_METHOD_CARD_AND_FINGERPRINT_AND_FACE_AND_PWD  = 35;// 卡+指纹+人脸+密码组合开锁 
+		public static final int CFG_DOOR_OPEN_METHOD_CARD_AND_FINGERPRINT_AND_FACE_AND_PWD  = 35;// 卡+指纹+人脸+密码组合开锁
 		public static final int CFG_DOOR_OPEN_METHOD_CARD_OR_FINGERPRINT_OR_FACE_OR_PWD     = 36;// 卡或指纹或人脸或密码开锁
 		public static final int CFG_DOOR_OPEN_METHOD_FACEIPCARDANDIDCARD_OR_CARD_OR_FACE    = 37;//(身份证+人证比对)或 刷卡 或 人脸
 		public static final int CFG_DOOR_OPEN_METHOD_FACEIDCARD_OR_CARD_OR_FACE        = 38;     // 人证比对 或 刷卡(二维码) 或 人脸
 	}
-	
+
 	// 首卡权限验证通过后的门禁状态
 	public static class CFG_ACCESS_FIRSTENTER_STATUS extends MyStructure
 	{
@@ -16968,7 +16968,7 @@ public interface NetSDKLib extends Library {
 		public static final int ACCESS_FIRSTENTER_STATUS_KEEPOPEN = 1;									// KeepOpen-首卡权限验证通过后，门保持常开
 		public static final int ACCESS_FIRSTENTER_STATUS_NORMAL = 2;									// Normal-首卡权限验证通过后，其他用户才能刷卡(指纹等)验证通过
 	}
-	
+
 	// 门禁协议
 	public static class CFG_EM_ACCESS_PROTOCOL extends MyStructure
 	{
@@ -16987,37 +16987,37 @@ public interface NetSDKLib extends Library {
 		public static final int CFG_EM_SERIAL_PROTOCOL_TYPE_LADDER_CONTROL = 2;							// 梯控
 		public static final int CFG_EM_SERIAL_PROTOCOL_TYPE_REMOTE_READ_HEAD = 3;						// 远距离读头
 	}
-	
+
 	// CLIENT_MatrixSetCameras接口的输入参数
 	public static class NET_IN_MATRIX_SET_CAMERAS extends MyStructure
 	{
 	    public int                   dwSize;
 	    public Pointer  			 pstuCameras;                    // 显示源信息 NET_MATRIX_CAMERA_INFO 数组, 用户分配内存，大小为sizeof(NET_MATRIX_CAMERA_INFO)*nCameraCount
 	    public int                   nCameraCount;                   // 显示源数组大小
-	    
+
 	    public NET_IN_MATRIX_SET_CAMERAS() {
 	    	this.dwSize = this.size();
 	    }
-	} 
+	}
 
 	// CLIENT_MatrixSetCameras接口的输出参数
-	public static class NET_OUT_MATRIX_SET_CAMERAS extends MyStructure 
+	public static class NET_OUT_MATRIX_SET_CAMERAS extends MyStructure
 	{
 	    public int                   dwSize;
-	    
+
 	    public NET_OUT_MATRIX_SET_CAMERAS() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
-	// 各种违章事件联动报警输出事件 (NET_ALARM_TRAFFIC_LINKAGEALARM)		
+	}
+
+	// 各种违章事件联动报警输出事件 (NET_ALARM_TRAFFIC_LINKAGEALARM)
 	public static class ALARM_TRAFFIC_LINKAGEALARM_INFO extends MyStructure
 	{
 		public NET_TIME_EX			stuTime;									// 事件发生的时间
 		public byte[]				szCode = new byte[NET_COMMON_STRING_32];	// 违章联动报警事件
-		public byte[]               byReserved = new byte[1024];       			// 保留字节 
+		public byte[]               byReserved = new byte[1024];       			// 保留字节
 	}
-	
+
 	// 门禁控制器操作类型
 	public static class NET_EM_ACCESS_CTL_MANAGER extends MyStructure
 	{
@@ -17030,37 +17030,37 @@ public interface NetSDKLib extends Library {
 	    public static final int NET_EM_ACCESS_CTL_GET_REPEAT_ENTERROUTE = 6;        // 获取反潜路径信息, 对应结构体 pstInparam = NET_IN_GET_REPEAT_ENTERROUTE, pstOutParam = NET_OUT_GET_REPEAT_ENTERROUTE
 	    public static final int NET_EM_ACCESS_CTL_SET_ABLOCK_ROUTE = 7;             // 设置AB互锁路径信息, 对应结构体 pstInparam = NET_IN_SET_ABLOCK_ROUTE, pstOutParam = NET_OUT_SET_ABLOCK_ROUTE
 	    public static final int NET_EM_ACCESS_CTL_GET_ABLOCK_ROUTE = 8;             // 获取AB互锁路径信息, 对应结构体 pstInparam = NET_IN_GET_ABLOCK_ROUTE, pstOutParam = NET_OUT_GET_ABLOCK_ROUTE
-	    public static final int NET_EM_ACCESS_CTL_GET_LOGSTATUS = 9;                // 获取日志同步状态,对应结构体 pstInparam = NET_IN_GET_LOGSTATUS, pstOutParam = NET_OUT_GET_LOGSTATUS 
-	    public static final int NET_EM_ACCESS_CTL_SYNCHRO_OFFLINE_LOG = 10;         // 同步离线日志, 对应结构体 pstInparam = NET_IN_SYNCHRO_OFFLINE_LOG, pstOutParam = NET_OUT_SYNCHRO_OFFLINE_LOG 
-	    public static final int NET_EM_ACCESS_CTL_SYNCHRO_TIME = 11;                // 同步分控器时间,对应结构体 pstInparam = NET_IN_SYNCHRO_CONTROLLER_TIME, pstOutParam = NET_OUT_SYNCHRO_CONTROLLER_TIME 
-	    public static final int NET_EM_ACCESS_CTL_SET_QRCODEDECODE_INFO = 12;       // 设置二维码的解码信息, 对应结构体 pstInparam = NET_IN_SET_QRCODE_DECODE_INFO, pstOutParam = NET_OUT_SET_QRCODE_DECODE_INFO 
+	    public static final int NET_EM_ACCESS_CTL_GET_LOGSTATUS = 9;                // 获取日志同步状态,对应结构体 pstInparam = NET_IN_GET_LOGSTATUS, pstOutParam = NET_OUT_GET_LOGSTATUS
+	    public static final int NET_EM_ACCESS_CTL_SYNCHRO_OFFLINE_LOG = 10;         // 同步离线日志, 对应结构体 pstInparam = NET_IN_SYNCHRO_OFFLINE_LOG, pstOutParam = NET_OUT_SYNCHRO_OFFLINE_LOG
+	    public static final int NET_EM_ACCESS_CTL_SYNCHRO_TIME = 11;                // 同步分控器时间,对应结构体 pstInparam = NET_IN_SYNCHRO_CONTROLLER_TIME, pstOutParam = NET_OUT_SYNCHRO_CONTROLLER_TIME
+	    public static final int NET_EM_ACCESS_CTL_SET_QRCODEDECODE_INFO = 12;       // 设置二维码的解码信息, 对应结构体 pstInparam = NET_IN_SET_QRCODE_DECODE_INFO, pstOutParam = NET_OUT_SET_QRCODE_DECODE_INFO
 	}
-	
+
 	// 获取分控器信息入参
 	public static class NET_IN_GET_SUB_CONTROLLER_INFO extends MyStructure
 	{
 	    public int                 dwSize;
 	    public int[]               nSubControllerID = new int[MAX_ACCESSSUBCONTROLLER_NUM];  // 分控器ID, 取值范围 -1~255, -1:获取所有,0:获取本地,1~255:外置分控
 	    public int                 nSubControllerNum;                              			 // 需要查询的分控器数量
-	    
+
 	    public NET_IN_GET_SUB_CONTROLLER_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 获取分控器信息出参
 	public static class NET_OUT_GET_SUB_CONTROLLER_INFO extends MyStructure
 	{
 	    public int                           dwSize;
-	    public NET_SUB_CONTROLLER_INFO[]     stuSubControllerInfo = 
+	    public NET_SUB_CONTROLLER_INFO[]     stuSubControllerInfo =
 	    									 (NET_SUB_CONTROLLER_INFO[])new NET_SUB_CONTROLLER_INFO().toArray(MAX_ACCESSSUBCONTROLLER_NUM);  // 分控器信息
 	    public int                           nRetNum;                                            									         // 查询到的分控器数量
-	    
+
 	    public NET_OUT_GET_SUB_CONTROLLER_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 分控器信息
 	public static class NET_SUB_CONTROLLER_INFO extends MyStructure
 	{
@@ -17070,27 +17070,27 @@ public interface NetSDKLib extends Library {
 	    public byte[]                    szDeviceType = new byte[MAX_COMMON_STRING_128];         // 分控器型号
 	    public byte[]                    szVesion = new byte[MAX_COMMON_STRING_128];             // 分控器版本号
 	    public int                       nDoorNum;                                               // 门数量
-	    public NET_CARDREAD_INFO[]       stuReaderInfo = 
+	    public NET_CARDREAD_INFO[]       stuReaderInfo =
 	    							     (NET_CARDREAD_INFO[])new NET_CARDREAD_INFO().toArray(MAX_ACCESSDOOR_NUM);   // 门对应的读卡器号
 	    public byte[]                    byReserved = new byte[128];
 	}
-	
+
 	// 读卡器信息
 	public static class NET_CARDREAD_INFO extends MyStructure
 	{
 		public int                       nDoor;                                          	     // 门序号
 		public int                       nReadNum;                                       		 // 读卡器数量
-		public READ_ID[]                 szReadIDArr = 
+		public READ_ID[]                 szReadIDArr =
 										 (READ_ID[])new READ_ID().toArray(MAX_ACCESS_READER_NUM);// 读卡器ID
-		public byte[]                    byReserved = new byte[64];  
+		public byte[]                    byReserved = new byte[64];
 	}
-	
+
 	// 读卡器ID
-	public static class READ_ID extends MyStructure 
+	public static class READ_ID extends MyStructure
 	{
 		public byte[]                    szReadID = new byte[NET_COMMON_STRING_32];  			// 读卡器ID
 	}
-	
+
 	// 单双向
 	public static class NET_ACCESS_PROPERTY extends MyStructure
 	{
@@ -17098,18 +17098,18 @@ public interface NetSDKLib extends Library {
 	    public static final int NET_EM_ACCESS_PROPERTY_BIDIRECT = 1;                            // 双向门禁
 	    public static final int NET_EM_ACCESS_PROPERTY_UNIDIRECT = 2;                           // 单向门径
 	}
-	
+
 
 	// 门禁刷卡时间段，对此配置，通道号实际表示配置索引, 对应命令  CFG_CMD_ACCESSTIMESCHEDULE
 	public static class CFG_ACCESS_TIMESCHEDULE_INFO extends MyStructure
 	{
-		public TIME_SECTION_WEEK_DAY_4[]	stuTimeWeekDay = 
+		public TIME_SECTION_WEEK_DAY_4[]	stuTimeWeekDay =
 										    (TIME_SECTION_WEEK_DAY_4[])new TIME_SECTION_WEEK_DAY_4().toArray(WEEK_DAY_NUM); // 刷卡时间段
 		public int					        bEnable;																	 	// 时间段使能开关， 1-true; 0-false
 	    public byte[]                    	szName = new byte[CFG_COMMON_STRING_128];                  				 	    // 自定义名称
 	}
-	
-	// 普通配置 (CFG_CMD_DEV_GENERRAL) General 
+
+	// 普通配置 (CFG_CMD_DEV_GENERRAL) General
 	public static class CFG_DEV_DISPOSITION_INFO extends MyStructure
 	{
 		public int                      	nLocalNo;              				// 本机编号，主要用于遥控器区分不同设备	0~998
@@ -17131,7 +17131,7 @@ public interface NetSDKLib extends Library {
 	    public int                			dwWaitTime;                     	// 接口超时等待时间
 	    public StdCallCallback  			cbVideoDiagnosis;               	// 视频诊断结果回调函数, 对应回调函数  fRealVideoDiagnosis
 	    public Pointer               		dwUser;                         	// 用户自定义参数
-	    
+
 	    public NET_IN_VIDEODIAGNOSIS() {
 	    	this.dwSize = this.size();
 	    }
@@ -17142,37 +17142,37 @@ public interface NetSDKLib extends Library {
 	{
 	    public int                			dwSize;                         	// 此结构体大小
 	    public LLong                		lDiagnosisHandle;               	// 订阅句柄
-	    
+
 	    public NET_OUT_VIDEODIAGNOSIS() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// cbVideoDiagnosis 回调参数类型
 	public static class NET_REAL_DIAGNOSIS_RESULT extends MyStructure
 	{
 	    public int                			dwSize;                         	// 此结构体大小
 	    public Pointer					    pstDiagnosisCommonInfo;  			// 视频诊断通用信息, 对应 NET_VIDEODIAGNOSIS_COMMON_INFO
-	    public int                  		nTypeCount;                     	// 诊断结果数据诊断类型个数	   
+	    public int                  		nTypeCount;                     	// 诊断结果数据诊断类型个数
 	    public Pointer                		pDiagnosisResult;               	// 一次诊断结果数据, 大小为 dwBufSize, 格式如 NET_DIAGNOSIS_RESULT_HEADER+诊断类型1+NET_DIAGNOSIS_RESULT_HEADER+诊断类型2+...
 	    public int                			dwBufSize;                      	// 缓冲长度
-	    
+
 	    public NET_REAL_DIAGNOSIS_RESULT() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	public static class NET_DIAGNOSIS_RESULT_HEADER extends MyStructure
 	{
 	    public int                			dwSize;                         	  // 此结构体大小
 	    public byte[]                 		szDiagnosisType = new byte[MAX_PATH]; // 诊断类型,详见"视频诊断上报结果检测类型定义" 如 NET_DIAGNOSIS_DITHER
 	    public int                  		nDiagnosisTypeLen;              	  // 该诊断类型结构体大小
-	    
+
 	    public NET_DIAGNOSIS_RESULT_HEADER() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 视频诊断结果上报通用数据
 	public static class NET_VIDEODIAGNOSIS_COMMON_INFO extends MyStructure
 	{
@@ -17186,7 +17186,7 @@ public interface NetSDKLib extends Library {
 		public NET_TIME                      stEndTime;                              // 结束时间
 		public int                           nVideoChannelID;                        // 视频通道号 前端设备比如DVR,IPC的通道
 		public int                 			 emVideoStream;                          // 视频码流, 参考  NET_STREAM_TYPE
-		public int  						 emResultType;                           // 诊断结果类型, 参考 NET_VIDEODIAGNOSIS_RESULT_TYPE 
+		public int  						 emResultType;                           // 诊断结果类型, 参考 NET_VIDEODIAGNOSIS_RESULT_TYPE
 		public int                           bCollectivityState;                     // 诊断结果, 1-true, 0-false
 		public int    						 emFailedCause;                          // 失败原因, 参考 NET_VIDEODIAGNOSIS_FAIL_TYPE
 		public byte[]                        szFailedCode = new byte[NET_COMMON_STRING_64];      // 失败原因描述
@@ -17196,30 +17196,30 @@ public interface NetSDKLib extends Library {
 		public int                           nFrameHeight;                           // 高	每天上报一次
 		public int						     nBackPic;								 // 背景图片个数
 		public BACK_PICTURE_ADDRESS[]		 szBackPicAddressArr = (BACK_PICTURE_ADDRESS[])new BACK_PICTURE_ADDRESS().toArray(MAX_BACKPIC_COUNT);	// 背景图片路径列表
-		
+
 		public NET_VIDEODIAGNOSIS_COMMON_INFO() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 背景图片路径
 	public static class BACK_PICTURE_ADDRESS extends MyStructure
 	{
 		public byte[]						 szBackPicAddress = new byte[NET_COMMON_STRING_128];	// 背景图片路径
 	}
-	
+
 	// 通用变长字符串以‘\0’结束
 	public static class NET_ARRAY extends MyStructure
 	{
 	    public int          				dwSize;                  	     // 此结构体大小
 	    public Pointer          			pArray;                 		 // 缓冲区 目前最小260字节,调用者申请内存 填充数据保证是'\0'结束
 	    public int         				    dwArrayLen;             		 // 缓冲空间长度
-	    
+
 	    public NET_ARRAY() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 视频码流类型
 	public static class NET_STREAM_TYPE extends MyStructure
 	{
@@ -17234,7 +17234,7 @@ public interface NetSDKLib extends Library {
 	    public static final int NET_EM_STREAM_PREVIEW = 8;                  // "Preview"-预览裸数据码流
 	    public static final int NET_EM_STREAM_NONE = 9;                     // 无视频码流(纯音频)
 	}
-	
+
 	// 视频诊断结果类型
 	public static class NET_VIDEODIAGNOSIS_RESULT_TYPE extends MyStructure
 	{
@@ -17242,7 +17242,7 @@ public interface NetSDKLib extends Library {
 		public static final int NET_EM_REAL = 1;                            // "Real" -实时视频分析结果
 		public static final int NET_EM_NR_UNKNOW = 2;                       // 未定义
 	}
-	
+
 	//视频诊断错误原因
 	public static class NET_VIDEODIAGNOSIS_FAIL_TYPE extends MyStructure
 	{
@@ -17261,7 +17261,7 @@ public interface NetSDKLib extends Library {
 		public static final int NET_EM_NF_UNKNOW = 12;                      // 其他原因,详见结构体里的失败原因描述
 		public static final int NET_EM_NOT_SD = 13;                         // "NotSD" - 设备非球机，云台类检测无效
 	}
-	
+
 	// 接口 CLIENT_StartFindDiagnosisResult 的输入参数
 	public static class NET_IN_FIND_DIAGNOSIS extends MyStructure
 	{
@@ -17276,11 +17276,11 @@ public interface NetSDKLib extends Library {
 	    public Pointer          	pstDiagnosisTypes;              		// 诊断类型数组,表示需要查询的诊断类型, 对应 NET_ARRAY[]
 															 				// 由用户申请内存，大小为sizeof(NET_ARRAY)*nTypeCount
 	    public byte[]               szProjectName = new byte[MAX_PATH];     // 计划名称
-	    
+
 	    public NET_IN_FIND_DIAGNOSIS() {
 	    	this.dwSize = this.size();
 	    }
-	} 
+	}
 
 	// 接口 CLIENT_StartFindDiagnosisResult 的输出参数
 	public static class NET_OUT_FIND_DIAGNOSIS extends MyStructure
@@ -17288,12 +17288,12 @@ public interface NetSDKLib extends Library {
 	    public int                	dwSize;                         		// 此结构体大小
 	    public LLong                lFindHandle;                    		// 查询句柄
 	    public int                	dwTotalCount;                   		// 符合条件的总个数
-	    
+
 	    public NET_OUT_FIND_DIAGNOSIS() {
-	    	this.dwSize = this.size();    			
+	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 接口 CLIENT_DoFindDiagnosisResult 的输入参数
 	public static class NET_IN_DIAGNOSIS_INFO extends MyStructure
 	{
@@ -17302,12 +17302,12 @@ public interface NetSDKLib extends Library {
 	    public int                	dwWaitTime;                     		// 接口超时等待时间
 	    public int                  nFindCount;                     		// 每次查询的视频诊断结果条数
 	    public int                  nBeginNumber;                   		// 查询起始序号 0<=beginNumber<= totalCount-1
-	    
+
 	    public NET_IN_DIAGNOSIS_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 接口 CLIENT_DoFindDiagnosisResult 的输出参数
 	public static class NET_OUT_DIAGNOSIS_INFO extends MyStructure
 	{
@@ -17316,68 +17316,68 @@ public interface NetSDKLib extends Library {
 		public int                  nReturnNum;                    			// 返回结果个数
 		public Pointer  			pstDiagnosisResult; 					// 结果数据  结构体指针需要调用者分配, 对应 NET_VIDEODIAGNOSIS_RESULT_INFO[]
 																			// 申请内存大小为sizeof(NET_VIDEODIAGNOSIS_RESULT_INFO)*nInputNum
-		
+
 		public NET_OUT_DIAGNOSIS_INFO() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	public static class NET_VIDEODIAGNOSIS_RESULT_INFO extends MyStructure
 	{
 	    public int                  dwSize;                                	// 此结构体大小
 
 	    public Pointer       	    pstDiagnosisCommonInfo;					// 视频诊断通用信息  以下结构体指针需要调用者分配, 对应 NET_VIDEODIAGNOSIS_COMMON_INFO
-	    
+
 	    public int                  abDither;                              	// 用于表示此次结果中这个诊断项是否有效, 1-true, 0-false
-	    public Pointer     			pstDither;             					// 视频抖动检测, 对应  NET_VIDEO_DITHER_DETECTIONRESULT   
-	    
+	    public Pointer     			pstDither;             					// 视频抖动检测, 对应  NET_VIDEO_DITHER_DETECTIONRESULT
+
 	    public int                  abStration;							    // 用于表示此次结果中这个诊断项是否有效, 1-true, 0-false
-	    public Pointer  			pstStration;           					// 视频条纹检测, 对应  NET_VIDEO_STRIATION_DETECTIONRESULT 
-	    
+	    public Pointer  			pstStration;           					// 视频条纹检测, 对应  NET_VIDEO_STRIATION_DETECTIONRESULT
+
 	    public int                  abLoss;								    // 用于表示此次结果中这个诊断项是否有效, 1-true, 0-false
-	    public Pointer       		pstLoss;              				    // 视频丢失检测, 对应  NET_VIDEO_LOSS_DETECTIONRESULT    
-	    
+	    public Pointer       		pstLoss;              				    // 视频丢失检测, 对应  NET_VIDEO_LOSS_DETECTIONRESULT
+
 	    public int                  abCover;								// 用于表示此次结果中这个诊断项是否有效, 1-true, 0-false
-	    public Pointer      		pstCover;              					// 视频遮挡检测, 对应 NET_VIDEO_COVER_DETECTIONRESULT    
-	    
+	    public Pointer      		pstCover;              					// 视频遮挡检测, 对应 NET_VIDEO_COVER_DETECTIONRESULT
+
 	    public int                  abFrozen;								// 用于表示此次结果中这个诊断项是否有效, 1-true, 0-false
-	    public Pointer     			pstFrozen;             					// 视频冻结检测, 对应 NET_VIDEO_FROZEN_DETECTIONRESULT  
-	     
+	    public Pointer     			pstFrozen;             					// 视频冻结检测, 对应 NET_VIDEO_FROZEN_DETECTIONRESULT
+
 	    public int                  abBrightness;							// 用于表示此次结果中这个诊断项是否有效, 1-true, 0-false
-	    public Pointer 				pstBrightness;         					// 视频亮度异常检测, 对应  NET_VIDEO_BRIGHTNESS_DETECTIONRESULT  
-	    
+	    public Pointer 				pstBrightness;         					// 视频亮度异常检测, 对应  NET_VIDEO_BRIGHTNESS_DETECTIONRESULT
+
 	    public int                  abContrast;								// 用于表示此次结果中这个诊断项是否有效, 1-true, 0-false
-	    public Pointer   			pstContrast;           					// 视频对比度异常检测, 对应  NET_VIDEO_CONTRAST_DETECTIONRESULT  
-	    
+	    public Pointer   			pstContrast;           					// 视频对比度异常检测, 对应  NET_VIDEO_CONTRAST_DETECTIONRESULT
+
 	    public int                  abUnbalance;							// 用于表示此次结果中这个诊断项是否有效, 1-true, 0-false
-	    public Pointer  			pstUnbalance;          					// 视频偏色检测, 对应 NET_VIDEO_UNBALANCE_DETECTIONRESULT   
-	    
+	    public Pointer  			pstUnbalance;          					// 视频偏色检测, 对应 NET_VIDEO_UNBALANCE_DETECTIONRESULT
+
 	    public int                  abNoise;								// 用于表示此次结果中这个诊断项是否有效, 1-true, 0-false
-	    public Pointer      		pstNoise;              					// 视频噪声检测, 对应 NET_VIDEO_NOISE_DETECTIONRESULT 
-	    
+	    public Pointer      		pstNoise;              					// 视频噪声检测, 对应 NET_VIDEO_NOISE_DETECTIONRESULT
+
 	    public int                  abBlur;									// 用于表示此次结果中这个诊断项是否有效, 1-true, 0-false
-	    public Pointer       		pstBlur;               					// 视频模糊检测, 对应  NET_VIDEO_BLUR_DETECTIONRESULT  
-	    
+	    public Pointer       		pstBlur;               					// 视频模糊检测, 对应  NET_VIDEO_BLUR_DETECTIONRESULT
+
 	    public int                  abSceneChange;							// 用于表示此次结果中这个诊断项是否有效, 1-true, 0-false
 	    public Pointer 				pstSceneChange;       					// 视频场景变化检测, 对应 NET_VIDEO_SCENECHANGE_DETECTIONRESULT
-	    
+
 	    public int                  abVideoDelay;							// 用于表示此次结果中这个诊断项是否有效, 1-true, 0-false
 	    public Pointer       		pstVideoDelay;         					// 视频延迟检测, 对应 NET_VIDEO_DELAY_DETECTIONRESUL
-	    
+
 	    public int                  abPTZMoving;							// 用于表示此次结果中这个诊断项是否有效, 1-true, 0-false
 	    public Pointer       		pstPTZMoving;          					// 云台操作检测, 对应 NET_PTZ_MOVING_DETECTIONRESULT
-	    
+
 	    public int					abBlackAndWhite;						// 用于表示此次结果中这个诊断项是否有效, 1-true, 0-false
 	    public Pointer	  			pstBlackAndWhite;		    			// 黑白图像检测, 对应  NET_BLACK_WHITE_DETECTIONRESULT
-	    
+
 	    public int					abDramaticChange;						// 用于表示此次结果中这个诊断项是否有效, 1-true, 0-false
 	    public Pointer 				pstDramaticChange;						// 场景剧变检测, 对应  NET_DIAGNOSIS_DRAMATIC_DETECTIONRESULT
-	    
+
 	    public NET_VIDEODIAGNOSIS_RESULT_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 对应检测类型(NET_DIAGNOSIS_DITHER) 视频抖动检测结果 -- 画面变化 风吹,晃动,转动包括云台转动
 	public static class NET_VIDEO_DITHER_DETECTIONRESULT extends MyStructure
 	{
@@ -17385,20 +17385,20 @@ public interface NetSDKLib extends Library {
 	    public int                  nValue;                         		// 检测结果量化值
 	    public int       			emState;                        		// 检测结果状态  一般小于是正常,大于是异常,中间是警告, 参考  NET_STATE_TYPE
 	    public int                  nDuration;                      		// 状态持续时间  检测项持续检测时间 暂时无用
-	    
+
 	    public NET_VIDEO_DITHER_DETECTIONRESULT() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	public static class NET_STATE_TYPE extends MyStructure
 	{
 	    public static final int NET_EM_STATE_ERR = 0;        				// 其它
-	    public static final int NET_EM_STATE_NORMAL = 1;     				// "Normal" 正常 
+	    public static final int NET_EM_STATE_NORMAL = 1;     				// "Normal" 正常
 	    public static final int NET_EM_STATE_WARNING = 2;    				// "Warning" 警告
 	    public static final int NET_EM_STATE_ABNORMAL = 3;   				// "Abnormal" 异常
 	}
-	
+
 	// 对应检测类型(NET_DIAGNOSIS_STRIATION)视频条纹检测结果 -- 相机受到干扰出现异常条纹
 	public static class NET_VIDEO_STRIATION_DETECTIONRESULT extends MyStructure
 	{
@@ -17406,24 +17406,24 @@ public interface NetSDKLib extends Library {
 		public int                  nValue;                         		// 检测结果量化值
 		public int       			emState;                        		// 检测结果状态, 参考  NET_STATE_TYPE
 		public int                  nDuration;                      		// 状态持续时间
-		
+
 		public NET_VIDEO_STRIATION_DETECTIONRESULT() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 对应检测类型(NET_DIAGNOSIS_LOSS)视频丢失检测结果 -- 断电 断线等造成的
 	public static class NET_VIDEO_LOSS_DETECTIONRESULT extends MyStructure
 	{
 		public int                	dwSize;                         		// 此结构体大小
 		public int       			emState;                        		// 检测结果状态, 参考 NET_STATE_TYPE
 		public int                  nDuration;                     		 	// 状态持续时间
-		
+
 		public NET_VIDEO_LOSS_DETECTIONRESULT() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 对应检测类型(NET_DIAGNOSIS_COVER)视频遮挡检测结果 -- 相机被遮挡了
 	public static class NET_VIDEO_COVER_DETECTIONRESULT extends MyStructure
 	{
@@ -17431,24 +17431,24 @@ public interface NetSDKLib extends Library {
 		public int                  nValue;                         		// 检测结果量化值
 		public int       			emState;                        		// 检测结果状态, 参考 NET_STATE_TYPE
 		public int                  nDuration;                      		// 状态持续时间
-		
+
 		public NET_VIDEO_COVER_DETECTIONRESULT() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 对应检测类型(NET_DIAGNOSIS_FROZEN)视频冻结检测结果 -- 画面不动多久为冻结
 	public static class NET_VIDEO_FROZEN_DETECTIONRESULT extends MyStructure
 	{
 		public int                	dwSize;                         		// 此结构体大小
 		public int       			emState;                        		// 检测结果状态, 参考 NET_STATE_TYPE
 		public int                  nDuration;                      		// 状态持续时间
-		
+
 		public NET_VIDEO_FROZEN_DETECTIONRESULT() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 对应检测类型(NET_DIAGNOSIS_BRIGHTNESS)视频亮度异常检测结果 --以下是相机配置不正确的一些现象检测
 	public static class NET_VIDEO_BRIGHTNESS_DETECTIONRESULT extends MyStructure
 	{
@@ -17456,12 +17456,12 @@ public interface NetSDKLib extends Library {
 		public int                  nValue;                         		// 检测结果量化值
 		public int       			emState;                        		// 检测结果状态, 参考 NET_STATE_TYPE
 		public int                  nDuration;                      		// 状态持续时间
-		
+
 		public NET_VIDEO_BRIGHTNESS_DETECTIONRESULT() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 对应检测类型(NET_DIAGNOSIS_CONTRAST)视频对比度异常检测结果
 	public static class NET_VIDEO_CONTRAST_DETECTIONRESULT extends MyStructure
 	{
@@ -17469,12 +17469,12 @@ public interface NetSDKLib extends Library {
 		public int                  nValue;                         		// 检测结果量化值
 		public int       			emState;                        		// 检测结果状态, 参考 NET_STATE_TYPE
 		public int                  nDuration;                      		// 状态持续时间
-		
+
 		public NET_VIDEO_CONTRAST_DETECTIONRESULT() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 对应检测类型(NET_DIAGNOSIS_UNBALANCE)视频偏色异常检测结果
 	public static class NET_VIDEO_UNBALANCE_DETECTIONRESULT extends MyStructure
 	{
@@ -17482,12 +17482,12 @@ public interface NetSDKLib extends Library {
 		public int                  nValue;                         		// 检测结果量化值
 		public int       			emState;                        		// 检测结果状态, 参考 NET_STATE_TYPE
 		public int                  nDuration;                      		// 状态持续时间
-		
+
 		public NET_VIDEO_UNBALANCE_DETECTIONRESULT() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 对应检测类型(NET_DIAGNOSIS_NOISE)视频噪声异常检测结果
 	public static class NET_VIDEO_NOISE_DETECTIONRESULT extends MyStructure
 	{
@@ -17495,12 +17495,12 @@ public interface NetSDKLib extends Library {
 		public int                  nValue;                         		// 检测结果量化值
 		public int       			emState;                        		// 检测结果状态, 参考 NET_STATE_TYPE
 		public int                  nDuration;                      		// 状态持续时间
-		
+
 		public NET_VIDEO_NOISE_DETECTIONRESULT() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 对应检测类型(NET_DIAGNOSIS_BLUR)视频模糊异常检测结果
 	public static class NET_VIDEO_BLUR_DETECTIONRESULT extends MyStructure
 	{
@@ -17508,12 +17508,12 @@ public interface NetSDKLib extends Library {
 	    public int                  nValue;                         		// 检测结果量化值
 	    public int       			emState;                        		// 检测结果状态, 参考 NET_STATE_TYPE
 	    public int                  nDuration;                      		// 状态持续时间
-	    
+
 	    public NET_VIDEO_BLUR_DETECTIONRESULT() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 对应检测类型(NET_DIAGNOSIS_SCENECHANGE)视频场景变化检测结果
 	public static class NET_VIDEO_SCENECHANGE_DETECTIONRESULT extends MyStructure
 	{
@@ -17521,7 +17521,7 @@ public interface NetSDKLib extends Library {
 	    public int                  nValue;                         		// 检测结果量化值
 	    public int       			emState;                        		// 检测结果状态, 参考 NET_STATE_TYPE
 	    public int                  nDuration;                     	 		// 状态持续时间
-	    
+
 	    public NET_VIDEO_SCENECHANGE_DETECTIONRESULT() {
 	    	this.dwSize = this.size();
 	    }
@@ -17532,12 +17532,12 @@ public interface NetSDKLib extends Library {
 	{
 		public int         			dwSize;                       			// 结构体大小
 		public String        		szCommand;                    			// 配置命令
-		
+
 		public NET_IN_DELETECFG() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// CLIENT_DeleteDevConfig 输出参数
 	public static class NET_OUT_DELETECFG extends MyStructure
 	{
@@ -17545,12 +17545,12 @@ public interface NetSDKLib extends Library {
 	    public int           		nError;                       			// 设备返回的错误码
 	    public int           		nRestart;                     			// 设备是否重启
 	    public int         			dwOptionMask;                 			// 选项 具体见枚举 NET_EM_CONFIGOPTION
-	    
+
 	    public NET_OUT_DELETECFG() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	public static class NET_EM_CONFIGOPTION extends MyStructure
 	{
 	    public static final int NET_EM_CONFIGOPTION_OK = 0;
@@ -17560,18 +17560,18 @@ public interface NetSDKLib extends Library {
 	    public static final int NET_EM_CONFIGOPTION_CAPSNOTSUPPORT = 8;    // 设备特性不支持
 	    public static final int NET_EM_CONFIGOPTION_VALIDATEFAILED = 16;   // 配置校验失败
 	}
-	
+
 	// CLIENT_GetMemberNames 输入参数
 	public static class NET_IN_MEMBERNAME extends MyStructure
 	{
 	    public int         		    dwSize;                       		   // 结构体大小
 	    public String         		szCommand;                    		   // 配置命令
-	    
+
 	    public NET_IN_MEMBERNAME() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// CLIENT_GetMemberNames 输出参数
 	public static class NET_OUT_MEMBERNAME extends MyStructure
 	{
@@ -17582,12 +17582,12 @@ public interface NetSDKLib extends Library {
 	    public int           		nRetNameCount;                		  // 返回的实际名称个数
 	    public Pointer     			pstNames;                     		  // 名称数组 调用者申请内存,个数是 nTotalNameCount 个 NET_ARRAY
 																		  // 由用户申请内存，大小为sizeof(NET_ARRAY)*nTotalNameCount
-	    
+
 	    public NET_OUT_MEMBERNAME() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 视频诊断参数表(CFG_CMD_VIDEODIAGNOSIS_PROFILE)，支持多种参数表，用表名称来索引   调用者申请内存并初始化
 	public static class CFG_VIDEODIAGNOSIS_PROFILE extends MyStructure
 	{
@@ -17595,7 +17595,7 @@ public interface NetSDKLib extends Library {
 		public int						nReturnProfileNum;					// 返回的实际参数表数
 		public Pointer					pstProfiles;						// 调用者分配 nTotalProfileNum 个 CFG_VIDEO_DIAGNOSIS_PROFILE
 	}
-	
+
 	public static class CFG_VIDEO_DIAGNOSIS_PROFILE extends MyStructure
 	{
 		public byte[]					szName = new byte[MAX_PATH];		// 名称Ansi编码
@@ -17616,7 +17616,7 @@ public interface NetSDKLib extends Library {
 		public Pointer 	 				pstBlackAndWhite;					// 黑白图像检测, 对应  CFG_VIDEO_BLACKWHITE_DETECTION
 		public Pointer 					pstDramaticChange;				    // 场景剧变检测, 对应  CFG_VIDEO_DRAMATICCHANGE_DETECTION
 	}
-	
+
 	///////////////////////////////////视频诊断参数配置///////////////////////////////////////
 	// 视频抖动检测
 	public static class CFG_VIDEO_DITHER_DETECTION extends MyStructure
@@ -17624,9 +17624,9 @@ public interface NetSDKLib extends Library {
 		public int						bEnable;							// 使能配置, 1-true, 0-false
 		public int						nMinDuration;						// 最短持续时间 单位：秒 0~65535
 		public byte						byThrehold1;						// 预警阀值 取值1-100
-		public byte						byThrehold2;						// 报警阀值 取值1-100	
+		public byte						byThrehold2;						// 报警阀值 取值1-100
 	}
-	
+
 	// 条纹检测
 	public static class CFG_VIDEO_STRIATION_DETECTION extends MyStructure
 	{
@@ -17635,16 +17635,16 @@ public interface NetSDKLib extends Library {
 		public byte						byThrehold1;						// 预警阀值 取值1-100
 		public byte						byThrehold2;						// 报警阀值 取值1-100
 		public byte[]					byReserved1 = new byte[2];			// 字节对齐
-		public int						bUVDetection;						// UV分量是否检测, 1-true, 0-false				
+		public int						bUVDetection;						// UV分量是否检测, 1-true, 0-false
 	}
-	
+
 	// 视频丢失检测
 	public static class CFG_VIDEO_LOSS_DETECTION extends MyStructure
 	{
 		public int						bEnable;							// 使能配置, 1-true, 0-false
 		public int						nMinDuration;						// 最短持续时间 单位：秒 0~65535
 	}
-	
+
 	// 视频遮挡检测
 	public static class CFG_VIDEO_COVER_DETECTION extends MyStructure
 	{
@@ -17653,17 +17653,17 @@ public interface NetSDKLib extends Library {
 		public byte						byThrehold1;						// 预警阀值 取值1-100
 		public byte						byThrehold2;						// 报警阀值 取值1-100
 	}
-	
+
 	// 画面冻结检测
 	public static class CFG_VIDEO_FROZEN_DETECTION extends MyStructure
 	{
 		public int						bEnable;							// 使能配置, 1-true, 0-false
 		public int						nMinDuration;						// 最短持续时间 单位：秒 0~65535
 	}
-	
+
 	// 亮度异常检测
 	public static class CFG_VIDEO_BRIGHTNESS_DETECTION extends MyStructure
-	{	
+	{
 		public int						bEnable;							// 使能配置, 1-true, 0-false
 		public int						nMinDuration;						// 最短持续时间 单位：秒 0~65535
 		public byte						bylowerThrehold1;					// 预警阀值 取值1-100
@@ -17671,10 +17671,10 @@ public interface NetSDKLib extends Library {
 		public byte						byUpperThrehold1;					// 预警阀值 取值1-100
 		public byte						byUpperThrehold2;					// 报警阀值 取值1-100
 	}
-	
+
 	// 对比度异常检测
 	public static class CFG_VIDEO_CONTRAST_DETECTION extends MyStructure
-	{	
+	{
 		public int						bEnable;							// 使能配置, 1-true, 0-false
 		public int						nMinDuration;						// 最短持续时间 单位：秒 0~65535
 		public byte						bylowerThrehold1;					// 预警阀值 取值1-100
@@ -17682,25 +17682,25 @@ public interface NetSDKLib extends Library {
 		public byte						byUpperThrehold1;					// 预警阀值 取值1-100
 		public byte						byUpperThrehold2;					// 报警阀值 取值1-100
 	}
-	
+
 	// 偏色检测
 	public static class CFG_VIDEO_UNBALANCE_DETECTION extends MyStructure
-	{	
+	{
 		public int						bEnable;							// 使能配置, 1-true, 0-false
 		public int						nMinDuration;						// 最短持续时间 单位：秒 0~65535
 		public byte						byThrehold1;						// 预警阀值 取值1-100
 		public byte						byThrehold2;						// 报警阀值 取值1-100
 	}
-	
+
 	// 噪声检测
 	public static class CFG_VIDEO_NOISE_DETECTION extends MyStructure
-	{	
+	{
 		public int						bEnable;							// 使能配置, 1-true, 0-false
 		public int						nMinDuration;						// 最短持续时间 单位：秒 0~65535
 		public byte					    byThrehold1;						// 预警阀值 取值1-100
 		public byte						byThrehold2;						// 报警阀值 取值1-100
 	}
-	
+
 	// 模糊检测
 	public static class CFG_VIDEO_BLUR_DETECTION extends MyStructure
 	{
@@ -17709,28 +17709,28 @@ public interface NetSDKLib extends Library {
 		public byte						byThrehold1;						// 预警阀值 取值1-100
 		public byte						byThrehold2;						// 报警阀值 取值1-100
 	}
-	
+
 	// 场景变化检测
 	public static class CFG_VIDEO_SCENECHANGE_DETECTION extends MyStructure
-	{	
+	{
 		public int						bEnable;							// 使能配置, 1-true, 0-false
 		public int						nMinDuration;						// 最短持续时间 单位：秒 0~65535
 		public byte					    byThrehold1;						// 预警阀值 取值1-100
 		public byte						byThrehold2;						// 报警阀值 取值1-100
 	}
-	
+
 	// 视频延时检测
 	public static class CFG_VIDEO_DELAY_DETECTION extends MyStructure
 	{
 		public int    					bEnable;                			// 使能配置, 1-true, 0-false
 	}
-	
+
 	// 云台移动检测
 	public static class CFG_PTZ_MOVING_DETECTION extends MyStructure
 	{
 		public int    					bEnable;                			// 使能配置, 1-true, 0-false
 	}
-	
+
 	// 黑白图像检测
 	public static class CFG_VIDEO_BLACKWHITE_DETECTION extends MyStructure
 	{
@@ -17738,8 +17738,8 @@ public interface NetSDKLib extends Library {
 		public int						nEarlyWarning;						// 预警阈值
 		public int						nAlarm;								// 报警阈值
 		public int						nMinDuration;						// 最短持续时间
-	} 
-	
+	}
+
 	// 场景剧变检测
 	public static class CFG_VIDEO_DRAMATICCHANGE_DETECTION extends MyStructure
 	{
@@ -17747,8 +17747,8 @@ public interface NetSDKLib extends Library {
 		public int						nEarlyWarning;						// 预警阈值
 		public int						nAlarm;								// 报警阈值
 		public int						nMinDuration;						// 最短持续时间
-	} 
-	
+	}
+
 	// 视频诊断任务表(CFG_CMD_VIDEODIAGNOSIS_TASK),不同的任务通过名子索引  调用者申请内存并初始化
 	public static class CFG_VIDEODIAGNOSIS_TASK extends MyStructure
 	{
@@ -17756,7 +17756,7 @@ public interface NetSDKLib extends Library {
 		public int						nReturnTaskNum; 					// 返回实际任务个数
 		public Pointer					pstTasks;							// 任务配置 调用者分配内存 nTotalTaskNum 个 CFG_DIAGNOSIS_TASK
 	}
-	
+
 	public static class CFG_DIAGNOSIS_TASK extends MyStructure
 	{
 		public byte[]					szTaskName = new byte[MAX_PATH];	// 任务名称Ansi编码
@@ -17765,7 +17765,7 @@ public interface NetSDKLib extends Library {
 		public int						nReturnSourceNum;					// 返回实际任务数据源的个数
 		public Pointer					pstSources;							// 任务数据源 调用者分配内存 nTotalSourceNum 个 CFG_TAST_SOURCES
 	}
-	
+
 	public static class CFG_TAST_SOURCES extends MyStructure
 	{
 		// 能力
@@ -17780,7 +17780,7 @@ public interface NetSDKLib extends Library {
 		public int                      abStartTime;                        // 0 表示源为实时码流, stuStartTime字段无效; 1表示源为录像文件, stuStartTime字段有效
 		public CFG_NET_TIME             stuStartTime;                       // 当abStartTime为TRUE时有效，表示源不是实时监视码流, 而是录像文件，该时间表示要分析的录像的开始时间
 	}
-	
+
 	// 设备详细信息
 	public static class CFG_TASK_REMOTEDEVICE extends MyStructure
 	{
@@ -17793,7 +17793,7 @@ public interface NetSDKLib extends Library {
 		public int				        nMaxVideoInputs;					// 视频输入通道最大数
 		public int				        nRetVideoInputs;					// 返回的视频输入通道数
 	}
-	
+
 	public static class CFG_EM_STREAM_TYPE extends MyStructure
 	{
 		public static final int CFG_EM_STREAM_ERR = 0;                  	// 其它
@@ -17804,7 +17804,7 @@ public interface NetSDKLib extends Library {
 		public static final int CFG_EM_STREAM_SNAPSHOT = 5;					// "Snapshot"-抓图码流
 		public static final int CFG_EM_STREAM_OBJECT = 6;					// "Object"-物体流
 	}
-	
+
 	// 频诊断计划表(CFG_CMD_VIDEODIAGNOSIS_PROJECT),不同的计划通过名字索引 调用者申请内存并初始化
 	public static class CFG_VIDEODIAGNOSIS_PROJECT extends MyStructure
 	{
@@ -17812,7 +17812,7 @@ public interface NetSDKLib extends Library {
 		public int						nReturnProjectNum;					// 返回实际计划个数
 		public Pointer					pstProjects;						// 计划配置 调用者分配内存 nTotalProjectNum 个 CFG_DIAGNOSIS_PROJECT
 	}
-	
+
 	public static class CFG_DIAGNOSIS_PROJECT extends MyStructure
 	{
 		public byte[]					szProjectName = new byte[MAX_PATH]; // 计划名称Ansi编码
@@ -17820,17 +17820,17 @@ public interface NetSDKLib extends Library {
 		public int						nReturnTaskNum;					    // 返回实际任务列表个数
 		public Pointer					pstProjectTasks;					// 任务列表 调用者分配内存 nTotalTaskNum 个 CFG_PROJECT_TASK
 	}
-	
+
 	// 视频诊断计划
 	public static class CFG_PROJECT_TASK extends MyStructure
 	{
 		public int						 bEnable;							// 任务是否使能, 1-true, 0-false
 		public byte[]					 szTaskName = new byte[MAX_PATH];	// 任务名称Ansi编码
-		public TIME_SECTION_WEEK_DAY_6[] stTimeSectionWeekDay = 
+		public TIME_SECTION_WEEK_DAY_6[] stTimeSectionWeekDay =
 									     (TIME_SECTION_WEEK_DAY_6[])new TIME_SECTION_WEEK_DAY_6().toArray(WEEK_DAY_NUM);	// 任务时间段
 		public int                       bIsCycle;                          // 任务是否循环, 1表示循环, 0表示不循环
 	}
-	
+
 	// 获取视频诊断进行状态( CFG_CMD_VIDEODIAGNOSIS_GETSTATE )对应结构体
 	public static class CFG_VIDEODIAGNOSIS_STATE_INFO extends MyStructure
 	{
@@ -17845,18 +17845,18 @@ public interface NetSDKLib extends Library {
 		public int                      nTaskCountOfProject;                   // 当前计划总任务数
 		public int                      nIndexOfCurrentTask;                   // 当前任务序号 从0开始
 	}
-	
+
 	// CLIENT_GetVideoDiagnosisState 入参
 	public static class NET_IN_GET_VIDEODIAGNOSIS_STATE extends MyStructure
 	{
 	     public int				        dwSize;                                //  结构体大小
 	     public byte[]                  szProject = new byte[128];             //  计划名，为空表示所有执行的计划
-	     
+
 	     public NET_IN_GET_VIDEODIAGNOSIS_STATE() {
 	    	 this.dwSize = this.size();
 	     }
 	}
-	
+
 	// 诊断状态
 	public static class VIDEODIAGNOSIS_STATE extends MyStructure
 	{
@@ -17877,12 +17877,12 @@ public interface NetSDKLib extends Library {
 	{
 		public int				        dwSize;                                      //  结构体大小
 		public VIDEODIAGNOSIS_STATE[]   stuState = (VIDEODIAGNOSIS_STATE[])new VIDEODIAGNOSIS_STATE().toArray(2);//  工作状态,数组下标0:Tour,1:RealTime
-		
+
 		public NET_OUT_GET_VIDEODIAGNOSIS_STATE() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// CLIENT_RadiometryAttach 入参
 	public static class NET_IN_RADIOMETRY_ATTACH extends MyStructure
 	{
@@ -17890,22 +17890,22 @@ public interface NetSDKLib extends Library {
 	    public int                 		nChannel;                              // 视频通道号	-1 表示全部
 	    public StdCallCallback 	   		cbNotify;                              // 状态回调函数指针, 对应回调函数  fRadiometryAttachCB
 	    public Pointer             		dwUser;                                // 用户数据
-	    
+
 	    public NET_IN_RADIOMETRY_ATTACH() {
 	    	this.dwSize = this.size();
 	    }
-	} 
+	}
 
 	// CLIENT_RadiometryAttach 出参
 	public static class NET_OUT_RADIOMETRY_ATTACH extends MyStructure
 	{
 		public int               		 dwSize;
-		
+
 		public NET_OUT_RADIOMETRY_ATTACH() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 热图数据
 	public static class NET_RADIOMETRY_DATA extends MyStructure
 	{
@@ -17913,8 +17913,8 @@ public interface NetSDKLib extends Library {
 	    public Pointer                   pbDataBuf;                  		// 热图数据缓冲区（压缩过的数据,里面是每个像素点的温度数据,可以使用元数据信息解压）
 	    public int                       dwBufSize;                  		// 热图数据缓冲区大小
 	    public byte[]                    reserved = new byte[512];
-	} 
-	
+	}
+
 	// 热图元数据信息
 	public static class NET_RADIOMETRY_METADATA extends MyStructure
 	{
@@ -17929,37 +17929,37 @@ public interface NetSDKLib extends Library {
 		public int                		 nUnzipParamF;                       // 解压缩参数F
 		public int                		 nUnzipParamO;                       // 解压缩参数O
 		public byte[]             	     Reserved = new byte[256];
-	} 
-	
+	}
+
 	// CLIENT_RadiometryFetch 入参
 	public static class NET_IN_RADIOMETRY_FETCH extends MyStructure
 	{
 	    public int               		 dwSize;
 	    public int                	     nChannel;                           // 通道号, 通道号要与订阅时一致, -1除外
-	    
+
 	    public NET_IN_RADIOMETRY_FETCH() {
 	    	this.dwSize = this.size();
 	    }
-	} 
+	}
 
 	// CLIENT_RadiometryFetch 出参
 	public static class NET_OUT_RADIOMETRY_FETCH extends MyStructure
 	{
 		public int               		 dwSize;
 		public int                 		 nStatus;                            // 0: 未知, 1: 空闲, 2: 获取热图中
-		
+
 		public NET_OUT_RADIOMETRY_FETCH() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 设备信息类型,对应 CLIENT_StartFind CLIENT_DoFind CLIENT_StopFind 接口
 	public static class NET_FIND extends MyStructure
 	{
-	    public static int NET_FIND_RADIOMETRY = 0;      // 热成像温度查询, pInBuf= NET_IN_RADIOMETRY_*FIND*, pOutBuf= NET_OUT_RADIOMETRY_*FIND*   
+	    public static int NET_FIND_RADIOMETRY = 0;      // 热成像温度查询, pInBuf= NET_IN_RADIOMETRY_*FIND*, pOutBuf= NET_OUT_RADIOMETRY_*FIND*
 	    public static int NET_FIND_POS_EXCHANGE = 1;	// POS交易信息查询,pInBuf = NET_IN_POSEXCHANGE_*FIND*,pOutBuf= NET_OUT_POSEXCHANGE_*FIND*
 	}
-		
+
 	//热成像查询保存周期
 	public static class EM_RADIOMETRY_PERIOD extends MyStructure
 	{
@@ -17972,14 +17972,14 @@ public interface NetSDKLib extends Library {
 
 	// CLIENT_StartFind 接口 NET_FIND_RADIOMETRY 命令入参
 	public static class NET_IN_RADIOMETRY_STARTFIND extends MyStructure
-	{  
+	{
 		public int                    dwSize;
 		public NET_TIME               stStartTime;                       // 查询开始时间
 		public NET_TIME               stEndTime;                         // 查询结束时间
 	    public int                    nMeterType;                        // 查询类别,见NET_RADIOMETRY_METERTYPE
 	    public int                    nChannel;                          // 通道号
 	    public int   				  emPeriod;                          // 所查询表的保存周期,详见EM_RADIOMETRY_PERIOD
-	    
+
 	    public NET_IN_RADIOMETRY_STARTFIND() {
 	    	this.dwSize = this.size();
 	    }
@@ -17987,11 +17987,11 @@ public interface NetSDKLib extends Library {
 
 	// CLIENT_StartFind 接口 NET_FIND_RADIOMETRY 命令出参
 	public static class NET_OUT_RADIOMETRY_STARTFIND extends MyStructure
-	{   
+	{
 		public int               dwSize;
 		public int               nFinderHanle;                      // 取到的查询句柄
 		public int               nTotalCount;                       // 符合此次查询条件的结果总条数
-		
+
 		public NET_OUT_RADIOMETRY_STARTFIND() {
 	    	this.dwSize = this.size();
 	    }
@@ -18000,12 +18000,12 @@ public interface NetSDKLib extends Library {
 
 	// CLIENT_DoFind 接口 NET_FIND_RADIOMETRY 命令入参
 	public static class NET_IN_RADIOMETRY_DOFIND extends MyStructure
-	{   
+	{
 		public int                 dwSize;
 		public int                 nFinderHanle;                      // 查询句柄
 		public int                 nBeginNumber;                      // 本次查询开始的索引号
 		public int                 nCount;                            // 本次查询条数,最大为NET_IN_RADIOMETRY_DOFIND_MAX
-		
+
 		public NET_IN_RADIOMETRY_DOFIND() {
 	    	this.dwSize = this.size();
 	    }
@@ -18026,22 +18026,22 @@ public interface NetSDKLib extends Library {
 
 	// CLIENT_DoFind 接口 NET_FIND_RADIOMETRY 命令出参
 	public static class NET_OUT_RADIOMETRY_DOFIND extends MyStructure
-	{   
+	{
 		public int                       dwSize;
-		public int                       nFound;                             // 实际查询到的点数 
+		public int                       nFound;                             // 实际查询到的点数
 		public NET_RADIOMETRY_QUERY[]    stInfo = (NET_RADIOMETRY_QUERY[])new NET_RADIOMETRY_QUERY().toArray(NET_RADIOMETRY_DOFIND_MAX); // 温度统计信息
-		
+
 		public NET_OUT_RADIOMETRY_DOFIND() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// CLIENT_StopFind 接口 NET_FIND_RADIOMETRY 命令入参
 	public static class NET_IN_RADIOMETRY_STOPFIND extends MyStructure
-	{   
+	{
 		public int                 dwSize;
 		public int                 nFinderHanle;                       // 查询句柄
-		
+
 		public NET_IN_RADIOMETRY_STOPFIND() {
 	    	this.dwSize = this.size();
 	    }
@@ -18049,39 +18049,39 @@ public interface NetSDKLib extends Library {
 
 	// CLIENT_StopFind 接口 NET_FIND_RADIOMETRY 命令出参
 	public static class NET_OUT_RADIOMETRY_STOPFIND extends MyStructure
-	{  
+	{
 		public int               dwSize;
-		    
+
 	    public NET_OUT_RADIOMETRY_STOPFIND() {
 	    	this.dwSize = this.size();
 	    }
-	}	
-	
+	}
+
 	// IPC报警,IPC通过DVR或NVR上报的本地报警(对应事件 NET_ALARM_IPC)
 	public static class ALARM_IPC_INFO extends MyStructure
 	{
-	    public int               		dwSize;    
+	    public int               		dwSize;
 	    public int						nChannelID;										// 通道号
 	    public int                 		nEventAction;                   				// 事件动作,0表示脉冲事件,1表示持续性事件开始,2表示持续性事件结束;
 	    public NET_TIME_EX				UTC;											// 事件发生的时间
-	    public byte[]					szName = new byte[MAX_ALARM_CHANNEL_NAME_LEN];	// 报警通道名称 
-	    
+	    public byte[]					szName = new byte[MAX_ALARM_CHANNEL_NAME_LEN];	// 报警通道名称
+
 	    public ALARM_IPC_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 蓝牙开门记录集信息查询条件
 	public static class FIND_RECORD_ACCESS_BLUETOOTH_INFO_CONDITION extends MyStructure
 	{
 		public int						dwSize;
 		public byte[]					szUserName = new byte[NET_COMMON_STRING_128];  // 用户名
-		
+
 		public FIND_RECORD_ACCESS_BLUETOOTH_INFO_CONDITION() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 蓝牙开门记录集信息
 	public static class NET_RECORD_ACCESS_BLUETOOTH_INFO extends MyStructure
 	{
@@ -18091,14 +18091,14 @@ public interface NetSDKLib extends Library {
 		public byte[]					szPassword = new byte[NET_COMMON_STRING_128]; // 密码
 		public byte[]        			szMac = new byte[NET_COMMON_STRING_32];       // mac地址
 		public byte[]        			szNote = new byte[NET_COMMON_STRING_128];     // 用户备注信息
-		
+
 		public NET_RECORD_ACCESS_BLUETOOTH_INFO() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 智能锁添加更新用户信息接口 CLIENT_UpdateSmartLockUser 入参
-	public static class NET_IN_SMARTLOCK_UPDATE_USER_INFO extends MyStructure 
+	public static class NET_IN_SMARTLOCK_UPDATE_USER_INFO extends MyStructure
 	{
 		public int							dwSize;						                						// 结构体大小
 		public byte[]                       szSerialNumber = new byte[32];                         				// 设备序列号
@@ -18108,16 +18108,16 @@ public interface NetSDKLib extends Library {
 		public NET_TIME                     stuEndTime;                                 						// 结束时间
 		public byte[]						szReserve = new byte[512];					            			// 保留字段
 		public int                          nCardInfoNum;                               						// 卡信息数量
-		public NET_SMARTLOCK_CARDINFO[]     stuCardInfo = 
+		public NET_SMARTLOCK_CARDINFO[]     stuCardInfo =
 										    (NET_SMARTLOCK_CARDINFO[])new NET_SMARTLOCK_CARDINFO().toArray(4);  // 卡的信息
 		public int                          nPwdInfoNum;                                						// 密码信息数量
-		public NET_SMARTLOCK_PWDINFO[]      stuPwdInfo = 
+		public NET_SMARTLOCK_PWDINFO[]      stuPwdInfo =
 											(NET_SMARTLOCK_PWDINFO[])new NET_SMARTLOCK_PWDINFO().toArray(4);    // 密码信息
 		public int                          nFingerPrintInfoNum;                        						// 密码信息数量
-		public NET_SMARTLOCK_FPINFO[]       stuFingerPrintInfo = 
+		public NET_SMARTLOCK_FPINFO[]       stuFingerPrintInfo =
 											(NET_SMARTLOCK_FPINFO[])new NET_SMARTLOCK_FPINFO().toArray(4);      // 指纹信息
 		public int							nTaskID;															// 任务ID
-		
+
 		public NET_IN_SMARTLOCK_UPDATE_USER_INFO() {
 			this.dwSize = this.size();
 		}
@@ -18127,12 +18127,12 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_SMARTLOCK_UPDATE_USER_INFO extends MyStructure
 	{
 	    public int							dwSize;							// 结构体大小
-	    
+
 	    public NET_OUT_SMARTLOCK_UPDATE_USER_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 卡片信息
 	public static class NET_SMARTLOCK_CARDINFO extends MyStructure
 	{
@@ -18142,7 +18142,7 @@ public interface NetSDKLib extends Library {
 	    public int          				 emCardType;                   // 卡类型, 参考 NET_ACCESSCTLCARD_TYPE
 	    public byte[]						 szReserve = new byte[512];	   // 保留字段
 	}
-	
+
 	// 密码信息
 	public static class NET_SMARTLOCK_PWDINFO extends MyStructure
 	{
@@ -18152,7 +18152,7 @@ public interface NetSDKLib extends Library {
 	    public int                          dwUseTime;                     // 使用次数
 	    public byte[]						szReserve = new byte[512];	   // 保留字段
 	}
-	
+
 	// 指纹信息
 	public static class NET_SMARTLOCK_FPINFO extends MyStructure
 	{
@@ -18162,27 +18162,27 @@ public interface NetSDKLib extends Library {
 	    public Pointer                      pFingerprintData;              // 指纹数据
 	    public byte[]						szReserve = new byte[512];	   // 保留字段
 	}
-	
+
 	// 控制方式
 	public static class NET_ACCESS_METHOD extends MyStructure
 	{
 	    public static final int NET_ACCESS_METHOD_UNKNOWN = 0;             // 未知
 	    public static final int NET_ACCESS_METHOD_CARD = 1;                // 卡
 	    public static final int NET_ACCESS_METHOD_PASSWORD = 2;            // 密码
-	    public static final int NET_ACCESS_METHOD_FINGERPRINT = 3;         // 指纹 
-	} 
-	
+	    public static final int NET_ACCESS_METHOD_FINGERPRINT = 3;         // 指纹
+	}
+
 	// 获取当前智能锁的注册用户信息 CLIENT_GetSmartLockRegisterInfo 入参 (每次获取最多获取32条信息)
 	public static class NET_IN_GET_SMART_LOCK_REGISTER_INFO extends MyStructure
 	{
 		public int				 			dwSize;												// 结构体大小
 		public byte[]            			szSerialNumber = new byte[MAX_COMMON_STRING_32];    // 设备序列号
 		public int				 			nOffset;											// 用户列表的偏移量
-		
+
 		public NET_IN_GET_SMART_LOCK_REGISTER_INFO() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 注册用户的信息
 	public static class NET_SMART_LOCK_REGISTER_INFO extends MyStructure
@@ -18190,23 +18190,23 @@ public interface NetSDKLib extends Library {
 		public int							emType;												// 开锁方式类型, 参考 NET_ACCESS_METHOD
 		public byte[]						szUserID = new byte[MAX_COMMON_STRING_16];			// 用户ID(非AccessControlCard记录集中的UserID概念)
 		public byte[]						szName = new byte[MAX_COMMON_STRING_32];			// 用户名称
-		public byte[]						byReserved = new byte[512];							// 保留字段	
-	} 
+		public byte[]						byReserved = new byte[512];							// 保留字段
+	}
 
 	// 获取当前智能锁的注册用户信息 CLIENT_GetSmartLockRegisterInfo 出参
 	public static class NET_OUT_GET_SMART_LOCK_REGISTER_INFO extends MyStructure
 	{
-	    public int								dwSize;											// 结构体大小   
+	    public int								dwSize;											// 结构体大小
 	    public int								nTotalCount;									// 总的用户数量
 	    public int								nReturnCount;									// 实际返回的用户数量
-	    public NET_SMART_LOCK_REGISTER_INFO[]	stuRegisterInfo = 
+	    public NET_SMART_LOCK_REGISTER_INFO[]	stuRegisterInfo =
 	    										(NET_SMART_LOCK_REGISTER_INFO[])new NET_SMART_LOCK_REGISTER_INFO().toArray(MAX_NUMBER_REGISTER_INFO);	// 注册用户的信息
-	    
+
 	    public NET_OUT_GET_SMART_LOCK_REGISTER_INFO() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 智能锁修改用户信息 CLIENT_SetSmartLockUserName 入参
 	public static class NET_IN_SET_SMART_LOCK_USERNAME extends MyStructure
 	{
@@ -18215,22 +18215,22 @@ public interface NetSDKLib extends Library {
 		public byte[]						szSerialNumber = new byte[MAX_COMMON_STRING_32];    // 智能锁序列号
 		public byte[]						szUserID = new byte[MAX_COMMON_STRING_16];			// 用户ID(非AccessControlCard记录集中的UserID概念)
 		public byte[]						szName = new byte[MAX_COMMON_STRING_32];			// 需要修改成的名称
-		
+
 		public NET_IN_SET_SMART_LOCK_USERNAME() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// 智能锁修改用户信息 CLIENT_SetSmartLockUserName 出参
 	public static class NET_OUT_SET_SMART_LOCK_USERNAME extends MyStructure
 	{
-	    public int							dwSize;												// 结构体大小  
-	    
+	    public int							dwSize;												// 结构体大小
+
 	    public NET_OUT_SET_SMART_LOCK_USERNAME() {
 	    	this.dwSize = this.size();
 	    }
-	} 
-	
+	}
+
 	// 智能锁删除用户接口 CLIENT_RemoveSmartLockUser 入参
 	public static class NET_IN_SMARTLOCK_REMOVE_USER_INFO extends MyStructure
 	{
@@ -18240,7 +18240,7 @@ public interface NetSDKLib extends Library {
 		public int			    			emType;                                     		// 开门类型,unknown 表示全部, 参考 NET_ACCESS_METHOD
 		public int                          nIndex;                                     		// 某种开门方式的索引号，-1表示全部
 		public int							nTaskID;											// 任务ID
-		
+
 		public NET_IN_SMARTLOCK_REMOVE_USER_INFO() {
 			this.dwSize = this.size();
 		}
@@ -18250,12 +18250,12 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_SMARTLOCK_REMOVE_USER_INFO extends MyStructure
 	{
 		public int							dwSize;						                		// 结构体大小
-		
+
 		public NET_OUT_SMARTLOCK_REMOVE_USER_INFO() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 	// 获取对码信息, 对应命令  NET_DEVSTATE_GET_CODEID_LIST
 	public static class NET_GET_CODEID_LIST extends MyStructure
 	{
@@ -18264,12 +18264,12 @@ public interface NetSDKLib extends Library {
 	    public int                 			nQueryNum;              // 本次获取的对码条数,此值小于等于能力集中nMaxPageSize字段的值
 	    public int                			nRetCodeIDNum;          // 实际返回的对码条数
 	    public Pointer    		   			pstuCodeIDInfo;         // 获取对码的内容, 对应 NET_CODEID_INFO[],内存由用户分配,不能小于nQueryNum*sizeof(NET_CODEID_INFO)
-	
+
 	    public NET_GET_CODEID_LIST() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 对码信息
 	public static class NET_CODEID_INFO extends MyStructure
 	{
@@ -18283,33 +18283,33 @@ public interface NetSDKLib extends Library {
 	    public int     						emMode;                             			// 无线设备工作模式, 对应枚举  EM_WIRELESS_DEVICE_MODE
 	    public int 							emSenseMethod;                     				// 传感器方式, 对应枚举  EM_CODEID_SENSE_METHOD_TYPE
 	    public byte[]                       szSerialNumber = new byte[NET_WIRELESS_DEVICE_SERIAL_NUMBER_MAX_LEN]; // 无线设备序列号
-	    
+
 	    public NET_CODEID_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 无线设备类型
 	public static class NET_WIRELESS_DEVICE_TYPE extends MyStructure
 	{
-	    public static final int NET_WIRELESS_DEVICE_TYPE_UNKNOWN = 0;               
+	    public static final int NET_WIRELESS_DEVICE_TYPE_UNKNOWN = 0;
 	    public static final int NET_WIRELESS_DEVICE_TYPE_KEYBOARD = 1;          	// 无线键盘
-	    public static final int NET_WIRELESS_DEVICE_TYPE_DEFENCE = 2;           	// 无线防区 
-	    public static final int NET_WIRELESS_DEVICE_TYPE_REMOTECONTROL = 3;     	// 无线遥控 
+	    public static final int NET_WIRELESS_DEVICE_TYPE_DEFENCE = 2;           	// 无线防区
+	    public static final int NET_WIRELESS_DEVICE_TYPE_REMOTECONTROL = 3;     	// 无线遥控
 	    public static final int NET_WIRELESS_DEVICE_TYPE_MAGNETOMER = 4;        	// 无线门磁
 	    public static final int NET_WIRELESS_DEVICE_TYPE_ALARMBELL = 5;				// 无线警号
 	    public static final int NET_WIRELESS_DEVICE_TYPE_SWITCHER = 6;          	// 无线插座
 	    public static final int NET_WIRELESS_DEVICE_TYPE_SMARTLOCK = 7;        	    // 无线智能锁
 	    public static final int NET_WIRELESS_DEVICE_TYPE_REPEATER = 8;         	    // 无线中继器
-	} 
+	}
 
 	// 无线设备工作模式
 	public static class EM_WIRELESS_DEVICE_MODE extends MyStructure
 	{
 		public static final int EM_WIRELESS_DEVICE_MODE_UNKNOWN = 0;            	// 模式未识别
-		public static final int EM_WIRELESS_DEVICE_MODE_NORMAL = 1;             	// Normal 普通模式 
+		public static final int EM_WIRELESS_DEVICE_MODE_NORMAL = 1;             	// Normal 普通模式
 		public static final int EM_WIRELESS_DEVICE_MODE_POLLING = 2;            	// Polling 巡检模式 只有Type为RemoteControl时才能处于巡检模式
-	} 
+	}
 
 	// 传感器方式
 	public static class EM_CODEID_SENSE_METHOD_TYPE extends MyStructure
@@ -18326,32 +18326,32 @@ public interface NetSDKLib extends Library {
 		public static final int EM_CODEID_SENSE_METHOD_TYPE_WATER_SENSOR = 9;   	// 水浸传感器
 		public static final int EM_CODEID_SENSE_METHOD_TYPE_THREEMETHOD = 10;   	// 三技术
 	}
-	
+
 	// CLIENT_EncryptString 接口入参
 	public static class NET_IN_ENCRYPT_STRING extends MyStructure
 	{
 		public int							 dwSize;								// 结构体大小
 		public byte[]						 szCard = new byte[33];					// 需要加密的字符串
-		public byte[]                        byReserved1 = new byte[3];             // 字节对齐	
+		public byte[]                        byReserved1 = new byte[3];             // 字节对齐
 		public byte[]                        szKey = new byte[33];                  // 秘钥
 		public byte[]                        byReserved2 = new byte[3];             // 字节对齐
-		
+
 		public NET_IN_ENCRYPT_STRING() {
 			this.dwSize = this.size();
 		}
-	} 
+	}
 
 	// CLIENT_EncryptString 接口出参
 	public static class NET_OUT_ENCRYPT_STRING extends MyStructure
 	{
 		public int							dwSize;									// 结构体大小
 		public byte[]						szEncryptString = new byte[1024];		// 加密后字符串
-		
+
 		public NET_OUT_ENCRYPT_STRING() {
 			this.dwSize = this.size();
 		}
-	} 
-	
+	}
+
 	// 设置二维码的解码信息入参
 	public static class NET_IN_SET_QRCODE_DECODE_INFO extends MyStructure
 	{
@@ -18359,7 +18359,7 @@ public interface NetSDKLib extends Library {
 		public int      					emCipher;                                // 加密方式, 参考枚举 NET_ENUM_QRCODE_CIPHER
 		public byte[]                       szKey = new byte[33];                    // 秘钥
 		public byte[]                       byReserved = new byte[3];                // 字节对齐
-		
+
 		public NET_IN_SET_QRCODE_DECODE_INFO() {
 			this.dwSize = this.size();
 		}
@@ -18369,25 +18369,25 @@ public interface NetSDKLib extends Library {
 	public static class NET_OUT_SET_QRCODE_DECODE_INFO extends MyStructure
 	{
 	    public int                       dwSize;
-	    
+
 	    public NET_OUT_SET_QRCODE_DECODE_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 使用的加密算法
 	public static class NET_ENUM_QRCODE_CIPHER extends MyStructure
 	{
-		public static final int NET_ENUM_QRCODE_CIPHER_UNKNOWN = 0; 
+		public static final int NET_ENUM_QRCODE_CIPHER_UNKNOWN = 0;
 		public static final int NET_ENUM_QRCODE_CIPHER_AES256 = 1;                  // AES-256
 	}
-	
-	//门禁卡数据操作事件       
-	public static class ALARM_ACCESS_CARD_OPERATE_INFO extends MyStructure    
-	{       
-	    public int                   	dwSize;       
-	    public int   				    emActionType;                    			 // 门禁卡数据操作类型, 参考  NET_ACCESS_ACTION_TYPE       
-	    public byte[]                   szCardNo = new byte[NET_MAX_CARDINFO_LEN];   // 门禁卡卡号       
+
+	//门禁卡数据操作事件
+	public static class ALARM_ACCESS_CARD_OPERATE_INFO extends MyStructure
+	{
+	    public int                   	dwSize;
+	    public int   				    emActionType;                    			 // 门禁卡数据操作类型, 参考  NET_ACCESS_ACTION_TYPE
+	    public byte[]                   szCardNo = new byte[NET_MAX_CARDINFO_LEN];   // 门禁卡卡号
 	    public int    					emResult;                        			 // 操作结果,-1为未知,0为失败,1为成功,参考 NET_THREE_STATUS_BOOL
 	    public int                      nChannelID;                      			 // 门通道号(或者门锁,门和门锁一一对应), 从0开始
 	    public byte[]                   szCredentialHolder = new byte[16];           // 身份拥有者
@@ -18395,22 +18395,22 @@ public interface NetSDKLib extends Library {
 	    public byte[]                   szSerialNum = new byte[32];                  // 序列号
 	    public int                      nIndex;                          		     // 某开门方式下的索引号
 	    public int						nTaskID;						 			 // 任务ID
-	    
+
 	    public ALARM_ACCESS_CARD_OPERATE_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
 
-	//门禁卡数据操作类型       
-	public static class NET_ACCESS_ACTION_TYPE extends MyStructure      
-	{       
-	    public static final int NET_ACCESS_ACTION_TYPE_UNKNOWN  = 0;    			// 未知       
-	    public static final int NET_ACCESS_ACTION_TYPE_INSERT   = 1;   			 	// 插入       
-	    public static final int NET_ACCESS_ACTION_TYPE_UPDATE   = 2;    			// 更新       
-	  	public static final int NET_ACCESS_ACTION_TYPE_REMOVE   = 3;    			// 删除       
+
+	//门禁卡数据操作类型
+	public static class NET_ACCESS_ACTION_TYPE extends MyStructure
+	{
+	    public static final int NET_ACCESS_ACTION_TYPE_UNKNOWN  = 0;    			// 未知
+	    public static final int NET_ACCESS_ACTION_TYPE_INSERT   = 1;   			 	// 插入
+	    public static final int NET_ACCESS_ACTION_TYPE_UPDATE   = 2;    			// 更新
+	  	public static final int NET_ACCESS_ACTION_TYPE_REMOVE   = 3;    			// 删除
 	}
-	
+
 	// 门禁未关事件详细信息
 	public static class ALARM_ACCESS_CTL_NOT_CLOSE_INFO extends MyStructure
 	{
@@ -18418,38 +18418,38 @@ public interface NetSDKLib extends Library {
 	    public int             	 	nDoor;                                  		// 门通道号
 	    public byte[]            	szDoorName = new byte[NET_MAX_DOORNAME_LEN];    // 门禁名称
 	    public NET_TIME        	 	stuTime;                                		// 报警事件发生的时间
-	    public int             	 	nAction;                                		// 0:开始 1:停止    
+	    public int             	 	nAction;                                		// 0:开始 1:停止
 	    public int 		    	 	nEventID;				                		// 事件ID
-	    
+
 	    public ALARM_ACCESS_CTL_NOT_CLOSE_INFO() {
 	    	this.dwSize = this.size();
 	    }
 	}
-	
+
 	// 闯入事件详细信息
 	public static class ALARM_ACCESS_CTL_BREAK_IN_INFO extends MyStructure
 	{
 		public int           		dwSize;
 		public int             		nDoor;                                  		// 门通道号
 		public byte[]            	szDoorName = new byte[NET_MAX_DOORNAME_LEN];    // 门禁名称
-		public NET_TIME        		stuTime;                                		// 报警事件发生的时间    
+		public NET_TIME        		stuTime;                                		// 报警事件发生的时间
 		public int 					nEventID;				                		//事件ID
-		
+
 		public ALARM_ACCESS_CTL_BREAK_IN_INFO() {
 			this.dwSize = this.size();
 		}
 	}
-	
+
 
 	// CLIENT_ListenServer 接口回调fServiceCallBack函数支持的命令类型
 	public static class EM_LISTEN_TYPE extends MyStructure
-	{ 
+	{
 	    public static final int NET_DVR_DISCONNECT = -1;                           // 验证期间设备断线回调
 	    public static final int NET_DVR_SERIAL_RETURN = 1;                         // 设备注册携带序列号 对应 char* szDevSerial
 	    public static final int NET_DEV_AUTOREGISTER_RETURN = 2;                   // 设备注册携带序列号和令牌 对应NET_CB_AUTOREGISTER
 	    public static final int NET_DEV_NOTIFY_IP_RETURN = 3;                      // 设备仅上报IP, 不作为主动注册用, 用户获取ip后只能按照约定的端口按照非主动注册的类型登录
 	}
-	
+
     /***********************************************************************
      ** 回调
      ***********************************************************************/
@@ -18462,18 +18462,18 @@ public interface NetSDKLib extends Library {
     public interface fHaveReConnect extends StdCallCallback {
         public void invoke(LLong lLoginID, String pchDVRIP, int nDVRPort, Pointer dwUser);
     }
-    
+
     // 消息回调函数原形(pBuf内存由SDK内部申请释放)
     public interface fMessCallBack extends StdCallCallback{
         public boolean invoke(int lCommand, LLong lLoginID, Pointer pStuEvent, int dwBufLen, String strDeviceIP, NativeLong nDevicePort, Pointer dwUser);
     }
-    
+
     // 订阅人脸回调函数
     public interface fFaceFindState extends StdCallCallback {
         // pstStates 指向NET_CB_FACE_FIND_STATE的指针
         public void invoke(LLong lLoginID, LLong lAttachHandle, Pointer pstStates, int nStateNum, Pointer dwUser);
     }
-    
+
     // 智能分析数据回调;nSequence表示上传的相同图片情况，为0时表示是第一次出现，为2表示最后一次出现或仅出现一次，为1表示此次之后还有
     // int nState = *(int*) reserved 表示当前回调数据的状态, 为0表示当前数据为实时数据，为1表示当前回调数据是离线数据，为2时表示离线数据传送结束
     // pAlarmInfo 对应智能事件信息, pBuffer 对应智能图片信息, dwBufSize 智能图片信息大小
@@ -18481,39 +18481,39 @@ public interface NetSDKLib extends Library {
         public int invoke(LLong lAnalyzerHandle, int dwAlarmType, Pointer pAlarmInfo, Pointer pBuffer,
                           int dwBufSize, Pointer dwUser, int nSequence, Pointer reserved);
     }
-    
+
     // 抓图回调函数原形(pBuf内存由SDK内部申请释放)
-    // EncodeType 编码类型，10：表示jpeg图片      0：mpeg4    CmdSerial : 操作流水号，同步抓图的情况下用不上 
+    // EncodeType 编码类型，10：表示jpeg图片      0：mpeg4    CmdSerial : 操作流水号，同步抓图的情况下用不上
     public interface fSnapRev extends StdCallCallback{
         public void invoke(LLong lLoginID, Pointer pBuf, int RevLen, int EncodeType, int CmdSerial, Pointer dwUser);
     }
-    
+
     // 异步搜索设备回调(pDevNetInfo内存由SDK内部申请释放)
     public interface fSearchDevicesCB extends StdCallCallback{
         public void invoke(Pointer pDevNetInfo, Pointer pUserData);
     }
-    
+
     // 按时间回放进度回调函数原形
-    public interface fTimeDownLoadPosCallBack extends StdCallCallback {    
+    public interface fTimeDownLoadPosCallBack extends StdCallCallback {
         public void invoke(LLong lPlayHandle, int dwTotalSize, int dwDownLoadSize, int index, NET_RECORDFILE_INFO.ByValue recordfileinfo, Pointer dwUser);
-    } 
-    
+    }
+
     // 回放数据回调函数原形
     public interface fDataCallBack extends StdCallCallback {
         public int invoke(LLong lRealHandle, int dwDataType, Pointer pBuffer, int dwBufSize, Pointer dwUser);
     }
-    
+
     // 回放进度回调函数原形
     public interface fDownLoadPosCallBack extends StdCallCallback {
     	public void invoke(LLong lPlayHandle, int dwTotalSize, int dwDownLoadSize, Pointer dwUser);
     }
-    
+
     // 视频统计摘要信息回调函数原形，lAttachHandle 是 CLIENT_AttachVideoStatSummary 返回值
     public interface fVideoStatSumCallBack extends StdCallCallback {
     	public void invoke(LLong lAttachHandle, NET_VIDEOSTAT_SUMMARY pBuf, int dwBufLen, Pointer dwUser);
     }
-    
-    // 用户自定义的数据回调   lTalkHandle是CLIENT_StartTalkEx的返回值 
+
+    // 用户自定义的数据回调   lTalkHandle是CLIENT_StartTalkEx的返回值
     // byAudioFlag：   0表示是本地录音库采集的音频数据 ，  1表示收到的设备发过来的音频数据
     public interface pfAudioDataCallBack extends StdCallCallback {
     	public void invoke(LLong lTalkHandle, Pointer pDataBuf, int dwBufSize, byte byAudioFlag, Pointer dwUser);
@@ -18522,23 +18522,23 @@ public interface NetSDKLib extends Library {
     // lHandle是文件传输句柄 ，nTransType是文件传输类型，nState是文件传输状态，
     public interface fTransFileCallBack extends StdCallCallback {
     	public void invoke(LLong lHandle, int nTransType, int nState, int nSendSize, int nTotalSize, Pointer dwUser);
-    }    
-    
+    }
+
     // GPS信息订阅回调--扩展
-    public interface fGPSRevEx extends StdCallCallback { 
+    public interface fGPSRevEx extends StdCallCallback {
     	public void invoke(LLong lLoginID, GPS_Info.ByValue GpsInfo, ALARM_STATE_INFO.ByValue stAlarmInfo, Pointer dwUserData, Pointer reserved);
     }
-    
+
     // GPS信息订阅回调--扩展2
-    public interface fGPSRevEx2 extends StdCallCallback { 
+    public interface fGPSRevEx2 extends StdCallCallback {
     	public void invoke(LLong lLoginID, NET_GPS_LOCATION_INFO lpData, Pointer dwUserData, Pointer reserved);
     }
-    
+
     // 实时监视数据回调函数--扩展(pBuffer内存由SDK内部申请释放)
     // lRealHandle实时监视           dwDataType: 0-原始数据   1-帧数据    2-yuv数据   3-pcm音频数据
     // pBuffer对应BYTE*
     // param:当类型为0(原始数据)和2(YUV数据) 时为0。当回调的数据类型为1时param为一个tagVideoFrameParam结构体指针。
-    // param:当数据类型是3时,param也是一个tagCBPCMDataParam结构体指针 
+    // param:当数据类型是3时,param也是一个tagCBPCMDataParam结构体指针
     public interface fRealDataCallBackEx extends StdCallCallback {
     	public void invoke(LLong lRealHandle, int dwDataType, Pointer pBuffer, int dwBufSize, int param, Pointer dwUser);
     }
@@ -18548,37 +18548,37 @@ public interface NetSDKLib extends Library {
     public interface fRealPlayDisConnect extends StdCallCallback {
     	public void invoke(LLong lOperateHandle, int dwEventType, Pointer param, Pointer dwUser);
     }
-    
+
     // 订阅过车记录数据回调函数原型     lAttachHandle为CLIENT_ParkingControlAttachRecord返回值
     public interface fParkingControlRecordCallBack extends StdCallCallback {
     	public void invoke(LLong lLoginID, LLong lAttachHandle, NET_CAR_PASS_ITEM pInfo, int nBufLen, Pointer dwUser);
     }
-    
+
     // 订阅车位信息回调函数原型
     public interface fParkInfoCallBack extends StdCallCallback {
     	public void invoke(LLong lLoginID, LLong lAttachHandle, NET_PARK_INFO_ITEM pInfo, int nBufLen, Pointer dwUser);
     }
-  
+
     // 订阅监测点位信息回调函数原型
     public interface fSCADAAttachInfoCallBack extends StdCallCallback {
     	public void invoke(LLong lLoginID, LLong lAttachHandle, NET_SCADA_NOTIFY_POINT_INFO_LIST pInfo, int nBufLen, Pointer dwUser);
     }
-    
-    // 透明串口回调函数原形(pBuffer内存由SDK内部申请释放)) 
+
+    // 透明串口回调函数原形(pBuffer内存由SDK内部申请释放))
     public interface fTransComCallBack extends StdCallCallback {
     	public void invoke(LLong lLoginID, LLong lTransComChannel, Pointer pBuffer, int dwBufSize, Pointer dwUser);
     }
-    
+
     //视频分析进度状态实时回调函数
     public interface fVideoAnalyseState extends StdCallCallback {
     	public int invoke(LLong lAttachHandle, NET_VIDEOANALYSE_STATE pAnalyseStateInfos, Pointer dwUser, Pointer pReserved);
     }
-    
+
     // 侦听服务器回调函数原形
     public interface fServiceCallBack extends StdCallCallback {
     	public int invoke(LLong lHandle, String pIp, int wPort, int lCommand, Pointer pParam, int dwParamLen, Pointer dwUserData);
     }
-    
+
     //订阅Bus状态回调函数原型
     public interface fBusStateCallBack extends StdCallCallback {
     	public void invoke(LLong lAttachHandle, int lCommand, Pointer pBuf, int dwBufLen, Pointer dwUser);
@@ -18597,21 +18597,21 @@ public interface NetSDKLib extends Library {
     // 注册添加设备的回调函数原型
     public interface fAddDeviceCallBack extends StdCallCallback {
     	public void invoke(LLong lAttachHandle, NET_CB_ATTACH_ADD_DEVICE pstAddDevice, Pointer dwUser);
-    } 
+    }
 
     // 定义监测点报警信息回调函数原型
     public interface fSCADAAlarmAttachInfoCallBack extends StdCallCallback {
     	public void invoke(LLong lAttachHandle, NET_SCADA_NOTIFY_POINT_ALARM_INFO_LIST pInfo, int nBufLen, Pointer dwUser);
     }
-    
+
     //视频诊断结果上报回调函数
     public interface fRealVideoDiagnosis extends StdCallCallback {
     	public int invoke(LLong lDiagnosisHandle, NET_REAL_DIAGNOSIS_RESULT pDiagnosisInfo, Pointer pBuf, int nBufLen, Pointer dwUser);
     }
 
 	/// \fn 温度分布数据状态回调函数
-	/// \brief 
-	/// \param  LLONG lAttachHandle [OUT] 订阅句柄, CLIENT_RadiometryAttach 的返回值 
+	/// \brief
+	/// \param  LLONG lAttachHandle [OUT] 订阅句柄, CLIENT_RadiometryAttach 的返回值
 	/// \param  NET_RADIOMETRY_DATA pBuf [OUT] 热图数据信息
 	/// \param  int nBufLen [OUT] 状态信息长度
 	/// \param  LDWORD dwUser 用户数据
@@ -18619,29 +18619,29 @@ public interface NetSDKLib extends Library {
     public interface fRadiometryAttachCB extends StdCallCallback {
     	public void invoke(LLong lAttachHandle, NET_RADIOMETRY_DATA pBuf, int nBufLen, Pointer dwUser);
     }
-    
+
     // 刻录设备回调函数原形,lAttachHandle是CLIENT_AttachBurnState返回值, 每次1条,pBuf->dwSize == nBufLen
     public interface fAttachBurnStateCB extends StdCallCallback {
     	public void invoke(LLong lLoginID, LLong lAttachHandle, NET_CB_BURNSTATE pBuf, int nBufLen, Pointer dwUser);
     }
-    
+
     // 刻录设备回调扩展函数原形
     public interface fAttachBurnStateCBEx extends StdCallCallback {
     	public void invoke(LLong lLoginID, LLong lAttachHandle, NET_OUT_BURN_GET_STATE pBuf, int nBufLen, Pointer dwUser);
     }
-    
+
     /************************************************************************
      ** 接口
      ***********************************************************************/
     //  JNA直接调用方法定义，cbDisConnect 实际情况并不回调Java代码，仅为定义可以使用如下方式进行定义。 fDisConnect 回调
     public boolean CLIENT_Init(StdCallCallback cbDisConnect, Pointer dwUser);
-    
+
     //  JNA直接调用方法定义，SDK退出清理
     public void CLIENT_Cleanup();
-    
+
     //  JNA直接调用方法定义，设置断线重连成功回调函数，设置后SDK内部断线自动重连, fHaveReConnect 回调
     public void CLIENT_SetAutoReconnect(StdCallCallback cbAutoConnect, Pointer dwUser);
-    
+
     // 返回函数执行失败代码
     public int CLIENT_GetLastError();
 
@@ -18653,24 +18653,24 @@ public interface NetSDKLib extends Library {
 
     // 获取SDK的版本信息
     public int CLIENT_GetSDKVersion();
-    
+
     //  JNA直接调用方法定义，登陆接口
     public LLong CLIENT_LoginEx(String pchDVRIP, int wDVRPort, String pchUserName, String pchPassword, int nSpecCap, Pointer pCapParam, NET_DEVICEINFO lpDeviceInfo, IntByReference error/*= 0*/);
-    
+
     //  JNA直接调用方法定义，登陆扩展接口///////////////////////////////////////////////////
     //  nSpecCap 对应  EM_LOGIN_SPAC_CAP_TYPE 登陆类型
     public LLong CLIENT_LoginEx2(String pchDVRIP, int wDVRPort, String pchUserName, String pchPassword, int nSpecCap, Pointer pCapParam, NET_DEVICEINFO_Ex lpDeviceInfo, IntByReference error/*= 0*/);
-    
+
     //  JNA直接调用方法定义，向设备注销
     public boolean CLIENT_Logout(LLong lLoginID);
-    
+
     // 获取配置
     // error 为设备返回的错误码： 0-成功 1-失败 2-数据不合法 3-暂时无法设置 4-没有权限
     public boolean CLIENT_GetNewDevConfig(LLong lLoginID, String szCommand, int nChannelID, byte[] szOutBuffer, int dwOutBufferSize, IntByReference error, int waiitime);
-    
+
     // 设置配置
     public boolean CLIENT_SetNewDevConfig(LLong lLoginID, String szCommand, int nChannelID, byte[] szInBuffer, int dwInBufferSize, IntByReference error, IntByReference restart, int waittime);
-    
+
     // 删除配置接口(Json格式)
     public boolean CLIENT_DeleteDevConfig(LLong lLoginID, NET_IN_DELETECFG pInParam, NET_OUT_DELETECFG pOutParam, int waittime);
 
@@ -18685,10 +18685,10 @@ public interface NetSDKLib extends Library {
 
     // 设置报警回调函数, fMessCallBack 回调
     public void  CLIENT_SetDVRMessCallBack(StdCallCallback cbMessage, Pointer dwUser);
-    
+
     // 向设备订阅报警--扩展
     public boolean  CLIENT_StartListenEx(LLong lLoginID);
-    
+
     // 停止订阅报警
     public boolean CLIENT_StopListen(LLong lLoginID);
 
@@ -18697,35 +18697,35 @@ public interface NetSDKLib extends Library {
     // pstInParam指向NET_IN_OPERATE_FACERECONGNITIONDB类型的指针
     // pstOutParam指向NET_OUT_OPERATE_FACERECONGNITIONDB类型的指针
     public boolean  CLIENT_OperateFaceRecognitionDB(LLong lLoginID, NET_IN_OPERATE_FACERECONGNITIONDB pstInParam, NET_OUT_OPERATE_FACERECONGNITIONDB pstOutParam, int nWaitTime);
-    
-    // 按条件查询人脸识别结果 
+
+    // 按条件查询人脸识别结果
     // pstInParam指向NET_IN_STARTFIND_FACERECONGNITION类型的指针
     // pstOutParam指向NET_OUT_STARTFIND_FACERECONGNITION类型的指针
     public boolean  CLIENT_StartFindFaceRecognition(LLong lLoginID, NET_IN_STARTFIND_FACERECONGNITION pstInParam, NET_OUT_STARTFIND_FACERECONGNITION pstOutParam, int nWaitTime);
-    
+
     // 查找人脸识别结果:nFilecount:需要查询的条数, 返回值为媒体文件条数 返回值<nFilecount则相应时间段内的文件查询完毕(每次最多只能查询20条记录)
     // pstInParam指向NET_IN_DOFIND_FACERECONGNITION类型的指针
     // pstOutParam指向NET_OUT_DOFIND_FACERECONGNITION类型的指针
     public boolean  CLIENT_DoFindFaceRecognition(final NET_IN_DOFIND_FACERECONGNITION pstInParam, NET_OUT_DOFIND_FACERECONGNITION pstOutParam, int nWaitTime);
-    
+
     //结束查询
     public boolean  CLIENT_StopFindFaceRecognition(LLong lFindHandle);
-    
+
     // 人脸检测(输入一张大图,输入大图中被检测出来的人脸图片)
     // pstInParam指向NET_IN_DETECT_FACE类型的指针
     // pstOutParam指向NET_OUT_DETECT_FACE类型的指针
     public boolean  CLIENT_DetectFace(LLong lLoginID, NET_IN_DETECT_FACE pstInParam, NET_OUT_DETECT_FACE pstOutParam, int nWaitTime);
-    
+
     // 人脸识别人员组操作（包括添加,修改和删除）
     // pstInParam指向NET_IN_OPERATE_FACERECONGNITION_GROUP类型的指针
     // pstOutParam指向NET_OUT_OPERATE_FACERECONGNITION_GROUP类型的指针
     public boolean  CLIENT_OperateFaceRecognitionGroup(LLong lLoginID, NET_IN_OPERATE_FACERECONGNITION_GROUP pstInParam, NET_OUT_OPERATE_FACERECONGNITION_GROUP pstOutParam, int nWaitTime);
-    
+
     // 查询人脸识别人员组信息
     // pstInParam指向NET_IN_FIND_GROUP_INFO类型的指针
     // pstOutParam指向NET_OUT_FIND_GROUP_INFO类型的指针
     public boolean  CLIENT_FindGroupInfo(LLong LLong, NET_IN_FIND_GROUP_INFO pstInParam, NET_OUT_FIND_GROUP_INFO pstOutParam, int nWaitTime);
-    
+
     // 获取布控在视频通道的组信息,pstInParam与pstOutParam内存由用户申请释放
     public boolean CLIENT_GetGroupInfoForChannel(LLong lLoginID, NET_IN_GET_GROUPINFO_FOR_CHANNEL pstInParam, NET_OUT_GET_GROUPINFO_FOR_CHANNEL pstOutParam, int nWaitTime);
 
@@ -18733,7 +18733,7 @@ public interface NetSDKLib extends Library {
     // pstInParam指向NET_IN_SET_GROUPINFO_FOR_CHANNEL类型的指针
     // pstOutParam指向NET_OUT_SET_GROUPINFO_FOR_CHANNEL类型的指针
     public boolean CLIENT_SetGroupInfoForChannel(LLong lLoginID, NET_IN_SET_GROUPINFO_FOR_CHANNEL pstInParam, NET_OUT_SET_GROUPINFO_FOR_CHANNEL pstOutParam, int nWaitTime);
-    
+
     // 以人脸库的角度进行布控, pstInParam与pstOutParam内存由用户申请释放
     public boolean CLIENT_FaceRecognitionPutDisposition(LLong lLoginID, NET_IN_FACE_RECOGNITION_PUT_DISPOSITION_INFO pstInParam, NET_OUT_FACE_RECOGNITION_PUT_DISPOSITION_INFO pstOutParam, int nWaitTime);
 
@@ -18744,60 +18744,60 @@ public interface NetSDKLib extends Library {
     // pstInParam指向NET_IN_FACE_FIND_STATE类型的指针
     // pstOutParam指向NET_OUT_FACE_FIND_STATE类型的指针
     public LLong CLIENT_AttachFaceFindState(LLong lLoginID, NET_IN_FACE_FIND_STATE pstInParam, NET_OUT_FACE_FIND_STATE pstOutParam, int nWaitTime);
-    
+
     //取消订阅人脸查询状态,lAttachHandle为CLIENT_AttachFaceFindState返回的句柄
     public boolean CLIENT_DetachFaceFindState(LLong lAttachHandle);
-    
+
     // 文件下载, 只适用于小文件,pInParam与pOutParam内存由用户申请释放
     public boolean CLIENT_DownloadRemoteFile(LLong lLoginID, NET_IN_DOWNLOAD_REMOTE_FILE pInParam, NET_OUT_DOWNLOAD_REMOTE_FILE pOutParam, int nWaitTime);
-    
+
     // 打开日志功能
     // pstLogPrintInfo指向LOG_SET_PRINT_INFO的指针
     public boolean CLIENT_LogOpen(LOG_SET_PRINT_INFO pstLogPrintInfo);
 
     // 关闭日志功能
     public boolean CLIENT_LogClose();
-    
+
     // 获取符合查询条件的文件总数
     // reserved为void *
     public boolean CLIENT_GetTotalFileCount(LLong lFindHandle, IntByReference pTotalCount, Pointer reserved, int waittime);
-    
+
     // 设置查询跳转条件
     // reserved为void *
     public boolean  CLIENT_SetFindingJumpOption(LLong lFindHandle, NET_FINDING_JUMP_OPTION_INFO pOption, Pointer reserved, int waittime);
-    
+
     // 按查询条件查询文件
     // pQueryCondition为void *, 具体类型根据emType的类型确定,对应 EM_FILE_QUERY_TYPE
     // reserved为void *, 具体类型根据emType的类型确定
     public LLong CLIENT_FindFileEx(LLong lLoginID, int emType, Pointer pQueryCondition, Pointer reserved, int waittime);
-    
+
     // 查找文件:nFilecount:需要查询的条数, 返回值为媒体文件条数 返回值<nFilecount则相应时间段内的文件查询完毕
     // pMediaFileInfo为void *
     // reserved为void *
     public int CLIENT_FindNextFileEx(LLong lFindHandle, int nFilecount, Pointer pMediaFileInfo, int maxlen, Pointer reserved, int waittime);
-    
+
     // 结束录像文件查找
     public boolean CLIENT_FindCloseEx(LLong lFindHandle);
-    
-    // 实时上传智能分析数据－图片(扩展接口,bNeedPicFile表示是否订阅图片文件,Reserved类型为RESERVED_PARA) 
+
+    // 实时上传智能分析数据－图片(扩展接口,bNeedPicFile表示是否订阅图片文件,Reserved类型为RESERVED_PARA)
     // bNeedPicFile为BOOL类型，取值范围为0或者1, fAnalyzerDataCallBack回调
     public LLong CLIENT_RealLoadPictureEx(LLong lLoginID, int nChannelID, int dwAlarmType, int bNeedPicFile, StdCallCallback cbAnalyzerData, Pointer dwUser, Pointer Reserved);
-    
+
     // 停止上传智能分析数据－图片
     public boolean CLIENT_StopLoadPic(LLong lAnalyzerHandle);
-    
+
     // 设置抓图回调函数, fSnapRev回调
     public void CLIENT_SetSnapRevCallBack(StdCallCallback OnSnapRevMessage, Pointer dwUser);
-    
+
     // 抓图请求扩展接口
     public boolean CLIENT_SnapPictureEx(LLong lLoginID, SNAP_PARAMS stParam, IntByReference reserved);
-    
+
     // 异步搜索局域网内IPC、NVS等设备, fSearchDevicesCB回调
     public LLong CLIENT_StartSearchDevices(StdCallCallback cbSearchDevices, Pointer pUserData, String szLocalIp);
-    
+
     // 停止异步搜索局域网内IPC、NVS等设备
     public boolean CLIENT_StopSearchDevices(LLong lSearchHandle);
-    
+
     // 同步跨网段搜索设备IP (pIpSearchInfo内存由用户申请释放)
     // szLocalIp为本地IP，可不做输入, fSearchDevicesCB回调
     // 接口调用1次只发送搜索信令1次
@@ -18806,10 +18806,10 @@ public interface NetSDKLib extends Library {
     // 开始实时监视
     // rType  : NET_RealPlayType    返回监控句柄
     public LLong CLIENT_RealPlayEx(LLong lLoginID, int nChannelID, Pointer hWnd, int rType);
-    
+
     // 停止实时预览--扩展     lRealHandle为CLIENT_RealPlayEx的返回值
     public boolean CLIENT_StopRealPlayEx(LLong lRealHandle);
-    
+
     // 开始实时监视支持设置码流回调接口     rType  : NET_RealPlayType   返回监控句柄
     // cbRealData 对应 fRealDataCallBackEx 回调
     // cbDisconnect 对应 fRealPlayDisConnect 回调
@@ -18817,30 +18817,30 @@ public interface NetSDKLib extends Library {
 
     // 停止实时预览
     public boolean CLIENT_StopRealPlay(LLong lRealHandle);
-    
+
     // 设置实时监视数据回调函数扩展接口    lRealHandle监控句柄,fRealDataCallBackEx 回调
     public boolean CLIENT_SetRealDataCallBackEx(LLong lRealHandle, StdCallCallback cbRealData, Pointer dwUser, int dwFlag);
-    
-    // 设置图象流畅性
-    // 将要调整图象的等级(0-6),当level为0时，图象最流畅；当level为6时，图象最实时。Level的默认值为3。注意：直接解码下有效 
-    public boolean CLIENT_AdjustFluency(LLong lRealHandle, int nLevel);
-    
 
-    // 保存数据为文件,lRealHandle为CLIENT_RealPlayEx的返回值,pchFileName为实时监视保存文件名 
+    // 设置图象流畅性
+    // 将要调整图象的等级(0-6),当level为0时，图象最流畅；当level为6时，图象最实时。Level的默认值为3。注意：直接解码下有效
+    public boolean CLIENT_AdjustFluency(LLong lRealHandle, int nLevel);
+
+
+    // 保存数据为文件,lRealHandle为CLIENT_RealPlayEx的返回值,pchFileName为实时监视保存文件名
     public boolean CLIENT_SaveRealData(LLong lRealHandle, String pchFileName);
-    
+
     // 结束保存数据为文件,lRealHandle为CLIENT_RealPlayEx的返回值
-    public boolean CLIENT_StopSaveRealData(LLong lRealHandle);     
+    public boolean CLIENT_StopSaveRealData(LLong lRealHandle);
 
     // 打开声音
     public boolean CLIENT_OpenSound(LLong hPlayHandle);
-    
+
     // 关闭声音
     public boolean CLIENT_CloseSound();
-    
+
     // 设置显示源(pInparam, pOutParam内存由用户申请释放)
     public boolean CLIENT_MatrixSetCameras(LLong lLoginID, NET_IN_MATRIX_SET_CAMERAS pInParam, NET_OUT_MATRIX_SET_CAMERAS pOutParam, int nWaitTime);
- 
+
     // 获取所有有效显示源
     // pInParam  对应  NET_IN_MATRIX_GET_CAMERAS
     // pOutParam 对应  NET_OUT_MATRIX_GET_CAMERAS
@@ -18848,18 +18848,18 @@ public interface NetSDKLib extends Library {
 
     // 抓图同步接口,将图片数据直接返回给用户
     public boolean CLIENT_SnapPictureToFile(LLong lLoginID, NET_IN_SNAP_PIC_TO_FILE_PARAM pInParam, NET_OUT_SNAP_PIC_TO_FILE_PARAM pOutParam, int nWaitTime);
-    
+
     // 查询时间段内的所有录像文件
     // nRecordFileType 录像类型 0:所有录像  1:外部报警  2:动态监测报警  3:所有报警  4:卡号查询   5:组合条件查询   6:录像位置与偏移量长度   8:按卡号查询图片(目前仅HB-U和NVS特殊型号的设备支持)  9:查询图片(目前仅HB-U和NVS特殊型号的设备支持)  10:按字段查询    15:返回网络数据结构(金桥网吧)  16:查询所有透明串数据录像文件
-    // nriFileinfo 返回的录像文件信息，是一个 NET_RECORDFILE_INFO 结构数组 
-    // maxlen 是 nriFileinfo缓冲的最大长度(单位字节，建议在(100~200)*sizeof(NET_RECORDFILE_INFO)之间) 
-    // filecount返回的文件个数，属于输出参数最大只能查到缓冲满为止的录像记录; 
-    // bTime 是否按时间查(目前无效) 
+    // nriFileinfo 返回的录像文件信息，是一个 NET_RECORDFILE_INFO 结构数组
+    // maxlen 是 nriFileinfo缓冲的最大长度(单位字节，建议在(100~200)*sizeof(NET_RECORDFILE_INFO)之间)
+    // filecount返回的文件个数，属于输出参数最大只能查到缓冲满为止的录像记录;
+    // bTime 是否按时间查(目前无效)
     public boolean CLIENT_QueryRecordFile(LLong lLoginID, int nChannelId, int nRecordFileType, NET_TIME tmStart, NET_TIME tmEnd, String pchCardid, NET_RECORDFILE_INFO[] stFileInfo, int maxlen, IntByReference filecount, int waittime, boolean bTime);
-    
+
     // 查询时间段内是否有录像文件   bResult输出参数，true有录像，false没录像
     public boolean CLIENT_QueryRecordTime(LLong lLoginID, int nChannelId, int nRecordFileType, NET_TIME tmStart, NET_TIME tmEnd, String pchCardid, IntByReference bResult, int waittime);
-    
+
     // 通过时间下载录像--扩展
     // nRecordFileType 对应 EM_QUERY_RECORD_TYPE
     // cbTimeDownLoadPos 对应 fTimeDownLoadPosCallBack 回调
@@ -18869,29 +18869,29 @@ public interface NetSDKLib extends Library {
                                          StdCallCallback cbTimeDownLoadPos, Pointer dwUserData,
                                          StdCallCallback fDownLoadDataCallBack, Pointer dwDataUser,
                                          Pointer pReserved);
-    
+
     // 停止录像下载
     public boolean CLIENT_StopDownload(LLong lFileHandle);
-    
+
     /******************************************************************************
 	    功能描述	:	通过时间下载录像--扩展,可加载码流转换库
-	    输入参数	:	
+	    输入参数	:
 	        lLoginID:       登录接口返回的句柄
 	        nChannelId:     视频通道号,从0开始
 	        nRecordFileType:录像类型 0 所有录像文件
-	                                1 外部报警 
-	                                2 动态检测报警 
-	                                3 所有报警 
-	                                4 卡号查询  
-	                                5 组合条件查询 
-	                                6 录像位置与偏移量长度 
-	                                8 按卡号查询图片(目前仅HB-U和NVS特殊型号的设备支持) 
-	                                9 查询图片(目前仅HB-U和NVS特殊型号的设备支持)  
-	                                10 按字段查询 
-	                                15 返回网络数据结构(金桥网吧) 
-	                                16 查询所有透明串数据录像文件 
-	        tmStart:        开始时间 
-	        tmEnd:          结束时间 
+	                                1 外部报警
+	                                2 动态检测报警
+	                                3 所有报警
+	                                4 卡号查询
+	                                5 组合条件查询
+	                                6 录像位置与偏移量长度
+	                                8 按卡号查询图片(目前仅HB-U和NVS特殊型号的设备支持)
+	                                9 查询图片(目前仅HB-U和NVS特殊型号的设备支持)
+	                                10 按字段查询
+	                                15 返回网络数据结构(金桥网吧)
+	                                16 查询所有透明串数据录像文件
+	        tmStart:        开始时间
+	        tmEnd:          结束时间
 	        sSavedFileName: 保存录像文件名,支持全路径
 	        cbTimeDownLoadPos: 下载进度回调函数(回调下载进度,下载结果), 对应回调   fTimeDownLoadPosCallBack
 	        dwUserData:     下载进度回调对应用户数据
@@ -18908,53 +18908,53 @@ public interface NetSDKLib extends Library {
                                           StdCallCallback cbTimeDownLoadPos, Pointer dwUserData,
                                           StdCallCallback fDownLoadDataCallBack, Pointer dwDataUser,
                                           int scType, Pointer pReserved);
-    
+
     // 私有云台控制扩展接口,支持三维快速定位
     public boolean CLIENT_DHPTZControlEx(LLong lLoginID, int nChannelID, int dwPTZCommand, int lParam1, int lParam2, int lParam3, int dwStop);
-   
+
     // 云台控制扩展接口,支持三维快速定位,鱼眼
     // dwStop类型为BOOL, 取值0或者1
     // dwPTZCommand取值为NET_EXTPTZ_ControlType中的值或者是NET_PTZ_ControlType中的值
     public boolean CLIENT_DHPTZControlEx2(LLong lLoginID, int nChannelID, int dwPTZCommand, int lParam1, int lParam2, int lParam3, int dwStop, Pointer param4);
-       
+
     // 设备控制(param内存由用户申请释放)  emType对应 枚举 CtrlType
     public boolean CLIENT_ControlDevice(LLong lLoginID, int emType, Pointer param, int waittime);
-    
+
     // 设备控制扩展接口，兼容 CLIENT_ControlDevice (pInBuf, pOutBuf内存由用户申请释放)
     // emType的取值为CtrlType中的值
     public boolean CLIENT_ControlDeviceEx(LLong lLoginID, int emType, Pointer pInBuf, Pointer pOutBuf, int nWaitTime);
-    
+
     // 查询配置信息(lpOutBuffer内存由用户申请释放)
     public boolean CLIENT_GetDevConfig(LLong lLoginID, int dwCommand, int lChannel, Pointer lpOutBuffer, int dwOutBufferSize, IntByReference lpBytesReturned, int waittime);
 
     // 设置配置信息(lpInBuffer内存由用户申请释放)
     public boolean CLIENT_SetDevConfig(LLong lLoginID, int dwCommand, int lChannel, Pointer lpInBuffer, int dwInBufferSize, int waittime);
-    
+
     // 查询设备状态(pBuf内存由用户申请释放)
     // pBuf指向char *,输出参数
     // pRetLen指向int *;输出参数，实际返回的数据长度，单位字节
     public boolean CLIENT_QueryDevState(LLong lLoginID, int nType, Pointer pBuf, int nBufLen, IntByReference pRetLen, int waittime);
-    
+
     // 查询远程设备状态(pBuf内存由用户申请释放)
     // nType为DH_DEVSTATE_ALARM_FRONTDISCONNECT时，通道号从1开始
     public boolean CLIENT_QueryRemotDevState(LLong lLoginID, int nType, int nChannelID, Pointer pBuf, int nBufLen, IntByReference pRetLen, int waittime);
-    
+
     // 获取设备能力接口
     // pInBuf指向void*，输入参数结构体指针       pOutBuf指向void*，输出参数结构体指针
     public boolean CLIENT_GetDevCaps(LLong lLoginID, int nType, Pointer pInBuf, Pointer pOutBuf, int nWaitTime);
-    
+
     // 新系统能力查询接口，查询系统能力信息(以Json格式，具体见配置SDK)(szOutBuffer内存由用户申请释放)
     // szCommand: 对应命令查看上文
     // szOutBuffer: 获取到的信息, 通过 CLIENT_ParseData 解析
     // error 指向 int * ： 错误码大于0表示设备返回的，小于0表示缓冲不够或数据校验引起的
     public boolean CLIENT_QueryNewSystemInfo(LLong lLoginID, String szCommand, int nChannelID, byte[] szOutBuffer, int dwOutBufferSize, IntByReference error, int waittime);
-    
+
     // 订阅视频统计摘要信息
     public LLong CLIENT_AttachVideoStatSummary(LLong lLoginID, NET_IN_ATTACH_VIDEOSTAT_SUM pInParam, NET_OUT_ATTACH_VIDEOSTAT_SUM pOutParam, int nWaitTime);
 
     // 取消订阅视频统计摘要信息，lAttachHandle为CLIENT_AttachVideoStatSummary的返回值
     public boolean CLIENT_DetachVideoStatSummary(LLong lAttachHandle);
-    
+
     // 开始查询视频统计信息/获取人数统计信息
     public LLong CLIENT_StartFindNumberStat(LLong lLoginID, NET_IN_FINDNUMBERSTAT pstInParam, NET_OUT_FINDNUMBERSTAT pstOutParam);
 
@@ -18963,13 +18963,13 @@ public interface NetSDKLib extends Library {
 
     // 结束查询视频统计/结束查询人数统计
     public boolean CLIENT_StopFindNumberStat(LLong lFindHandle);
-   
+
     // 设置语音对讲模式,客户端方式还是服务器方式
     // emType : 方式类型 参照 EM_USEDEV_MODE
     public boolean CLIENT_SetDeviceMode(LLong lLoginID, int emType, Pointer pValue);
-    
+
     ///////////////// 录像回放相关接口 ///////////////////////
-    // 按时间方式回放--扩展接口 
+    // 按时间方式回放--扩展接口
     // cbDownLoadPos 对应 fDownLoadPosCallBack 回调
     // fDownLoadDataCallBack 对应 fDataCallBack 回调
     public LLong CLIENT_PlayBackByTimeEx(LLong lLoginID, int nChannelID, NET_TIME lpStartTime, NET_TIME lpStopTime, Pointer hWnd,
@@ -18977,134 +18977,134 @@ public interface NetSDKLib extends Library {
                                          StdCallCallback fDownLoadDataCallBack, Pointer dwDataUser);
     // 停止录像回放接口
     public boolean CLIENT_StopPlayBack(LLong lPlayHandle);
-    
+
     // 获取回放OSD时间
     public boolean CLIENT_GetPlayBackOsdTime(LLong lPlayHandle, NET_TIME lpOsdTime, NET_TIME lpStartTime, NET_TIME lpEndTime);
 
     // 暂停或恢复录像回放
-    // bPause: 1 - 暂停	0 - 恢复 
+    // bPause: 1 - 暂停	0 - 恢复
     public boolean CLIENT_PausePlayBack(LLong lPlayHandle, int bPause);
-    
+
     // 快进录像回放
     public boolean CLIENT_FastPlayBack(LLong lPlayHandle);
 
     // 慢进录像回放
     public boolean CLIENT_SlowPlayBack(LLong lPlayHandle);
- 
+
     // 恢复正常回放速度
     public boolean CLIENT_NormalPlayBack(LLong lPlayHandle);
-    
+
     // 设置录像回放速度, emSpeed 对应枚举 EM_PLAY_BACK_SPEED
     public boolean CLIENT_SetPlayBackSpeed(LLong lPlayHandle, int emSpeed);
-    
+
     // 查询设备当前时间
     public boolean CLIENT_QueryDeviceTime(LLong lLoginID, NET_TIME pDeviceTime, int waittime);
-    
+
     // 设置设备当前时间
     public boolean CLIENT_SetupDeviceTime(LLong lLoginID, NET_TIME pDeviceTime);
-    
-    // 获得亮度、色度、对比度、饱和度的参数      
+
+    // 获得亮度、色度、对比度、饱和度的参数
     // param1/param2/param3/param4 四个参数范围0~255
   	public boolean CLIENT_ClientGetVideoEffect(LLong lPlayHandle, byte[] nBrightness, byte[] nContrast, byte[] nHue, byte[] nSaturation);
 
-  	// 设置亮度、色度、对比度、饱和度的参数    
+  	// 设置亮度、色度、对比度、饱和度的参数
   	// nBrightness/nContrast/nHue/nSaturation四个参数为 unsigned byte 范围0~255
-  	public boolean CLIENT_ClientSetVideoEffect(LLong lPlayHandle, byte nBrightness, byte nContrast, byte nHue, byte nSaturation);    
+  	public boolean CLIENT_ClientSetVideoEffect(LLong lPlayHandle, byte nBrightness, byte nContrast, byte nHue, byte nSaturation);
 
 	//------------------------用户管理-----------------------
   	// 查询用户信息--扩展(info内存由用户申请释放,大小为sizeof(USER_MANAGE_INFO_EX))
   	public boolean CLIENT_QueryUserInfoEx(LLong lLoginID, USER_MANAGE_INFO_EX info, int waittime);
 
-	// 查询用户信息--最大支持64通道设备  
-	// pReserved指向void*  
+	// 查询用户信息--最大支持64通道设备
+	// pReserved指向void*
 	public boolean CLIENT_QueryUserInfoNew(LLong lLoginID, USER_MANAGE_INFO_NEW info, Pointer pReserved, int nWaittime);
-	
+
 	// 设置用户信息接口--操作设备用户--最大支持64通道设备
-	// opParam指向void*           subParam指向void*   
-	// pReserved指向void*       
+	// opParam指向void*           subParam指向void*
+	// pReserved指向void*
 	// opParam（设置用户信息的输入缓冲）和subParam（设置用户信息的辅助输入缓冲）对应结构体类型USER_GROUP_INFO_NEW或USER_INFO_NEW
 	public boolean CLIENT_OperateUserInfoNew(LLong lLoginID, int nOperateType, Pointer opParam, Pointer subParam, Pointer pReserved, int nWaittime);
-	
-	
+
+
 	//----------------------语音对讲--------------------------
 	// 向设备发起语音对讲请求          pfcb是用户自定义的数据回调接口, pfAudioDataCallBack 回调
 	public LLong CLIENT_StartTalkEx(LLong lLoginID, StdCallCallback pfcb, Pointer dwUser);
-	
+
 	// 停止语音对讲        lTalkHandle语音对讲句柄，是CLIENT_StartTalkEx的返回 值
     public boolean CLIENT_StopTalkEx(LLong lTalkHandle);
 
     // 启动本地录音功能(只在Windows平台下有效)，录音采集出来的音频数据通过CLIENT_StartTalkEx的回调函数回调给用户，对应操作是CLIENT_RecordStopEx
-    // lLoginID是CLIENT_Login的返回值 
+    // lLoginID是CLIENT_Login的返回值
     public boolean CLIENT_RecordStartEx(LLong lLoginID);
-    
+
     // 开始PC端录音
     public boolean CLIENT_RecordStart();
-    
+
     // 结束PC端录音
     public boolean CLIENT_RecordStop();
 
     // 停止本地录音(只在Windows平台下有效)，对应操作是CLIENT_RecordStartEx。
     public boolean CLIENT_RecordStopEx(LLong lLoginID);
-    
+
     // 向设备发送用户的音频数据，这里的数据可以是从CLIENT_StartTalkEx的回调接口中回调出来的数据
     public LLong CLIENT_TalkSendData(LLong lTalkHandle, Pointer pSendBuf, int dwBufSize);
-    
-    // 解码音频数据扩展接口(只在Windows平台下有效)    pAudioDataBuf是要求解码的音频数据内容 
+
+    // 解码音频数据扩展接口(只在Windows平台下有效)    pAudioDataBuf是要求解码的音频数据内容
     public void CLIENT_AudioDec(Pointer pAudioDataBuf, int dwBufSize);
     public boolean CLIENT_AudioDecEx(LLong lTalkHandle, Pointer pAudioDataBuf, int dwBufSize);
-    
+
     //-------------------白名单-------------------------
-    // 按查询条件查询记录          pInParam查询记录参数        pOutParam返回查询句柄  
-    // 可以先调用本接口获得查询句柄，再调用  CLIENT_FindNextRecord函数获取记录列表，查询完毕可以调用CLIENT_FindRecordClose关闭查询句柄。 
+    // 按查询条件查询记录          pInParam查询记录参数        pOutParam返回查询句柄
+    // 可以先调用本接口获得查询句柄，再调用  CLIENT_FindNextRecord函数获取记录列表，查询完毕可以调用CLIENT_FindRecordClose关闭查询句柄。
     public boolean CLIENT_FindRecord(LLong lLoginID, NET_IN_FIND_RECORD_PARAM pInParam, NET_OUT_FIND_RECORD_PARAM pOutParam, int waittime);
-    
+
     // 查找记录:nFilecount:需要查询的条数, 返回值为媒体文件条数 返回值小于nFilecount则相应时间段内的文件查询完毕
     public boolean CLIENT_FindNextRecord(NET_IN_FIND_NEXT_RECORD_PARAM pInParam, NET_OUT_FIND_NEXT_RECORD_PARAM pOutParam, int waittime);
-    
-    // 结束记录查找,lFindHandle是CLIENT_FindRecord的返回值 
+
+    // 结束记录查找,lFindHandle是CLIENT_FindRecord的返回值
     public boolean CLIENT_FindRecordClose(LLong lFindHandle);
-    
+
     // 查找记录条数,pInParam与pOutParam内存由用户申请释放
     public boolean CLIENT_QueryRecordCount(NET_IN_QUEYT_RECORD_COUNT_PARAM pInParam, NET_OUT_QUEYT_RECORD_COUNT_PARAM pOutParam, int waittime);
-    
+
     // 黑白名单操作 ,pstOutParam = null;
     public boolean CLIENT_OperateTrafficList(LLong lLoginID, NET_IN_OPERATE_TRAFFIC_LIST_RECORD pstInParam, NET_OUT_OPERATE_TRAFFIC_LIST_RECORD pstOutParam, int waittime);
-    
+
     // 文件上传控制接口，白名单上传需要三个步骤配合使用，CLIENT_FileTransmit的 NET_DEV_BLACKWHITETRANS_START、  NET_DEV_BLACKWHITETRANS_SEND、   NET_DEV_BLACKWHITETRANS_STOP，如下所示
     // fTransFileCallBack 回调
-    public LLong CLIENT_FileTransmit(LLong lLoginID, int nTransType, Pointer szInBuf, int nInBufLen, StdCallCallback cbTransFile, Pointer dwUserData, int waittime);    
+    public LLong CLIENT_FileTransmit(LLong lLoginID, int nTransType, Pointer szInBuf, int nInBufLen, StdCallCallback cbTransFile, Pointer dwUserData, int waittime);
 
   	// 查询设备信息
   	public boolean CLIENT_QueryDevInfo(LLong lLoginID, int nQueryType, Pointer pInBuf, Pointer pOutBuf, Pointer pReservedL, int nWaitTime);
-  	
-  	// ------------------车载GPS------------------------- 	
+
+  	// ------------------车载GPS-------------------------
   	// 设置GPS订阅回调函数--扩展, fGPSRevEx 回调
   	public void CLIENT_SetSubcribeGPSCallBackEX(StdCallCallback OnGPSMessage, Pointer dwUser);
-  	
+
     // 设置GPS订阅回调函数--扩展2， fGPSRevEx2 回调
   	public void CLIENT_SetSubcribeGPSCallBackEX2(StdCallCallback OnGPSMessage, Pointer dwUser);
-  	
-  	// GPS信息订阅       
+
+  	// GPS信息订阅
   	// bStart:表明是订阅还是取消          InterTime:订阅时间内GPS发送频率(单位秒)
-  	// KeepTime:订阅持续时间(单位秒) 值为-1时,订阅时间为极大值,可视为永久订阅     
+  	// KeepTime:订阅持续时间(单位秒) 值为-1时,订阅时间为极大值,可视为永久订阅
   	// 订阅时间内GPS发送频率(单位秒)
   	public boolean CLIENT_SubcribeGPS(LLong lLoginID, int bStart, int KeepTime, int InterTime);
-	
+
     // 同步文件上传, 只适用于小文件
   	public boolean CLIENT_UploadRemoteFile(LLong lLoginID, NET_IN_UPLOAD_REMOTE_FILE pInParam, NET_OUT_UPLOAD_REMOTE_FILE pOutParam, int nWaitTime);
 
   	// 显示目录中文件和子目录,pInParam与pOutParam内存由用户申请释放
   	public boolean CLIENT_ListRemoteFile(LLong lLoginID, NET_IN_LIST_REMOTE_FILE pInParam, NET_OUT_LIST_REMOTE_FILE pOutParam, int nWaitTime);
-  	
+
   	// 删除文件或目录,pInParam与pOutParam内存由用户申请释放
   	public boolean CLIENT_RemoveRemoteFiles(LLong lLoginID, NET_IN_REMOVE_REMOTE_FILES pInParam, NET_OUT_REMOVE_REMOTE_FILES pOutParam, int nWaitTime);
 
     // 过车记录订阅
   	public LLong CLIENT_ParkingControlAttachRecord(LLong lLoginID, NET_IN_PARKING_CONTROL_PARAM pInParam, NET_OUT_PARKING_CONTROL_PARAM pOutParam, int nWaitTime);
-  	
+
   	// 取消过车记录订阅
   	public boolean CLIENT_ParkingControlDetachRecord(LLong lAttachHandle);
- 
+
     // 开始过车记录查询
   	public LLong CLIENT_ParkingControlStartFind(LLong lLoginID, NET_IN_PARKING_CONTROL_START_FIND_PARAM pInParam, NET_OUT_PARKING_CONTROL_START_FIND_PARAM pOutParam, int waittime);
 
@@ -19113,20 +19113,20 @@ public interface NetSDKLib extends Library {
 
   	// 结束过车记录查询
   	public boolean CLIENT_ParkingControlStopFind(LLong lFindHandle);
-  	
+
   	// 车位状态订阅,pInParam与pOutParam内存由用户申请释放
   	public LLong CLIENT_ParkingControlAttachParkInfo(LLong lLoginID, NET_IN_PARK_INFO_PARAM pInParam, NET_OUT_PARK_INFO_PARAM pOutParam, int nWaitTime);
 
   	// 取消车位状态订阅
   	public boolean CLIENT_ParkingControlDetachParkInfo(LLong lAttachHandle);
-  	
+
   	// 电源控制,pInParam与pOutParam内存由用户申请释放
   	public boolean CLIENT_PowerControl(LLong lLoginID, NET_IN_WM_POWER_CTRL pInParam, NET_OUT_WM_POWER_CTRL pOutParam, int nWaitTime);
 
   	// 载入/保存预案,pInParam与pOutParam内存由用户申请释放
   	public boolean CLIENT_LoadMonitorWallCollection(LLong lLoginID, NET_IN_WM_LOAD_COLLECTION pInParam, NET_OUT_WM_LOAD_COLLECTION pOutParam, int nWaitTime);
   	public boolean CLIENT_SaveMonitorWallCollection(LLong lLoginID, NET_IN_WM_SAVE_COLLECTION pInParam, NET_OUT_WM_SAVE_COLLECTION pOutParam, int nWaitTime);
-  	
+
   	// 获取电视墙预案,pInParam与pOutParam内存由用户申请释放
   	public boolean CLIENT_GetMonitorWallCollections(LLong lLoginID, NET_IN_WM_GET_COLLECTIONS pInParam, NET_OUT_WM_GET_COLLECTIONS pOutParam, int nWaitTime);
 
@@ -19136,10 +19136,10 @@ public interface NetSDKLib extends Library {
 
   	// 设置显示源, 支持同时设置多个窗口(pInparam, pOutParam内存由用户申请释放)
   	public boolean CLIENT_SplitSetMultiSource(LLong lLoginID, NET_IN_SPLIT_SET_MULTI_SOURCE pInParam, NET_OUT_SPLIT_SET_MULTI_SOURCE pOutParam, int nWaitTime);
-  	
+
   	// 查询矩阵子卡信息(pstuCardList内存由用户申请释放)
   	public boolean CLIENT_QueryMatrixCardInfo(LLong lLoginID, NET_MATRIX_CARD_LIST pstuCardList, int nWaitTime);
-  	
+
     // 开始查找录像文件帧信息(pInParam, pOutParam内存由用户申请释放)
   	public boolean CLIENT_FindFrameInfo(LLong lLoginID, NET_IN_FIND_FRAMEINFO_PRAM pInParam, NET_OUT_FIND_FRAMEINFO_PRAM pOutParam, int nWaitTime);
 
@@ -19161,7 +19161,7 @@ public interface NetSDKLib extends Library {
   	public boolean CLIENT_GetSplitWindowsInfo(LLong lLoginID, NET_IN_SPLIT_GET_WINDOWS pInParam, NET_OUT_SPLIT_GET_WINDOWS pOutParam, int nWaitTime);
 
   	// 查询分割能力(pstuCaps内存由用户申请释放)
-  	public boolean CLIENT_GetSplitCaps(LLong lLoginID, int nChannel, NET_SPLIT_CAPS pstuCaps, int nWaitTime);	
+  	public boolean CLIENT_GetSplitCaps(LLong lLoginID, int nChannel, NET_SPLIT_CAPS pstuCaps, int nWaitTime);
 
 	// 下位矩阵切换(pInparam, pOutParam内存由用户申请释放)
 	public boolean CLIENT_MatrixSwitch(LLong lLoginID, NET_IN_MATRIX_SWITCH pInParam, NET_OUT_MATRIX_SWITCH pOutParam, int nWaitTime);
@@ -19171,24 +19171,24 @@ public interface NetSDKLib extends Library {
 
 	// 关闭刻录会话
 	public boolean CLIENT_StopBurnSession(LLong lBurnSession);
-	
-	//------------有盘/无盘刻录----lBurnSession 是 CLIENT_StartBurnSession返回的句柄//	
+
+	//------------有盘/无盘刻录----lBurnSession 是 CLIENT_StartBurnSession返回的句柄//
 	// 开始刻录,pstInParam与pstOutParam内存由用户申请释放
 	public boolean CLIENT_StartBurn(LLong lBurnSession, NET_IN_START_BURN pstInParam, NET_OUT_START_BURN pstOutParam, int nWaitTime);
 	// 停止刻录
 	public boolean CLIENT_StopBurn(LLong lBurnSession);
 	// 暂停/恢复刻录
 	public boolean CLIENT_PauseBurn(LLong lBurnSession, int bPause);
-	
+
 	// 获取刻录状态
 	public boolean CLIENT_BurnGetState(LLong lBurnSession, NET_IN_BURN_GET_STATE pstInParam, NET_OUT_BURN_GET_STATE pstOutParam, int nWaitTime);
-	
+
 	// 监听刻录状态,pstInParam与pstOutParam内存由用户申请释放
 	public LLong CLIENT_AttachBurnState(LLong lLoginID, NET_IN_ATTACH_STATE pstInParam, NET_OUT_ATTACH_STATE pstOutParam, int nWaitTime);
 
 	// 取消监听刻录状态,lAttachHandle是CLIENT_AttachBurnState返回值
 	public boolean CLIENT_DetachBurnState(LLong lAttachHandle);
-	
+
   	// 下载指定的智能分析数据 - 图片, fDownLoadPosCallBack 回调
   	// emType 参考 EM_FILE_QUERY_TYPE
   	public LLong CLIENT_DownloadMediaFile(LLong lLoginID, int emType, Pointer lpMediaFileInfo, String sSavedFileName, StdCallCallback cbDownLoadPos, Pointer dwUserData, Pointer reserved);
@@ -19202,21 +19202,21 @@ public interface NetSDKLib extends Library {
   	// 查询IO状态(pState内存由用户申请释放,根据emType对应的类型找到相应的结构体，进而确定申请内存大小), emType 参考 NET_IOTYPE
   	public boolean CLIENT_QueryIOControlState(LLong lLoginID, int emType,
                                               Pointer pState, int maxlen, IntByReference nIOCount, int waittime);
-  	
+
   	// IO控制(pState内存由用户申请释放,根据emType对应的类型找到相应的结构体，进而确定申请内存大小),emType 参考 NET_IOTYPE
   	public boolean CLIENT_IOControl(LLong lLoginID, int emType, Pointer pState, int maxlen);
-  	
+
   	// 订阅监测点位信息,pInParam与pOutParam内存由用户申请释放
   	public LLong CLIENT_SCADAAttachInfo(LLong lLoginID, NET_IN_SCADA_ATTACH_INFO pInParam, NET_OUT_SCADA_ATTACH_INFO pOutParam, int nWaitTime);
 
   	// 取消监测点位信息订阅
   	public boolean CLIENT_SCADADetachInfo(LLong lAttachHandle);
-  	
+
   	// 创建透明串口通道,TransComType高2个字节表示串口序号,低2个字节表示串口类型,目前类型支持 0：串口(232), 1:485
-  	// baudrate 串口的波特率，1~8分别表示1200，2400，4800，9600，19200，38400，57600，115200 
-  	// databits 串口的数据位 4~8表示4位~8位 
+  	// baudrate 串口的波特率，1~8分别表示1200，2400，4800，9600，19200，38400，57600，115200
+  	// databits 串口的数据位 4~8表示4位~8位
   	// stopbits 串口的停止位   232串口 ： 数值0 代表停止位1; 数值1 代表停止位1.5; 数值2 代表停止位2.    485串口 ： 数值1 代表停止位1; 数值2 代表停止位2.
-  	// parity 串口的检验位，0：无校验，1：奇校验；2：偶校验; 
+  	// parity 串口的检验位，0：无校验，1：奇校验；2：偶校验;
   	// cbTransCom 串口数据回调，回调出前端设备发过来的信息
   	// fTransComCallBack 回调
   	public LLong CLIENT_CreateTransComChannel(LLong lLoginID, int TransComType, int baudrate, int databits, int stopbits, int parity, StdCallCallback cbTransCom, Pointer dwUser);
@@ -19227,7 +19227,7 @@ public interface NetSDKLib extends Library {
   	// 释放通明串口通道
   	public boolean CLIENT_DestroyTransComChannel(LLong lTransComChannel);
 
-  	// 查询透明串口状态(pCommState内存由用户申请释放), TransComType 低2个字节表示串口类型， 0:串口(232)， 1:485口；高2个字节表示串口通道号，从0开始 
+  	// 查询透明串口状态(pCommState内存由用户申请释放), TransComType 低2个字节表示串口类型， 0:串口(232)， 1:485口；高2个字节表示串口通道号，从0开始
   	public boolean CLIENT_QueryTransComParams(LLong lLoginID, int TransComType, NET_COMM_STATE pCommState, int nWaitTime);
 
   	// 订阅智能分析进度（适用于视频分析源为录像文件时）,pstInParam与pstOutParam内存由用户申请释放
@@ -19235,23 +19235,23 @@ public interface NetSDKLib extends Library {
 
   	// 停止订阅
   	public boolean CLIENT_DetachVideoAnalyseState(LLong lAttachHandle);
-  	
+
   	// 抓图, hPlayHandle为监视或回放句柄
   	public boolean CLIENT_CapturePicture(LLong hPlayHandle, String pchPicFileName);
-  	
+
   	// 抓图, hPlayHandle为监视或回放句柄
   	public boolean CLIENT_CapturePictureEx(LLong hPlayHandle, String pchPicFileName, int eFormat);
-  	
+
   	// 获取设备自检信息,pInParam与pOutParam内存由用户申请释放
   	public boolean CLIENT_GetSelfCheckInfo(LLong lLoginID, NET_IN_GET_SELTCHECK_INFO pInParam, NET_SELFCHECK_INFO pOutParam, int nWaitTime);
 
-  	// 主动注册功能,启动服务；nTimeout参数已无效 . 
-  	// cbListen对象为  fServiceCallBack 子类 
+  	// 主动注册功能,启动服务；nTimeout参数已无效 .
+  	// cbListen对象为  fServiceCallBack 子类
   	public LLong CLIENT_ListenServer(String ip, int port, int nTimeout, StdCallCallback cbListen, Pointer dwUserData);
-  	
+
   	// 停止服务
   	public boolean CLIENT_StopListenServer(LLong lServerHandle);
-  	
+
 	// 指定回调数据类型 实施监视(预览), 数据回调函数 cbRealData 中得到的码流类型为 emDataType 所指定的类型
   	public LLong CLIENT_RealPlayByDataType(LLong lLoginID, NET_IN_REALPLAY_BY_DATA_TYPE pstInParam, NET_OUT_REALPLAY_BY_DATA_TYPE pstOutParam, int dwWaitTime);
 
@@ -19260,7 +19260,7 @@ public interface NetSDKLib extends Library {
 
 	// 指定码流类型 开始下载, 下载得到的文件和数据回调函数 fDownLoadDataCallBack 中得到的码流类型均为 emDataType 所指定的类型
   	public LLong CLIENT_DownloadByDataType(LLong lLoginID, NET_IN_DOWNLOAD_BY_DATA_TYPE pstInParam, NET_OUT_DOWNLOAD_BY_DATA_TYPE pstOutParam, int dwWaitTime);
-  	
+
   	/************************************************************************/
   	/*                            BUS订阅                                   */
   	/************************************************************************/
@@ -19269,22 +19269,22 @@ public interface NetSDKLib extends Library {
 
   	// 停止订阅Bus状态,lAttachHandle是CLIENT_AttachBusState返回值
   	public boolean CLIENT_DetachBusState(LLong lAttachHandle);
-  
+
    //订阅事件重传,pInParam内存由用户申请释放
    public LLong CLIENT_AttachEventRestore(LLong lLoginID, NET_IN_ATTACH_EVENT_RESTORE pInParam, int nWaitTime);
 
    // 停止订阅事件重传,pInParam内存由用户申请释放
    public boolean CLIENT_DetachEventRestore(LLong lAttachHandle);
-   
+
    // 设置GPS温湿度订阅回调函数, fGPSTempHumidityRev
    public void CLIENT_SetSubcribeGPSTHCallBack(StdCallCallback OnGPSMessage, Pointer dwUser);
 
    // GPS温湿度信息订阅, bStart为BOOL类型
    public boolean CLIENT_SubcribeGPSTempHumidity(LLong lLoginID, int bStart, int InterTime, Pointer Reserved);
-   
+
    // 人脸信息记录操作函数
    public boolean CLIENT_FaceInfoOpreate(LLong lLoginID, int emType, Pointer pInParam, Pointer pOutParam, int nWaitTime);
-   
+
    //开始查询人脸信息
    public LLong CLIENT_StartFindFaceInfo(LLong lLoginID, NET_IN_FACEINFO_START_FIND pstIn, NET_OUT_FACEINFO_START_FIND pstOut, int nWaitTime);
 
@@ -19299,7 +19299,7 @@ public interface NetSDKLib extends Library {
     **********************************************************************************/
    // 设置诱导屏配置信息接口
    public boolean CLIENT_SetGuideScreenCfg(LLong lLoginID, NET_IN_SET_GUIDESCREEN_CFG pInParam, NET_OUT_SET_GUIDESCREEN_CFG pstOutPqram, int nWaitTime);
-  
+
    // 添加一个节目信息到诱导屏
    public boolean CLIENT_AddOneProgramme(LLong lLoginID, NET_IN_ADD_ONE_PROGRAMME pInParam, NET_OUT_ADD_ONE_PROGRAMME pOutParam, int nWaitTime);
 
@@ -19308,22 +19308,22 @@ public interface NetSDKLib extends Library {
 
    // 批量删除节目信息
    public boolean CLIENT_DelMultiProgrammesById(LLong lLoginID, NET_IN_DEL_PROGRAMMES pInParam, NET_OUT_DEL_PROGRAMMES pOutParam, int nWaitTime);
-   
+
    // 增加一个即时节目计划
    public boolean CLIENT_AddOneImmediProgrammePlan(LLong lLoginID, NET_IN_ADD_IMME_PROGRAMMEPLAN pInParam, NET_OUT_ADD_PROGRAMMEPLAN pOutParam, int nWaitTime);
 
    // 修改一个即时节目计划
    public boolean CLIENT_ModifyOneImmediProgrammePlan(LLong lLoginID, NET_IN_MODIFY_IMME_PROGRAMMEPLAN pInParam, NET_OUT_MODIFY_IMME_PROGRAMMEPLAN pOutParam, int nWaitTime);
-   
+
    // 增加一个定时节目计划
    public boolean CLIENT_AddOneTimerProgrammePlan(LLong lLoginID, NET_IN_ADD_TIMER_PROGRAMMEPLAN pInParam, NET_OUT_ADD_PROGRAMMEPLAN pOutParam, int nWaitTime);
-   
+
    // 修改一个定时节目计划
    public boolean CLIENT_ModifyOneTimerProgrammePlan(LLong lLoginID, NET_IN_MODIFY_TIMER_PROGRAMMEPLAN pInParam, NET_OUT_MODIFY_TIMER_PROGRAMMEPLAN pOutParam, int nWaitTime);
 
    // 删除多个节目计划
    public boolean CLIENT_DelMultiProgrammePlans(LLong lLoginID, NET_IN_DEL_PROGRAMMEPLANS pInParam, NET_OUT_DEL_PROGRAMMEPLANS pOutParam, int nWaitTime);
-   
+
    // 通过诱导屏ID 获取诱导屏配置信息
    public boolean CLIENT_GetOneGuideScreenCfgById(LLong lLoginID, NET_IN_GET_GUIDESCREEN_CFG_BYID pInParam, NET_OUT_GET_GUIDESCREEN_CFG_BYID pOutParam, int nWaitTime);
 
@@ -19347,7 +19347,7 @@ public interface NetSDKLib extends Library {
 
    // 设置光带状态信息
    public boolean CLIENT_SetGuideScreenGDStatus(LLong lLoginID, NET_IN_SET_GD_STATUS pInParam, NET_OUT_SET_GD_STATUS pOutParam, int nWaitTime);
-   
+
    /***********************************************************************************
 	*						                  播放盒与广告机的节目操作接口					      *
     **********************************************************************************/
@@ -19356,15 +19356,15 @@ public interface NetSDKLib extends Library {
 
    // 通过programme ID 获取播放盒上对应的节目信息
    public boolean CLIENT_GetOneProgramByIdOnPlayBox(LLong lLoginID, NET_IN_GET_PLAYBOX_PROGRAM_BYID pInParam, NET_OUT_GET_PLAYBOX_PROGRAM_BYID pOutParam, int nWaitTime);
-  
+
    // 在播放盒上添加一个节目
    public boolean CLIENT_AddOneProgramToPlayBox(LLong lLoginID, NET_IN_ADD_ONE_PLAYBOX_PRAGROM pInParam, NET_OUT_ADD_ONE_PLAYBOX_PRAGROM pOutParam, int nWaitTime);
 
    // 在播放盒上修改指定ID的节目信息
-   public boolean CLIENT_ModifyProgramOnPlayBoxById(LLong lLoginID, NET_IN_MODIFY_PLAYBOX_PROGRAM_BYID pInParam, NET_OUT_MODIFY_PLAYBOX_PROGRAM_BYID pOutParam, int nWaitTime); 
+   public boolean CLIENT_ModifyProgramOnPlayBoxById(LLong lLoginID, NET_IN_MODIFY_PLAYBOX_PROGRAM_BYID pInParam, NET_OUT_MODIFY_PLAYBOX_PROGRAM_BYID pOutParam, int nWaitTime);
 
 
-  
+
    // 获取配置信息(szOutBuffer内存由用户申请释放, 具体见枚举类型 NET_EM_CFG_OPERATE_TYPE 说明)
    public boolean CLIENT_GetConfig(LLong lLoginID, int emCfgOpType, int nChannelID, Pointer szOutBuffer, int dwOutBufferSize, int waittime, Pointer reserve);
 
@@ -19373,19 +19373,19 @@ public interface NetSDKLib extends Library {
 
    // 显示私有数据，例如规则框，规则框报警，移动侦测等       lPlayHandle:播放句柄      bTrue=1 打开, bTrue= 0 关闭
    public boolean CLIENT_RenderPrivateData(LLong lPlayHandle, int bTrue);
-  
+
    // 按设备信息添加显示源,pInParam与pOutParam内存由用户申请释放
    public boolean CLIENT_MatrixAddCamerasByDevice(LLong lLoginID, NET_IN_ADD_LOGIC_BYDEVICE_CAMERA pInParam, NET_OUT_ADD_LOGIC_BYDEVICE_CAMERA pOutParam, int nWaitTime);
 
    // 订阅监测点位报警信息,pInParam与pOutParam内存由用户申请释放
    public LLong CLIENT_SCADAAlarmAttachInfo(LLong lLoginID, NET_IN_SCADA_ALARM_ATTACH_INFO pInParam, NET_OUT_SCADA_ALARM_ATTACH_INFO pOutParam, int nWaitTime);
-	
+
    // 取消订阅监测点位报警信息
    public boolean CLIENT_SCADAAlarmDetachInfo(LLong lAttachHandle);
-  
+
    /***********************************************************************************
 	*						           IVSS设备添加相关接口				             *
-    **********************************************************************************/  
+    **********************************************************************************/
    // 注册设备状态回调
    public LLong CLIENT_AttachDeviceState(LLong lLoginID, NET_IN_ATTACH_DEVICE_STATE pInParam, NET_OUT_ATTACH_DEVICE_STATE pOutParam, int nWaitTime);
 
@@ -19394,34 +19394,34 @@ public interface NetSDKLib extends Library {
 
    // 添加设备
    public boolean CLIENT_AsyncAddDevice(LLong lLoginID, NET_IN_ASYNC_ADD_DEVICE pInParam, NET_OUT_ASYNC_ADD_DEVICE pOutParam, int nWaitTime);
-	
+
    // 注册添加设备回调
    public LLong CLIENT_AttachAddDevice(LLong lLoginID, NET_IN_ATTACH_ADD_DEVICE pInParam, NET_OUT_ATTACH_ADD_DEVICE pOutParam, int nWaitTime);
-	
+
    // 注销添加设备回调
    public boolean CLIENT_DetachAddDevice(LLong lAttachHandle);
-	
+
    // 获取添加中的设备状态
    public boolean CLIENT_GetAddDeviceInfo(LLong lLoginID, NET_IN_GET_ADD_DEVICE_LIST_INFO pInParam, NET_OUT_GET_ADD_DEVICE_LIST_INFO pOutParam, int nWaitTime);
-	
+
    // 获取已添加的设备状态
    public boolean CLIENT_GetDeviceInfo(LLong lLoginID, NET_IN_GET_DEVICE_LIST_INFO pInParam, NET_OUT_GET_DEVICE_LIST_INFO pOutParam, int nWaitTime);
-	
+
    // 设置连接通道
    public boolean CLIENT_SetConnectChannel(LLong lLoginID, NET_IN_SET_CONNECT_CHANNEL pInParam, NET_OUT_SET_CONNECT_CHANNEL pOutParam, int nWaitTime);
-	
+
    // 获取设备通道信息
    public boolean CLIENT_GetChannelInfo(LLong lLoginID, NET_IN_GET_CHANNEL_INFO pInParam, NET_OUT_GET_CHANNEL_INFO pOutParam, int nWaitTime);
-	
+
    // 删除设备
    public boolean CLIENT_RemoveDevice(LLong lLoginID, NET_IN_REMOVE_DEVICE pInParam, NET_OUT_REMOVE_DEVICE pOutParam, int nWaitTime);
-  
+
    // 中止添加设备任务
    public boolean CLIENT_CancelAddDeviceTask(LLong lLoginID, NET_IN_CANCEL_ADD_TASK pInParam, NET_OUT_CANCEL_ADD_TASK pOutParam, int nWaitTime);
 
    // 确认添加设备任务
    public boolean CLIENT_ConfirmAddDeviceTask(LLong lLoginID, NET_IN_CONFIRM_ADD_TASK pInParam, NET_OUT_CONFIRM_ADD_TASK pOutParam, int nWaitTime);
-  
+
    // 球机定制，地磁车位同步上报车位信息,如有车停入、或车从车位开出
    public boolean CLIENT_SyncParkingInfo(LLong lLoginID, NET_IN_SYNC_PARKING_INFO pInParam, NET_OUT_SYNC_PARKING_INFO pOutParam, int nWaitTime);
 
@@ -19450,10 +19450,10 @@ public interface NetSDKLib extends Library {
     * @return true：成功    false：失败
     */
     public boolean CLIENT_SetSecurityKey(LLong lPlayHandle, String szKey, int nKeyLen);
-  
+
     /***********************************************************************************
      *						           	  考勤机相关接口						         *
-     **********************************************************************************/ 
+     **********************************************************************************/
     //考勤新增加用户
     public boolean CLIENT_Attendance_AddUser(LLong lLoginID, NET_IN_ATTENDANCE_ADDUSER pstuInAddUser, NET_OUT_ATTENDANCE_ADDUSER pstuOutAddUser, int nWaitTime);
 
@@ -19486,7 +19486,7 @@ public interface NetSDKLib extends Library {
 
     //获取考勤机在线状态
     public boolean CLIENT_Attendance_GetDevState(LLong lLoginID, NET_IN_ATTENDANCE_GETDEVSTATE pstuInParam, NET_OUT_ATTENDANCE_GETDEVSTATE pstuOutParam, int nWaitTime);
-   
+
 	/*********************************************************************************************************
 	 * 									视频诊断功能接口														 *
 	 * 													 												     *
@@ -19496,41 +19496,41 @@ public interface NetSDKLib extends Library {
 	 * 删除任务接口  CLIENT_DeleteDevConfig																	 *
 	 * 获取成员配置接口 CLIENT_GetMemberNames	  对应命令  CFG_CMD_VIDEODIAGNOSIS_TASK					         *
 	 * 获取诊断状态  CLIENT_QueryNewSystemInfo CFG_CMD_VIDEODIAGNOSIS_GETSTATE							 	 *
-	 *********************************************************************************************************/	
+	 *********************************************************************************************************/
 
 	// 实时获取视频诊断结果,pstInParam与pstOutParam内存由用户申请释放
 	public boolean CLIENT_StartVideoDiagnosis(LLong lLoginID, NET_IN_VIDEODIAGNOSIS pstInParam, NET_OUT_VIDEODIAGNOSIS pstOutParam);
-	
+
 	// 停止视频诊断结果上报
 	public boolean CLIENT_StopVideoDiagnosis(LLong hDiagnosisHandle);
-	
+
 	// 开始视频诊断结果查询,pstInParam与pstOutParam内存由用户申请释放
 	public boolean CLIENT_StartFindDiagnosisResult(LLong lLoginID, NET_IN_FIND_DIAGNOSIS pstInParam, NET_OUT_FIND_DIAGNOSIS pstOutParam);
-	
+
 	// 获取视频诊断结果信息,pstInParam与pstOutParam内存由用户申请释放
 	public boolean CLIENT_DoFindDiagnosisResult(LLong hFindHandle, NET_IN_DIAGNOSIS_INFO pstInParam, NET_OUT_DIAGNOSIS_INFO pstOutParam);
-	
+
 	// 结束视频诊断结果查询
 	public boolean CLIENT_StopFindDiagnosis(LLong hFindHandle);
-	
+
 	// 获取视频诊断进行状态
 	public boolean CLIENT_GetVideoDiagnosisState(LLong lLoginID, NET_IN_GET_VIDEODIAGNOSIS_STATE pstInParam, NET_OUT_GET_VIDEODIAGNOSIS_STATE pstOutParam, int nWaitTime);
-	
+
 	/********************************************************************************************
 	 * 									热成像												    *
 	 ********************************************************************************************/
-	
+
 	// 订阅温度分布数据（热图）,pInParam与pOutParam内存由用户申请释放
 	public LLong CLIENT_RadiometryAttach(LLong lLoginID, NET_IN_RADIOMETRY_ATTACH pInParam, NET_OUT_RADIOMETRY_ATTACH pOutParam, int nWaitTime);
 
 	// 取消订阅温度分布数据,lAttachHandle是 CLIENT_RadiometryAttach 的返回值
 	public boolean CLIENT_RadiometryDetach(LLong lAttachHandle);
-	
+
 	// 通知开始获取热图数据,pInParam与pOutParam内存由用户申请释放
 	public boolean CLIENT_RadiometryFetch(LLong lLoginID, NET_IN_RADIOMETRY_FETCH pInParam, NET_OUT_RADIOMETRY_FETCH pOutParam, int nWaitTime);
 
 	// 热图数据解压与转换接口
-	/// \brief 
+	/// \brief
 	/// \param  pRadiometryData [IN] 热图数据， 由 fRadiometryAttachCB 获得
 	/// \param  pGrayImg [IN, OUT] 解压后的数据，是一张灰度图，
 	///			传空指针表示不需要此数据
@@ -19552,7 +19552,7 @@ public interface NetSDKLib extends Library {
 	// 停止查询信息（销毁查询句柄）(pInBuf, pOutBuf内存由用户申请释放,根据emType对应的类型找到相应的结构体，进而确定申请内存大小)
 	public boolean  CLIENT_StopFind(LLong lLoginID, int emType, Pointer pInBuf, Pointer pOutBuf, int nWaitTime);
 
-	
+
 	// 智能锁添加更新用户信息接口
 	public boolean CLIENT_UpdateSmartLockUser(LLong lLoginID, NET_IN_SMARTLOCK_UPDATE_USER_INFO pstInParam, NET_OUT_SMARTLOCK_UPDATE_USER_INFO pstOutParam, int nWaitTime);
 
